@@ -1,1 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" role="img" aria-labelledby="title"><title id="title">Bind Builds — Plan Build Deliver</title><g fill="#fff"><path d="M28 42h92c52 0 86 27 86 69 0 28-15 48-38 58 31 9 49 32 49 64 0 47-36 75-94 75H28V42zm56 45v176h37c25 0 40-12 40-33 0-22-15-34-42-34H98v-43h18c22 0 35-11 35-31 0-22-14-35-38-35H84z"/><path d="M246 42h58v266h-58z"/><path d="M335 308V129c0-57 39-94 95-94s95 37 95 94v179h-58V134c0-29-13-46-37-46s-37 17-37 46v174h-58z"/><path d="M555 42h58c73 0 115 49 115 133s-42 133-115 133h-58V42zm58 48v170h5c34 0 53-28 53-85s-19-85-53-85h-5z" transform="translate(-88 0)"/></g><text x="320" y="286" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="28" letter-spacing="31" text-anchor="middle">BUILDS</text><g fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="15" letter-spacing="5"><text x="320" y="323" text-anchor="middle">PLAN • BUILD • DELIVER</text></g><g stroke="#fff" stroke-width="2"><path d="M42 317h92M506 317h92"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 430" role="img" aria-labelledby="title">
+<title id="title">BIND BUILDS — Plan Build Deliver</title>
+<g fill="#fff">
+  <!-- B -->
+  <path d="M42 42h112c69 0 113 36 113 91 0 35-18 61-49 75 40 13 63 44 63 84 0 61-48 98-123 98H42V42zm65 55v238h45c38 0 61-19 61-51 0-31-22-49-63-49h-24v-54h22c34 0 53-16 53-43 0-27-20-41-55-41h-39z"/>
+  <!-- I -->
+  <path d="M314 42h69v348h-69z"/>
+  <!-- N / arch -->
+  <path d="M422 390V164c0-78 49-129 119-129s119 51 119 129v226h-69V169c0-48-18-73-50-73s-50 25-50 73v221h-69z"/>
+  <!-- D -->
+  <path d="M684 42h76v348h-76V42zm76 0h28c94 0 150 64 150 174s-56 174-150 174h-28v-62h24c53 0 82-38 82-112s-29-112-82-112h-24V42z" transform="translate(-190 0)"/>
+</g>
+<text x="380" y="350" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="31" font-weight="400" letter-spacing="38" text-anchor="middle">BUILDS</text>
+<g fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="17" letter-spacing="6">
+  <text x="380" y="410" text-anchor="middle">PLAN • BUILD • DELIVER</text>
+</g>
+<g stroke="#fff" stroke-width="2.5"><path d="M54 403h106M600 403h106"/></g>
+</svg>
