@@ -1,4 +1,3 @@
-import './globals.css';
-import type { Metadata } from 'next';
-export const metadata: Metadata={title:'Bind Builds | Architect-Led Construction Chennai',description:'Bind Builds brings architecture, engineering and execution together for thoughtful construction in Chennai.'};
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>}
+import './globals.css';import type {Metadata} from 'next';import Reveal from '@/components/Reveal';
+export const metadata:Metadata={title:{default:'Bind Builds | Architect-Led Construction Studio',template:'%s | Bind Builds'},description:'Bind Builds is an architect-led construction studio in Chennai bringing professional architectural thinking, engineering and construction execution into one coordinated process.',keywords:['architect-led construction Chennai','architecture and construction Chennai','turnkey construction Chennai','Bind Builds']};
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body><Reveal/>{children}</body></html>}
