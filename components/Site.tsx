@@ -1,0 +1,6 @@
+'use client';
+import Link from 'next/link';
+export function Nav(){return <nav className="nav"><Link href="/" className="brand">BIND<small>BUILDS</small></Link><div className="links"><Link href="/projects">Projects</Link><Link href="/approach">Approach</Link><Link href="/about">About</Link><Link href="/insights">Insights</Link></div><Link className="cta" href="/start-a-project">START A PROJECT ↗</Link></nav>}
+export function Footer(){return <footer className="footer"><span className="eyebrow">ARCHITECT-LED CONSTRUCTION · CHENNAI</span><h2>PLANNING A PROJECT?<br/>LET’S START WITH A CONVERSATION.</h2><Link className="cta" href="/start-a-project">START A PROJECT ↗</Link><p style={{marginTop:'12vw',opacity:.5}}>BIND BUILDS · PLAN • BUILD • DELIVER</p></footer>}
+export function Page({kicker,title,children}:{kicker:string,title:string,children:React.ReactNode}){return <><Nav/><header className="pageHero"><span className="eyebrow">{kicker}</span><h1>{title}</h1></header>{children}<Footer/></>}
+export const sectors=['Homes','Healthcare','Retail','Hospitality','Offices','Commercial'];
