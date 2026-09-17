@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Page } from '@/components/Site';
@@ -6,7 +7,7 @@ import ProjectForm from '@/components/ProjectForm';
 import { site, whatsappUrl } from '@/lib/site';
 const titles:Record<string,string>={about:'Our Story & Founder',projects:'Design & Site Experience',contact:'Contact the Chennai Studio','start-a-project':'Discuss Your Construction Project',privacy:'Enquiry Privacy'};
 export function generateStaticParams(){return Object.keys(titles).map(slug=>({slug}));}
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;return {title:titles[slug]||'Page not found',alternates:{canonical:'/'+slug}};}
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const descriptions:Record<string,string>={about:'Meet Ar. Parthiban Moorthy and the practice behind Bind Builds: Studio Bind Architects since 2019, and architect-led construction in Chennai since 2026.',projects:'Explore the design and site-coordination experience behind Bind Builds, including residential, healthcare and commercial project contexts.',contact:'Contact Bind Builds in Chennai to discuss architect-led home construction, site requirements and budgets. Conversations in English and Tamil by appointment.','start-a-project':'Prepare your Chennai construction project brief. Share your location, requirements and budget, then review your enquiry before sending it to Bind Builds.',privacy:'How Bind Builds handles website project enquiries, messaging drafts and personal information.'};return pageMetadata(titles[slug]||'Page not found',descriptions[slug]||'Bind Builds — Chennai construction.','/'+slug);}
 export default async function Slug({params}:{params:Promise<{slug:string}>}){
  const {slug}=await params;
  if(slug==='start-a-project')return <Page kicker="YOUR PROJECT / LET’S BEGIN" title="A home begins with a conversation."><section className="section enquirySection"><ProjectForm /></section></Page>;

@@ -1,0 +1,7 @@
+import type { Metadata } from 'next';
+import { site } from './site';
+export function pageMetadata(title:string,description:string,path:string):Metadata {
+ return {title:path==='/'?{absolute:title+' | '+site.name}:title,description,alternates:{canonical:path},openGraph:{type:'website',locale:'en_IN',siteName:site.name,title:title+' | '+site.name,description,url:site.url+path},twitter:{card:'summary',title:title+' | '+site.name,description}};
+}
+export function breadcrumbSchema(name:string,path:string){return {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:site.url},{'@type':'ListItem',position:2,name,item:site.url+path}]};}
+export const organizationSchema={'@context':'https://schema.org','@type':'Organization','@id':site.url+'/#organization',name:site.name,url:site.url,logo:site.url+'/bind-builds-logo.svg',description:'Architect-led construction in Chennai, connecting design, engineering and site execution.',telephone:site.telephone,email:site.email,areaServed:{'@type':'City',name:'Chennai'},founder:{'@type':'Person',name:'Parthiban Moorthy'},contactPoint:{'@type':'ContactPoint',telephone:site.telephone,contactType:'project enquiries',availableLanguage:['English','Tamil']}};

@@ -1,5 +1,6 @@
 import './globals.css';
 import './premium.css';
+import './guides.css';
 import type { Metadata } from 'next';
 import Motion from '@/components/Motion';
 import { site } from '@/lib/site';

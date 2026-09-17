@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import {Page} from '@/components/Site';
-export const metadata:Metadata={title:'From Planning to Construction',description:'Understand the Bind Builds process from your brief and paid design engagement through plans, approvals, engineering and site commencement.',alternates:{canonical:'/process'}};
+export const metadata=pageMetadata("Home Construction Process in Chennai","Understand the Bind Builds process from your brief and paid design engagement through plans, approvals, engineering and construction in Chennai.","/process");
 const milestones=[
 {no:'01',title:'DISCOVERY MEETING + REQUIREMENT FREEZE',body:'We begin with a discovery meeting with the users to understand the family, lifestyle, priorities, site context, expectations and project needs.',output:'Understanding the users + finalized project requirements / design brief.'},
 {no:'02',title:'SCHEMATIC FLOOR PLANNING',body:'Initial floor plan concepts are prepared from the finalized requirements, site conditions and lifestyle needs.',output:'Shortlisted 1–2 schematic floor plan options for discussion.'},
