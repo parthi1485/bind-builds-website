@@ -16,15 +16,15 @@ const number = (value: string) => value.trim() === '' ? NaN : Number(value);
 
 function Building({ floors }: { floors: number }) {
   return <svg className="calcBuilding" viewBox="0 -30 300 280" aria-hidden="true">
-    <path d="M20 187L145 123L280 187L155 251Z" fill="#263f38" />
-    <path d="M20 187L145 123L280 187M55 205L180 141M92 223L218 159M56 169L191 233M94 149L230 213" fill="none" stroke="#4b695f" strokeWidth=".6" />
+    <path d="M20 187L145 123L280 187L155 251Z" fill="#283242" />
+    <path d="M20 187L145 123L280 187M55 205L180 141M92 223L218 159M56 169L191 233M94 149L230 213" fill="none" stroke="#57677e" strokeWidth=".6" />
     {Array.from({ length: floors }, (_, index) => <g key={index} className="calcBuildingFloor" style={{ animationDelay: `${index * 70}ms` }}>
-      <path d={`M75 ${166 - index * 38}L150 ${128 - index * 38}L225 ${166 - index * 38}L150 ${204 - index * 38}Z`} fill="#e7eee4" stroke="#b3ccbc" />
-      <path d={`M75 ${166 - index * 38}L150 ${204 - index * 38}V${175 - index * 38}L75 ${137 - index * 38}Z`} fill="#aec5b7" />
-      <path d={`M150 ${204 - index * 38}L225 ${166 - index * 38}V${137 - index * 38}L150 ${175 - index * 38}Z`} fill="#719e88" />
-      <path d={`M75 ${137 - index * 38}L150 ${99 - index * 38}L225 ${137 - index * 38}L150 ${175 - index * 38}Z`} fill="#edf3e8" stroke="#aec5b7" />
-      <path d={`M88 ${148 - index * 38}L110 ${159 - index * 38}V${177 - index * 38}L88 ${166 - index * 38}Z M119 ${164 - index * 38}L139 ${174 - index * 38}V${192 - index * 38}L119 ${182 - index * 38}Z`} fill="#294a45" />
-      <path d={`M163 ${174 - index * 38}L185 ${163 - index * 38}V${181 - index * 38}L163 ${192 - index * 38}Z M194 ${158 - index * 38}L215 ${148 - index * 38}V${166 - index * 38}L194 ${176 - index * 38}Z`} fill="#23413b" />
+      <path d={`M75 ${166 - index * 38}L150 ${128 - index * 38}L225 ${166 - index * 38}L150 ${204 - index * 38}Z`} fill="#f4f6fa" stroke="#c5d1e2" />
+      <path d={`M75 ${166 - index * 38}L150 ${204 - index * 38}V${175 - index * 38}L75 ${137 - index * 38}Z`} fill="#c6d0df" />
+      <path d={`M150 ${204 - index * 38}L225 ${166 - index * 38}V${137 - index * 38}L150 ${175 - index * 38}Z`} fill="#849dbd" />
+      <path d={`M75 ${137 - index * 38}L150 ${99 - index * 38}L225 ${137 - index * 38}L150 ${175 - index * 38}Z`} fill="#fafbff" stroke="#c6d0df" />
+      <path d={`M88 ${148 - index * 38}L110 ${159 - index * 38}V${177 - index * 38}L88 ${166 - index * 38}Z M119 ${164 - index * 38}L139 ${174 - index * 38}V${192 - index * 38}L119 ${182 - index * 38}Z`} fill="#29415f" />
+      <path d={`M163 ${174 - index * 38}L185 ${163 - index * 38}V${181 - index * 38}L163 ${192 - index * 38}Z M194 ${158 - index * 38}L215 ${148 - index * 38}V${166 - index * 38}L194 ${176 - index * 38}Z`} fill="#233a56" />
     </g>)}
   </svg>;
 }

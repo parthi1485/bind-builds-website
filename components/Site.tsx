@@ -44,16 +44,16 @@ export function Nav() {
     <header className={`nav ${scrolled || pathname !== '/' || open ? 'navScrolled' : ''}`}>
       <Link href="/" className="brandImage" aria-label="Bind Builds home"><Image src="/bind-builds-logo.svg" alt="Bind Builds" width={190} height={66} priority /></Link>
       <nav className="links" aria-label="Main navigation">{navigation.map(([name, href]) => <Link key={href} href={href} aria-current={pathname === href ? 'page' : undefined}>{name}</Link>)}</nav>
-      <Link className="cta navCta" href="/start-a-project">Discuss your project <span aria-hidden="true">↗</span></Link>
+      <Link className="cta navCta" href="/start-a-project">Plan my home <span aria-hidden="true">↗</span></Link>
       <button ref={toggle} type="button" className="menuButton" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>{open ? 'Close' : 'Menu'}<span aria-hidden="true">{open ? '−' : '+'}</span></button>
     </header>
     <div ref={menu} id="mobile-menu" className="mobileMenu" hidden={!open}>
       <p className="eyebrow">Architecture. Engineering. Construction.</p>
       <nav aria-label="Mobile navigation">{navigation.map(([name, href], i) => <Link href={href} key={href} onClick={() => setOpen(false)} aria-current={pathname === href ? 'page' : undefined}><small>0{i + 1}</small><span>{name}</span><span aria-hidden="true">↗</span></Link>)}</nav>
-      <Link className="cta primary" href="/start-a-project" onClick={() => setOpen(false)}>Discuss your project ↗</Link>
+      <Link className="cta primary" href="/start-a-project" onClick={() => setOpen(false)}>Plan my home ↗</Link>
       <a className="menuPhone" href={`tel:${site.telephone}`}>{site.phone}</a>
     </div>
-    {pathname !== '/start-a-project' && pathname !== '/cost-calculator' && <div className="mobileProjectBar"><a href={`tel:${site.telephone}`}>Call the studio</a><Link href="/start-a-project">Discuss your project ↗</Link></div>}
+    {pathname !== '/start-a-project' && pathname !== '/cost-calculator' && <div className="mobileProjectBar"><a href={`tel:${site.telephone}`}>Call the studio</a><Link href="/start-a-project">Plan my home ↗</Link></div>}
   </>;
 }
 export function Footer() {
