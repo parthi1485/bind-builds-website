@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { calculateEstimate, calculateEmi, splitStages } from '../lib/calculator.ts';
+import { calculateEstimate, calculateEmi, createVisualData, splitStages } from '../lib/calculator.ts';
 const input = { plot: 1200, floors: [1000, 800], rate: 2649, headroom: 100, allowances: [], reservePercent: 0 };
 test('different floor areas and headroom are charged exactly once', () => {
   const result = calculateEstimate(input);
@@ -31,6 +31,19 @@ test('stage allocation reconciles to the base after rupee rounding', () => {
     assert.equal(parts.reduce((sum, part) => sum + part.percent, 0), 100);
     assert.ok(parts.every(part => part.amount >= 0));
   }
+});
+test('report diagrams reconcile area and budget without pricing unknown extras', () => {
+  const scenario = {...input, reservePercent: 5, allowances: [
+    {key:'gate',label:'Gate',selected:true,amount:125000},
+    {key:'sump',label:'Sump',selected:true,amount:null},
+  ]};
+  const estimate = calculateEstimate(scenario);
+  const visual = createVisualData(scenario, estimate, 'Elevate', [{name:'Elevate',rate:2649,base:estimate.base}]);
+  assert.equal(visual.parts.reduce((sum, item) => sum + item.value, 0), 5416005);
+  assert.equal(visual.floors.reduce((sum, item) => sum + item.area, 0), 1900);
+  assert.equal(visual.allocation.reduce((sum, item) => sum + item.amount, 0), estimate.base);
+  assert.equal(visual.unpricedCount, 1);
+  assert.equal(visual.comparisons[0].base, 5033100);
 });
 test('EMI follows amortization and handles zero interest', () => {
   assert.ok(Math.abs(calculateEmi(5000000, 8.5, 20).monthly - 43391.16) < 0.01);

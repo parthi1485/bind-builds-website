@@ -72,3 +72,14 @@ export const money = (value: number) => '₹' + Math.round(value).toLocaleString
 export const compactMoney = (value: number) => value >= 10000000
   ? '₹' + (value / 10000000).toLocaleString('en-IN', { maximumFractionDigits: 2, minimumFractionDigits: 2 }) + ' crore'
   : '₹' + (value / 100000).toLocaleString('en-IN', { maximumFractionDigits: 2, minimumFractionDigits: 2 }) + ' lakh';
+
+/** One numeric source for on-screen charts, presentation slides and PDF diagrams. */
+export function createVisualData(input: EstimateInput, estimate: Estimate, packageName: string, comparisons: {name:string; rate:number; base:number}[]) {
+  return {
+    packageName, plot: input.plot, area: estimate.area, configuration: configuration(input.floors.length), total: estimate.total, unpricedCount: estimate.unpriced.length,
+    parts: [{ label: 'Base construction', value: estimate.base, color: '#0071e3' }, { label: 'Your allowances', value: estimate.allowanceTotal, color: '#7974e8' }, { label: 'Planning reserve', value: estimate.reserve, color: '#66b9ce' }],
+    floors: [...input.floors.map((area,index)=>({label:floorName(index),area})), ...(input.headroom?[{label:'Separate headroom',area:input.headroom}]:[])],
+    comparisons, allocation: splitStages(estimate.base),
+  };
+}
+export type VisualEstimate = ReturnType<typeof createVisualData>;
