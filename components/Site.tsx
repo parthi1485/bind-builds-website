@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { site, whatsappUrl } from '@/lib/site';
 
-const navigation = [['Projects', '/projects'], ['Packages', '/packages'], ['Process', '/process'], ['About', '/about'], ['FAQs', '/faq'], ['Contact', '/contact']];
+const navigation = [['Projects', '/projects'], ['Packages', '/packages'], ['Calculator', '/cost-calculator'], ['Process', '/process'], ['About', '/about'], ['FAQs', '/faq'], ['Contact', '/contact']];
 export function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -53,7 +53,7 @@ export function Nav() {
       <Link className="cta primary" href="/start-a-project" onClick={() => setOpen(false)}>Discuss your project ↗</Link>
       <a className="menuPhone" href={`tel:${site.telephone}`}>{site.phone}</a>
     </div>
-    {pathname !== '/start-a-project' && <div className="mobileProjectBar"><a href={`tel:${site.telephone}`}>Call the studio</a><Link href="/start-a-project">Discuss your project ↗</Link></div>}
+    {pathname !== '/start-a-project' && pathname !== '/cost-calculator' && <div className="mobileProjectBar"><a href={`tel:${site.telephone}`}>Call the studio</a><Link href="/start-a-project">Discuss your project ↗</Link></div>}
   </>;
 }
 export function Footer() {
