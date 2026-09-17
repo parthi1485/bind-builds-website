@@ -10,7 +10,7 @@ export default function ProjectForm(){
  const [prepared,setPrepared]=useState(false);
  const [copyStatus,setCopyStatus]=useState('');
  const heading=useRef<HTMLHeadingElement>(null);
- useEffect(()=>{const params=new URLSearchParams(window.location.search);const tier=params.get('package');const area=params.get('area');const location=(params.get('location')||'').slice(0,120).replace(/[\u0000-\u001f]/g,'');const notes=(params.get('notes')||'').slice(0,2000).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,'');setForm(value=>({...value,location,package:['Essential','Elevate','Signature'].includes(tier||'')?tier!:'',area:area&&/^\d{1,6}$/.test(area)?area:'',notes}));},[]);
+ useEffect(()=>{const params=new URLSearchParams(window.location.search);const requestedType=params.get('type');const type=['New home','Demolition & rebuild','Rental / multi-family building','Commercial','Healthcare','Retail / hospitality','Interiors','Other'].includes(requestedType||'')?requestedType!:'New home';const tier=params.get('package');const area=params.get('area');const location=(params.get('location')||'').slice(0,120).replace(/[\u0000-\u001f]/g,'');const notes=(params.get('notes')||'').slice(0,2000).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,'');setForm(value=>({...value,type,location,package:['Essential','Elevate','Signature'].includes(tier||'')?tier!:'',area:area&&/^\d{1,6}$/.test(area)?area:'',notes}));},[]);
  useEffect(()=>{if(step>0||prepared)heading.current?.focus();},[step,prepared]);
  const update=(key:keyof Brief,value:string)=>setForm(current=>({...current,[key]:value}));
  const submit=(event:FormEvent<HTMLFormElement>)=>{event.preventDefault();if(step<2)setStep(step+1);else setPrepared(true);};
