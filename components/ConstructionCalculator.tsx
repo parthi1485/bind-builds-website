@@ -83,7 +83,7 @@ export default function ConstructionCalculator() {
             <p id="plot-help" className="calcHint">{validNumber(number(plot), 1, 100000) ? `${(Number(plot) / 9).toLocaleString('en-IN', { maximumFractionDigits: 1 })} sq.yd · ${(Number(plot) / 435.6).toFixed(2)} cents · ${(Number(plot) / 2400).toFixed(2)} grounds` : 'Enter a plot area between 1 and 1,00,000 sq.ft.'}</p>
             <label htmlFor="calc-ground">Ground-floor built-up area <span>sq.ft</span></label><input id="calc-ground" required type="number" inputMode="numeric" min="1" max="100000" step="1" value={areas[0]} onChange={e => setGround(e.target.value)} aria-describedby="ground-help" />
             <p id="ground-help" className="calcHint">Enter the building area, not the full plot. Count staircases and covered circulation once. Exclude any parking or headroom you plan to add separately.</p>
-            {Number(areas[0]) > Number(plot) && <p className="calcNotice">Your ground-floor area exceeds the plot area. Please review these figures with your architect.</p>}
+            {validNumber(number(plot), 1, 100000) && Number(areas[0]) > Number(plot) && <p className="calcNotice">Your ground-floor area exceeds the plot area. Please review these figures with your architect.</p>}
             <div className="calcNote"><span aria-hidden="true">↗</span><p>Have a total area from a drawing? Choose <strong>Ground only</strong> in the next step and enter that total for a simple budget calculation.</p></div>
           </div>}
           {step === 1 && <div className="calcFields">
