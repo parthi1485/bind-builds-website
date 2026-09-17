@@ -1,0 +1,15 @@
+/* Mobile homepage hero alignment refinements */
+@media (max-width:760px){
+  .hero{padding:15vh 6vw 6vh;min-height:100svh;justify-content:flex-end;gap:0}
+  .heroTop{position:absolute!important;top:14vh;left:6vw;right:6vw;display:block}
+  .heroBottom{display:block;width:100%;padding-bottom:13vh}
+  .hero h1{font-size:clamp(54px,14.2vw,74px);line-height:.86;letter-spacing:-.065em;max-width:100%;overflow-wrap:normal;word-break:normal}
+  .heroMeta{margin-top:7vw;max-width:92%}
+  .heroStatement{font-size:clamp(18px,5.1vw,23px)!important;line-height:1.38!important;max-width:19em;margin:0}
+  .heroCta{margin-top:7vw;padding:15px 20px;font-size:15px;min-height:54px}
+  .scrollCue{bottom:3.5vh;right:6vw;font-size:7px;letter-spacing:.2em}
+}
+@media (max-width:390px){
+  .hero h1{font-size:13.7vw}
+  .heroStatement{font-size:4.8vw!important}
+}
