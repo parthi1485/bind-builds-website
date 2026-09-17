@@ -1,13 +1,69 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
-import {useEffect,useState} from 'react';
-const nav=[['PROJECTS','/projects'],['PACKAGES','/packages'],['PROCESS','/process'],['ABOUT','/about'],['CONTACT','/contact']];
-function Brand(){return <Link href="/" className="brand brandImage" aria-label="Bind Builds home"><img src="/bind-builds-logo.svg" alt="Bind Builds — Plan Build Deliver"/></Link>}
-export function Nav(){const [open,setOpen]=useState(false);const [scrolled,setScrolled]=useState(false);useEffect(()=>{const onScroll=()=>setScrolled(window.scrollY>32);onScroll();window.addEventListener('scroll',onScroll,{passive:true});return()=>window.removeEventListener('scroll',onScroll)},[]);useEffect(()=>{document.body.style.overflow=open?'hidden':'';return()=>{document.body.style.overflow=''}},[open]);return <><nav className={`nav ${scrolled?'navScrolled':''} ${open?'navOpen':''}`}><Brand/><div className="links">{nav.map(([n,h])=><Link key={h} href={h}>{n}</Link>)}</div><Link className="cta desktopCta" href="/start-a-project">START A PROJECT <span>↗</span></Link><button className={`menuButton ${open?'active':''}`} aria-label={open?'Close menu':'Open menu'} aria-expanded={open} onClick={()=>setOpen(!open)}><span>{open?'CLOSE':'MENU'}</span><i aria-hidden="true">{open?'×':'+'}</i></button></nav><div className={`mobileMenu ${open?'open':''}`}><div className="mobileMenuIntro"><span>ARCHITECT-LED CONSTRUCTION STUDIO</span><span>CHENNAI · INDIA</span></div><div className="mobileNavLinks">{nav.map(([n,h],i)=><Link key={h} href={h} onClick={()=>setOpen(false)}><small>{String(i+1).padStart(2,'0')}</small><b>{n}</b><span>↗</span></Link>)}</div><div className="mobileMenuBottom"><Link className="cta" href="/start-a-project" onClick={()=>setOpen(false)}>START A PROJECT ↗</Link><span className="eyebrow">PLAN • BUILD • DELIVER</span></div></div><style jsx global>{`
-.brandImage{display:block;width:clamp(132px,10vw,168px);line-height:0}.brandImage img{display:block;width:100%;height:auto;object-fit:contain}.navOpen{background:#111;border-color:#ffffff18}.mobileMenuIntro,.mobileMenuBottom{display:none}
-.heroMedia{background-image:linear-gradient(90deg,rgba(0,0,0,.76) 0%,rgba(0,0,0,.44) 38%,rgba(0,0,0,.12) 72%),linear-gradient(0deg,rgba(0,0,0,.72) 0%,transparent 52%),url('https://amazingarchitecture.com/storage/files/1742/architecture-projects/cubism-architects/n-cube-villa/n_cube_villa_cubism_architects_and_interiors_india-13.jpg')!important;background-position:center 58%!important;background-size:cover!important}
-@media(max-width:760px){body{padding-bottom:0!important}.nav{padding:18px 6vw;min-height:112px}.brandImage{width:132px}.navScrolled{min-height:84px;padding-top:10px;padding-bottom:10px}.navScrolled .brandImage{width:108px}.navOpen{background:#111}.menuButton{display:flex;align-items:center;gap:10px;border:1px solid #ffffff70;border-radius:999px;background:transparent;color:#fff;padding:7px 8px 7px 16px;font-size:10px;letter-spacing:.16em}.menuButton i{display:grid;place-items:center;width:28px;height:28px;border:1px solid #ffffff45;border-radius:50%;font-style:normal;font-size:14px}.mobileMenu{padding:17vh 6vw 8vh;background:#111;justify-content:flex-start}.mobileMenuIntro{display:flex;justify-content:space-between;gap:20px;margin:3vh 0 7vh;color:#777;font-size:7px;letter-spacing:.15em;white-space:nowrap}.mobileNavLinks{border-top:1px solid #ffffff2b}.mobileNavLinks a{display:grid;grid-template-columns:42px minmax(0,1fr) 28px;align-items:center;gap:8px;padding:4.3vw 0;border-bottom:1px solid #ffffff2b;font-size:inherit}.mobileNavLinks small{font-size:8px;color:#777}.mobileNavLinks b{font-size:clamp(34px,9.2vw,48px);line-height:1;font-weight:400;letter-spacing:-.045em}.mobileNavLinks span{font-size:24px;font-weight:300;line-height:1;text-align:right}.mobileMenuBottom{display:flex;flex-direction:column;align-items:flex-start;gap:7vw;margin-top:7vw}.mobileMenuBottom .cta{padding:14px 18px;font-size:15px}.mobileMenuBottom .eyebrow{font-size:8px}.mobileProjectBar{display:none!important}.heroMedia{background-position:52% center!important}.heroTop{display:none!important}.hero{min-height:100svh!important;padding:0 6vw 5.5vh!important;display:flex!important;justify-content:flex-end!important}.heroBottom{display:block!important;width:100%!important;margin:0 0 13vh!important}.hero h1{font-size:clamp(54px,13.2vw,68px)!important;line-height:.84!important;letter-spacing:-.065em!important;max-width:100%!important;margin:0!important}.hero h1 span{white-space:nowrap!important}.heroMeta{margin-top:5.5vw!important;max-width:94%!important}.heroStatement{font-size:clamp(17px,4.6vw,21px)!important;line-height:1.35!important;letter-spacing:-.025em!important;margin:0!important}.heroCta{margin-top:7vw!important;padding:15px 20px!important;font-size:16px!important}.scrollCue{bottom:2.7vh!important;right:6vw!important;font-size:7px!important;letter-spacing:.2em!important}}
-@media(max-width:390px){.hero h1{font-size:12.6vw!important}.heroStatement{font-size:4.35vw!important}.brandImage{width:120px}}
-`}</style></>}
-export function Footer(){return <footer className="footer"><div className="footerTop"><span className="eyebrow">BIND BUILDS · ARCHITECT-LED CONSTRUCTION STUDIO</span><span className="eyebrow">CHENNAI · INDIA</span></div><h2>PLANNING A PROJECT?<br/>LET’S START WITH A CONVERSATION.</h2><div className="footerAction"><Link className="cta" href="/start-a-project">START A PROJECT ↗</Link><p>Architecture + engineering + construction.<br/>One coordinated process.</p></div><div className="footerLinks">{nav.map(([n,h])=><Link key={h} href={h}>{n}</Link>)}</div><p className="footerMark">PLAN • BUILD • DELIVER</p></footer>}
-export function Page({kicker,title,children}:{kicker:string,title:string,children:React.ReactNode}){return <><Nav/><header className="pageHero"><span className="eyebrow">{kicker}</span><h1>{title}</h1></header>{children}<Footer/></>}
+import { usePathname } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import { site, whatsappUrl } from '@/lib/site';
+
+const navigation = [['Projects', '/projects'], ['Packages', '/packages'], ['Process', '/process'], ['About', '/about'], ['FAQs', '/faq'], ['Contact', '/contact']];
+export function Nav() {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const menu = useRef<HTMLDivElement>(null);
+  const toggle = useRef<HTMLButtonElement>(null);
+  useEffect(() => { setOpen(false); }, [pathname]);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    menu.current?.querySelector<HTMLAnchorElement>('a')?.focus();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { setOpen(false); toggle.current?.focus(); }
+      if (event.key !== 'Tab') return;
+      const links = menu.current?.querySelectorAll<HTMLElement>('a,button');
+      if (!links?.length) return;
+      const first = toggle.current;
+      const last = links[links.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
+    const onResize = () => { if (window.innerWidth >= 1100) setOpen(false); };
+    document.addEventListener('keydown', onKey);
+    window.addEventListener('resize', onResize);
+    return () => { document.body.style.overflow = previous; document.removeEventListener('keydown', onKey); window.removeEventListener('resize', onResize); };
+  }, [open]);
+  return <>
+    <a className="skipLink" href="#main-content">Skip to content</a>
+    <header className={`nav ${scrolled || pathname !== '/' || open ? 'navScrolled' : ''}`}>
+      <Link href="/" className="brandImage" aria-label="Bind Builds home"><Image src="/bind-builds-logo.svg" alt="Bind Builds" width={190} height={66} priority /></Link>
+      <nav className="links" aria-label="Main navigation">{navigation.map(([name, href]) => <Link key={href} href={href} aria-current={pathname === href ? 'page' : undefined}>{name}</Link>)}</nav>
+      <Link className="cta navCta" href="/start-a-project">Discuss your project <span aria-hidden="true">↗</span></Link>
+      <button ref={toggle} type="button" className="menuButton" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>{open ? 'Close' : 'Menu'}<span aria-hidden="true">{open ? '−' : '+'}</span></button>
+    </header>
+    <div ref={menu} id="mobile-menu" className="mobileMenu" hidden={!open}>
+      <p className="eyebrow">Architecture. Engineering. Construction.</p>
+      <nav aria-label="Mobile navigation">{navigation.map(([name, href], i) => <Link href={href} key={href} onClick={() => setOpen(false)} aria-current={pathname === href ? 'page' : undefined}><small>0{i + 1}</small><span>{name}</span><span aria-hidden="true">↗</span></Link>)}</nav>
+      <Link className="cta primary" href="/start-a-project" onClick={() => setOpen(false)}>Discuss your project ↗</Link>
+      <a className="menuPhone" href={`tel:${site.telephone}`}>{site.phone}</a>
+    </div>
+    {pathname !== '/start-a-project' && <div className="mobileProjectBar"><a href={`tel:${site.telephone}`}>Call the studio</a><Link href="/start-a-project">Discuss your project ↗</Link></div>}
+  </>;
+}
+export function Footer() {
+  return <footer className="footer">
+    <div className="footerIdentity"><Link href="/" className="brandImage" aria-label="Bind Builds home"><Image src="/bind-builds-logo.svg" alt="Bind Builds" width={190} height={66} /></Link><p>Architect-led construction.<br />Chennai, Tamil Nadu.</p></div>
+    <nav className="footerLinks" aria-label="Footer navigation">{navigation.map(([name, href]) => <Link href={href} key={href}>{name}</Link>)}</nav>
+    <div className="footerContact"><a href={`tel:${site.telephone}`}>{site.phone}</a><a href={`mailto:${site.email}`}>{site.email}</a><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">Chat on WhatsApp ↗</a></div>
+    <div className="footerBottom"><span>© {new Date().getFullYear()} Bind Builds</span><span>Plan • Build • Deliver</span><Link href="/privacy">Privacy</Link></div>
+  </footer>;
+}
+export function Page({ kicker, title, children }: { kicker: string; title: string; children: React.ReactNode }) {
+  return <><Nav /><main id="main-content"><header className="pageHero"><span className="eyebrow">{kicker}</span><h1>{title}</h1></header>{children}</main><Footer /></>;
+}
