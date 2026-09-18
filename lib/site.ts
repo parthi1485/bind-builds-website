@@ -6,6 +6,7 @@ export const site = {
   whatsapp: '918072701454',
   email: 'bindarchitects@gmail.com',
   instagram: 'https://www.instagram.com/bindbuilds/',
+  portfolio: 'https://www.bindarchitects.com/',
   studio: 'https://www.bindarchitects.com/studio',
 };
 // Public business contact published at https://www.bindarchitects.com/studio.
