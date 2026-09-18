@@ -27,3 +27,6 @@ html[data-motion=paused]{scroll-behavior:auto}html[data-motion=paused] *,html[da
 @media(hover:hover) and (prefers-reduced-motion:no-preference){.storyTile:hover .storyPicture img,.highlightCard:hover .highlightPhoto img{transform:scale(1.045)}.storyRailFooter button:hover{background:#d2e6ff}}
 @media(max-width:760px){.storyTile{flex-basis:86%;max-width:380px}.storyPicture{height:340px}.storyPictureCopy{left:22px;right:22px;bottom:24px}.storyPictureCopy h3{font-size:1.75rem}.storyText{padding:22px}.storyRail{gap:14px}.storyRailFooter p{max-width:180px;font-size:.625rem}.highlightPhoto{margin-inline:-28px;height:240px}.storyCollection{margin:26px 0}}
 @media(prefers-reduced-motion:reduce){.storyPicture img,.highlightPhoto img{transition:none}}
+
+.premiumHome .designStatement{color:#172c43}.premiumHome .designStatement>.productEyebrow,.premiumHome .designStatement>p{color:#536779}.premiumHome .designStatement>h2>span{color:#3976b0}.premiumHome .designStatement .productTextLink{color:#0063c7}.designStatement .storyCollection{text-align:left;max-width:1400px;margin-inline:auto}.designStatement .storyTile{flex-basis:calc((100% - 40px)/3)}
+@media(max-width:760px){.designStatement .storyTile{flex-basis:86%}}
