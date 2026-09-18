@@ -60,7 +60,7 @@ export function Footer() {
   return <footer className="footer">
     <div className="footerIdentity"><Link href="/" className="brandImage" aria-label="Bind Builds home"><Image src="/bind-builds-logo.svg" alt="Bind Builds" width={190} height={66} /></Link><p>Architect-led construction.<br />Chennai, Tamil Nadu.</p></div>
     <nav className="footerLinks" aria-label="Footer navigation">{navigation.map(([name, href]) => <Link href={href} key={href}>{name}</Link>)}<Link className="footerGuideLink" href="/house-construction-chennai">House construction in Chennai</Link></nav>
-    <div className="footerContact"><a href={`tel:${site.telephone}`}>{site.phone}</a><a href={`mailto:${site.email}`}>{site.email}</a><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">Chat on WhatsApp ↗</a></div>
+    <div className="footerContact"><a href={`tel:${site.telephone}`}>{site.phone}</a><a href={`mailto:${site.email}`}>{site.email}</a><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">Chat on WhatsApp ↗</a><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a></div>
     <div className="footerBottom"><span>© {new Date().getFullYear()} Bind Builds</span><span>Plan • Build • Deliver</span><Link href="/privacy">Privacy</Link></div>
   </footer>;
 }
