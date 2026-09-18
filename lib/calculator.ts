@@ -1,19 +1,8 @@
 /** Pure planning calculations. All money is rounded to whole INR. No quotation or approval logic. */
-export type Allowance = { key: string; label: string; selected: boolean; amount: number | null };
+export type Allowance = { key: string; label: string; selected: boolean; amount: number | null; detail?: string };
 export type EstimateInput = { plot: number; floors: number[]; rate: number; headroom: number; allowances: Allowance[]; reservePercent: number };
 export const floorName = (index: number) => ['Ground floor', 'First floor', 'Second floor', 'Third floor'][index] || `Floor ${index + 1}`;
 export const configuration = (count: number) => count === 1 ? 'Ground only' : `G + ${count - 1}`;
-export const extras = [
-  { key: 'parking', label: 'Separate car parking', detail: 'Only if excluded from the floor areas above.' },
-  { key: 'compound', label: 'Compound wall & gate', detail: 'Boundary length, height and gate design affect cost.' },
-  { key: 'sump', label: 'Underground sump', detail: 'Capacity, ground conditions and construction need review.' },
-  { key: 'septic', label: 'Septic / wastewater system', detail: 'Confirm the drainage solution suitable for your site.' },
-  { key: 'solar', label: 'Solar installation', detail: 'System capacity and equipment to be agreed.' },
-  { key: 'lift', label: 'Lift equipment', detail: 'Equipment and installation; confirm shaft scope separately.' },
-  { key: 'smart', label: 'CCTV & smart-home upgrades', detail: 'Devices, cabling and automation beyond package scope.' },
-  { key: 'interiors', label: 'Interiors & fitted furniture', detail: 'Wardrobes, modular kitchen and other excluded fit-out.' },
-  { key: 'tank', label: 'Overhead tank upgrade', detail: 'Only the upgrade beyond the tank already in your package.' },
-] as const;
 export const stages = [
   { name: 'Site work & foundation', percent: 15 },
   { name: 'RCC frame & roof', percent: 25 },
