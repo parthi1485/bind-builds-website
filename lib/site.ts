@@ -1,6 +1,6 @@
 export const site = {
   name: 'Bind Builds',
-  url: 'https://bind-builds-website.vercel.app',
+  url: 'https://www.bindbuilds.com',
   phone: '+91 80727 01454',
   telephone: '+918072701454',
   whatsapp: '918072701454',
