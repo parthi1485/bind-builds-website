@@ -41,7 +41,6 @@ export default function ConstructionCalculator() {
   const [hasHeadroom, setHasHeadroom] = useState(false);
   const [headroom, setHeadroom] = useState('200');
   const [allowances, setAllowances] = useState<Partial<Record<string, ExtraSelection>>>({});
-  const [reserve, setReserve] = useState('0');
   const root = useRef<HTMLDivElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const firstRender = useRef(true);
@@ -61,7 +60,7 @@ export default function ConstructionCalculator() {
     heading.current?.focus({ preventScroll: true });
   }, [step]);
   const input: EstimateInput = { plot: number(plot), floors: areas.slice(0, floorCount).map(number), rate: selected.rate,
-    headroom: hasHeadroom ? number(headroom) : 0, reservePercent: number(reserve),
+    headroom: hasHeadroom ? number(headroom) : 0, reservePercent: 0,
     allowances: extraOptions.map(item => { const value=allowances[item.key]??initialExtra(item); return {key:item.key,label:item.label,selected:value.selected,amount:extraAmount(value),detail:extraDescription(item,value)}; }) };
   let estimate = null;
   try { estimate = calculateEstimate(input); } catch { /* Invalid input is explained by the native form constraints. */ }
@@ -111,19 +110,18 @@ export default function ConstructionCalculator() {
             <div className="calcNote"><span aria-hidden="true">✓</span><p>Your {selected.name} package already lists a <strong>{tankIncluded[tier].toLowerCase()}</strong>. Add an allowance only for an upgrade beyond that scope.</p></div>
             <p className="calcHint">Reference allowances from the supplied example: ₹40/L sump, ₹35/L septic, ₹55/L additional RCC tank and ₹2,750/running ft wall. They are not verified Bind Builds rates. Edit each amount before relying on the budget. Septic and recycling are alternative scenarios here.</p>
             <div className="calcExtras">{extraOptions.filter(item=>item.key!=='parking').map(item=><CalculatorExtra key={item.key} item={item} value={allowances[item.key]} onChange={change=>updateExtra(item.key,change)}/>)}</div>
-            <label htmlFor="calc-reserve">Optional planning reserve <span>%</span></label><div className="calcReserve"><input id="calc-reserve" required type="number" inputMode="decimal" min="0" max="25" step="0.5" value={reserve} onChange={e => setReserve(e.target.value)} /><p>Extra room in your budget. Applied to base construction plus the allowances you enter; it does not price excluded work.</p></div>
           </div>}
         </div>
         <div className="calcActions">{step > 0 ? <button type="button" className="textButton" onClick={() => setStep(step - 1)}>← Back</button> : <span className="calcHint">No sign-up needed</span>}<button type="submit" className="cta primary">{step === 3 ? 'See my estimate' : ['Choose floors', 'Compare packages', 'Add extras'][step]} <span aria-hidden="true">→</span></button></div>
-        {step === 3 && !estimate && <p role="alert" className="fieldError">Please check the area, allowance and reserve values before creating your estimate.</p>}
+        {step === 3 && !estimate && <p role="alert" className="fieldError">Please check the area and additional item values before creating your estimate.</p>}
       </form>
       <aside className="calcPreview" aria-label="Live estimate preview">
         <div className="calcPreviewTop"><span className="eyebrow">Your home, taking shape</span><span className="calcLive"><i /> Live estimate</span></div>
         <Building floors={floorCount} />
         <div className="calcPreviewMeta"><span>{configuration(floorCount)}</span><span>{selected.name}</span></div>
         <p className="calcPreviewTime">~{duration} months <span>construction scenario · excludes design & approvals</span></p><span className="calcPreviewLabel">Planning subtotal</span><output className="calcPreviewAmount" aria-live="polite" aria-atomic="true">{estimate ? compactMoney(estimate.total) : 'Check your inputs'}</output>
-        <p className="calcPreviewEquation">{estimate ? `${estimate.area.toLocaleString('en-IN')} sq.ft × ${money(selected.rate)}` : 'Enter valid areas to see your estimate.'}{estimate && (estimate.allowanceTotal > 0 || estimate.reserve > 0) ? ' + allowances / reserve' : ''}</p>
-        {estimate && <dl className="calcMiniBreakdown"><div><dt>Base construction</dt><dd>{money(estimate.base)}</dd></div><div><dt>Your allowances</dt><dd>{money(estimate.allowanceTotal)}</dd></div>{estimate.reserve > 0 && <div><dt>Planning reserve</dt><dd>{money(estimate.reserve)}</dd></div>}</dl>}
+        <p className="calcPreviewEquation">{estimate ? `${estimate.area.toLocaleString('en-IN')} sq.ft × ${money(selected.rate)}` : 'Enter valid areas to see your estimate.'}{estimate && estimate.allowanceTotal > 0 ? ' + additional items' : ''}</p>
+        {estimate && <dl className="calcMiniBreakdown"><div><dt>Base construction</dt><dd>{money(estimate.base)}</dd></div><div><dt>Additional items</dt><dd>{money(estimate.allowanceTotal)}</dd></div></dl>}
         {estimate && estimate.unpriced.length > 0 && <p className="calcUnpriced">+ {estimate.unpriced.length} {estimate.unpriced.length === 1 ? 'selected extra needs' : 'selected extras need'} a quote</p>}
         <p className="calcPreviewDisclaimer">An initial budget, subject to a site-specific proposal. Taxes, approval charges and other exclusions are additional.</p>
       </aside>

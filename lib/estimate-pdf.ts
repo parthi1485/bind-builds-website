@@ -94,7 +94,7 @@ export function createEstimatePdf(data: PdfReportData) {
   y = chartTop + 68;
   paragraph(data.unpriced.length ? `${data.unpriced.length} selected extra(s) still need a quote and are excluded from the subtotal. See the breakdown on the next page.` : 'The diagram shows the planning subtotal only. Taxes, approvals and site-specific exclusions remain additional.', 8);
   newPage('Your build. By category.', 'Construction cost distribution');
-  paragraph('Illustrative allocation of base construction only. The percentages follow the supplied reference and total 100%. Extras and planning reserve are separate; this is not a BOQ or payment schedule.');
+  paragraph('Illustrative allocation of base construction only. The categories total 100%. Additional items are separate; this is not a BOQ or payment schedule.');
   const categoryTotal = data.visuals.allocation.reduce((sum, part) => sum + part.amount, 0);
   const ringX = 105, ringY = y + 25, ringRadius = 22;
   let ringAngle = -Math.PI / 2;
@@ -116,7 +116,7 @@ export function createEstimatePdf(data: PdfReportData) {
   row('Planning subtotal', data.total, true);
   paragraph('Extra quantities and rates are editable reference or custom planning allowances, not verified Bind Builds prices. An empty amount means the work is unpriced, not included for free.', 8);
   newPage('Compare. Plan. Refine.', 'Package comparison & budget allocation');
-  paragraph('The package comparison uses the same calculated area. It excludes extras and the optional reserve to keep the base construction costs comparable.');
+  paragraph('The package comparison uses the same calculated area. It excludes additional items to keep the base construction costs comparable.');
   const maximumBase = Math.max(...data.visuals.comparisons.map(item => item.base));
   data.visuals.comparisons.forEach(item => row(item.name + ' | ' + inr(item.rate) + ' / sq.ft', inr(item.base), item.name === data.packageName, item.base / maximumBase));
   section('Illustrative category allocation');

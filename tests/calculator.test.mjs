@@ -17,8 +17,8 @@ test('unpriced selections stay visible and do not masquerade as included items',
   ], reservePercent: 5 });
   assert.equal(result.allowanceTotal, 125000);
   assert.equal(result.unpriced.length, 1);
-  assert.equal(result.reserve, 257905);
-  assert.equal(result.total, 5416005);
+  assert.equal(result.reserve, 0);
+  assert.equal(result.total, 5158100);
 });
 test('invalid and nonfinite inputs cannot produce an estimate', () => {
   for (const change of [{floors: []}, {floors: [NaN]}, {floors: [-1]}, {floors: [1.2]}, {plot: 0}, {rate: Infinity}, {headroom: -1}, {reservePercent: 26}, {floors: [1,1,1,1,1]}]) assert.throws(() => calculateEstimate({ ...input, ...change }), RangeError);
@@ -39,7 +39,7 @@ test('report diagrams reconcile area and budget without pricing unknown extras',
   ]};
   const estimate = calculateEstimate(scenario);
   const visual = createVisualData(scenario, estimate, 'Elevate', [{name:'Elevate',rate:2649,base:estimate.base}]);
-  assert.equal(visual.parts.reduce((sum, item) => sum + item.value, 0), 5416005);
+  assert.equal(visual.parts.reduce((sum, item) => sum + item.value, 0), 5158100);
   assert.equal(visual.floors.reduce((sum, item) => sum + item.area, 0), 1900);
   assert.equal(visual.allocation.reduce((sum, item) => sum + item.amount, 0), estimate.base);
   assert.equal(visual.unpricedCount, 1);
@@ -86,7 +86,7 @@ test('unit rates, custom totals and unpriced choices remain distinct',()=>{
  assert.equal(extraAmount(initialExtra(tank)),null,'included overhead capacity is not automatically charged twice');
 });
 
-test('reference categories reconcile independently of extras and reserve',()=>{
+test('reference categories reconcile with additional items and no reserve',()=>{
  const result=calculateEstimate({...input,allowances:[{key:'gate',label:'Gate',selected:true,amount:125000},{key:'tank',label:'Tank',selected:true,amount:null}],reservePercent:5});
  const visual=createVisualData(input,result,'Elevate',[]);
  assert.deepEqual(visual.allocation.map(x=>x.percent),[20,13,12,6,10,8,7,7,8,9]);

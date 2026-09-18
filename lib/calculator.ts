@@ -31,7 +31,7 @@ export function calculateEstimate(input: EstimateInput) {
   const base = floorCost + headroomCost;
   const allowanceTotal = selected.reduce((total, item) => total + (item.amount ?? 0), 0);
   const subtotal = base + allowanceTotal;
-  const reserve = Math.round(subtotal * input.reservePercent / 100);
+  const reserve = 0; // Estimates contain base construction and selected additional items only.
   return { area, floorArea, floorCost, headroomCost, base, allowanceTotal, subtotal, reserve, total: subtotal + reserve,
     unpriced: selected.filter(item => item.amount === null), selected,
     coverage: input.floors[0] / input.plot * 100,
@@ -66,7 +66,7 @@ export const compactMoney = (value: number) => value >= 10000000
 export function createVisualData(input: EstimateInput, estimate: Estimate, packageName: string, comparisons: {name:string; rate:number; base:number}[]) {
   return {
     packageName, plot: input.plot, area: estimate.area, configuration: configuration(input.floors.length), total: estimate.total, unpricedCount: estimate.unpriced.length,
-    parts: [{ label: 'Base construction', value: estimate.base, color: '#0071e3' }, { label: 'Your allowances', value: estimate.allowanceTotal, color: '#7974e8' }, { label: 'Planning reserve', value: estimate.reserve, color: '#66b9ce' }],
+    parts: [{ label: 'Base construction', value: estimate.base, color: '#0071e3' }, { label: 'Additional items', value: estimate.allowanceTotal, color: '#7974e8' }],
     floors: [...input.floors.map((area,index)=>({label:floorName(index),area})), ...(input.headroom?[{label:'Separate headroom',area:input.headroom}]:[])],
     extras: estimate.selected.filter(item=>item.amount!==null).map((item,index)=>({label:item.label,value:item.amount!,color:stages[index%stages.length].color})),
     comparisons, allocation: splitStages(estimate.base),
