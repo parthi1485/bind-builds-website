@@ -93,6 +93,24 @@ export function createEstimatePdf(data: PdfReportData) {
   });
   y = chartTop + 68;
   paragraph(data.unpriced.length ? `${data.unpriced.length} selected extra(s) still need a quote and are excluded from the subtotal. See the breakdown on the next page.` : 'The diagram shows the planning subtotal only. Taxes, approvals and site-specific exclusions remain additional.', 8);
+  newPage('Your build. By category.', 'Construction cost distribution');
+  paragraph('Illustrative allocation of base construction only. The percentages follow the supplied reference and total 100%. Extras and planning reserve are separate; this is not a BOQ or payment schedule.');
+  const categoryTotal = data.visuals.allocation.reduce((sum, part) => sum + part.amount, 0);
+  const ringX = 105, ringY = y + 25, ringRadius = 22;
+  let ringAngle = -Math.PI / 2;
+  doc.setLineWidth(9);
+  data.visuals.allocation.forEach(part => {
+    const end = ringAngle + part.amount / categoryTotal * Math.PI * 2;
+    const count = Math.max(4, Math.ceil((end - ringAngle) * 25));
+    let px = ringX + Math.cos(ringAngle) * ringRadius, py = ringY + Math.sin(ringAngle) * ringRadius;
+    const sx = px, sy = py, points: number[][] = [];
+    for (let i = 1; i <= count; i++) { const theta = ringAngle + (end - ringAngle) * i / count; const nx = ringX + Math.cos(theta) * ringRadius, ny = ringY + Math.sin(theta) * ringRadius; points.push([nx-px,ny-py]); px=nx; py=ny; }
+    doc.setDrawColor(part.color); doc.lines(points,sx,sy,[1,1],'S',false); ringAngle=end;
+  });
+  doc.setLineWidth(.2); doc.setFont('BindReportSans','bold'); doc.setFontSize(16); doc.setTextColor(ink); doc.text('100%',ringX,ringY,{align:'center'});
+  doc.setFont('BindReportSans','normal'); doc.setFontSize(8); doc.text('base construction',ringX,ringY+7,{align:'center'}); y+=61;
+  data.visuals.allocation.forEach(part => row(part.name + ' | ' + part.percent + '%', inr(part.amount)));
+  row('Base construction total',inr(categoryTotal),true);
   newPage('The detail behind the total.', 'Cost breakdown / ' + clean(data.packageName));
   data.rows.forEach(([label, value]) => row(label, value, label === 'Base construction total'));
   row('Planning subtotal', data.total, true);
@@ -101,7 +119,7 @@ export function createEstimatePdf(data: PdfReportData) {
   paragraph('The package comparison uses the same calculated area. It excludes extras and the optional reserve to keep the base construction costs comparable.');
   const maximumBase = Math.max(...data.visuals.comparisons.map(item => item.base));
   data.visuals.comparisons.forEach(item => row(item.name + ' | ' + inr(item.rate) + ' / sq.ft', inr(item.base), item.name === data.packageName, item.base / maximumBase));
-  section('Illustrative ten-stage allocation');
+  section('Illustrative category allocation');
   paragraph('An assumed distribution of the base construction cost only. This is not a bill of quantities, invoice or agreed payment schedule. Actual quantities, sequence and milestones can differ.');
   data.visuals.allocation.forEach(item => row(item.name + ' | ' + item.percent + '%', inr(item.amount), false, item.percent / 100));
   newPage('The scope behind the number.', 'Keep these assumptions with your estimate');
