@@ -85,3 +85,13 @@ test('unit rates, custom totals and unpriced choices remain distinct',()=>{
  const tank=extraOptions.find(item=>item.key==='tank');
  assert.equal(extraAmount(initialExtra(tank)),null,'included overhead capacity is not automatically charged twice');
 });
+
+test('reference categories reconcile independently of extras and reserve',()=>{
+ const result=calculateEstimate({...input,allowances:[{key:'gate',label:'Gate',selected:true,amount:125000},{key:'tank',label:'Tank',selected:true,amount:null}],reservePercent:5});
+ const visual=createVisualData(input,result,'Elevate',[]);
+ assert.deepEqual(visual.allocation.map(x=>x.percent),[20,13,12,6,10,8,7,7,8,9]);
+ assert.equal(visual.allocation.reduce((sum,x)=>sum+x.amount,0),result.base);
+ assert.equal(visual.extras.reduce((sum,x)=>sum+x.value,0),125000);
+ assert.equal(visual.parts.reduce((sum,x)=>sum+x.value,0),result.total);
+ assert.equal(visual.unpricedCount,1);
+});
