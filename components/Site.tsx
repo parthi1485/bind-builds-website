@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { site, whatsappUrl } from '@/lib/site';
 
-const navigation = [['Projects', '/projects'], ['Packages', '/packages'], ['Calculator', '/cost-calculator'], ['Process', '/process'], ['Approvals', '/building-plan-approval-chennai'], ['About', '/about'], ['FAQs', '/faq'], ['Contact', '/contact']];
+const navigation = [['Projects', site.portfolio], ['Packages', '/packages'], ['Calculator', '/cost-calculator'], ['Process', '/process'], ['Approvals', '/building-plan-approval-chennai'], ['About', '/about'], ['FAQs', '/faq'], ['Contact', '/contact']];
 export function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -43,13 +43,13 @@ export function Nav() {
     <a className="skipLink" href="#main-content">Skip to content</a>
     <header className={`nav ${scrolled || pathname !== '/' || open ? 'navScrolled' : ''}`}>
       <Link href="/" className="brandImage" aria-label="Bind Builds home"><Image src="/bind-builds-logo.svg" alt="Bind Builds" width={190} height={66} priority /></Link>
-      <nav className="links" aria-label="Main navigation">{navigation.map(([name, href]) => <Link key={href} href={href} aria-current={pathname === href ? 'page' : undefined}>{name}</Link>)}</nav>
+      <nav className="links" aria-label="Main navigation">{navigation.map(([name, href]) => href.startsWith('http') ? <a key={href} href={href} target="_blank" rel="noopener noreferrer">{name}</a> : <Link key={href} href={href} aria-current={pathname === href ? 'page' : undefined}>{name}</Link>)}</nav>
       <Link className="cta navCta" href="/start-a-project">Plan my home <span aria-hidden="true">↗</span></Link>
       <button ref={toggle} type="button" className="menuButton" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>{open ? 'Close' : 'Menu'}<span aria-hidden="true">{open ? '−' : '+'}</span></button>
     </header>
     <div ref={menu} id="mobile-menu" className="mobileMenu" hidden={!open}>
       <p className="eyebrow">Architecture. Engineering. Construction.</p>
-      <nav aria-label="Mobile navigation">{navigation.map(([name, href], i) => <Link href={href} key={href} onClick={() => setOpen(false)} aria-current={pathname === href ? 'page' : undefined}><small>0{i + 1}</small><span>{name}</span><span aria-hidden="true">↗</span></Link>)}</nav>
+      <nav aria-label="Mobile navigation">{navigation.map(([name, href], i) => href.startsWith('http') ? <a href={href} key={href} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}><small>0{i + 1}</small><span>{name}</span><span aria-hidden="true">↗</span></a> : <Link href={href} key={href} onClick={() => setOpen(false)} aria-current={pathname === href ? 'page' : undefined}><small>0{i + 1}</small><span>{name}</span><span aria-hidden="true">↗</span></Link>)}</nav>
       <Link className="cta primary" href="/start-a-project" onClick={() => setOpen(false)}>Plan my home ↗</Link>
       <a className="menuPhone" href={`tel:${site.telephone}`}>{site.phone}</a>
     </div>
@@ -59,7 +59,7 @@ export function Nav() {
 export function Footer() {
   return <footer className="footer">
     <div className="footerIdentity"><Link href="/" className="brandImage" aria-label="Bind Builds home"><Image src="/bind-builds-logo.svg" alt="Bind Builds" width={190} height={66} /></Link><p>Architect-led construction.<br />Chennai, Tamil Nadu.</p></div>
-    <nav className="footerLinks" aria-label="Footer navigation">{navigation.map(([name, href]) => <Link href={href} key={href}>{name}</Link>)}<Link className="footerGuideLink" href="/house-construction-chennai">House construction in Chennai</Link></nav>
+    <nav className="footerLinks" aria-label="Footer navigation">{navigation.map(([name, href]) => href.startsWith('http') ? <a href={href} key={href} target="_blank" rel="noopener noreferrer">{name}</a> : <Link href={href} key={href}>{name}</Link>)}<Link className="footerGuideLink" href="/house-construction-chennai">House construction in Chennai</Link></nav>
     <div className="footerContact"><a href={`tel:${site.telephone}`}>{site.phone}</a><a href={`mailto:${site.email}`}>{site.email}</a><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">Chat on WhatsApp ↗</a><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a></div>
     <div className="footerBottom"><span>© {new Date().getFullYear()} Bind Builds</span><span>Plan • Build • Deliver</span><Link href="/privacy">Privacy</Link></div>
   </footer>;
