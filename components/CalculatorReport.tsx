@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { packages, site, whatsappUrl } from '@/lib/site';
 import { calculateEmi, compactMoney, configuration, createVisualData, floorName, money, splitStages, validNumber, type Estimate, type EstimateInput } from '@/lib/calculator';
 import ProposalVisuals, { EstimatePresentation, ComparisonDiagram, StageDiagram } from './ProposalVisuals';
+import { constructionMonths } from '@/lib/calculator-options';
 import type { PdfReportData } from '@/lib/estimate-pdf';
 
 type Props = { input: EstimateInput; estimate: Estimate; packageIndex: number; headingRef: RefObject<HTMLHeadingElement | null>; onEdit: () => void };
@@ -11,7 +12,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
   const selected = packages[packageIndex];
   const [status, setStatus] = useState('');
   const [downloading, setDownloading] = useState(false);
-  const [months, setMonths] = useState('12');
+  const [months, setMonths] = useState(String(constructionMonths(input.floors.length)));
   const [loan, setLoan] = useState(String(Math.round(estimate.total * .8)));
   const [interest, setInterest] = useState('8.5');
   const [tenure, setTenure] = useState('20');
@@ -21,7 +22,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
   const rows: [string, string][] = input.floors.map((area, index) => [`${floorName(index)} · ${area.toLocaleString('en-IN')} sq.ft`, money(area * input.rate)]);
   if (input.headroom) rows.push([`Separate headroom · ${input.headroom.toLocaleString('en-IN')} sq.ft`, money(estimate.headroomCost)]);
   rows.push(['Base construction total', money(estimate.base)]);
-  estimate.selected.forEach(item => rows.push([`${item.label}${item.amount === null ? '' : ' · your allowance'}`, item.amount === null ? 'To be quoted' : money(item.amount)]));
+  estimate.selected.forEach(item => rows.push([`${item.label}${item.detail ? ' · '+item.detail : ''}${item.amount === null ? '' : ' · allowance'}`, item.amount === null ? 'To be quoted' : money(item.amount)]));
   if (estimate.reserve) rows.push([`Planning reserve · ${input.reservePercent}%`, money(estimate.reserve)]);
   const notes = [
     'Bind Builds planning estimate (not a quotation)',
@@ -29,9 +30,10 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     ...input.floors.map((area, index) => `${floorName(index)}: ${area} sq.ft`),
     input.headroom ? `Separate headroom: ${input.headroom} sq.ft` : '',
     `${selected.name}: ${money(input.rate)}/sq.ft | Base: ${money(estimate.base)}`,
-    ...estimate.selected.map(item => `${item.label}: ${item.amount === null ? 'TO BE QUOTED (excluded)' : money(item.amount) + ' allowance'}`),
+    ...estimate.selected.map(item => `${item.label}${item.detail ? " · "+item.detail : ""}: ${item.amount === null ? 'TO BE QUOTED (excluded)' : money(item.amount) + ' allowance'}`),
     estimate.reserve ? `Reserve: ${input.reservePercent}% (${money(estimate.reserve)})` : '',
     `Planning subtotal: ${money(estimate.total)}`,
+    `Construction scenario: approximately ${constructionMonths(input.floors.length)} months; 6 months + 4 per additional floor. Design and approvals excluded; not a delivery commitment.`,
     'Taxes, approvals, site-specific work and other exclusions are additional.',
     'Please review the scope and prepare a project-specific proposal.',
   ].filter(Boolean).join('\n');
@@ -41,10 +43,11 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
   const assumptions = [
     'This is a planning estimate, not a quotation or construction agreement. Published package rates are starting rates and need confirmation for your design and site.',
     'Floor areas are combined and any separate headroom is added once. All of this area is provisionally charged at the chosen package rate. Final area measurement and treatment of parking, headroom and open spaces must be agreed.',
-    'Selected extras with amounts are your budget allowances, not Bind Builds prices. Selected extras without amounts are excluded from the total and still need a quote.',
+    'Extra rates begin as reference allowances from a supplied example and can be edited. They are not verified Bind Builds prices. Selected extras with amounts are planning allowances. Selected extras without amounts are excluded from the total and still need a quote.',
     'Allow separately for land, taxes, building approvals, statutory and utility connection charges, demolition, special foundations or ground treatment, external works and fit-out beyond the agreed package. A planning reserve does not price these exclusions.',
     'Your package already includes an overhead tank to its stated specification. Only an upgrade should be added separately. Confirm every inclusion and exclusion in the proposal.',
     'The ten-stage allocation is an illustrative distribution of base construction cost only. It is not a bill of quantities, invoice or payment schedule. Site-specific quantities, sequence and milestones can differ.',
+    `Construction duration is a planning scenario: ${constructionMonths(input.floors.length)} months for ${configuration(input.floors.length)}, using 6 months plus 4 per additional floor. It excludes design and approvals. Site, area, weather and scope affect the actual programme.`,
     'Floor choices and plot conversions do not assess legal buildability, setbacks or permitted FSI. Your architect must confirm the applicable approval route for the site.',
   ];
   const copy = async () => { try { await navigator.clipboard.writeText(notes); setStatus('Estimate copied. You can paste it into a message.'); } catch { setStatus('Copy is unavailable in this browser. Use the WhatsApp draft or download the PDF.'); } };
@@ -52,6 +55,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     setDownloading(true); setStatus('Preparing your PDF…');
     try {
       const data: PdfReportData = { packageName: selected.name, total: money(estimate.total), date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }),
+        duration: `Construction scenario: ~${constructionMonths(input.floors.length)} months. Excludes design and approvals; subject to the agreed programme.`,
         facts: [['Plot', `${input.plot.toLocaleString('en-IN')} sq.ft`], ['Configuration', configuration(input.floors.length)], ['Calculated area', `${estimate.area.toLocaleString('en-IN')} sq.ft`], ['Package rate', `${money(input.rate)} / sq.ft`]],
         visuals, rows, unpriced: estimate.unpriced.map(item => item.label), comparisons: comparisons.map(item => [item.name, `${money(item.rate)} / sq.ft`, money(item.base)]),
         stages: allocation.map(item => [item.name, `${item.percent}%`, money(item.amount)]), assumptions,
@@ -73,7 +77,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     {estimate.unpriced.length > 0 && <div className="calcQuoteNotice"><strong>{estimate.unpriced.length} selected {estimate.unpriced.length === 1 ? 'extra still needs' : 'extras still need'} a quote</strong><p>{estimate.unpriced.map(item => item.label).join(' · ')}</p><span>These items are excluded from the subtotal above.</span></div>}
     <div className="calcReportToolbar"><EstimatePresentation data={visuals}/><button className="cta" type="button" onClick={download} disabled={downloading}>{downloading ? 'Preparing PDF…' : 'Download estimate PDF'} <span aria-hidden="true">↓</span></button><button className="textButton" type="button" onClick={copy}>Copy estimate</button><button className="textButton" type="button" onClick={onEdit}>Edit my inputs</button></div>
     <p role="status" className="calcStatus">{status}</p>
-    <ProposalVisuals data={visuals}/>
+    <section className="calcReportCard calcDuration"><span className="eyebrow">Construction planning scenario</span><strong>~{constructionMonths(input.floors.length)}<small> months</small></strong><div className="durationTrack"><span style={{width:`${constructionMonths(input.floors.length)/18*100}%`}}/></div><p>6 months for ground only + 4 months per additional floor. Design and approval time is separate. Actual duration depends on area, site conditions, scope and the agreed programme.</p></section><ProposalVisuals data={visuals}/>
     <div className="calcReportColumns">
       <section className="calcReportCard"><span className="eyebrow">01 / Where the number comes from</span><h3>Your cost breakdown.</h3><p className="calcHint">{estimate.area.toLocaleString('en-IN')} sq.ft × {money(input.rate)} / sq.ft, plus your allowances and reserve.</p><dl className="calcCostRows">{rows.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}<div className="calcCostTotal"><dt>Planning subtotal</dt><dd>{money(estimate.total)}</dd></div></dl></section>
       <section className="calcReportCard calcNextStep"><span className="eyebrow">Make it specific to your site</span><h3>A number starts the conversation.<br />A plan brings it together.</h3><p>We’ll review your site, design priorities and the scope behind this estimate. Your selections are carried into the project brief.</p><Link href={enquiryUrl} className="cta primary">Discuss this estimate ↗</Link><a href={whatsappUrl('Hello Bind Builds, I would like to discuss this estimate.\n\n' + notes)} className="textLink" target="_blank" rel="noopener noreferrer">Open estimate in WhatsApp ↗</a><p className="calcHint">No details needed to see or download your estimate. You choose when to contact us.</p></section>

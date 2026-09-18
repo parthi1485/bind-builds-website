@@ -52,3 +52,36 @@ test('EMI follows amortization and handles zero interest', () => {
   assert.equal(calculateEmi(100, 8, 0), null);
   assert.equal(calculateEmi(NaN, 8, 20), null);
 });
+
+import { constructionMonths, parkingArea, extraAmount, extraOptions, initialExtra, extraDescription } from '../lib/calculator-options.ts';
+test('car presets charge parking once as an extra, not again at the package rate', () => {
+ const parking=extraOptions.find(item=>item.key==='parking');
+ for(const cars of [1,2,3,4]) {
+  const value={...initialExtra(parking),selected:true,cars,quantity:String(parkingArea(cars))};
+  const amount=extraAmount(value);
+  assert.equal(amount,cars*200*2350);
+  const result=calculateEstimate({...input,allowances:[{key:'parking',label:'Parking',selected:true,amount}]});
+  assert.equal(result.area,1900);
+  assert.equal(result.total,5033100+amount);
+ }
+ assert.throws(()=>parkingArea(0),RangeError);
+});
+test('floor configurations produce 6, 10, 14, 18 month planning scenarios',()=>{
+ assert.deepEqual([1,2,3,4].map(constructionMonths),[6,10,14,18]);
+ assert.throws(()=>constructionMonths(0),RangeError);
+});
+test('unit rates, custom totals and unpriced choices remain distinct',()=>{
+ const sump=extraOptions.find(item=>item.key==='sump');
+ const value={...initialExtra(sump),selected:true};
+ assert.equal(extraAmount(value),200000);
+ assert.equal(extraAmount({...value,quantity:'7500',rate:'45'}),337500);
+ assert.equal(extraAmount({...value,mode:'lump',amount:'123456'}),123456);
+ assert.equal(extraAmount({...value,mode:'unpriced'}),null);
+ assert.equal(extraAmount({...value,quantity:''}),null);
+ assert.equal(extraAmount({...value,rate:''}),null);
+ assert.ok(Number.isNaN(extraAmount({...value,quantity:'-10'})));
+ assert.ok(Number.isNaN(extraAmount({...value,rate:'Infinity'})));
+ assert.equal(extraDescription(sump,{...value,quantity:'7500',rate:'45'}),'7500 litres × ₹45 / litres');
+ const tank=extraOptions.find(item=>item.key==='tank');
+ assert.equal(extraAmount(initialExtra(tank)),null,'included overhead capacity is not automatically charged twice');
+});
