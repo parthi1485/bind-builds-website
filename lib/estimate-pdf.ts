@@ -2,7 +2,7 @@ import { jsPDF } from 'jspdf';
 import { regular, bold } from './pdf-fonts.mjs';
 import type { VisualEstimate } from './calculator';
 export type PdfReportData = {
-  packageName: string; total: string; date: string; facts: [string, string][];
+  packageName: string; total: string; date: string; duration?: string; facts: [string, string][];
   rows: [string, string][]; unpriced: string[]; comparisons: string[][]; stages: string[][];
   assumptions: string[]; contact: string; url: string;
   visuals: VisualEstimate;
@@ -57,6 +57,7 @@ export function createEstimatePdf(data: PdfReportData) {
   doc.setFont('BindReportSans', 'normal'); doc.setTextColor(muted); doc.setFontSize(9); doc.text('PLANNING SUBTOTAL', left + 6, y + 5);
   doc.setFont('BindReportSans', 'bold'); doc.setTextColor(blue); doc.setFontSize(25); doc.text(clean(data.total), left + 6, y + 19); y += 38;
   paragraph('Not a quotation. Taxes, approval charges, site-specific work and other exclusions are additional. See the assumptions in this report.');
+  if (data.duration) paragraph(data.duration, 9, ink);
   const factTop = y;
   data.facts.forEach(([label, value], index) => {
     const x = left + (index % 2) * 89, top = factTop + Math.floor(index / 2) * 21;
@@ -95,7 +96,7 @@ export function createEstimatePdf(data: PdfReportData) {
   newPage('The detail behind the total.', 'Cost breakdown / ' + clean(data.packageName));
   data.rows.forEach(([label, value]) => row(label, value, label === 'Base construction total'));
   row('Planning subtotal', data.total, true);
-  paragraph('Amounts beside selected extras are your planning allowances, not Bind Builds prices. An empty amount means the work is unpriced, not included for free.', 8);
+  paragraph('Extra quantities and rates are editable reference or custom planning allowances, not verified Bind Builds prices. An empty amount means the work is unpriced, not included for free.', 8);
   newPage('Compare. Plan. Refine.', 'Package comparison & budget allocation');
   paragraph('The package comparison uses the same calculated area. It excludes extras and the optional reserve to keep the base construction costs comparable.');
   const maximumBase = Math.max(...data.visuals.comparisons.map(item => item.base));
@@ -106,7 +107,7 @@ export function createEstimatePdf(data: PdfReportData) {
   newPage('The scope behind the number.', 'Keep these assumptions with your estimate');
   data.assumptions.forEach((text, index) => paragraph(`${index + 1}. ${text}`, 9));
   section('About this report');
-  paragraph('This report records the construction estimate only. Optional time and loan scenarios explored on the website are separate and are not included. Package rates and project requirements must be reconfirmed before any commitment.');
+  paragraph('This report includes the floor-based construction duration assumption. Optional spending and loan scenarios explored on the website are separate and are not included. Package rates and project requirements must be reconfirmed before any commitment.');
   paragraph('Prepared using the Bind Builds construction cost calculator. No personal contact information is required to generate this estimate.');
   section('Let\'s make it specific to your site');
   paragraph('Share this report with Bind Builds to review your site, requirements, inclusions and exclusions, then prepare a project-specific proposal.');
