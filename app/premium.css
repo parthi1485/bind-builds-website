@@ -21,3 +21,34 @@ html[data-motion=paused]{scroll-behavior:auto}html[data-motion=paused] *,html[da
 .estimatePresentation .categoryComposition figcaption dd{display:block;margin:0;text-align:right;font-size:.8125rem}
 .estimatePresentation .categoryComposition figcaption dd small{display:block;margin-top:3px;font-size:.625rem}
 .estimatePresentation .categoryComposition figcaption>p{font-size:.625rem;line-height:1.6}
+
+/* The distribution panel wraps the figure, so mobile rules must target
+   the figure itself rather than only direct children of visualEstimateGrid. */
+@media(max-width:760px){
+ .costDistributionPanel{width:100%;min-width:0}
+ .budgetComposition.categoryComposition,
+ .presentationSlide .budgetComposition.categoryComposition,
+ .proposalTeaser .budgetComposition.categoryComposition{grid-template-columns:minmax(0,1fr);gap:20px;width:100%;max-width:100%;align-items:start}
+ .categoryComposition .budgetDonut,
+ .presentationSlide .categoryComposition .budgetDonut,
+ .proposalTeaser .categoryComposition .budgetDonut{width:min(100%,260px);max-width:260px;aspect-ratio:1;align-self:start;justify-self:center;margin:0 auto}
+ .categoryComposition .budgetDonut>div{inset:23%;padding:0;gap:6px;min-width:0}
+ .categoryComposition .budgetDonut>div>span{font-size:.625rem;line-height:1.3;white-space:normal;color:#62626d}
+ .categoryComposition .budgetDonut strong{font-size:clamp(1rem,4.7vw,1.3rem);line-height:1.2;margin:0;letter-spacing:-.045em}
+ .categoryComposition .budgetDonut>div>small{font-size:.5625rem;line-height:1.4;margin:0;max-width:115px}
+ .categoryComposition figcaption{min-width:0;width:100%;max-width:100%;margin:0}
+ .categoryComposition figcaption>.productEyebrow{display:block;font-size:.6875rem;line-height:1.5;overflow-wrap:anywhere}
+ .categoryComposition figcaption dl{display:grid;grid-template-columns:minmax(0,1fr);gap:0;margin:14px 0}
+ .categoryComposition figcaption dl>div,
+ .estimatePresentation .categoryComposition figcaption dl>div{display:block;margin:0;padding:13px 0;border-bottom:1px solid #e6e6ed}
+ .categoryComposition figcaption dt{font-size:.8125rem;line-height:1.5;overflow-wrap:anywhere;color:#666672}
+ .categoryComposition figcaption dd,
+ .estimatePresentation .categoryComposition figcaption dd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:6px 0 0 13px;font-size:.9375rem;text-align:left;white-space:normal;font-variant-numeric:tabular-nums}
+ .categoryComposition figcaption dd small,
+ .estimatePresentation .categoryComposition figcaption dd small{display:inline;font-size:.6875rem;margin:0;flex-shrink:0;color:#6d6d78}
+ .categoryComposition figcaption>p{font-size:.6875rem;line-height:1.7;color:#6d6d78}
+ .distributionTabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:18px}
+ .distributionTabs button{min-width:0;min-height:48px;padding:10px 6px;font-size:.6875rem;line-height:1.4;border-radius:16px;overflow-wrap:normal}
+ .visualEstimateGrid{min-width:0;gap:26px}
+ .visualEstimate{scroll-margin-top:90px}
+}
