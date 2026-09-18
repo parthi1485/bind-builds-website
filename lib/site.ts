@@ -5,6 +5,7 @@ export const site = {
   telephone: '+918072701454',
   whatsapp: '918072701454',
   email: 'bindarchitects@gmail.com',
+  instagram: 'https://www.instagram.com/bindbuilds/',
   studio: 'https://www.bindarchitects.com/studio',
 };
 // Public business contact published at https://www.bindarchitects.com/studio.
