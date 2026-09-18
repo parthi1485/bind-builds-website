@@ -4,16 +4,16 @@ export type EstimateInput = { plot: number; floors: number[]; rate: number; head
 export const floorName = (index: number) => ['Ground floor', 'First floor', 'Second floor', 'Third floor'][index] || `Floor ${index + 1}`;
 export const configuration = (count: number) => count === 1 ? 'Ground only' : `G + ${count - 1}`;
 export const stages = [
-  { name: 'Site work & foundation', percent: 15 },
-  { name: 'RCC frame & roof', percent: 25 },
-  { name: 'Masonry', percent: 12 },
-  { name: 'Plaster & waterproofing', percent: 10 },
-  { name: 'Flooring', percent: 9 },
-  { name: 'Doors & windows', percent: 9 },
-  { name: 'Plumbing & sanitary', percent: 7 },
-  { name: 'Electrical', percent: 6 },
-  { name: 'Painting', percent: 5 },
-  { name: 'Finishing & handover', percent: 2 },
+  { name: 'Foundation & excavation', percent: 20, color: '#0071e3' },
+  { name: 'RCC structure & columns', percent: 13, color: '#4389e7' },
+  { name: 'Masonry & block work', percent: 12, color: '#7974e8' },
+  { name: 'Waterproofing & terrace', percent: 6, color: '#34a6b8' },
+  { name: 'Flooring & tiling', percent: 10, color: '#d58954' },
+  { name: 'Doors & windows', percent: 8, color: '#4d9b82' },
+  { name: 'Plumbing & sanitary', percent: 7, color: '#5372ae' },
+  { name: 'Electrical & wiring', percent: 7, color: '#ae913a' },
+  { name: 'Painting & finishing', percent: 8, color: '#b86c97' },
+  { name: 'Miscellaneous & overheads', percent: 9, color: '#727888' },
 ] as const;
 export function validNumber(value: number, min: number, max: number, whole = false) {
   return Number.isFinite(value) && value >= min && value <= max && (!whole || Number.isInteger(value));
@@ -68,6 +68,7 @@ export function createVisualData(input: EstimateInput, estimate: Estimate, packa
     packageName, plot: input.plot, area: estimate.area, configuration: configuration(input.floors.length), total: estimate.total, unpricedCount: estimate.unpriced.length,
     parts: [{ label: 'Base construction', value: estimate.base, color: '#0071e3' }, { label: 'Your allowances', value: estimate.allowanceTotal, color: '#7974e8' }, { label: 'Planning reserve', value: estimate.reserve, color: '#66b9ce' }],
     floors: [...input.floors.map((area,index)=>({label:floorName(index),area})), ...(input.headroom?[{label:'Separate headroom',area:input.headroom}]:[])],
+    extras: estimate.selected.filter(item=>item.amount!==null).map((item,index)=>({label:item.label,value:item.amount!,color:stages[index%stages.length].color})),
     comparisons, allocation: splitStages(estimate.base),
   };
 }
