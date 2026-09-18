@@ -2,8 +2,10 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import { packages } from '@/lib/site';
-import { calculateEstimate, compactMoney, configuration, extras, floorName, money, validNumber, type EstimateInput } from '@/lib/calculator';
+import { calculateEstimate, compactMoney, configuration, floorName, money, validNumber, type EstimateInput } from '@/lib/calculator';
 import CalculatorReport from './CalculatorReport';
+import CalculatorExtra from './CalculatorExtra';
+import { constructionMonths, extraOptions, extraAmount, extraDescription, initialExtra, packageMetrics, type ExtraSelection } from '@/lib/calculator-options';
 
 const stepNames = ['Your site', 'Your floors', 'Your package', 'Your extras'];
 const tankIncluded = ['2,000 L three-layer overhead tank', '3,000 L overhead tank with sensor', 'RCC overhead tank up to 6,000 L'];
@@ -37,8 +39,8 @@ export default function ConstructionCalculator() {
   const [floorCount, setFloorCount] = useState(2);
   const [tier, setTier] = useState(1);
   const [hasHeadroom, setHasHeadroom] = useState(false);
-  const [headroom, setHeadroom] = useState('150');
-  const [allowances, setAllowances] = useState<Partial<Record<string, { selected: boolean; amount: string }>>>({});
+  const [headroom, setHeadroom] = useState('200');
+  const [allowances, setAllowances] = useState<Partial<Record<string, ExtraSelection>>>({});
   const [reserve, setReserve] = useState('0');
   const root = useRef<HTMLDivElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
@@ -60,13 +62,19 @@ export default function ConstructionCalculator() {
   }, [step]);
   const input: EstimateInput = { plot: number(plot), floors: areas.slice(0, floorCount).map(number), rate: selected.rate,
     headroom: hasHeadroom ? number(headroom) : 0, reservePercent: number(reserve),
-    allowances: extras.map(item => ({ ...item, selected: allowances[item.key]?.selected ?? false,
-      amount: allowances[item.key]?.amount?.trim() ? number(allowances[item.key]?.amount ?? '') : null })) };
+    allowances: extraOptions.map(item => { const value=allowances[item.key]??initialExtra(item); return {key:item.key,label:item.label,selected:value.selected,amount:extraAmount(value),detail:extraDescription(item,value)}; }) };
   let estimate = null;
   try { estimate = calculateEstimate(input); } catch { /* Invalid input is explained by the native form constraints. */ }
   const setArea = (index: number, value: string) => setAreas(current => current.map((area, i) => i === index ? value : area));
   const setGround = (value: string) => setAreas(current => current.map((area, i) => i === 0 || area === current[0] ? value : area));
-  const updateExtra = (key: string, change: Partial<{ selected: boolean; amount: string }>) => setAllowances(current => ({ ...current, [key]: { selected: false, amount: '', ...current[key], ...change } }));
+  const updateExtra = (key:string,change:Partial<ExtraSelection>) => setAllowances(current => {
+    const item=extraOptions.find(item=>item.key===key)!;
+    const updated={...current,[key]:{...initialExtra(item),...current[key],...change}};
+    if(change.selected && (key==='septic'||key==='recycling')) {const other=key==='septic'?'recycling':'septic'; updated[other]={...initialExtra(extraOptions.find(item=>item.key===other)!),...current[other],selected:false};}
+    return updated;
+  });
+  const duration=constructionMonths(floorCount);
+  const metrics=packageMetrics[tier];
   const next = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); if (step === 3 && !estimate) return; setFurthest(Math.max(furthest, step + 1)); setStep(step + 1); };
 
   return <div className="calculator" id="calculator" ref={root}>
@@ -76,7 +84,7 @@ export default function ConstructionCalculator() {
         <div className="calcStepContent" key={step}>
           <span className="eyebrow">Step {step + 1} of 4</span>
           <h2 tabIndex={-1} ref={heading}>{['Let’s start with your site.', 'Make room for your plans.', 'Choose your level of finish.', 'Look beyond the square foot.'][step]}</h2>
-          <p className="calcIntro">{['A rough area is enough to explore. You can refine every number later.', 'Use the built-up area of each floor, including its walls and circulation.', 'The same design-led approach, with different material and finish allowances.', 'Choose additional work and add any budget you have in mind. Leave the amount empty if you need us to price it.'][step]}</p>
+          <p className="calcIntro">{['A rough area is enough to explore. You can refine every number later.', 'Use the built-up area of each floor, including its walls and circulation.', 'The same design-led approach, with different material and finish allowances.', 'Choose additional work. Use an editable reference rate, enter your own total or request a quote.'][step]}</p>
           {step === 0 && <div className="calcFields">
             <label htmlFor="calc-plot">Plot area <span>sq.ft</span></label><input id="calc-plot" required type="number" inputMode="decimal" min="1" max="100000" step="0.01" value={plot} onChange={e => setPlot(e.target.value)} aria-describedby="plot-help" />
             <div className="calcPresets" aria-label="Common plot sizes">{[600, 1200, 1800, 2400].map(value => <button key={value} type="button" aria-pressed={Number(plot) === value} onClick={() => setPlot(String(value))}>{value.toLocaleString('en-IN')} sq.ft</button>)}</div>
@@ -84,11 +92,11 @@ export default function ConstructionCalculator() {
             <label htmlFor="calc-ground">Ground-floor built-up area <span>sq.ft</span></label><input id="calc-ground" required type="number" inputMode="numeric" min="1" max="100000" step="1" value={areas[0]} onChange={e => setGround(e.target.value)} aria-describedby="ground-help" />
             <p id="ground-help" className="calcHint">Enter the building area, not the full plot. Count staircases and covered circulation once. Exclude any parking or headroom you plan to add separately.</p>
             {validNumber(number(plot), 1, 100000) && Number(areas[0]) > Number(plot) && <p className="calcNotice">Your ground-floor area exceeds the plot area. Please review these figures with your architect.</p>}
-            <div className="calcNote"><span aria-hidden="true">↗</span><p>Have a total area from a drawing? Choose <strong>Ground only</strong> in the next step and enter that total for a simple budget calculation.</p></div>
+            <CalculatorExtra item={extraOptions[0]} value={allowances.parking} onChange={change=>updateExtra('parking',change)}/><p className="calcHint">Enter each floor separately in the next step so the area and construction-time scenario reflect your actual configuration.</p>
           </div>}
           {step === 1 && <div className="calcFields">
             <fieldset className="calcChoices"><legend>Number of floors</legend><div className="floorChoices">{[1, 2, 3, 4].map(count => <label key={count}><input type="radio" name="floors" checked={floorCount === count} onChange={() => setFloorCount(count)} /><span><strong>{count === 1 ? 'Ground' : `G + ${count - 1}`}</strong><small>{count} {count === 1 ? 'floor' : 'floors'}</small></span></label>)}</div></fieldset>
-            <div className="calcFloorFields">{areas.slice(0, floorCount).map((area, index) => <label key={index}>{floorName(index)} <span>sq.ft</span><input required type="number" inputMode="numeric" min="1" max="100000" step="1" value={area} onChange={e => setArea(index, e.target.value)} /></label>)}</div>
+            <div className="calcDuration" aria-live="polite"><span className="eyebrow">Construction planning scenario</span><strong>{duration}<small> months</small></strong><div className="durationTrack"><span style={{width:`${duration/18*100}%`}}/></div><p>6 months for ground only + 4 months per additional floor. Indicative only; area, soil, design, access and weather can change the programme. Design and approvals are separate.</p></div><div className="calcFloorFields">{areas.slice(0, floorCount).map((area, index) => <label key={index}>{floorName(index)} <span>sq.ft</span><input required type="number" inputMode="numeric" min="1" max="100000" step="1" value={area} onChange={e => setArea(index, e.target.value)} /></label>)}</div>
             {floorCount > 1 && <button className="textButton calcCopyArea" type="button" onClick={() => setAreas(areas.map(() => areas[0]))}>Use the ground-floor area for every floor</button>}
             <label className="calcCheck"><input type="checkbox" checked={hasHeadroom} onChange={e => setHasHeadroom(e.target.checked)} /><span>Add staircase headroom separately<small>Only when it is not already counted in a floor area.</small></span></label>
             {hasHeadroom && <label className="calcHeadroom">Headroom area <span>sq.ft</span><input required type="number" inputMode="numeric" min="1" max="10000" step="1" value={headroom} onChange={e => setHeadroom(e.target.value)} /><small>Estimated at the selected package rate. Final measurement and pricing need confirmation.</small></label>}
@@ -96,12 +104,13 @@ export default function ConstructionCalculator() {
           </div>}
           {step === 2 && <div className="calcFields">
             <fieldset className="calcChoices"><legend>Construction package</legend><div className="calcPackageChoices">{packages.map((item, index) => <label key={item.key}><input type="radio" name="package" checked={tier === index} onChange={() => setTier(index)} /><span><b>{item.name}</b><strong>{money(item.rate)}<small> / sq.ft</small></strong><em>{item.description}</em></span></label>)}</div></fieldset>
-            <div className="calcSpecification"><span className="eyebrow">A few {selected.name} details</span><ul>{highlights[tier].map(text => <li key={text}>{text}</li>)}<li>{tankIncluded[tier]}</li></ul><Link className="textLink" href={`/packages#${selected.key}`} target="_blank" rel="noopener noreferrer">See the complete specification ↗</Link></div>
+            <div className="packageImpact" aria-live="polite"><span className="eyebrow">{selected.name} / The difference in numbers</span><h3>{tier===0?'A considered starting point.':tier===1?'More choice. More coordination.':'More room for the details.'}</h3><div className="packageMetricGrid">{[{label:'Main flooring allowance',value:metrics.flooring,max:200,unit:'/ sq.ft'},{label:'Bathroom fittings allowance',value:metrics.bathroom,max:60000,unit:'/ bathroom'}].map(metric=><div key={metric.label}><span>{metric.label}</span><strong>{money(metric.value)}<small>{metric.unit}</small></strong><div className="metricTrack"><span style={{width:`${metric.value/metric.max*100}%`}}/></div></div>)}<div><span>Included overhead tank</span><strong>{metrics.tank.toLocaleString('en-IN')}<small>litres · package specification</small></strong><div className="metricTrack"><span style={{width:`${metrics.tank/6000*100}%`}}/></div></div></div><ul className="packageBenefits">{metrics.benefits.map(benefit=><li key={benefit}>✓ {benefit}</li>)}</ul>{tier>0&&<p><strong>+{money(selected.rate-packages[0].rate)} / sq.ft</strong> above Essential{estimate?` · ${compactMoney(estimate.area*(selected.rate-packages[0].rate))} more across your ${estimate.area.toLocaleString('en-IN')} sq.ft`:''}. Base construction comparison; extras are separate.</p>}<p className="calcHint">Bars compare allowance amounts and tank capacity across our three packages, not quality scores. Material allowances are within package scope, not cash credits.</p></div><div className="calcSpecification"><span className="eyebrow">A few {selected.name} details</span><ul>{highlights[tier].map(text => <li key={text}>{text}</li>)}<li>{tankIncluded[tier]}</li></ul><Link className="textLink" href={`/packages#${selected.key}`} target="_blank" rel="noopener noreferrer">See the complete specification ↗</Link></div>
             <p className="calcHint">Published starting rates. Area measurement, design, structural requirements, quantities and the project agreement determine the final price.</p>
           </div>}
           {step === 3 && <div className="calcFields">
             <div className="calcNote"><span aria-hidden="true">✓</span><p>Your {selected.name} package already lists a <strong>{tankIncluded[tier].toLowerCase()}</strong>. Add an allowance only for an upgrade beyond that scope.</p></div>
-            <div className="calcExtras">{extras.map(item => { const value = allowances[item.key]; return <div className={`calcExtra ${value?.selected ? 'selected' : ''}`} key={item.key}><label className="calcCheck"><input type="checkbox" checked={value?.selected ?? false} onChange={e => updateExtra(item.key, { selected: e.target.checked })} /><span>{item.label}<small>{item.detail}</small></span></label>{value?.selected && <label className="calcAllowance">Your budget allowance <span>₹ · optional</span><input type="number" inputMode="numeric" min="1" max="100000000" step="1" placeholder="To be quoted" value={value.amount} onChange={e => updateExtra(item.key, { amount: e.target.value })} /><small>{value.amount ? 'Your planning amount; not a Bind Builds rate.' : 'Will be listed as unpriced and excluded from the total.'}</small></label>}</div>; })}</div>
+            <p className="calcHint">Reference allowances from the supplied example: ₹40/L sump, ₹35/L septic, ₹55/L additional RCC tank and ₹2,750/running ft wall. They are not verified Bind Builds rates. Edit each amount before relying on the budget. Septic and recycling are alternative scenarios here.</p>
+            <div className="calcExtras">{extraOptions.filter(item=>item.key!=='parking').map(item=><CalculatorExtra key={item.key} item={item} value={allowances[item.key]} onChange={change=>updateExtra(item.key,change)}/>)}</div>
             <label htmlFor="calc-reserve">Optional planning reserve <span>%</span></label><div className="calcReserve"><input id="calc-reserve" required type="number" inputMode="decimal" min="0" max="25" step="0.5" value={reserve} onChange={e => setReserve(e.target.value)} /><p>Extra room in your budget. Applied to base construction plus the allowances you enter; it does not price excluded work.</p></div>
           </div>}
         </div>
@@ -112,7 +121,7 @@ export default function ConstructionCalculator() {
         <div className="calcPreviewTop"><span className="eyebrow">Your home, taking shape</span><span className="calcLive"><i /> Live estimate</span></div>
         <Building floors={floorCount} />
         <div className="calcPreviewMeta"><span>{configuration(floorCount)}</span><span>{selected.name}</span></div>
-        <span className="calcPreviewLabel">Planning subtotal</span><output className="calcPreviewAmount" aria-live="polite" aria-atomic="true">{estimate ? compactMoney(estimate.total) : 'Check your inputs'}</output>
+        <p className="calcPreviewTime">~{duration} months <span>construction scenario · excludes design & approvals</span></p><span className="calcPreviewLabel">Planning subtotal</span><output className="calcPreviewAmount" aria-live="polite" aria-atomic="true">{estimate ? compactMoney(estimate.total) : 'Check your inputs'}</output>
         <p className="calcPreviewEquation">{estimate ? `${estimate.area.toLocaleString('en-IN')} sq.ft × ${money(selected.rate)}` : 'Enter valid areas to see your estimate.'}{estimate && (estimate.allowanceTotal > 0 || estimate.reserve > 0) ? ' + allowances / reserve' : ''}</p>
         {estimate && <dl className="calcMiniBreakdown"><div><dt>Base construction</dt><dd>{money(estimate.base)}</dd></div><div><dt>Your allowances</dt><dd>{money(estimate.allowanceTotal)}</dd></div>{estimate.reserve > 0 && <div><dt>Planning reserve</dt><dd>{money(estimate.reserve)}</dd></div>}</dl>}
         {estimate && estimate.unpriced.length > 0 && <p className="calcUnpriced">+ {estimate.unpriced.length} {estimate.unpriced.length === 1 ? 'selected extra needs' : 'selected extras need'} a quote</p>}
