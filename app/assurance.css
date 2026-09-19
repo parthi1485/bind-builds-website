@@ -53,13 +53,7 @@
 .brandWordmarkWrap{display:block}
 .brandWordmark{width:178px;height:84px;padding:0 22px;border:1px solid #e6e6eb;background:#fff;border-radius:16px;display:grid;place-items:center;overflow:hidden}
 .brandWordmark img{display:block;width:auto;height:auto;max-width:128px;max-height:38px;object-fit:contain}
-.brandTextLogo{display:block;max-width:100%;text-align:center;font-size:1rem;line-height:1.15;font-weight:700;letter-spacing:-.02em;white-space:normal}
-.brandTextLogo.tone-dark{color:#2f3137}
-.brandTextLogo.tone-blue{color:#1f4d8d}
-.brandTextLogo.tone-orange{color:#e07b2d}
-.brandTextLogo.tone-burgundy{color:#9b3760}
-.brandTextLogo.tone-green{color:#2d7f57}
-.brandTextLogo.tone-red{color:#d83030}
+
 .brand-icici img{max-width:138px;max-height:34px}
 .brand-axis img{max-width:144px;max-height:35px}
 .brand-bob img{max-width:132px;max-height:38px}
@@ -122,7 +116,7 @@
  .brandMarquee{margin-inline:-22px}
  .brandWordmark{width:150px;height:72px;padding-inline:18px}
  .brandWordmark img{max-width:108px;max-height:32px}
- .brandTextLogo{font-size:.875rem}
+
  .ecosystemDisclaimer{margin:0 22px;padding-top:18px;font-size:.5625rem}
 }
 @media(prefers-reduced-motion:reduce){
@@ -130,8 +124,3 @@
  .assurancePanel:hover .avAccent,.assurancePanel:hover .avAccentFill{animation:none}
 }
 
-.vendorSequence{display:flex;gap:12px;align-items:center}
-.uploadedVendorStrip{height:84px;width:auto;display:block;flex:none}
-.vendorMarquee .brandMarqueeTrack{gap:12px}
-@media(max-width:1099px){.uploadedVendorStrip{height:78px}}
-@media(max-width:760px){.uploadedVendorStrip{height:72px}}
