@@ -1,0 +1,101 @@
+/* Build assurance + brand ecosystem */
+.assuranceSection{background:#f5f5f7}
+.assuranceExperience{max-width:1150px;margin:auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:18px;align-items:stretch}
+.assuranceTabs{display:flex;flex-direction:column;gap:8px}
+.assuranceTabs>button{min-height:78px;border:1px solid #e4e4e9;background:#fff;border-radius:18px;padding:13px 14px;display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;gap:12px;text-align:left;color:#777781;transition:background .25s,border-color .25s,color .25s,transform .25s,box-shadow .25s}
+.assuranceTabs>button:hover{transform:translateX(3px);border-color:#d6d6dd;color:#35353b}
+.assuranceTabs>button[aria-selected=true]{background:#edf5ff;border-color:#b8d7fb;color:#0071e3;box-shadow:0 8px 28px #245a9b0a}
+.assuranceTabIcon{height:40px;width:40px;border-radius:12px;background:#f5f5f7;display:grid;place-items:center}
+.assuranceTabs>button[aria-selected=true] .assuranceTabIcon{background:#fff}
+.assuranceTabIcon svg{width:22px;height:22px}
+.assuranceTabs>button>span:nth-child(2){font-size:.75rem;font-weight:550;line-height:1.25;color:#505058}
+.assuranceTabs>button[aria-selected=true]>span:nth-child(2){color:#0071e3}
+.assuranceTabs>button>small{font-size:.5625rem;color:#aaaab2}
+.assuranceTabs>button[aria-selected=true]>small{color:#6aa9ea}
+.assurancePanel{min-height:510px;position:relative;overflow:hidden;border-radius:26px;background:linear-gradient(135deg,#0e1928,#193451 58%,#0b2138);color:#fff;display:grid;grid-template-columns:.8fr 1.2fr;align-items:stretch}
+.assurancePanel:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 84% 24%,#2b7ed52c,transparent 34%),linear-gradient(120deg,transparent 46%,#ffffff05);pointer-events:none}
+.assuranceCopy{padding:52px 0 45px 52px;position:relative;z-index:2;align-self:start}
+.assuranceCopy .productEyebrow{color:#8fc2fb}
+.assuranceCopy h3{font-size:clamp(2.3rem,3.7vw,4rem);line-height:1.03;letter-spacing:-.055em;font-weight:550;margin:22px 0 22px;max-width:470px}
+.assuranceCopy>p{font-size:.9375rem;line-height:1.8;color:#c0cbd8;max-width:460px;margin:0}
+.assuranceNote{display:grid;grid-template-columns:25px 1fr;gap:11px;align-items:start;border-top:1px solid #ffffff17;margin-top:34px;padding-top:20px;max-width:465px}
+.assuranceNote>span{width:22px;height:22px;border:1px solid #ffffff38;border-radius:50%;display:grid;place-items:center;color:#9cbce0;font-size:.6875rem}
+.assuranceNote p{font-size:.6875rem;line-height:1.65;color:#8fa1b4;margin:2px 0 0}
+.assuranceVisual{min-height:510px;position:relative;z-index:1;display:grid;place-items:center;overflow:hidden}
+.assuranceVisual:after{content:'';position:absolute;width:90%;height:70%;left:10%;bottom:-35%;border-radius:50%;background:#fff;opacity:.035;filter:blur(4px)}
+.assuranceVisual svg{width:min(96%,590px);height:auto;position:relative;z-index:2;filter:drop-shadow(0 22px 30px #0003)}
+.visualOrb{position:absolute;width:430px;height:430px;border-radius:50%;background:radial-gradient(circle,#1389ff2b 0,#1389ff12 42%,transparent 70%);right:0;top:20px}
+.avLine{fill:none;stroke:#7990a9;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.avStrong{fill:none;stroke:#e9f0f7;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.avAccent{fill:none;stroke:#47a6ff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.avSoft{fill:#627990}
+.avSoftFill{fill:#344e68}
+.avAccentFill{fill:#1689f5}
+.avPaper{fill:#f6f9fc}
+.avStroke{stroke:#8aa0b5;stroke-width:2}
+.avWhite{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.assurancePanel:hover .avAccent{stroke-dasharray:520;animation:assuranceDraw 1.1s ease-out}
+.assurancePanel:hover .avAccentFill{animation:assurancePulse .7s ease-out}
+.ecosystemSection{background:#fff;padding-top:115px}
+.ecosystemIntro{max-width:1150px;margin:0 auto 60px;display:grid;grid-template-columns:1.3fr .7fr;gap:8vw;align-items:end}
+.ecosystemIntro h2{font-size:clamp(2.7rem,4.8vw,5rem);line-height:1.04;letter-spacing:-.057em;font-weight:600;margin:22px 0 0}
+.ecosystemIntro h2>span{color:#86868e}
+.ecosystemIntro>p{font-size:.9375rem;line-height:1.8;color:#777780;max-width:470px;margin:0 0 6px}
+.ecosystemBlock{max-width:1150px;margin:0 auto;border-top:1px solid #e5e5ea;padding:27px 0 31px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:35px;align-items:center;overflow:hidden}
+.ecosystemLabel{display:grid;grid-template-columns:28px minmax(0,1fr);gap:13px;align-items:start}
+.ecosystemLabel>span{font-size:.625rem;color:#a0a0a8;padding-top:2px}
+.ecosystemLabel strong{display:block;font-size:.875rem;font-weight:550;color:#313137}
+.ecosystemLabel small{display:block;font-size:.625rem;line-height:1.6;color:#898991;margin-top:7px}
+.brandMarquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.brandMarqueeTrack{width:max-content;display:flex;gap:12px;animation:brandFlow 28s linear infinite}
+.brandMarquee.reverse .brandMarqueeTrack{animation-direction:reverse;animation-duration:24s}
+.brandMarquee:hover .brandMarqueeTrack{animation-play-state:paused}
+.brandWordmark{min-width:160px;height:76px;padding:0 22px;border:1px solid #e6e6eb;background:#fafafa;border-radius:16px;display:grid;place-items:center;text-align:center;color:#4f5058;font-size:.875rem;line-height:1.25;font-weight:650;letter-spacing:-.025em;white-space:nowrap}
+.ecosystemDisclaimer{max-width:1150px;margin:0 auto;border-top:1px solid #eeeeF2;padding-top:20px;color:#8a8a93;font-size:.625rem;line-height:1.7}
+@keyframes assuranceDraw{from{stroke-dashoffset:520}to{stroke-dashoffset:0}}
+@keyframes assurancePulse{0%{opacity:.4;transform:scale(.95);transform-origin:center}100%{opacity:1;transform:scale(1)}}
+@keyframes brandFlow{to{transform:translateX(calc(-50% - 6px))}}
+@media(max-width:1099px){
+ .assuranceExperience{grid-template-columns:180px minmax(0,1fr)}
+ .assuranceTabs>button{grid-template-columns:38px 1fr;padding-inline:12px}
+ .assuranceTabs>button>small{display:none}
+ .assurancePanel{grid-template-columns:1fr 1fr}
+ .assuranceCopy{padding-left:40px}
+ .ecosystemIntro{grid-template-columns:1fr 1fr;gap:6vw}
+ .ecosystemBlock{grid-template-columns:220px minmax(0,1fr);gap:25px}
+ .brandWordmark{min-width:145px}
+}
+@media(max-width:760px){
+ .assuranceSection{padding-inline:0}
+ .assuranceSection>.productSectionHeader{padding-inline:22px}
+ .assuranceExperience{display:block}
+ .assuranceTabs{display:flex;flex-direction:row;gap:8px;overflow-x:auto;padding:0 22px 16px;scrollbar-width:none;scroll-snap-type:x proximity}
+ .assuranceTabs::-webkit-scrollbar{display:none}
+ .assuranceTabs>button{flex:0 0 126px;min-height:86px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:8px;border-radius:16px;scroll-snap-align:start}
+ .assuranceTabs>button:hover{transform:none}
+ .assuranceTabIcon{height:34px;width:34px;border-radius:10px}
+ .assuranceTabIcon svg{width:19px;height:19px}
+ .assuranceTabs>button>span:nth-child(2){font-size:.6875rem}
+ .assurancePanel{margin:0 16px;border-radius:22px;grid-template-columns:1fr;min-height:0}
+ .assuranceCopy{padding:35px 28px 15px}
+ .assuranceCopy h3{font-size:clamp(2.1rem,9vw,3.25rem);margin:18px 0}
+ .assuranceCopy>p{font-size:.8125rem;line-height:1.8}
+ .assuranceNote{margin-top:25px;padding-top:16px}
+ .assuranceNote p{font-size:.625rem}
+ .assuranceVisual{min-height:300px;margin-top:-8px}
+ .assuranceVisual svg{width:min(96%,430px)}
+ .visualOrb{width:340px;height:340px;right:-40px;top:-15px}
+ .ecosystemSection{padding-top:70px;padding-inline:0}
+ .ecosystemIntro{display:block;padding-inline:22px;margin-bottom:42px}
+ .ecosystemIntro h2{font-size:clamp(2.35rem,8.6vw,3.75rem)}
+ .ecosystemIntro>p{font-size:.8125rem;margin-top:24px}
+ .ecosystemBlock{display:block;padding:24px 0 27px;margin:0 22px}
+ .ecosystemLabel{margin-bottom:20px}
+ .brandMarquee{margin-inline:-22px}
+ .brandWordmark{min-width:138px;height:68px;font-size:.75rem;padding-inline:17px}
+ .ecosystemDisclaimer{margin:0 22px;padding-top:18px;font-size:.5625rem}
+}
+@media(prefers-reduced-motion:reduce){
+ .brandMarqueeTrack{animation:none;transform:none}
+ .assurancePanel:hover .avAccent,.assurancePanel:hover .avAccentFill{animation:none}
+}
