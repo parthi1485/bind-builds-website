@@ -158,14 +158,34 @@ export function BuildAssurance() {
   </section>;
 }
 
-const materialBrands = ['UltraTech Cement', 'JSW Steel', 'Tata Tiscon', 'Astral', 'Finolex', 'Asian Paints', 'Jaquar', 'Kajaria'];
-const lenders = ['SBI', 'HDFC Bank', 'ICICI Bank', 'Axis Bank', 'Bank of Baroda'];
+type BrandLogo = { key: string; name: string; src: string };
 
-function Marquee({ items, reverse = false }: { items: string[]; reverse?: boolean }) {
+const materialBrands: BrandLogo[] = [
+  { key: 'ultratech', name: 'UltraTech Cement', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/UltraTech_logo.jpg' },
+  { key: 'jsw', name: 'JSW Steel', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/JSW_Group_logo.svg' },
+  { key: 'tata', name: 'Tata Tiscon / Tata Steel', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Tata_Steel_Logo.svg' },
+  { key: 'astral', name: 'Astral Pipes', src: 'https://cdn.brandfetch.io/idYTu69Rc6/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1782313367229' },
+  { key: 'finolex', name: 'Finolex', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Finolex_Logo.svg' },
+  { key: 'asian-paints', name: 'Asian Paints', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Asian_Paints_Logo.svg' },
+  { key: 'jaquar', name: 'Jaquar', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Official_Jaquar_Group_Logo.png' },
+  { key: 'kajaria', name: 'Kajaria', src: 'https://cdn.brandfetch.io/id84jb-Wzd/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1781736025323' },
+];
+
+const lenders: BrandLogo[] = [
+  { key: 'sbi', name: 'State Bank of India', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/State_Bank_of_India.svg' },
+  { key: 'hdfc', name: 'HDFC Bank', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/HDFC_Bank_Logo.svg' },
+  { key: 'icici', name: 'ICICI Bank', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/ICICI_Bank_Logo.svg' },
+  { key: 'axis', name: 'Axis Bank', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Axis_Bank_logo.svg' },
+  { key: 'bob', name: 'Bank of Baroda', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Bank_of_Baroda_Logo_since_Dec_19.png' },
+];
+
+function Marquee({ items, reverse = false }: { items: BrandLogo[]; reverse?: boolean }) {
   const repeated = [...items, ...items];
-  return <div className={'brandMarquee' + (reverse ? ' reverse' : '')} aria-label={items.join(', ')}>
-    <div className="brandMarqueeTrack" aria-hidden="true">
-      {repeated.map((name, index) => <span className="brandWordmark" key={name + index}>{name}</span>)}
+  return <div className={'brandMarquee' + (reverse ? ' reverse' : '')} aria-label={items.map(item => item.name).join(', ')}>
+    <div className="brandMarqueeTrack">
+      {repeated.map((brand, index) => <span className={'brandWordmark brand-' + brand.key} key={brand.key + index} aria-hidden={index >= items.length}>
+        <img src={brand.src} alt={index < items.length ? brand.name : ''} loading="lazy" decoding="async" referrerPolicy="no-referrer"/>
+      </span>)}
     </div>
   </div>;
 }
