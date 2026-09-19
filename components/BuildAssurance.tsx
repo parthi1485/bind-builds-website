@@ -158,34 +158,66 @@ export function BuildAssurance() {
   </section>;
 }
 
-type BrandLogo = { key: string; name: string; src: string };
+type BrandLogo = {
+  key: string;
+  name: string;
+  src?: string;
+  tone?: 'dark' | 'blue' | 'orange' | 'burgundy' | 'green' | 'red';
+  label?: string;
+};
 
 const materialBrands: BrandLogo[] = [
-  { key: 'ultratech', name: 'UltraTech Cement', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/UltraTech_logo.jpg' },
-  { key: 'jsw', name: 'JSW Steel', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/JSW_Group_logo.svg' },
-  { key: 'tata', name: 'Tata Tiscon / Tata Steel', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Tata_Steel_Logo.svg' },
-  { key: 'astral', name: 'Astral Pipes', src: 'https://cdn.brandfetch.io/idYTu69Rc6/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1782313367229' },
-  { key: 'finolex', name: 'Finolex', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Finolex_Logo.svg' },
-  { key: 'asian-paints', name: 'Asian Paints', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Asian_Paints_Logo.svg' },
-  { key: 'jaquar', name: 'Jaquar', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Official_Jaquar_Group_Logo.png' },
-  { key: 'kajaria', name: 'Kajaria', src: 'https://cdn.brandfetch.io/id84jb-Wzd/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1781736025323' },
+  { key: 'ultratech', name: 'UltraTech Cement', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/UltraTech_logo.jpg', tone: 'blue' },
+  { key: 'jsw', name: 'JSW Steel', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/JSW_Group_logo.svg', tone: 'blue' },
+  { key: 'tata', name: 'Tata Tiscon', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Tata_Steel_Logo.svg', tone: 'blue' },
+  { key: 'kohler', name: 'Kohler', src: 'https://www.kohler.co.in/content/dam/kohler-site/global/kps/logos/kohler-logo-black.svg', tone: 'dark' },
+  { key: 'sites', name: 'Sites', tone: 'dark', label: 'Sites' },
+  { key: 'parryware', name: 'Parryware', src: 'https://www.parryware.in/wp-content/uploads/2023/10/Parryware-Logo.svg', tone: 'blue' },
+  { key: 'nippon', name: 'Nippon Paint', src: 'https://www.nipponpaint.co.in/wp-content/themes/nippon/images/logo.png', tone: 'orange' },
+  { key: 'asian-paints', name: 'Asian Paints', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Asian_Paints_Logo.svg', tone: 'orange' },
+  { key: 'kajaria', name: 'Kajaria', src: 'https://www.kajariaceramics.com/assets/images/logo.svg', tone: 'blue' },
+  { key: 'jaquar', name: 'Jaquar', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Official_Jaquar_Group_Logo.png', tone: 'blue' },
+  { key: 'lag', name: 'LAG', tone: 'dark', label: 'LAG' },
+  { key: 'ars-steel', name: 'ARS Steel', tone: 'blue', label: 'ARS Steel' },
+  { key: 'orbit', name: 'Orbit', tone: 'orange', label: 'ORBIT' },
+  { key: 'finolex', name: 'Finolex', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Finolex_Logo.svg', tone: 'blue' },
+  { key: 'ashirvad', name: 'Ashirvad', src: 'https://ashirvad.com/wp-content/themes/ashirvad/assets/images/logo.svg', tone: 'orange' },
+  { key: 'astral', name: 'Astral', src: 'https://www.astralpipes.com/wp-content/themes/astral/assets/images/logo.svg', tone: 'blue' },
+  { key: 'gm-switches', name: 'GM Switches', src: 'https://www.gmmodular.com/assets/images/logo.svg', tone: 'red' },
+  { key: 'legrand', name: 'Legrand Switches', src: 'https://www.legrand.co.in/themes/custom/legrand/logo.svg', tone: 'red', label: 'legrand' },
 ];
 
 const lenders: BrandLogo[] = [
-  { key: 'sbi', name: 'State Bank of India', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/State_Bank_of_India.svg' },
-  { key: 'hdfc', name: 'HDFC Bank', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/HDFC_Bank_Logo.svg' },
-  { key: 'icici', name: 'ICICI Bank', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/ICICI_Bank_Logo.svg' },
-  { key: 'axis', name: 'Axis Bank', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Axis_Bank_logo.svg' },
-  { key: 'bob', name: 'Bank of Baroda', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Bank_of_Baroda_Logo_since_Dec_19.png' },
+  { key: 'sbi', name: 'State Bank of India', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/State_Bank_of_India.svg', tone: 'blue' },
+  { key: 'hdfc', name: 'HDFC Bank', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/HDFC_Bank_Logo.svg', tone: 'blue' },
+  { key: 'icici', name: 'ICICI Bank', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/ICICI_Bank_Logo.svg', tone: 'orange' },
+  { key: 'axis', name: 'Axis Bank', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Axis_Bank_logo.svg', tone: 'burgundy' },
+  { key: 'bob', name: 'Bank of Baroda', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Bank_of_Baroda_logo.svg', tone: 'orange' },
 ];
+
+function LogoCard({ brand }: { brand: BrandLogo }) {
+  const [failed, setFailed] = useState(!brand.src);
+  return <span className={'brandWordmark brand-' + brand.key + (failed ? ' isFallback' : '')}>
+    {!failed && brand.src ? (
+      <img
+        src={brand.src}
+        alt={brand.name}
+        loading="lazy"
+        decoding="async"
+        referrerPolicy="no-referrer"
+        onError={() => setFailed(true)}
+      />
+    ) : (
+      <span className={'brandTextLogo tone-' + (brand.tone ?? 'dark')}>{brand.label ?? brand.name}</span>
+    )}
+  </span>;
+}
 
 function Marquee({ items, reverse = false }: { items: BrandLogo[]; reverse?: boolean }) {
   const repeated = [...items, ...items];
   return <div className={'brandMarquee' + (reverse ? ' reverse' : '')} aria-label={items.map(item => item.name).join(', ')}>
     <div className="brandMarqueeTrack">
-      {repeated.map((brand, index) => <span className={'brandWordmark brand-' + brand.key} key={brand.key + index} aria-hidden={index >= items.length}>
-        <img src={brand.src} alt={index < items.length ? brand.name : ''} loading="lazy" decoding="async" referrerPolicy="no-referrer"/>
-      </span>)}
+      {repeated.map((brand, index) => <div className="brandWordmarkWrap" key={brand.key + index} aria-hidden={index >= items.length}><LogoCard brand={brand}/></div>)}
     </div>
   </div>;
 }
@@ -194,22 +226,22 @@ export function BrandEcosystem() {
   return <section className="productSection ecosystemSection">
     <div className="ecosystemIntro reveal">
       <div>
-        <span className="productEyebrow">Specifications that name the product</span>
-        <h2>Recognised materials.<br/><span>Selected for the project.</span></h2>
+        <span className="productEyebrow">Project ecosystem</span>
+        <h2>Trusted vendors.<br/><span>Banking partners.</span></h2>
       </div>
-      <p>We define approved brands, grades and allowances in the project specification so material decisions are visible before procurement.</p>
+      <p>Reference brands and financial institutions commonly considered while planning, specifying and delivering residential construction projects.</p>
     </div>
 
     <div className="ecosystemBlock reveal">
-      <div className="ecosystemLabel"><span>01</span><div><strong>Construction materials</strong><small>Examples of established brands commonly considered across project specifications.</small></div></div>
+      <div className="ecosystemLabel"><span>01</span><div><strong>Trusted vendors</strong><small>Materials, fittings, paint, piping, steel, switches and sanitaryware considered across project specifications.</small></div></div>
       <Marquee items={materialBrands}/>
     </div>
 
     <div className="ecosystemBlock reveal">
-      <div className="ecosystemLabel"><span>02</span><div><strong>Home-loan ecosystem</strong><small>Major lenders a homeowner may explore for construction finance.</small></div></div>
+      <div className="ecosystemLabel"><span>02</span><div><strong>Banking partners</strong><small>Major lenders homeowners may explore for construction finance and home-loan support.</small></div></div>
       <Marquee items={lenders} reverse/>
     </div>
 
-    <p className="ecosystemDisclaimer">Brand, model and lender selection depend on the final specification, local availability, client approval, eligibility and lender terms. Displayed names are references for planning and do not imply an exclusive partnership or endorsement.</p>
+    <p className="ecosystemDisclaimer">Brand and lender selection depend on the final specification, project scope, local availability, client approval, eligibility and lender terms. Displayed names are reference ecosystems and do not imply an exclusive partnership or endorsement.</p>
   </section>;
 }
