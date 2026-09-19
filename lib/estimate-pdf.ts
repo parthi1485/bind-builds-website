@@ -56,7 +56,7 @@ export function createEstimatePdf(data: PdfReportData) {
   doc.setFillColor(paper); doc.roundedRect(left, y - 3, 174, 32, 2, 2, 'F');
   doc.setFont('BindReportSans', 'normal'); doc.setTextColor(muted); doc.setFontSize(9); doc.text('PLANNING SUBTOTAL', left + 6, y + 5);
   doc.setFont('BindReportSans', 'bold'); doc.setTextColor(blue); doc.setFontSize(25); doc.text(clean(data.total), left + 6, y + 19); y += 38;
-  paragraph('Not a quotation. Taxes, approval charges, site-specific work and other exclusions are additional. See the assumptions in this report.');
+  paragraph('Not a quotation. Only priced additional items are included. Taxes, unpriced approval charges and other exclusions are additional. See the assumptions.');
   if (data.duration) paragraph(data.duration, 9, ink);
   const factTop = y;
   data.facts.forEach(([label, value], index) => {
@@ -92,7 +92,7 @@ export function createEstimatePdf(data: PdfReportData) {
     doc.setTextColor(ink); doc.setFont('BindReportSans', 'bold'); doc.setFontSize(11); doc.text(inr(part.value), x + 5, top + 6);
   });
   y = chartTop + 68;
-  paragraph(data.unpriced.length ? `${data.unpriced.length} selected extra(s) still need a quote and are excluded from the subtotal. See the breakdown on the next page.` : 'The diagram shows the planning subtotal only. Taxes, approvals and site-specific exclusions remain additional.', 8);
+  paragraph(data.unpriced.length ? `${data.unpriced.length} selected extra(s) still need a quote and are excluded from the subtotal. See the breakdown on the next page.` : 'The diagram includes priced additional items only. Taxes, unpriced approval charges and site-specific exclusions remain additional.', 8);
   newPage('Your build. By category.', 'Construction cost distribution');
   paragraph('Illustrative allocation of base construction only. The categories total 100%. Additional items are separate; this is not a BOQ or payment schedule.');
   const categoryTotal = data.visuals.allocation.reduce((sum, part) => sum + part.amount, 0);

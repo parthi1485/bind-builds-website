@@ -5,6 +5,8 @@ import { packages } from '@/lib/site';
 import { calculateEstimate, compactMoney, configuration, floorName, money, validNumber, type EstimateInput } from '@/lib/calculator';
 import CalculatorReport from './CalculatorReport';
 import CalculatorExtra from './CalculatorExtra';
+import ApprovalFeeExtra from './ApprovalFeeExtra';
+import { approvalAllowance, initialApproval } from '@/lib/approval-fees';
 import { constructionMonths, extraOptions, extraAmount, extraDescription, initialExtra, packageMetrics, type ExtraSelection } from '@/lib/calculator-options';
 
 const stepNames = ['Your site', 'Your floors', 'Your package', 'Your extras'];
@@ -41,6 +43,7 @@ export default function ConstructionCalculator() {
   const [hasHeadroom, setHasHeadroom] = useState(false);
   const [headroom, setHeadroom] = useState('200');
   const [allowances, setAllowances] = useState<Partial<Record<string, ExtraSelection>>>({});
+  const [approval, setApproval] = useState(initialApproval);
   const root = useRef<HTMLDivElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const firstRender = useRef(true);
@@ -59,9 +62,10 @@ export default function ConstructionCalculator() {
     root.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
     heading.current?.focus({ preventScroll: true });
   }, [step]);
+  const builtArea = areas.slice(0, floorCount).reduce((sum, area) => sum + number(area), 0) + (hasHeadroom ? number(headroom) : 0);
   const input: EstimateInput = { plot: number(plot), floors: areas.slice(0, floorCount).map(number), rate: selected.rate,
     headroom: hasHeadroom ? number(headroom) : 0, reservePercent: 0,
-    allowances: extraOptions.map(item => { const value=allowances[item.key]??initialExtra(item); return {key:item.key,label:item.label,selected:value.selected,amount:extraAmount(value),detail:extraDescription(item,value)}; }) };
+    allowances: [...extraOptions.map(item => { const value=allowances[item.key]??initialExtra(item); return {key:item.key,label:item.label,selected:value.selected,amount:extraAmount(value),detail:extraDescription(item,value)}; }), approvalAllowance(approval, builtArea)] };
   let estimate = null;
   try { estimate = calculateEstimate(input); } catch { /* Invalid input is explained by the native form constraints. */ }
   const setArea = (index: number, value: string) => setAreas(current => current.map((area, i) => i === index ? value : area));
@@ -107,6 +111,7 @@ export default function ConstructionCalculator() {
             <p className="calcHint">Published starting rates. Area measurement, design, structural requirements, quantities and the project agreement determine the final price.</p>
           </div>}
           {step === 3 && <div className="calcFields">
+            <ApprovalFeeExtra value={approval} builtArea={builtArea} onChange={change => setApproval(current => ({...current, ...change}))}/>
             <div className="calcNote"><span aria-hidden="true">✓</span><p>Your {selected.name} package already lists a <strong>{tankIncluded[tier].toLowerCase()}</strong>. Add an allowance only for an upgrade beyond that scope.</p></div>
             <p className="calcHint">Reference allowances from the supplied example: ₹40/L sump, ₹35/L septic, ₹55/L additional RCC tank and ₹2,750/running ft wall. They are not verified Bind Builds rates. Edit each amount before relying on the budget. Septic and recycling are alternative scenarios here.</p>
             <div className="calcExtras">{extraOptions.filter(item=>item.key!=='parking').map(item=><CalculatorExtra key={item.key} item={item} value={allowances[item.key]} onChange={change=>updateExtra(item.key,change)}/>)}</div>
@@ -123,7 +128,7 @@ export default function ConstructionCalculator() {
         <p className="calcPreviewEquation">{estimate ? `${estimate.area.toLocaleString('en-IN')} sq.ft × ${money(selected.rate)}` : 'Enter valid areas to see your estimate.'}{estimate && estimate.allowanceTotal > 0 ? ' + additional items' : ''}</p>
         {estimate && <dl className="calcMiniBreakdown"><div><dt>Base construction</dt><dd>{money(estimate.base)}</dd></div><div><dt>Additional items</dt><dd>{money(estimate.allowanceTotal)}</dd></div></dl>}
         {estimate && estimate.unpriced.length > 0 && <p className="calcUnpriced">+ {estimate.unpriced.length} {estimate.unpriced.length === 1 ? 'selected extra needs' : 'selected extras need'} a quote</p>}
-        <p className="calcPreviewDisclaimer">An initial budget, subject to a site-specific proposal. Taxes, approval charges and other exclusions are additional.</p>
+        <p className="calcPreviewDisclaimer">An initial budget, subject to a site-specific proposal. Only priced additional items are included. Taxes, unpriced approval charges and other exclusions are additional.</p>
       </aside>
     </div>}
   </div>;

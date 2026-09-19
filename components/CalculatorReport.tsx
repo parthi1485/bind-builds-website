@@ -32,7 +32,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     ...estimate.selected.map(item => `${item.label}${item.detail ? " · "+item.detail : ""}: ${item.amount === null ? 'TO BE QUOTED (excluded)' : money(item.amount) + ' allowance'}`),
     `Planning subtotal: ${money(estimate.total)}`,
     `Construction scenario: approximately ${constructionMonths(input.floors.length)} months; 6 months + 4 per additional floor. Design and approvals excluded; not a delivery commitment.`,
-    'Taxes, approvals, site-specific work and other exclusions are additional.',
+    'Only priced additional items are included. Taxes, unpriced approval charges, site-specific work and other exclusions are additional.',
     'Please review the scope and prepare a project-specific proposal.',
   ].filter(Boolean).join('\n');
   const enquiryUrl = '/start-a-project?' + new URLSearchParams({ package: selected.name, area: String(estimate.area), notes }).toString();
@@ -42,7 +42,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     'This is a planning estimate, not a quotation or construction agreement. Published package rates are starting rates and need confirmation for your design and site.',
     'Floor areas are combined and any separate headroom is added once. All of this area is provisionally charged at the chosen package rate. Final area measurement and treatment of parking, headroom and open spaces must be agreed.',
     'Extra rates begin as reference allowances from a supplied example and can be edited. They are not verified Bind Builds prices. Selected extras with amounts are planning allowances. Selected extras without amounts are excluded from the total and still need a quote.',
-    'Allow separately for land, taxes, building approvals, statutory and utility connection charges, demolition, special foundations or ground treatment, external works and fit-out beyond the agreed package.',
+    'An approval allowance is included only when selected and priced. Reference fee slabs need current authority and eligibility verification; they do not establish permission to build. Unentered authority charges and professional approval services remain excluded. Allow separately for land, taxes, utility charges, demolition, special foundations and work beyond the agreed package.',
     'Your package already includes an overhead tank to its stated specification. Only an upgrade should be added separately. Confirm every inclusion and exclusion in the proposal.',
     'The ten-stage allocation is an illustrative distribution of base construction cost only. It is not a bill of quantities, invoice or payment schedule. Site-specific quantities, sequence and milestones can differ.',
     `Construction duration is a planning scenario: ${constructionMonths(input.floors.length)} months for ${configuration(input.floors.length)}, using 6 months plus 4 per additional floor. It excludes design and approvals. Site, area, weather and scope affect the actual programme.`,
