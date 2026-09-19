@@ -47,18 +47,38 @@
 .ecosystemLabel strong{display:block;font-size:.875rem;font-weight:550;color:#313137}
 .ecosystemLabel small{display:block;font-size:.625rem;line-height:1.6;color:#898991;margin-top:7px}
 .brandMarquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
-.brandMarqueeTrack{width:max-content;display:flex;gap:12px;animation:brandFlow 28s linear infinite}
-.brandMarquee.reverse .brandMarqueeTrack{animation-direction:reverse;animation-duration:24s}
+.brandMarqueeTrack{width:max-content;display:flex;gap:12px;animation:brandFlow 34s linear infinite}
+.brandMarquee.reverse .brandMarqueeTrack{animation-direction:reverse;animation-duration:26s}
 .brandMarquee:hover .brandMarqueeTrack{animation-play-state:paused}
-.brandWordmark{min-width:174px;height:84px;padding:0 22px;border:1px solid #e6e6eb;background:#fff;border-radius:16px;display:grid;place-items:center;overflow:hidden}
-.brandWordmark img{display:block;width:auto;height:auto;max-width:132px;max-height:42px;object-fit:contain}
-.brandWordmark.brand-ultratech img{max-width:122px;max-height:48px}
-.brandWordmark.brand-jsw img{max-width:102px;max-height:48px}
-.brandWordmark.brand-tata img{max-width:134px;max-height:38px}
-.brandWordmark.brand-asian-paints img{max-width:122px;max-height:38px}
-.brandWordmark.brand-jaquar img{max-width:116px;max-height:43px}
-.brandWordmark.brand-astral,.brandWordmark.brand-kajaria{padding:0;background:#07568f}
-.brandWordmark.brand-astral img,.brandWordmark.brand-kajaria img{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover}
+.brandWordmarkWrap{display:block}
+.brandWordmark{width:178px;height:84px;padding:0 22px;border:1px solid #e6e6eb;background:#fff;border-radius:16px;display:grid;place-items:center;overflow:hidden}
+.brandWordmark img{display:block;width:auto;height:auto;max-width:128px;max-height:38px;object-fit:contain}
+.brandTextLogo{display:block;max-width:100%;text-align:center;font-size:1rem;line-height:1.15;font-weight:700;letter-spacing:-.02em;white-space:normal}
+.brandTextLogo.tone-dark{color:#2f3137}
+.brandTextLogo.tone-blue{color:#1f4d8d}
+.brandTextLogo.tone-orange{color:#e07b2d}
+.brandTextLogo.tone-burgundy{color:#9b3760}
+.brandTextLogo.tone-green{color:#2d7f57}
+.brandTextLogo.tone-red{color:#d83030}
+.brand-icici img{max-width:138px;max-height:34px}
+.brand-axis img{max-width:144px;max-height:35px}
+.brand-bob img{max-width:132px;max-height:38px}
+.brand-hdfc img{max-width:126px;max-height:34px}
+.brand-sbi img{max-width:118px;max-height:36px}
+.brand-ultratech img{max-width:126px;max-height:42px}
+.brand-jsw img{max-width:104px;max-height:44px}
+.brand-tata img{max-width:126px;max-height:32px}
+.brand-kohler img{max-width:112px;max-height:24px}
+.brand-parryware img{max-width:126px;max-height:34px}
+.brand-nippon img{max-width:138px;max-height:34px}
+.brand-asian-paints img{max-width:126px;max-height:34px}
+.brand-kajaria img{max-width:116px;max-height:26px}
+.brand-jaquar img{max-width:118px;max-height:38px}
+.brand-finolex img{max-width:116px;max-height:30px}
+.brand-ashirvad img{max-width:118px;max-height:30px}
+.brand-astral img{max-width:108px;max-height:34px}
+.brand-gm-switches img{max-width:84px;max-height:30px}
+.brand-legrand img{max-width:124px;max-height:30px}
 .ecosystemDisclaimer{max-width:1150px;margin:0 auto;border-top:1px solid #eeeeF2;padding-top:20px;color:#8a8a93;font-size:.625rem;line-height:1.7}
 @keyframes assuranceDraw{from{stroke-dashoffset:520}to{stroke-dashoffset:0}}
 @keyframes assurancePulse{0%{opacity:.4;transform:scale(.95);transform-origin:center}100%{opacity:1;transform:scale(1)}}
@@ -71,7 +91,7 @@
  .assuranceCopy{padding-left:40px}
  .ecosystemIntro{grid-template-columns:1fr 1fr;gap:6vw}
  .ecosystemBlock{grid-template-columns:220px minmax(0,1fr);gap:25px}
- .brandWordmark{min-width:154px}
+ .brandWordmark{width:160px;height:78px}
 }
 @media(max-width:760px){
  .assuranceSection{padding-inline:0}
@@ -100,14 +120,9 @@
  .ecosystemBlock{display:block;padding:24px 0 27px;margin:0 22px}
  .ecosystemLabel{margin-bottom:20px}
  .brandMarquee{margin-inline:-22px}
- .brandWordmark{min-width:148px;height:72px;padding-inline:18px}
- .brandWordmark img{max-width:112px;max-height:36px}
- .brandWordmark.brand-ultratech img{max-width:104px;max-height:41px}
- .brandWordmark.brand-jsw img{max-width:88px;max-height:42px}
- .brandWordmark.brand-tata img{max-width:116px;max-height:34px}
- .brandWordmark.brand-asian-paints img{max-width:106px;max-height:34px}
- .brandWordmark.brand-jaquar img{max-width:98px;max-height:37px}
- .brandWordmark.brand-astral img,.brandWordmark.brand-kajaria img{width:100%;height:100%;max-width:none;max-height:none}
+ .brandWordmark{width:150px;height:72px;padding-inline:18px}
+ .brandWordmark img{max-width:108px;max-height:32px}
+ .brandTextLogo{font-size:.875rem}
  .ecosystemDisclaimer{margin:0 22px;padding-top:18px;font-size:.5625rem}
 }
 @media(prefers-reduced-motion:reduce){
