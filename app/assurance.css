@@ -129,3 +129,9 @@
  .brandMarqueeTrack{animation:none;transform:none}
  .assurancePanel:hover .avAccent,.assurancePanel:hover .avAccentFill{animation:none}
 }
+
+.vendorSequence{display:flex;gap:12px;align-items:center}
+.uploadedVendorStrip{height:84px;width:auto;display:block;flex:none}
+.vendorMarquee .brandMarqueeTrack{gap:12px}
+@media(max-width:1099px){.uploadedVendorStrip{height:78px}}
+@media(max-width:760px){.uploadedVendorStrip{height:72px}}
