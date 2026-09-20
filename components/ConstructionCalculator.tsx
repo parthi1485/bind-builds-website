@@ -43,6 +43,8 @@ export default function ConstructionCalculator() {
   const [hasHeadroom, setHasHeadroom] = useState(false);
   const [headroom, setHeadroom] = useState('200');
   const [headroomRate, setHeadroomRate] = useState(String(HEADROOM_STANDARD_RATE));
+  const [headroomMode, setHeadroomMode] = useState<ExtraSelection['mode']>('unit');
+  const [headroomAmount, setHeadroomAmount] = useState('');
   const [allowances, setAllowances] = useState<Partial<Record<string, ExtraSelection>>>({});
   const [approval, setApproval] = useState(initialApproval);
   const root = useRef<HTMLDivElement>(null);
@@ -65,7 +67,8 @@ export default function ConstructionCalculator() {
   }, [step]);
   const builtArea = areas.slice(0, floorCount).reduce((sum, area) => sum + number(area), 0) + (hasHeadroom ? number(headroom) : 0);
   const input: EstimateInput = { plot: number(plot), floors: areas.slice(0, floorCount).map(number), rate: selected.rate,
-    headroom: hasHeadroom ? number(headroom) : 0, headroomRate: hasHeadroom ? number(headroomRate) : HEADROOM_STANDARD_RATE, reservePercent: 0,
+    headroom: hasHeadroom ? number(headroom) : 0, headroomRate: hasHeadroom ? number(headroomRate) : HEADROOM_STANDARD_RATE,
+    headroomMode: hasHeadroom ? headroomMode : 'unit', headroomAmount: hasHeadroom && headroomMode === 'lump' ? (headroomAmount.trim()==='' ? null : number(headroomAmount)) : null, reservePercent: 0,
     allowances: [...extraOptions.map(item => { const value=allowances[item.key]??initialExtra(item); return {key:item.key,label:item.label,selected:value.selected,amount:extraAmount(value),detail:extraDescription(item,value)}; }), approvalAllowance(approval, builtArea)] };
   let estimate = null;
   try { estimate = calculateEstimate(input); } catch { /* Invalid input is explained by the native form constraints. */ }
@@ -79,6 +82,7 @@ export default function ConstructionCalculator() {
   });
   const duration=constructionMonths(floorCount);
   const metrics=packageMetrics[tier];
+  const headroomPlanningAmount = hasHeadroom ? extraAmount({selected:true,mode:headroomMode,quantity:headroom,rate:headroomRate,amount:headroomAmount,cars:0}) : 0;
   const next = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); if (step === 3 && !estimate) return; setFurthest(Math.max(furthest, step + 1)); setStep(step + 1); };
 
   return <div className="calculator" id="calculator" ref={root}>
@@ -102,8 +106,17 @@ export default function ConstructionCalculator() {
             <fieldset className="calcChoices"><legend>Number of floors</legend><div className="floorChoices">{[1, 2, 3, 4].map(count => <label key={count}><input type="radio" name="floors" checked={floorCount === count} onChange={() => setFloorCount(count)} /><span><strong>{count === 1 ? 'Ground' : `G + ${count - 1}`}</strong><small>{count} {count === 1 ? 'floor' : 'floors'}</small></span></label>)}</div></fieldset>
             <div className="calcDuration" aria-live="polite"><span className="eyebrow">Construction planning scenario</span><strong>{duration}<small> months</small></strong><div className="durationTrack"><span style={{width:`${duration/18*100}%`}}/></div><p>6 months for ground only + 4 months per additional floor. Indicative only; area, soil, design, access and weather can change the programme. Design and approvals are separate.</p></div><div className="calcFloorFields">{areas.slice(0, floorCount).map((area, index) => <label key={index}>{floorName(index)} <span>sq.ft</span><input required type="number" inputMode="numeric" min="1" max="100000" step="1" value={area} onChange={e => setArea(index, e.target.value)} /></label>)}</div>
             {floorCount > 1 && <button className="textButton calcCopyArea" type="button" onClick={() => setAreas(areas.map(() => areas[0]))}>Use the ground-floor area for every floor</button>}
-            <label className="calcCheck"><input type="checkbox" checked={hasHeadroom} onChange={e => setHasHeadroom(e.target.checked)} /><span>Add staircase headroom separately<small>Only when it is not already counted in a floor area.</small></span></label>
-            {hasHeadroom && <div className="calcHeadroom"><div className="extraUnitFields"><label>Headroom area <span>sq.ft</span><input required type="number" inputMode="numeric" min="1" max="10000" step="1" value={headroom} onChange={e => setHeadroom(e.target.value)} /></label><label>Headroom rate <span>₹ / sq.ft</span><input required type="number" inputMode="decimal" min="1" max="10000000" step="1" value={headroomRate} onChange={e => setHeadroomRate(e.target.value)} /></label></div><button className="textButton calcHeadroomRateReset" type="button" onClick={() => setHeadroomRate(String(HEADROOM_STANDARD_RATE))}>Use standard headroom rate · {money(HEADROOM_STANDARD_RATE)} / sq.ft</button><small>Standard planning rate is ₹2,350/sq.ft. You can edit it for this estimate. Final measurement, scope and pricing need confirmation.</small></div>}
+            <div className={`calcExtra ${hasHeadroom?'selected':''}`}>
+              <label className="calcCheck"><input type="checkbox" checked={hasHeadroom} onChange={e => setHasHeadroom(e.target.checked)} /><span>Add staircase headroom separately<small>Only when it is not already counted in a floor area.</small></span></label>
+              {hasHeadroom&&<div className="extraEditor">
+                <label>Pricing method<select value={headroomMode} onChange={e=>setHeadroomMode(e.target.value as ExtraSelection['mode'])}><option value="unit">Quantity × unit rate</option><option value="lump">Enter total allowance</option><option value="unpriced">Request a quote</option></select></label>
+                {headroomMode==='unit'&&<><div className="extraUnitFields"><label>Headroom area <span>sq.ft</span><input required type="number" inputMode="decimal" min="0.01" max="10000" step="0.01" value={headroom} onChange={e=>setHeadroom(e.target.value)}/></label><label>Unit rate <span>₹ / sq.ft</span><input required type="number" inputMode="decimal" min="0.01" max="10000000" step="0.01" value={headroomRate} onChange={e=>setHeadroomRate(e.target.value)}/></label></div><button className="textButton" type="button" onClick={()=>setHeadroomRate(String(HEADROOM_STANDARD_RATE))}>Use reference rate · {money(HEADROOM_STANDARD_RATE)} / sq.ft</button></>}
+                {headroomMode==='lump'&&<label>Total allowance <span>₹</span><input type="number" inputMode="numeric" min="1" max="100000000" step="1" placeholder="To be quoted" value={headroomAmount} onChange={e=>setHeadroomAmount(e.target.value)}/></label>}
+                {headroomMode!=='lump'&&headroomMode!=='unit'&&<div className="extraUnitFields"><label>Headroom area <span>sq.ft</span><input required type="number" inputMode="decimal" min="0.01" max="10000" step="0.01" value={headroom} onChange={e=>setHeadroom(e.target.value)}/></label></div>}
+                <output className="extraTotal" aria-live="polite">{headroomPlanningAmount===null?'To be quoted · excluded from total':Number.isFinite(headroomPlanningAmount)&&Number(headroomPlanningAmount)>=1&&Number(headroomPlanningAmount)<=100000000?money(Number(headroomPlanningAmount)):'Check quantity and rate'}</output>
+                <p className="calcHint">{headroomMode==='unpriced'?'This headroom stays in your estimate for follow-up and is excluded from the total.':'Editable planning allowance. Standard reference rate is ₹2,350/sq.ft; final measurement, scope and pricing need confirmation.'}</p>
+              </div>}
+            </div>
             <p className="calcHint">Floor choices describe your budget scenario. They do not confirm permitted floors, setbacks, FSI or planning approval for your Chennai site.</p>
           </div>}
           {step === 2 && <div className="calcFields">
@@ -126,7 +139,7 @@ export default function ConstructionCalculator() {
         <Building floors={floorCount} />
         <div className="calcPreviewMeta"><span>{configuration(floorCount)}</span><span>{selected.name}</span></div>
         <p className="calcPreviewTime">~{duration} months <span>construction scenario · excludes design & approvals</span></p><span className="calcPreviewLabel">Planning subtotal</span><output className="calcPreviewAmount" aria-live="polite" aria-atomic="true">{estimate ? compactMoney(estimate.total) : 'Check your inputs'}</output>
-        <p className="calcPreviewEquation">{estimate ? `${estimate.floorArea.toLocaleString('en-IN')} sq.ft × ${money(selected.rate)}${input.headroom ? ` + ${input.headroom.toLocaleString('en-IN')} sq.ft headroom × ${money(estimate.headroomRate)}` : ''}` : 'Enter valid areas to see your estimate.'}{estimate && estimate.allowanceTotal > 0 ? ' + additional items' : ''}</p>
+        <p className="calcPreviewEquation">{estimate ? `${estimate.floorArea.toLocaleString('en-IN')} sq.ft × ${money(selected.rate)}${input.headroom ? estimate.headroomUnpriced ? ` + ${input.headroom.toLocaleString('en-IN')} sq.ft headroom · quote` : estimate.headroomMode==='lump' ? ` + headroom allowance ${money(estimate.headroomCost)}` : ` + ${input.headroom.toLocaleString('en-IN')} sq.ft headroom × ${money(estimate.headroomRate)}` : ''}` : 'Enter valid areas to see your estimate.'}{estimate && estimate.allowanceTotal > 0 ? ' + additional items' : ''}</p>
         {estimate && <dl className="calcMiniBreakdown"><div><dt>Base construction</dt><dd>{money(estimate.base)}</dd></div><div><dt>Additional items</dt><dd>{money(estimate.allowanceTotal)}</dd></div></dl>}
         {estimate && estimate.unpriced.length > 0 && <p className="calcUnpriced">+ {estimate.unpriced.length} {estimate.unpriced.length === 1 ? 'selected extra needs' : 'selected extras need'} a quote</p>}
         <p className="calcPreviewDisclaimer">An initial budget, subject to a site-specific proposal. Only priced additional items are included. Taxes, unpriced approval charges and other exclusions are additional.</p>
