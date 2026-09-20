@@ -19,9 +19,11 @@ export function validNumber(value: number, min: number, max: number, whole = fal
   return Number.isFinite(value) && value >= min && value <= max && (!whole || Number.isInteger(value));
 }
 export function calculateEstimate(input: EstimateInput) {
+  const headroomRate = input.headroomRate ?? HEADROOM_STANDARD_RATE;
   if (!validNumber(input.plot, 1, 100000) || !validNumber(input.rate, 1, 100000) ||
       input.floors.length < 1 || input.floors.length > 4 || input.floors.some(area => !validNumber(area, 1, 100000, true)) ||
-      !validNumber(input.headroom, 0, 10000, true) || !validNumber(input.reservePercent, 0, 25)) throw new RangeError('Invalid estimate inputs');
+      !validNumber(input.headroom, 0, 10000, true) || !validNumber(headroomRate, 1, 10000000) ||
+      !validNumber(input.reservePercent, 0, 25)) throw new RangeError('Invalid estimate inputs');
   const selected = input.allowances.filter(item => item.selected);
   if (selected.some(item => item.amount !== null && !validNumber(item.amount, 1, 100000000, true))) throw new RangeError('Invalid allowance');
   const floorArea = input.floors.reduce((total, area) => total + area, 0);
