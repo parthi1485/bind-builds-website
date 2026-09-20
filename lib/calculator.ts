@@ -1,7 +1,7 @@
 /** Pure planning calculations. All money is rounded to whole INR. No quotation or approval logic. */
 export type Allowance = { key: string; label: string; selected: boolean; amount: number | null; detail?: string };
 export const HEADROOM_STANDARD_RATE = 2350;
-export type EstimateInput = { plot: number; floors: number[]; rate: number; headroom: number; headroomRate?: number; allowances: Allowance[]; reservePercent: number };
+export type EstimateInput = { plot: number; floors: number[]; rate: number; headroom: number; headroomRate?: number; headroomMode?: 'unit'|'lump'|'unpriced'; headroomAmount?: number|null; allowances: Allowance[]; reservePercent: number };
 export const floorName = (index: number) => ['Ground floor', 'First floor', 'Second floor', 'Third floor'][index] || `Floor ${index + 1}`;
 export const configuration = (count: number) => count === 1 ? 'Ground only' : `G + ${count - 1}`;
 export const stages = [
@@ -21,22 +21,29 @@ export function validNumber(value: number, min: number, max: number, whole = fal
 }
 export function calculateEstimate(input: EstimateInput) {
   const headroomRate = input.headroomRate ?? HEADROOM_STANDARD_RATE;
+  const headroomMode = input.headroomMode ?? 'unit';
   if (!validNumber(input.plot, 1, 100000) || !validNumber(input.rate, 1, 100000) ||
       input.floors.length < 1 || input.floors.length > 4 || input.floors.some(area => !validNumber(area, 1, 100000, true)) ||
-      !validNumber(input.headroom, 0, 10000, true) || !validNumber(headroomRate, 1, 10000000) ||
-      !validNumber(input.reservePercent, 0, 25)) throw new RangeError('Invalid estimate inputs');
+      !validNumber(input.headroom, 0, 10000, true) || !validNumber(input.reservePercent, 0, 25)) throw new RangeError('Invalid estimate inputs');
+  if (input.headroom > 0 && headroomMode === 'unit' && !validNumber(headroomRate, 1, 10000000)) throw new RangeError('Invalid headroom rate');
+  if (input.headroom > 0 && headroomMode === 'lump' && input.headroomAmount !== null && input.headroomAmount !== undefined &&
+      !validNumber(input.headroomAmount, 1, 100000000)) throw new RangeError('Invalid headroom allowance');
   const selected = input.allowances.filter(item => item.selected);
   if (selected.some(item => item.amount !== null && !validNumber(item.amount, 1, 100000000, true))) throw new RangeError('Invalid allowance');
   const floorArea = input.floors.reduce((total, area) => total + area, 0);
   const area = floorArea + input.headroom;
   const floorCost = Math.round(floorArea * input.rate);
-  const headroomCost = Math.round(input.headroom * headroomRate);
+  const headroomUnpriced = input.headroom > 0 && (headroomMode === 'unpriced' || (headroomMode === 'lump' && (input.headroomAmount === null || input.headroomAmount === undefined)));
+  const headroomCost = input.headroom <= 0 || headroomUnpriced ? 0 :
+    headroomMode === 'lump' ? Math.round(input.headroomAmount ?? 0) :
+    Math.round(input.headroom * headroomRate);
   const base = floorCost + headroomCost;
   const allowanceTotal = selected.reduce((total, item) => total + (item.amount ?? 0), 0);
   const subtotal = base + allowanceTotal;
   const reserve = 0; // Estimates contain base construction and selected additional items only.
-  return { area, floorArea, floorCost, headroomRate, headroomCost, base, allowanceTotal, subtotal, reserve, total: subtotal + reserve,
-    unpriced: selected.filter(item => item.amount === null), selected,
+  const headroomFollowUp: Allowance[] = headroomUnpriced ? [{key:'headroom',label:'Staircase headroom',selected:true,amount:null,detail:`${input.headroom} sq.ft · to be quoted`}] : [];
+  return { area, floorArea, floorCost, headroomRate, headroomMode, headroomUnpriced, headroomCost, base, allowanceTotal, subtotal, reserve, total: subtotal + reserve,
+    unpriced: [...selected.filter(item => item.amount === null), ...headroomFollowUp], selected,
     coverage: input.floors[0] / input.plot * 100,
   };
 }
