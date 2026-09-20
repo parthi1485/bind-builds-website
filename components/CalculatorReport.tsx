@@ -1,5 +1,5 @@
 'use client';
-import { useState, type RefObject } from 'react';
+import { useRef, useState, type FormEvent, type RefObject } from 'react';
 import Link from 'next/link';
 import { packages, site, whatsappUrl } from '@/lib/site';
 import { calculateEmi, compactMoney, configuration, createVisualData, floorName, money, splitStages, validNumber, type Estimate, type EstimateInput } from '@/lib/calculator';
@@ -12,6 +12,8 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
   const selected = packages[packageIndex];
   const [status, setStatus] = useState('');
   const [downloading, setDownloading] = useState(false);
+  const downloadGate = useRef<HTMLDialogElement>(null);
+  const [downloadLead, setDownloadLead] = useState({ name: '', phone: '', email: '' });
   const [months, setMonths] = useState(String(constructionMonths(input.floors.length)));
   const [loan, setLoan] = useState(String(Math.round(estimate.total * .8)));
   const [interest, setInterest] = useState('8.5');
@@ -66,6 +68,20 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     } catch { setStatus('The PDF could not be created. Please try again, or copy your estimate.'); }
     finally { setDownloading(false); }
   };
+  const requestDownload = () => {
+    try {
+      if (window.localStorage.getItem('bind-builds-estimate-download-signup')) { download(); return; }
+    } catch {}
+    downloadGate.current?.showModal();
+  };
+  const unlockDownload = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const digits = downloadLead.phone.replace(/\D/g, '').length;
+    if (digits < 10 || digits > 15) { setStatus('Please enter a valid phone number with 10–15 digits.'); return; }
+    try { window.localStorage.setItem('bind-builds-estimate-download-signup', JSON.stringify(downloadLead)); } catch {}
+    downloadGate.current?.close();
+    download();
+  };
 
   return <div className="calcReport">
     <div className="calcReportHero">
@@ -73,12 +89,26 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
       <div className="calcReportTotal"><span>Planning subtotal</span><strong>{compactMoney(estimate.total)}</strong><span>{money(estimate.total)}</span><p>Only priced additional items are included. Taxes, unpriced approval charges and other exclusions are additional. Subject to a project-specific proposal.</p></div>
     </div>
     {estimate.unpriced.length > 0 && <div className="calcQuoteNotice"><strong>{estimate.unpriced.length} selected {estimate.unpriced.length === 1 ? 'extra still needs' : 'extras still need'} a quote</strong><p>{estimate.unpriced.map(item => item.label).join(' · ')}</p><span>These items are excluded from the subtotal above.</span></div>}
-    <div className="calcReportToolbar"><EstimatePresentation data={visuals}/><button className="cta" type="button" onClick={download} disabled={downloading}>{downloading ? 'Preparing PDF…' : 'Download estimate PDF'} <span aria-hidden="true">↓</span></button><button className="textButton" type="button" onClick={copy}>Copy estimate</button><button className="textButton" type="button" onClick={onEdit}>Edit my inputs</button></div>
+    <div className="calcReportToolbar"><EstimatePresentation data={visuals}/><button className="cta" type="button" onClick={requestDownload} disabled={downloading}>{downloading ? 'Preparing PDF…' : 'Download estimate PDF'} <span aria-hidden="true">↓</span></button><button className="textButton" type="button" onClick={copy}>Copy estimate</button><button className="textButton" type="button" onClick={onEdit}>Edit my inputs</button></div>
+    <dialog className="estimateDownloadGate" ref={downloadGate} aria-labelledby="estimate-download-title" onClick={event=>{if(event.target===event.currentTarget)downloadGate.current?.close();}}>
+      <form onSubmit={unlockDownload}>
+        <div className="estimateDownloadGateHead"><span className="eyebrow">PDF DOWNLOAD</span><button type="button" aria-label="Close" onClick={()=>downloadGate.current?.close()}>×</button></div>
+        <h3 id="estimate-download-title">Sign up to download<br/>your estimate PDF.</h3>
+        <p>Your estimate stays free to view and present. We only ask for your contact details before the downloadable PDF.</p>
+        <div className="estimateDownloadFields">
+          <label>Your name <span>required</span><input required minLength={2} maxLength={80} autoComplete="name" value={downloadLead.name} onChange={e=>setDownloadLead(v=>({...v,name:e.target.value}))}/></label>
+          <label>Phone number <span>required</span><input required type="tel" inputMode="tel" autoComplete="tel" maxLength={22} pattern="[+0-9() -]{10,22}" value={downloadLead.phone} onChange={e=>setDownloadLead(v=>({...v,phone:e.target.value}))}/></label>
+          <label>Email <span>required</span><input required type="email" autoComplete="email" maxLength={150} value={downloadLead.email} onChange={e=>setDownloadLead(v=>({...v,email:e.target.value}))}/></label>
+        </div>
+        <button className="cta primary estimateDownloadSubmit" type="submit">Sign up & download PDF ↓</button>
+        <p className="estimateDownloadPrivacy">No password or account setup. Your presentation remains available without signing up. <Link href="/privacy">Privacy details ↗</Link></p>
+      </form>
+    </dialog>
     <p role="status" className="calcStatus">{status}</p>
     <section className="calcReportCard calcDuration"><span className="eyebrow">Construction planning scenario</span><strong>~{constructionMonths(input.floors.length)}<small> months</small></strong><div className="durationTrack"><span style={{width:`${constructionMonths(input.floors.length)/18*100}%`}}/></div><p>6 months for ground only + 4 months per additional floor. Design and approval time is separate. Actual duration depends on area, site conditions, scope and the agreed programme.</p></section><ProposalVisuals data={visuals}/>
     <div className="calcReportColumns">
       <section className="calcReportCard"><span className="eyebrow">01 / Where the number comes from</span><h3>Your cost breakdown.</h3><p className="calcHint">{estimate.area.toLocaleString('en-IN')} sq.ft calculated area, plus selected additional items.</p><dl className="calcCostRows">{rows.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}<div className="calcCostTotal"><dt>Planning subtotal</dt><dd>{money(estimate.total)}</dd></div></dl></section>
-      <section className="calcReportCard calcNextStep"><span className="eyebrow">Make it specific to your site</span><h3>A number starts the conversation.<br />A plan brings it together.</h3><p>We’ll review your site, design priorities and the scope behind this estimate. Your selections are carried into the project brief.</p><Link href={enquiryUrl} className="cta primary">Discuss this estimate ↗</Link><a href={whatsappUrl('Hello Bind Builds, I would like to discuss this estimate.\n\n' + notes)} className="textLink" target="_blank" rel="noopener noreferrer">Open estimate in WhatsApp ↗</a><p className="calcHint">No details needed to see or download your estimate. You choose when to contact us.</p></section>
+      <section className="calcReportCard calcNextStep"><span className="eyebrow">Make it specific to your site</span><h3>A number starts the conversation.<br />A plan brings it together.</h3><p>We’ll review your site, design priorities and the scope behind this estimate. Your selections are carried into the project brief.</p><Link href={enquiryUrl} className="cta primary">Discuss this estimate ↗</Link><a href={whatsappUrl('Hello Bind Builds, I would like to discuss this estimate.\n\n' + notes)} className="textLink" target="_blank" rel="noopener noreferrer">Open estimate in WhatsApp ↗</a><p className="calcHint">No details are needed to view or present your estimate. Contact details are requested only before downloading the PDF.</p></section>
     </div>
     <section className="calcReportCard calcCompare"><ComparisonDiagram data={visuals}/><p className="calcHint">Additional items are excluded from this comparison.</p><div className="comparisonSpecLinks">{packages.map(item=><Link key={item.key} href={`/packages#${item.key}`} target="_blank" rel="noopener noreferrer">{item.name} specification ↗</Link>)}</div></section>
     <section className="calcReportCard"><StageDiagram data={visuals}/></section>
