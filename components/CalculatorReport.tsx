@@ -20,14 +20,14 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
   const emi = calculateEmi(parse(loan), parse(interest), parse(tenure));
   const allocation = splitStages(estimate.base);
   const rows: [string, string][] = input.floors.map((area, index) => [`${floorName(index)} · ${area.toLocaleString('en-IN')} sq.ft`, money(area * input.rate)]);
-  if (input.headroom) rows.push([`Separate headroom · ${input.headroom.toLocaleString('en-IN')} sq.ft`, money(estimate.headroomCost)]);
+  if (input.headroom) rows.push([`Separate headroom · ${input.headroom.toLocaleString('en-IN')} sq.ft${estimate.headroomMode==='unit'?` × ${money(estimate.headroomRate)}/sq.ft`:estimate.headroomMode==='lump'?' · custom allowance':' · quote requested'}`, estimate.headroomUnpriced ? 'To be quoted' : money(estimate.headroomCost)]);
   rows.push(['Base construction total', money(estimate.base)]);
   estimate.selected.forEach(item => rows.push([`${item.label}${item.detail ? ' · '+item.detail : ''}${item.amount === null ? '' : ' · allowance'}`, item.amount === null ? 'To be quoted' : money(item.amount)]));
   const notes = [
     'Bind Builds planning estimate (not a quotation)',
     `Plot: ${input.plot.toLocaleString('en-IN')} sq.ft | ${configuration(input.floors.length)}`,
     ...input.floors.map((area, index) => `${floorName(index)}: ${area} sq.ft`),
-    input.headroom ? `Separate headroom: ${input.headroom} sq.ft` : '',
+    input.headroom ? `Separate headroom: ${input.headroom} sq.ft · ${estimate.headroomUnpriced?'TO BE QUOTED':estimate.headroomMode==='lump'?money(estimate.headroomCost):`${money(estimate.headroomRate)}/sq.ft = ${money(estimate.headroomCost)}`}` : '',
     `${selected.name}: ${money(input.rate)}/sq.ft | Base: ${money(estimate.base)}`,
     ...estimate.selected.map(item => `${item.label}${item.detail ? " · "+item.detail : ""}: ${item.amount === null ? 'TO BE QUOTED (excluded)' : money(item.amount) + ' allowance'}`),
     `Planning subtotal: ${money(estimate.total)}`,
