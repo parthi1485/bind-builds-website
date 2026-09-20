@@ -1,6 +1,7 @@
 /** Pure planning calculations. All money is rounded to whole INR. No quotation or approval logic. */
 export type Allowance = { key: string; label: string; selected: boolean; amount: number | null; detail?: string };
-export const HEADROOM_STANDARD_RATE = 2350;\nexport type EstimateInput = { plot: number; floors: number[]; rate: number; headroom: number; headroomRate?: number; allowances: Allowance[]; reservePercent: number };
+export const HEADROOM_STANDARD_RATE = 2350;
+export type EstimateInput = { plot: number; floors: number[]; rate: number; headroom: number; headroomRate?: number; allowances: Allowance[]; reservePercent: number };
 export const floorName = (index: number) => ['Ground floor', 'First floor', 'Second floor', 'Third floor'][index] || `Floor ${index + 1}`;
 export const configuration = (count: number) => count === 1 ? 'Ground only' : `G + ${count - 1}`;
 export const stages = [
