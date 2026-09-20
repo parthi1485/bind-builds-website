@@ -1,6 +1,6 @@
 /** Pure planning calculations. All money is rounded to whole INR. No quotation or approval logic. */
 export type Allowance = { key: string; label: string; selected: boolean; amount: number | null; detail?: string };
-export type EstimateInput = { plot: number; floors: number[]; rate: number; headroom: number; allowances: Allowance[]; reservePercent: number };
+export const HEADROOM_STANDARD_RATE = 2350;\nexport type EstimateInput = { plot: number; floors: number[]; rate: number; headroom: number; headroomRate?: number; allowances: Allowance[]; reservePercent: number };
 export const floorName = (index: number) => ['Ground floor', 'First floor', 'Second floor', 'Third floor'][index] || `Floor ${index + 1}`;
 export const configuration = (count: number) => count === 1 ? 'Ground only' : `G + ${count - 1}`;
 export const stages = [
@@ -27,12 +27,12 @@ export function calculateEstimate(input: EstimateInput) {
   const floorArea = input.floors.reduce((total, area) => total + area, 0);
   const area = floorArea + input.headroom;
   const floorCost = Math.round(floorArea * input.rate);
-  const headroomCost = Math.round(input.headroom * input.rate);
+  const headroomCost = Math.round(input.headroom * headroomRate);
   const base = floorCost + headroomCost;
   const allowanceTotal = selected.reduce((total, item) => total + (item.amount ?? 0), 0);
   const subtotal = base + allowanceTotal;
   const reserve = 0; // Estimates contain base construction and selected additional items only.
-  return { area, floorArea, floorCost, headroomCost, base, allowanceTotal, subtotal, reserve, total: subtotal + reserve,
+  return { area, floorArea, floorCost, headroomRate, headroomCost, base, allowanceTotal, subtotal, reserve, total: subtotal + reserve,
     unpriced: selected.filter(item => item.amount === null), selected,
     coverage: input.floors[0] / input.plot * 100,
   };
