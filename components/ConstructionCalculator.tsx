@@ -41,7 +41,8 @@ export default function ConstructionCalculator() {
   const [floorCount, setFloorCount] = useState(2);
   const [tier, setTier] = useState(1);
   const [hasHeadroom, setHasHeadroom] = useState(false);
-  const [headroom, setHeadroom] = useState('200');\n  const [headroomRate, setHeadroomRate] = useState(String(HEADROOM_STANDARD_RATE));
+  const [headroom, setHeadroom] = useState('200');
+  const [headroomRate, setHeadroomRate] = useState(String(HEADROOM_STANDARD_RATE));
   const [allowances, setAllowances] = useState<Partial<Record<string, ExtraSelection>>>({});
   const [approval, setApproval] = useState(initialApproval);
   const root = useRef<HTMLDivElement>(null);
