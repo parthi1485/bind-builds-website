@@ -3,7 +3,7 @@
 import Script from 'next/script';
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { trackEvent } from '@/lib/analytics';
+import { captureAttribution, trackEvent } from '@/lib/analytics';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-3JP7ZM2MXT';
 
@@ -12,11 +12,32 @@ export default function Analytics() {
 
   useEffect(() => {
     if (!GA_ID) return;
+    captureAttribution();
     trackEvent('page_view', {
       page_path: pathname + window.location.search,
       page_location: window.location.href,
       page_title: document.title,
     });
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!GA_ID) return;
+    const seen = new Set<number>();
+    const thresholds = [25, 50, 75, 90];
+    const onScroll = () => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      if (height <= 0) return;
+      const percent = Math.round(window.scrollY / height * 100);
+      for (const threshold of thresholds) {
+        if (percent >= threshold && !seen.has(threshold)) {
+          seen.add(threshold);
+          trackEvent('scroll_depth', { page_path: window.location.pathname, percent_scrolled: threshold });
+        }
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
   }, [pathname]);
 
   useEffect(() => {
@@ -27,12 +48,20 @@ export default function Analytics() {
       if (!anchor) return;
       const href = anchor.getAttribute('href') || '';
       const linkText = (anchor.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80);
-      const base = { page_path: window.location.pathname, link_text: linkText };
+      const region = anchor.closest('header,nav,section,footer,aside');
+      const ctaLocation = region?.id || (region?.tagName || 'page').toLowerCase();
+      const base = { page_path: window.location.pathname, link_text: linkText, cta_location: ctaLocation };
 
       if (href.startsWith('tel:')) trackEvent('call_click', base);
       else if (href.includes('wa.me')) trackEvent('whatsapp_click', base);
       else if (href.startsWith('/start-a-project')) trackEvent('project_cta_click', base);
       else if (href.startsWith('/cost-calculator')) trackEvent('calculator_cta_click', base);
+      else {
+        try {
+          const url = new URL(anchor.href, window.location.href);
+          if (url.origin !== window.location.origin) trackEvent('outbound_click', { ...base, link_domain: url.hostname.replace(/^www\./, '') });
+        } catch {}
+      }
     };
     document.addEventListener('click', onClick);
     return () => document.removeEventListener('click', onClick);
