@@ -291,7 +291,7 @@ button:disabled,.cta[aria-disabled=true]{opacity:.58}
 }
 
 /* Stage 8 Batch 2 — conversion improvements */
-.productHeroTrust{display:flex;align-items:center;flex-wrap:wrap;gap:9px 11px;margin-top:18px;color:#777b82;font-size:.68rem;line-height:1.4}
+.productHeroTrust{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:9px 11px;width:max-content;max-width:100%;margin:18px auto 0;color:#777b82;font-size:.68rem;line-height:1.4;text-align:center}
 .productHeroTrust i{width:3px;height:3px;border-radius:50%;background:#a8adb5;flex:0 0 3px}
 .estimateConversionBar{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(220px,.55fr);gap:clamp(28px,5vw,72px);align-items:end;margin:20px 0 22px;padding:clamp(28px,4vw,44px);border:1px solid #cfe0f4;border-radius:22px;background:linear-gradient(135deg,#f2f8ff 0%,#f9fcff 52%,#fff 100%);box-shadow:0 16px 45px #173c6609;position:relative;overflow:hidden}
 .estimateConversionBar:after{content:'';position:absolute;width:280px;height:280px;border-radius:50%;right:-130px;top:-160px;background:radial-gradient(circle,#a9d0ff55 0%,transparent 70%);pointer-events:none}
