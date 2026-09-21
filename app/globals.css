@@ -106,3 +106,27 @@
 .estimateDownloadGate .estimateDownloadPrivacy{font-size:.6875rem;line-height:1.65;color:#85858d;margin:16px 0 0}
 .estimateDownloadPrivacy a{text-decoration:underline;text-underline-offset:3px}
 @media(max-width:600px){.estimateDownloadGate{width:calc(100vw - 28px);border-radius:18px}.estimateDownloadGate>form{padding:26px 22px 24px}.estimateDownloadGate h3{font-size:2rem}.estimateDownloadGateHead{margin-bottom:20px}}
+
+/* Detailed cost breakdown inside Present Estimate. */
+.presentationCostBreakdown{max-width:1080px;margin:0 auto;width:100%}
+.presentationBreakdownIntro{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:18px}
+.presentationBreakdownIntro p{margin:0;color:#6b6b72;font-size:.8125rem}
+.presentationCostBreakdown dl{margin:0;border-top:1px solid #dedee5}
+.presentationCostBreakdown dl>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:start;padding:13px 0;border-bottom:1px solid #e5e5eb}
+.presentationCostBreakdown dt{font-size:.79rem;line-height:1.55;color:#5d5d65}
+.presentationCostBreakdown dd{margin:0;font-size:.82rem;white-space:nowrap;font-weight:500;color:#1e1e23}
+.presentationBreakdownTotal{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding-top:18px;margin-top:2px;border-top:1px solid #74747b}
+.presentationBreakdownTotal span{font-size:.9rem;font-weight:600;color:#66666e}
+.presentationBreakdownTotal strong{font-size:1.15rem;color:var(--blue);font-weight:600}
+.presentationSpecLinks{display:flex;flex-wrap:wrap;gap:14px 28px;margin-top:22px;padding-top:18px;border-top:1px solid #e1e1e7}
+.presentationSpecLinks a{font-size:.75rem;color:var(--blue);text-decoration:none}
+.presentationSpecLinks a:hover{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:700px){
+ .presentationBreakdownIntro{display:block;margin-bottom:12px}
+ .presentationBreakdownIntro p{margin-top:7px}
+ .presentationCostBreakdown dl>div{gap:14px;padding:11px 0}
+ .presentationCostBreakdown dt{font-size:.72rem}
+ .presentationCostBreakdown dd{font-size:.74rem}
+ .presentationBreakdownTotal strong{font-size:1rem}
+ .presentationSpecLinks{gap:12px 18px}
+}
