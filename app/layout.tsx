@@ -2,12 +2,13 @@ import './globals.css';
 import './premium.css';
 import './assurance.css';
 import './guides.css';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import Motion from '@/components/Motion';
 import PageScroll from '@/components/PageScroll';
 import Analytics from '@/components/Analytics';
 import { site } from '@/lib/site';
 const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+export const viewport: Viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#ffffff', colorScheme: 'light' };
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: 'Architect-Led Home Construction in Chennai | Bind Builds', template: '%s | Bind Builds' },
