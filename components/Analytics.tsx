@@ -56,6 +56,7 @@ export default function Analytics() {
       else if (href.includes('wa.me')) trackEvent('whatsapp_click', base);
       else if (href.startsWith('/start-a-project')) trackEvent('project_cta_click', base);
       else if (href.startsWith('/cost-calculator')) trackEvent('calculator_cta_click', base);
+      else if (href.startsWith('/review') || href.includes('g.page/r/')) trackEvent('review_click', base);
       else {
         try {
           const url = new URL(anchor.href, window.location.href);
