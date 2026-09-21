@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import { site, whatsappUrl } from '@/lib/site';
-import { trackEvent } from '@/lib/analytics';
+import { attributedPageUrl, trackEvent } from '@/lib/analytics';
 
 type Brief = {type:string;location:string;stage:string;area:string;budget:string;timeline:string;notes:string;name:string;phone:string;email:string;package:string};
 type Props = { source?: 'Website – Project Enquiry' | 'Website – Contact Form' };
@@ -19,6 +19,7 @@ export default function ProjectForm({source='Website – Project Enquiry'}:Props
 
  useEffect(()=>{const params=new URLSearchParams(window.location.search);const requestedType=params.get('type');const type=['New home','Demolition & rebuild','Rental / multi-family building','Commercial','Healthcare','Retail / hospitality','Interiors','Other'].includes(requestedType||'')?requestedType!:'New home';const tier=params.get('package');const area=params.get('area');const location=(params.get('location')||'').slice(0,120).replace(/[\u0000-\u001f]/g,'');const notes=(params.get('notes')||'').slice(0,2000).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,'');setForm(value=>({...value,type,location,package:['Essential','Elevate','Signature'].includes(tier||'')?tier!:'',area:area&&/^\d{1,6}$/.test(area)?area:'',notes}));},[]);
  useEffect(()=>{if(step>0||prepared)heading.current?.focus();},[step,prepared]);
+ useEffect(()=>{if(!prepared)trackEvent('project_form_step_view',{form_source:source,step_number:step+1,step_name:['project','priorities','contact'][step]});},[step,prepared,source]);
 
  const update=(key:keyof Brief,value:string)=>setForm(current=>({...current,[key]:value}));
  const brief=['Hello Bind Builds, I would like to discuss my project.','', 'Name: '+form.name,'Phone: '+form.phone,form.email?'Email: '+form.email:'','Project: '+form.type,'Location: '+form.location,'Stage: '+form.stage,'Approx. built-up area: '+(form.area?form.area+' sq.ft':'To be discussed'),'Budget: '+form.budget,'Preferred start: '+form.timeline,form.package?'Package interest: '+form.package:'',form.notes?'Requirements: '+form.notes:'','','Enquiry from the Bind Builds website.'].filter(Boolean).join('\n');
@@ -26,19 +27,21 @@ export default function ProjectForm({source='Website – Project Enquiry'}:Props
  const submit=async(event:FormEvent<HTMLFormElement>)=>{
   event.preventDefault();
   setSubmitStatus('');
-  if(step<2){setStep(step+1);return;}
+  if(step<2){trackEvent('project_form_step_complete',{form_source:source,step_number:step+1,step_name:['project','priorities'][step]});setStep(step+1);return;}
   setSubmitting(true);
   try{
    const response=await fetch('/api/website-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
     source,name:form.name,phone:form.phone,email:form.email,projectType:form.type,location:form.location,stage:form.stage,
     builtUpArea:form.area,budget:form.budget,timeline:form.timeline,requirements:form.notes,package:form.package,
-    pdfDownloaded:'No',pageUrl:window.location.href,website:''
+    pdfDownloaded:'No',pageUrl:attributedPageUrl(),website:''
    })});
    const result=await response.json().catch(()=>({ok:false}));
    if(!response.ok||!result.ok)throw new Error('Lead capture failed');
-   trackEvent('project_enquiry',{source,project_type:form.type,budget_band:form.budget,timeline:form.timeline});
+   trackEvent('project_form_step_complete',{form_source:source,step_number:3,step_name:'contact'});
+   trackEvent('project_enquiry',{source,project_type:form.type,budget_band:form.budget,timeline:form.timeline,package_interest:form.package||'none'});
    setPrepared(true);
   }catch{
+   trackEvent('project_enquiry_error',{form_source:source,step_number:3});
    setSubmitStatus('We could not send your enquiry right now. Please try again, or use WhatsApp below.');
   }finally{setSubmitting(false);}
  };
