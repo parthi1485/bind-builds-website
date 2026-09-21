@@ -238,3 +238,54 @@ html[data-motion=paused]{scroll-behavior:auto}html[data-motion=paused] *,html[da
  .formActions .cta{min-width:0}
  .sendActions{flex-direction:column}.sendActions .cta{width:100%;justify-content:center}
 }
+
+/* Stage 6 Batch 3 — final consistency and accessibility QA */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;color-scheme:light}
+body{overflow-x:clip}
+main:focus{outline:none}
+:target{scroll-margin-top:118px}
+a,button,summary,input,select,textarea{touch-action:manipulation}
+button:disabled,.cta[aria-disabled=true]{opacity:.58}
+[aria-busy=true]{cursor:progress}
+[aria-busy=true] button[type=submit]{cursor:progress}
+.navCta[aria-current=page]{box-shadow:0 0 0 3px #0071e31a}
+.mobileMenu a[aria-current=page]{color:#78baff}
+.mobileMenu a[aria-current=page] small{color:#78baff}
+.skipLink{border-radius:10px;box-shadow:0 10px 35px #0002}
+.skipLink:focus{top:12px}
+.fields input::placeholder,.fields textarea::placeholder,.calcFields input::placeholder{color:#8a8d94;opacity:1}
+.fields input:invalid:not(:placeholder-shown),.estimateDownloadFields input:invalid:not(:placeholder-shown){border-color:#c65d55}
+.fields input:valid:not(:placeholder-shown),.estimateDownloadFields input:valid:not(:placeholder-shown){border-color:#9db9a3}
+.calcStatus:not(:empty),.estimateDownloadGateStatus:not(:empty){padding:10px 12px;border-radius:10px;background:#f3f7fc}
+.calcStatus:empty,.estimateDownloadGateStatus:empty,.formSubmitStatus:empty{display:none}
+.simpleCategory button:focus-visible,.formSteps li[aria-current=step]>span{position:relative}
+.productSectionHeader h2,.guideIntro h2,.guideSection h2,.pageHero h1{text-wrap:balance}
+.productSectionHeader p,.guideIntro p,.guideClosing p{text-wrap:pretty}
+.calcPreviewAmount,.calcReportTotal strong,.simplePrice strong,.budgetResult output{font-variant-numeric:tabular-nums}
+@media(hover:hover) and (pointer:fine){
+ .footerLinks a,.footerContact a,.footerPrimaryLink{transition:color .18s,transform .18s}
+ .footerLinks a:hover,.footerContact a:hover,.footerPrimaryLink:hover{transform:translateX(2px)}
+}
+@media(max-width:760px){
+ button,.cta,.textButton,summary,.mobileProjectBar a{min-height:44px}
+ input,select,textarea{font-size:16px}
+ .mobileMenu nav>a{min-height:58px}
+ .footerSitemap{gap:28px 18px}
+ .footerSitemap .footerLinks{gap:10px}
+ .footerBottom{padding-bottom:calc(82px + env(safe-area-inset-bottom))}
+ body:has(.calculatorPage) .footerBottom,body:has(.enquirySection) .footerBottom{padding-bottom:24px}
+}
+@media(prefers-contrast:more){
+ :root{--muted:#505056;--line:#bfc1c7}
+ .pageHero>.eyebrow,.productEyebrow,.eyebrow{color:#45474c}
+ .cta,.simplePackageCard,.projectForm,.calcForm,.calcReportCard,.guideCards article,.serviceRates article{border-width:2px}
+ .nav,.navScrolled{border-bottom-color:#777}
+}
+@media(forced-colors:active){
+ .cta,.simplePackageCard,.projectForm,.calcForm,.calcReportCard,.calcExtra,.guideCards article{forced-color-adjust:auto}
+ .readingProgress,.durationTrack span,.metricTrack span,.comparisonTrack i{background:Highlight}
+ .sceneGlow,.pageHero:after{display:none}
+}
+@media print{
+ .mobileProjectBar,.skipLink{display:none!important}
+}
