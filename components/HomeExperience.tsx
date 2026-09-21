@@ -10,8 +10,8 @@ const modes = ['The plan', 'The structure', 'The home'];
 const modeCopy = ['Spaces shaped around your life.', 'Architecture and engineering, in sync.', 'Every detail, brought together.'];
 export function HomeHero() {
   const [mode, setMode] = useState(2);
-  return <section className="productHero">
-    <div className="productHeroCopy"><span className="productEyebrow">Bind Builds · Architect-led construction · Chennai</span><h1>Your home.<br /><span>Thought through.</span></h1><p>One team. From the first sketch to the final key.</p><div className="productHeroActions"><Link href="/start-a-project" className="cta primary">Plan my home <span aria-hidden="true">↗</span></Link><Link className="productTextLink" href="/cost-calculator">Explore my budget <span aria-hidden="true">→</span></Link></div></div>
+  return <section className="productHero" id="home-hero">
+    <div className="productHeroCopy"><span className="productEyebrow">Bind Builds · Architect-led construction · Chennai</span><h1>Your home.<br /><span>Thought through.</span></h1><p>One team. From the first sketch to the final key.</p><div className="productHeroActions"><Link href="/start-a-project" className="cta primary">Plan my home <span aria-hidden="true">↗</span></Link><Link className="productTextLink" href="/cost-calculator">Calculate my construction cost <span aria-hidden="true">→</span></Link></div><div className="productHeroTrust" aria-label="Project enquiry details"><span>~2 minute brief</span><i aria-hidden="true"/><span>No commitment</span><i aria-hidden="true"/><span>English or Tamil</span></div></div>
     <figure className={`architectureScene sceneMode${mode}`} aria-label="An illustrative home concept, shown as a plan, structure or finished home">
       <div className="sceneGlow" aria-hidden="true" />
       <svg viewBox="0 0 1000 610" aria-hidden="true" className="homeObject">
