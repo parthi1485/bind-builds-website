@@ -289,3 +289,36 @@ button:disabled,.cta[aria-disabled=true]{opacity:.58}
 @media print{
  .mobileProjectBar,.skipLink{display:none!important}
 }
+
+/* Stage 8 Batch 2 — conversion improvements */
+.productHeroTrust{display:flex;align-items:center;flex-wrap:wrap;gap:9px 11px;margin-top:18px;color:#777b82;font-size:.68rem;line-height:1.4}
+.productHeroTrust i{width:3px;height:3px;border-radius:50%;background:#a8adb5;flex:0 0 3px}
+.estimateConversionBar{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(220px,.55fr);gap:clamp(28px,5vw,72px);align-items:end;margin:20px 0 22px;padding:clamp(28px,4vw,44px);border:1px solid #cfe0f4;border-radius:22px;background:linear-gradient(135deg,#f2f8ff 0%,#f9fcff 52%,#fff 100%);box-shadow:0 16px 45px #173c6609;position:relative;overflow:hidden}
+.estimateConversionBar:after{content:'';position:absolute;width:280px;height:280px;border-radius:50%;right:-130px;top:-160px;background:radial-gradient(circle,#a9d0ff55 0%,transparent 70%);pointer-events:none}
+.estimateConversionBar>div{position:relative;z-index:1}
+.estimateConversionBar h3{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:500;letter-spacing:-.045em;line-height:1.08;margin:16px 0 14px;text-wrap:balance}
+.estimateConversionBar p{max-width:720px;font-size:.875rem;line-height:1.75;color:#626872;margin:0}
+.estimateConversionProof{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.estimateConversionProof span{padding:7px 10px;border-radius:100px;background:#fff;border:1px solid #dae7f5;color:#526275;font-size:.66rem}
+.estimateConversionActions{display:flex;flex-direction:column;align-items:stretch;gap:14px;min-width:0}
+.estimateConversionActions .cta{justify-content:center;box-shadow:0 10px 24px #0071e321}
+.estimateConversionActions .textLink{text-align:center;font-size:.76rem}
+.calcNextChecklist{list-style:none;padding:0;margin:22px 0 14px;display:grid;gap:0}
+.calcNextChecklist li{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid #dfe6ef}
+.calcNextChecklist li:first-child{border-top:1px solid #dfe6ef}
+.calcNextChecklist li>span{font-size:.625rem;color:#0071e3;padding-top:3px}
+.calcNextChecklist p{margin:0;font-size:.76rem;line-height:1.55;color:#656b73}
+.calcNextChecklist strong{display:block;color:#252930;font-size:.8rem;margin-bottom:2px}
+.formOptionalNote{padding:13px 14px;border:1px solid #dce8f5;border-radius:12px;background:#f6faff;color:#606873;font-size:.76rem;line-height:1.6;margin:0 0 4px}
+.formOptionalNote strong{color:#252b32;font-weight:550}
+.formSkipButton{margin-left:auto;color:#60666e}
+@media(max-width:760px){
+ .productHeroTrust{margin-top:15px;font-size:.64rem}
+ .estimateConversionBar{grid-template-columns:1fr;gap:24px;padding:26px 22px;border-radius:18px}
+ .estimateConversionBar h3{font-size:1.9rem}
+ .estimateConversionActions{gap:12px}
+ .estimateConversionActions .cta{width:100%}
+ .formActions .formSkipButton{order:2;width:100%;justify-content:center;margin-left:0}
+ .formActions .cta{order:1}
+ .formActions>span,.formActions>button:first-child{order:0}
+}
