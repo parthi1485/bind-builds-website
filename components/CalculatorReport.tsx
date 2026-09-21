@@ -6,7 +6,7 @@ import { calculateEmi, compactMoney, configuration, createVisualData, floorName,
 import ProposalVisuals, { EstimatePresentation, ComparisonDiagram, StageDiagram } from './ProposalVisuals';
 import { constructionMonths } from '@/lib/calculator-options';
 import type { PdfReportData } from '@/lib/estimate-pdf';
-import { trackEvent } from '@/lib/analytics';
+import { attributedPageUrl, trackEvent } from '@/lib/analytics';
 
 type Props = { input: EstimateInput; estimate: Estimate; packageIndex: number; headingRef: RefObject<HTMLHeadingElement | null>; onEdit: () => void };
 export default function CalculatorReport({ input, estimate, packageIndex, headingRef, onEdit }: Props) {
@@ -73,12 +73,13 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
   };
   const requestDownload = () => {
     setDownloadLeadStatus('');
+    trackEvent('pdf_gate_open',{package_name:selected.name,calculated_area:estimate.area,value:estimate.total,currency:'INR'});
     downloadGate.current?.showModal();
   };
   const unlockDownload = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const digits = downloadLead.phone.replace(/\D/g, '').length;
-    if (digits < 10 || digits > 15) { setDownloadLeadStatus('Please enter a valid phone number with 10–15 digits.'); return; }
+    if (digits < 10 || digits > 15) { trackEvent('pdf_gate_validation_error',{field:'phone'}); setDownloadLeadStatus('Please enter a valid phone number with 10–15 digits.'); return; }
 
     const parking = input.allowances.find(item => item.key === 'parking' && item.selected);
     const extras = estimate.selected
@@ -115,7 +116,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
           parkingPricing: parking ? (parking.detail || (parking.amount === null ? 'To be quoted' : money(parking.amount))) : '',
           additionalItems: extras,
           pdfDownloaded: 'Yes',
-          pageUrl: window.location.href,
+          pageUrl: attributedPageUrl(),
           website: ''
         }),
       });
@@ -127,6 +128,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
       downloadGate.current?.close();
       await download();
     } catch {
+      trackEvent('pdf_download_lead_error',{package_name:selected.name,calculated_area:estimate.area});
       setDownloading(false);
       setDownloadLeadStatus('We could not save your details. Please try again before downloading.');
     }
