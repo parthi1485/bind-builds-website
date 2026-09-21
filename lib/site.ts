@@ -13,6 +13,7 @@ export const site = {
     addressCountry: 'IN',
   },
   maps: 'https://www.google.com/maps/search/?api=1&query=No.%20B%2F28%2C%202nd%20Cross%20Street%2C%20Ramapuram%2C%20Chennai%20600089',
+  googleReview: 'https://g.page/r/CSwfjwSfCckhEBI/review',
   instagram: 'https://www.instagram.com/bindbuilds/',
   portfolio: 'https://www.bindarchitects.com/',
   studio: 'https://www.bindarchitects.com/studio',
