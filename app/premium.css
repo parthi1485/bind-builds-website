@@ -52,3 +52,14 @@ html[data-motion=paused]{scroll-behavior:auto}html[data-motion=paused] *,html[da
  .visualEstimateGrid{min-width:0;gap:26px}
  .visualEstimate{scroll-margin-top:90px}
 }
+
+/* Mobile presentation interaction hardening */
+@media(max-width:760px){
+  .segmentedControl button{min-height:44px}
+  .homeBudgetControl input[type=range]{min-height:44px;height:44px}
+  .estimatePresentation{height:calc(100dvh - 20px);max-height:calc(100dvh - 20px);overflow:hidden}
+  .presentationCanvas{height:100%;max-height:100%}
+  .presentationSlide{min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  .presentationCanvas header>button{min-height:44px}
+  .presentationCanvas>footer button{height:44px;min-width:44px}
+}
