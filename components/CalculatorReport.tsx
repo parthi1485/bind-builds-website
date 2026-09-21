@@ -140,12 +140,12 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     {estimate.unpriced.length > 0 && <div className="calcQuoteNotice"><strong>{estimate.unpriced.length} selected {estimate.unpriced.length === 1 ? 'extra still needs' : 'extras still need'} a quote</strong><p>{estimate.unpriced.map(item => item.label).join(' · ')}</p><span>These items are excluded from the subtotal above.</span></div>}
     <div className="calcReportToolbar"><EstimatePresentation data={visuals} breakdown={{rows,total:money(estimate.total)}}/><button className="cta" type="button" onClick={requestDownload} disabled={downloading}>{downloading ? 'Preparing PDF…' : 'Download estimate PDF'} <span aria-hidden="true">↓</span></button><button className="textButton" type="button" onClick={copy}>Copy estimate</button><button className="textButton" type="button" onClick={onEdit}>Edit my inputs</button></div>
     <dialog className="estimateDownloadGate" ref={downloadGate} aria-labelledby="estimate-download-title" onClick={event=>{if(event.target===event.currentTarget)downloadGate.current?.close();}}>
-      <form onSubmit={unlockDownload}>
+      <form onSubmit={unlockDownload} aria-busy={downloading}>
         <div className="estimateDownloadGateHead"><span className="eyebrow">PDF DOWNLOAD</span><button type="button" aria-label="Close" onClick={()=>downloadGate.current?.close()}>×</button></div>
         <h3 id="estimate-download-title">Download your<br/>estimate PDF.</h3>
         <p>Enter your contact details to continue.</p>
         <div className="estimateDownloadFields">
-          <label>Your name <span>required</span><input required minLength={2} maxLength={80} autoComplete="name" value={downloadLead.name} onChange={e=>setDownloadLead(v=>({...v,name:e.target.value}))}/></label>
+          <label>Your name <span>required</span><input autoFocus required minLength={2} maxLength={80} autoComplete="name" value={downloadLead.name} onChange={e=>setDownloadLead(v=>({...v,name:e.target.value}))}/></label>
           <label>Phone number <span>required</span><input required type="tel" inputMode="tel" autoComplete="tel" maxLength={22} pattern="[+0-9() -]{10,22}" value={downloadLead.phone} onChange={e=>setDownloadLead(v=>({...v,phone:e.target.value}))}/></label>
           <label>Email <span>required</span><input required type="email" autoComplete="email" maxLength={150} value={downloadLead.email} onChange={e=>setDownloadLead(v=>({...v,email:e.target.value}))}/></label>
         </div>
