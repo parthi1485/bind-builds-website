@@ -11,7 +11,7 @@ Updated: 21 September 2026
 - Direct Google review link: https://g.page/r/CSwfjwSfCckhEBI/review
 - Phone: +91 80727 01454
 - Email: bindbuilds@gmail.com
-- Address: No. B/28, 2nd Cross Street, Ramapuram, Chennai, Tamil Nadu 600089, India
+- Address: No. B/28, 2nd Cross Street, Kurinji Nagar, Ramapuram, Chennai, Tamil Nadu 600089, India
 - Service market: Chennai and nearby urban areas
 - Languages: English, Tamil
 - Founder / Principal Architect: Ar. Parthiban Moorthy
@@ -91,7 +91,7 @@ For every profile verify:
 - +91 80727 01454
 - bindbuilds@gmail.com
 - https://www.bindbuilds.com
-- No. B/28, 2nd Cross Street, Ramapuram, Chennai, Tamil Nadu 600089
+- No. B/28, 2nd Cross Street, Kurinji Nagar, Ramapuram, Chennai, Tamil Nadu 600089
 - same logo
 - same short positioning
 - no unsupported awards, certifications, completed-project counts or guarantees
