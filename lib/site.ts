@@ -12,6 +12,7 @@ export const site = {
     postalCode: '600089',
     addressCountry: 'IN',
   },
+  maps: 'https://www.google.com/maps/search/?api=1&query=No.%20B%2F28%2C%202nd%20Cross%20Street%2C%20Ramapuram%2C%20Chennai%20600089',
   instagram: 'https://www.instagram.com/bindbuilds/',
   portfolio: 'https://www.bindarchitects.com/',
   studio: 'https://www.bindarchitects.com/studio',
