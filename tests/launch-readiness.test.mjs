@@ -11,9 +11,11 @@ test('launch-critical routes are represented in the sitemap', () => {
   const routes=[
     "''",
     "'/about'",
+    "'/project-evidence'",
     "'/packages'",
     "'/cost-calculator'",
     "'/construction-cost-chennai'",
+    "'/construction-company-chennai'",
     "'/house-construction-chennai'",
     "'/turnkey-house-construction-chennai'",
     "'/building-plan-approval-chennai'",
@@ -26,7 +28,7 @@ test('launch-critical routes are represented in the sitemap', () => {
     "'/privacy'",
   ];
   for(const route of routes) assert.ok(sitemap.includes('['+route+','), 'Missing sitemap route '+route);
-  assert.equal((sitemap.match(/\['\//g)||[]).length+Number(sitemap.includes("['',1]")),15);
+  assert.equal((sitemap.match(/\['\//g)||[]).length+Number(sitemap.includes("['',1]")),routes.length);
 });
 
 test('robots, icon and social preview surfaces exist', () => {
