@@ -39,7 +39,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     'Please review the scope and prepare a project-specific proposal.',
   ].filter(Boolean).join('\n');
   const enquiryUrl = '/start-a-project?' + new URLSearchParams({ package: selected.name, area: String(estimate.area), notes }).toString();
-  const comparisons = packages.map(item => ({ name: item.name, rate: item.rate, base: estimate.area * item.rate }));
+  const comparisons = packages.map(item => ({ name: item.name, rate: item.rate, base: estimate.floorArea * item.rate + estimate.headroomCost }));
   const visuals = createVisualData(input, estimate, selected.name, comparisons);
   const assumptions = [
     'This is a planning estimate, not a quotation or construction agreement. Published package rates are starting rates and need confirmation for your design and site.',
