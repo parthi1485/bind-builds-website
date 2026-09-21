@@ -34,6 +34,7 @@ Useful dimensions:
 - `area_provided`
 - `lead_priority`
 - `lead_score`
+- `followup_mode`
 
 ### Construction calculator
 
@@ -156,3 +157,25 @@ Suggested handling:
 - Priority: call first and qualify site/scope/decision-makers before booking a site meeting.
 - Develop: ask the clearest missing scope/timing question, then move to qualification.
 - Nurture: send useful cost/process content and avoid heavy follow-up until intent changes.
+
+
+## Stage 8 Batch 6 follow-up intelligence
+
+The website now creates a concise internal follow-up plan for every submitted project enquiry using the existing Priority / Develop / Nurture classification.
+
+The plan is stored in the existing **Requirements** field and therefore flows into the current Google Sheet and notification email without a schema change. It contains:
+- recommended first channel;
+- suggested response timing;
+- qualification objective;
+- the first missing-information question to ask;
+- a personalised first WhatsApp draft using the visitor's name, project type and location;
+- nurture content guidance for early-stage leads.
+
+Follow-up patterns:
+- **Priority:** call first; if unanswered, use the acknowledgement WhatsApp. Qualify before scheduling a site meeting.
+- **Develop:** personalised WhatsApp first, ask one missing-information question, then call when the lead responds or timing becomes clearer.
+- **Nurture:** resource-first response; avoid repeated sales calls and resume a stronger conversation when site, timing or intent changes.
+
+The internal priority/score is never shown to the visitor.
+
+A new `SALES_FOLLOWUP_PLAYBOOK.md` documents the call objectives and guardrails. GA4 `project_enquiry` also records `followup_mode` so lead handling can later be compared with conversion quality.
