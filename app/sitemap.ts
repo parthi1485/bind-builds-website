@@ -12,6 +12,8 @@ export default function sitemap():MetadataRoute.Sitemap{
   ['/house-construction-chennai',.95],
   ['/turnkey-house-construction-chennai',.9],
   ['/building-plan-approval-chennai',.9],
+  ['/service-areas-chennai',.85],
+  ['/demolition-rebuild-house-chennai',.9],
   ['/process',.8],
   ['/faq',.85],
   ['/contact',.7],
