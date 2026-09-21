@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import { site, whatsappUrl } from '@/lib/site';
 import { attributedPageUrl, trackEvent } from '@/lib/analytics';
+import { classifyLead, leadHandoffLine } from '@/lib/lead-quality';
 
 type Brief = {type:string;location:string;stage:string;intent:string;area:string;budget:string;timeline:string;notes:string;name:string;phone:string;email:string;package:string};
 type Props = { source?: 'Website – Project Enquiry' | 'Website – Contact Form' };
@@ -23,7 +24,8 @@ export default function ProjectForm({source='Website – Project Enquiry'}:Props
 
  const update=(key:keyof Brief,value:string)=>setForm(current=>({...current,[key]:value}));
  const brief=['Hello Bind Builds, I would like to discuss my project.','', 'Name: '+form.name,'Phone: '+form.phone,form.email?'Email: '+form.email:'','Project: '+form.type,'Location: '+form.location,'Stage: '+form.stage,'Intent: '+form.intent,'Approx. built-up area: '+(form.area?form.area+' sq.ft':'To be discussed'),'Budget: '+form.budget,'Preferred start: '+form.timeline,form.package?'Package interest: '+form.package:'',form.notes?'Requirements: '+form.notes:'','','Enquiry from the Bind Builds website.'].filter(Boolean).join('\n');
- const requirements=[form.notes,'Lead intent: '+form.intent].filter(Boolean).join(' | ');
+ const leadQuality=classifyLead(form);
+ const requirements=[leadHandoffLine(form),'Lead intent: '+form.intent,form.notes].filter(Boolean).join(' | ');
 
  const submit=async(event:FormEvent<HTMLFormElement>)=>{
   event.preventDefault();
@@ -39,7 +41,7 @@ export default function ProjectForm({source='Website – Project Enquiry'}:Props
    const result=await response.json().catch(()=>({ok:false}));
    if(!response.ok||!result.ok)throw new Error('Lead capture failed');
    trackEvent('project_form_step_complete',{form_source:source,step_number:3,step_name:'contact'});
-   trackEvent('project_enquiry',{source,project_type:form.type,budget_band:form.budget,timeline:form.timeline,package_interest:form.package||'none',lead_intent:form.intent,site_stage:form.stage,area_provided:Boolean(form.area)});
+   trackEvent('project_enquiry',{source,project_type:form.type,budget_band:form.budget,timeline:form.timeline,package_interest:form.package||'none',lead_intent:form.intent,site_stage:form.stage,area_provided:Boolean(form.area),lead_priority:leadQuality.priority,lead_score:leadQuality.score});
    setPrepared(true);
   }catch{
    trackEvent('project_enquiry_error',{form_source:source,step_number:3});
