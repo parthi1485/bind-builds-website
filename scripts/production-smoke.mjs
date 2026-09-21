@@ -70,7 +70,10 @@ console.log('✓ robots.txt');
 const sitemap=await request('/sitemap.xml');
 assert.equal(sitemap.status,200);
 const sitemapText=await sitemap.text();
-for(const [path] of pages) assert.ok(sitemapText.includes('<loc>'+base+path+'</loc>'),`Sitemap missing ${path}`);
+for(const [path] of pages) {
+  const canonical=path==='/'?base:base+path;
+  assert.ok(sitemapText.includes('<loc>'+canonical+'</loc>')||sitemapText.includes('<loc>'+canonical+'/</loc>'),`Sitemap missing ${path}`);
+}
 console.log('✓ sitemap.xml includes all',pages.length,'public pages');
 
 const og=await request('/opengraph-image');
