@@ -130,3 +130,20 @@
  .presentationBreakdownTotal strong{font-size:1rem}
  .presentationSpecLinks{gap:12px 18px}
 }
+
+/* Mobile conversion QA hardening */
+@media(max-width:760px){
+  .menuButton{min-height:44px}
+  .mobileMenu{padding-bottom:calc(30px + env(safe-area-inset-bottom))}
+  .textButton{min-height:44px}
+  .calcPresets button{min-height:44px;padding-block:9px}
+  .extraEditor input,.extraEditor select{font-size:16px}
+  .estimateDownloadGate{max-height:calc(100dvh - 16px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  .estimateDownloadGateHead>button{width:44px;height:44px;min-width:44px}
+  .estimateDownloadGate>form{padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+  .packageProcessStepLink{min-height:44px;padding-inline:14px}
+}
+@media(max-width:600px){
+  .extraUnitFields{grid-template-columns:minmax(0,1fr)}
+  .estimateDownloadGate{width:calc(100vw - 20px)}
+}
