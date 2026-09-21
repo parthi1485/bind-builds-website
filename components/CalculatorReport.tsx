@@ -6,6 +6,7 @@ import { calculateEmi, compactMoney, configuration, createVisualData, floorName,
 import ProposalVisuals, { EstimatePresentation, ComparisonDiagram, StageDiagram } from './ProposalVisuals';
 import { constructionMonths } from '@/lib/calculator-options';
 import type { PdfReportData } from '@/lib/estimate-pdf';
+import { trackEvent } from '@/lib/analytics';
 
 type Props = { input: EstimateInput; estimate: Estimate; packageIndex: number; headingRef: RefObject<HTMLHeadingElement | null>; onEdit: () => void };
 export default function CalculatorReport({ input, estimate, packageIndex, headingRef, onEdit }: Props) {
@@ -65,6 +66,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
       const { createEstimatePdf } = await import('@/lib/estimate-pdf');
       const doc = createEstimatePdf(data);
       doc.save('bind-builds-construction-estimate.pdf');
+      trackEvent('estimate_pdf_download',{package_name:selected.name,calculated_area:estimate.area,value:estimate.total,currency:'INR'});
       setStatus('PDF prepared. Check your browser downloads.');
     } catch { setStatus('The PDF could not be created. Please try again, or copy your estimate.'); }
     finally { setDownloading(false); }
@@ -120,6 +122,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
       const result = await response.json().catch(() => ({ ok: false }));
       if (!response.ok || !result.ok) throw new Error('Lead capture failed');
 
+      trackEvent('pdf_download_lead',{package_name:selected.name,calculated_area:estimate.area,value:estimate.total,currency:'INR'});
       setDownloadLeadStatus('Details received. Preparing your PDF…');
       downloadGate.current?.close();
       await download();
