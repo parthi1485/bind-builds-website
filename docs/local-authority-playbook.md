@@ -7,6 +7,8 @@ Updated: 21 September 2026
 - Business name: Bind Builds
 - Positioning: Architect-led construction studio
 - Website: https://www.bindbuilds.com
+- Branded review link: https://www.bindbuilds.com/review
+- Direct Google review link: https://g.page/r/CSwfjwSfCckhEBI/review
 - Phone: +91 80727 01454
 - Email: bindbuilds@gmail.com
 - Address: No. B/28, 2nd Cross Street, Ramapuram, Chennai, Tamil Nadu 600089, India
@@ -38,20 +40,20 @@ Profile checklist:
 
 Google review requests must go only to real clients or people with a genuine experience. Do not offer discounts, gifts, cash or other incentives in exchange for reviews. Do not ask only happy clients while suppressing unhappy feedback.
 
-When the Google Business Profile is verified:
-1. Google Search → find Bind Builds → Read reviews → Get more reviews.
-2. Copy the direct review link and download the QR code.
-3. Store the direct review link in the business ops/CRM.
-4. Use the same link in completion emails, milestone thank-yous, receipts and WhatsApp follow-ups.
+Google review links now in use:
+- Client-facing branded link: https://www.bindbuilds.com/review
+- Direct Google link: https://g.page/r/CSwfjwSfCckhEBI/review
+
+Use the branded /review URL in completion emails, milestone thank-yous, receipts, QR codes and WhatsApp follow-ups. The redirect keeps future Google-link changes maintainable in one place.
 
 WhatsApp review request:
-"Hi {Name}, thank you for working with Bind Builds. If you have a moment, could you share an honest Google review about your experience with our design / coordination / construction process? Your feedback helps future homeowners understand what working with us is actually like. {GOOGLE_REVIEW_LINK}"
+"Hi {Name}, thank you for working with Bind Builds. If you have a moment, could you share an honest Google review about your experience with our design / coordination / construction process? Your feedback helps future homeowners understand what working with us is actually like. https://www.bindbuilds.com/review"
 
 Email subject:
 "Could you share your Bind Builds experience?"
 
 Email copy:
-"Hi {Name}, thank you for trusting Bind Builds with your project. If you are comfortable, we would appreciate an honest Google review about your experience — what worked well, what stood out, or what we could improve. Your feedback helps other homeowners make a better-informed decision. Review Bind Builds: {GOOGLE_REVIEW_LINK}"
+"Hi {Name}, thank you for trusting Bind Builds with your project. If you are comfortable, we would appreciate an honest Google review about your experience — what worked well, what stood out, or what we could improve. Your feedback helps other homeowners make a better-informed decision. Review Bind Builds: https://www.bindbuilds.com/review"
 
 Review reply rule:
 - Reply in the client's language when practical.
