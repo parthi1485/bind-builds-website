@@ -139,16 +139,16 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     <dialog className="estimateDownloadGate" ref={downloadGate} aria-labelledby="estimate-download-title" onClick={event=>{if(event.target===event.currentTarget)downloadGate.current?.close();}}>
       <form onSubmit={unlockDownload}>
         <div className="estimateDownloadGateHead"><span className="eyebrow">PDF DOWNLOAD</span><button type="button" aria-label="Close" onClick={()=>downloadGate.current?.close()}>×</button></div>
-        <h3 id="estimate-download-title">Sign up to download<br/>your estimate PDF.</h3>
-        <p>Your estimate stays free to view and present. We only ask for your contact details before the downloadable PDF.</p>
+        <h3 id="estimate-download-title">Download your<br/>estimate PDF.</h3>
+        <p>Enter your contact details to continue.</p>
         <div className="estimateDownloadFields">
           <label>Your name <span>required</span><input required minLength={2} maxLength={80} autoComplete="name" value={downloadLead.name} onChange={e=>setDownloadLead(v=>({...v,name:e.target.value}))}/></label>
           <label>Phone number <span>required</span><input required type="tel" inputMode="tel" autoComplete="tel" maxLength={22} pattern="[+0-9() -]{10,22}" value={downloadLead.phone} onChange={e=>setDownloadLead(v=>({...v,phone:e.target.value}))}/></label>
           <label>Email <span>required</span><input required type="email" autoComplete="email" maxLength={150} value={downloadLead.email} onChange={e=>setDownloadLead(v=>({...v,email:e.target.value}))}/></label>
         </div>
-        <button className="cta primary estimateDownloadSubmit" type="submit" disabled={downloading}>{downloading ? 'Saving details…' : 'Sign up & download PDF ↓'}</button>
+        <button className="cta primary estimateDownloadSubmit" type="submit" disabled={downloading}>{downloading ? 'Preparing PDF…' : 'Download PDF ↓'}</button>
         <p className="estimateDownloadGateStatus" role="status">{downloadLeadStatus}</p>
-        <p className="estimateDownloadPrivacy">No password or account setup. Your presentation remains available without signing up. Your details are sent to Bind Builds for project follow-up. <Link href="/privacy">Privacy details ↗</Link></p>
+        <p className="estimateDownloadPrivacy"><Link href="/privacy">Privacy details ↗</Link></p>
       </form>
     </dialog>
     <p role="status" className="calcStatus">{status}</p>
