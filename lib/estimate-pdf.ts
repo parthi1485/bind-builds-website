@@ -116,7 +116,7 @@ export function createEstimatePdf(data: PdfReportData) {
   row('Planning subtotal', data.total, true);
   paragraph('Extra quantities and rates are editable reference or custom planning allowances, not verified Bind Builds prices. An empty amount means the work is unpriced, not included for free.', 8);
   newPage('Compare. Plan. Refine.', 'Package comparison & budget allocation');
-  paragraph('The package comparison uses the same calculated area. It excludes additional items to keep the base construction costs comparable.');
+  paragraph('The package comparison uses the same floor area. Any currently priced headroom allowance is held constant across packages; other additional items are excluded.');
   const maximumBase = Math.max(...data.visuals.comparisons.map(item => item.base));
   data.visuals.comparisons.forEach(item => row(item.name + ' | ' + inr(item.rate) + ' / sq.ft', inr(item.base), item.name === data.packageName, item.base / maximumBase));
   section('Illustrative category allocation');
