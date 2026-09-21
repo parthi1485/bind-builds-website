@@ -4,12 +4,12 @@ export const site = {
   phone: '+91 80727 01454',
   telephone: '+918072701454',
   whatsapp: '918072701454',
-  email: 'bindarchitects@gmail.com',
+  email: 'bindbuilds@gmail.com',
   instagram: 'https://www.instagram.com/bindbuilds/',
   portfolio: 'https://www.bindarchitects.com/',
   studio: 'https://www.bindarchitects.com/studio',
 };
-// Public business contact published at https://www.bindarchitects.com/studio.
+// Public Bind Builds contact details used across the website.
 export function whatsappUrl(message = 'Hello Bind Builds, I am planning a construction project in Chennai. I would like to discuss my site, requirements and budget.') {
   return 'https://wa.me/' + site.whatsapp + '?text=' + encodeURIComponent(message);
 }
