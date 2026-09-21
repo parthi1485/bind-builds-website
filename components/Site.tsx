@@ -29,10 +29,10 @@ export function Nav() {
       if (event.key !== 'Tab') return;
       const links = menu.current?.querySelectorAll<HTMLElement>('a,button');
       if (!links?.length) return;
-      const first = toggle.current;
+      const first = links[0];
       const last = links[links.length - 1];
       if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     };
     const onResize = () => { if (window.innerWidth >= 1100) setOpen(false); };
     document.addEventListener('keydown', onKey);
@@ -44,10 +44,10 @@ export function Nav() {
     <header className={`nav ${scrolled || pathname !== '/' || open ? 'navScrolled' : ''}`}>
       <Link href="/" className="brandImage" aria-label="Bind Builds home"><Image src="/bind-builds-logo.svg" alt="Bind Builds" width={190} height={66} priority /></Link>
       <nav className="links" aria-label="Main navigation">{navigation.map(([name, href]) => href.startsWith('http') ? <a key={href} href={href} target="_blank" rel="noopener noreferrer">{name}</a> : <Link key={href} href={href} aria-current={pathname === href ? 'page' : undefined}>{name}</Link>)}</nav>
-      <Link className="cta navCta" href="/start-a-project">Plan my home <span aria-hidden="true">↗</span></Link>
+      <Link className="cta navCta" href="/start-a-project" aria-current={pathname === '/start-a-project' ? 'page' : undefined}>Plan my home <span aria-hidden="true">↗</span></Link>
       <button ref={toggle} type="button" className="menuButton" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>{open ? 'Close' : 'Menu'}<span aria-hidden="true">{open ? '−' : '+'}</span></button>
     </header>
-    <div ref={menu} id="mobile-menu" className="mobileMenu" hidden={!open}>
+    <div ref={menu} id="mobile-menu" className="mobileMenu" hidden={!open} aria-label="Site navigation">
       <p className="eyebrow">Architecture. Engineering. Construction.</p>
       <nav aria-label="Mobile navigation">{navigation.map(([name, href], i) => href.startsWith('http') ? <a href={href} key={href} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}><small>0{i + 1}</small><span>{name}</span><span aria-hidden="true">↗</span></a> : <Link href={href} key={href} onClick={() => setOpen(false)} aria-current={pathname === href ? 'page' : undefined}><small>0{i + 1}</small><span>{name}</span><span aria-hidden="true">↗</span></Link>)}</nav>
       <Link className="cta primary" href="/start-a-project" onClick={() => setOpen(false)}>Plan my home ↗</Link>
