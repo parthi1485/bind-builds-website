@@ -8,6 +8,7 @@ import CalculatorExtra from './CalculatorExtra';
 import ApprovalFeeExtra from './ApprovalFeeExtra';
 import { approvalAllowance, initialApproval } from '@/lib/approval-fees';
 import { constructionMonths, extraOptions, extraAmount, extraDescription, initialExtra, packageMetrics, type ExtraSelection } from '@/lib/calculator-options';
+import { trackEvent } from '@/lib/analytics';
 
 const stepNames = ['Your site', 'Your floors', 'Your package', 'Your extras'];
 const tankIncluded = ['2,000 L three-layer overhead tank', '3,000 L overhead tank with sensor', 'RCC overhead tank up to 6,000 L'];
@@ -50,6 +51,7 @@ export default function ConstructionCalculator() {
   const root = useRef<HTMLDivElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const firstRender = useRef(true);
+  const analyticsStarted = useRef(false);
   const selected = packages[tier];
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -83,7 +85,7 @@ export default function ConstructionCalculator() {
   const duration=constructionMonths(floorCount);
   const metrics=packageMetrics[tier];
   const headroomPlanningAmount = hasHeadroom ? extraAmount({selected:true,mode:headroomMode,quantity:headroom,rate:headroomRate,amount:headroomAmount,cars:0}) : 0;
-  const next = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); if (step === 3 && !estimate) return; setFurthest(Math.max(furthest, step + 1)); setStep(step + 1); };
+  const next = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); if (step === 3 && !estimate) return; if(step===0&&!analyticsStarted.current){analyticsStarted.current=true;trackEvent('calculator_started',{plot_area:Number(plot)||0});} if(step===3&&estimate){trackEvent('estimate_generated',{package_name:selected.name,floors:floorCount,calculated_area:estimate.area,value:estimate.total,currency:'INR'});} setFurthest(Math.max(furthest, step + 1)); setStep(step + 1); };
 
   return <div className="calculator" id="calculator" ref={root}>
     <ol className="calcProgress" aria-label="Estimate progress">{[...stepNames, 'Your estimate'].map((label, index) => <li key={label} aria-current={step === index ? 'step' : undefined} className={index < step ? 'complete' : ''}><button type="button" disabled={index > furthest || index === 4 && !estimate} onClick={() => setStep(index)}><span>{index < step ? '✓' : String(index + 1).padStart(2, '0')}</span><b>{label}</b></button></li>)}</ol>
