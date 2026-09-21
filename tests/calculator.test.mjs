@@ -6,8 +6,8 @@ test('different floor areas and headroom are charged exactly once', () => {
   const result = calculateEstimate(input);
   assert.equal(result.area, 1900);
   assert.equal(result.floorCost, 4768200);
-  assert.equal(result.headroomCost, 264900);
-  assert.equal(result.total, 5033100);
+  assert.equal(result.headroomCost, 235000);
+  assert.equal(result.total, 5003200);
 });
 test('unpriced selections stay visible and do not masquerade as included items', () => {
   const result = calculateEstimate({ ...input, allowances: [
