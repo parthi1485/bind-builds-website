@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { calculateEstimate, compactMoney, createVisualData, money, type VisualEstimate } from '@/lib/calculator';
 import { packages } from '@/lib/site';
+import { trackEvent } from '@/lib/analytics';
 
 type CostPart={label:string;value:number;color:string};
 function CostDistribution({parts,total,label,note}:{parts:CostPart[];total:number;label:string;note:string}) {
@@ -66,7 +67,7 @@ export function EstimatePresentation({data,example=false,breakdown}:{data:Visual
   categories:'Illustrative base-cost allocation, not a BOQ or agreed payment schedule.'
  };
  const maxSlide=slides.length-1;
- return <><button className="cta presentationButton" type="button" onClick={()=>{setSlide(0);setOpen(true);}}>Present estimate <span aria-hidden="true">↗</span></button><dialog className="estimatePresentation" ref={dialog} aria-label="Estimate presentation" onClose={()=>setOpen(false)} onClick={event=>{if(event.target===event.currentTarget)close();}} onKeyDown={event=>{if(event.key==='ArrowRight'){event.preventDefault();setSlide(value=>Math.min(maxSlide,value+1));}if(event.key==='ArrowLeft'){event.preventDefault();setSlide(value=>Math.max(0,value-1));}}}>
+ return <><button className="cta presentationButton" type="button" onClick={()=>{setSlide(0);trackEvent(example?'example_estimate_presented':'estimate_presented',{package_name:data.packageName,calculated_area:data.area,value:data.total,currency:'INR'});setOpen(true);}}>Present estimate <span aria-hidden="true">↗</span></button><dialog className="estimatePresentation" ref={dialog} aria-label="Estimate presentation" onClose={()=>setOpen(false)} onClick={event=>{if(event.target===event.currentTarget)close();}} onKeyDown={event=>{if(event.key==='ArrowRight'){event.preventDefault();setSlide(value=>Math.min(maxSlide,value+1));}if(event.key==='ArrowLeft'){event.preventDefault();setSlide(value=>Math.max(0,value-1));}}}>
    {open&&<div className="presentationCanvas"><header><span>BIND BUILDS <small>{example?'Illustrative example':'Planning estimate'}</small></span><button type="button" onClick={close} aria-label="Close presentation">Close <span aria-hidden="true">×</span></button></header><div className="presentationSlide" key={current}><span className="productEyebrow">{data.packageName} · {data.configuration} · {data.area.toLocaleString('en-IN')} sq.ft</span><h2 ref={title} tabIndex={-1}>{titles[current]}</h2>
     {current==='overview'?<BudgetComposition data={data}/>:
      current==='breakdown'&&breakdown?<PresentationCostBreakdown breakdown={breakdown}/>:
