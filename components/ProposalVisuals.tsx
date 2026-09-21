@@ -31,7 +31,17 @@ export function StageDiagram({data}:{data:VisualEstimate}){
 export default function ProposalVisuals({data}:{data:VisualEstimate}){
  return <section className="visualEstimate"><div className="visualEstimateHeading"><span className="productEyebrow">Your estimate, at a glance</span><h3>Every number.<br/><span>A clearer picture.</span></h3></div><div className="visualEstimateGrid"><BudgetComposition data={data}/><AreaDiagram data={data}/></div></section>;
 }
-export function EstimatePresentation({data,example=false}:{data:VisualEstimate;example?:boolean}){
+type PresentationBreakdown = { rows:[string,string][]; total:string };
+
+function PresentationCostBreakdown({breakdown}:{breakdown:PresentationBreakdown}) {
+ return <section className="presentationCostBreakdown">
+  <div className="presentationBreakdownIntro"><span className="productEyebrow">Where the number comes from</span><p>Base construction plus your selected additional items.</p></div>
+  <dl>{breakdown.rows.map(([label,value],index)=><div key={label+'-'+index}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+  <div className="presentationBreakdownTotal"><span>Planning subtotal</span><strong>{breakdown.total}</strong></div>
+ </section>;
+}
+
+export function EstimatePresentation({data,example=false,breakdown}:{data:VisualEstimate;example?:boolean;breakdown?:PresentationBreakdown}){
  const [open,setOpen]=useState(false);
  const [slide,setSlide]=useState(0);
  const dialog=useRef<HTMLDialogElement>(null);
@@ -39,11 +49,33 @@ export function EstimatePresentation({data,example=false}:{data:VisualEstimate;e
  useEffect(()=>{if(open&&!dialog.current?.open)dialog.current?.showModal();},[open]);
  useEffect(()=>{if(open)title.current?.focus({preventScroll:true});},[open,slide]);
  const close=()=>{dialog.current?.close();setOpen(false);};
- const titles=['Your home. In numbers.','The specification. In perspective.','Your build. By category.'];
- return <><button className="cta presentationButton" type="button" onClick={()=>{setSlide(0);setOpen(true);}}>Present estimate <span aria-hidden="true">↗</span></button><dialog className="estimatePresentation" ref={dialog} aria-label="Estimate presentation" onClose={()=>setOpen(false)} onClick={event=>{if(event.target===event.currentTarget)close();}} onKeyDown={event=>{if(event.key==='ArrowRight'){event.preventDefault();setSlide(value=>Math.min(2,value+1));}if(event.key==='ArrowLeft'){event.preventDefault();setSlide(value=>Math.max(0,value-1));}}}>
-   {open&&<div className="presentationCanvas"><header><span>BIND BUILDS <small>{example?'Illustrative example':'Planning estimate'}</small></span><button type="button" onClick={close} aria-label="Close presentation">Close <span aria-hidden="true">×</span></button></header><div className="presentationSlide" key={slide}><span className="productEyebrow">{data.packageName} · {data.configuration} · {data.area.toLocaleString('en-IN')} sq.ft</span><h2 ref={title} tabIndex={-1}>{titles[slide]}</h2>{slide===0?<BudgetComposition data={data}/>:slide===1?<ComparisonDiagram data={data}/>:<StageDiagram data={data}/>}</div><footer><p>{slide===2?'Illustrative base-cost allocation, not a BOQ or agreed payment schedule.':slide===1?'Base construction comparison. Additional items, taxes and approvals are excluded.':'Planning estimate. Taxes, unpriced approval charges and other exclusions are additional.'}</p><div><button type="button" disabled={slide===0} onClick={()=>setSlide(slide-1)} aria-label="Previous slide">←</button><span>{slide+1} / 3</span><button type="button" disabled={slide===2} onClick={()=>setSlide(slide+1)} aria-label="Next slide">→</button></div></footer></div>}
+ const slides=breakdown
+  ? ['overview','breakdown','comparison','categories'] as const
+  : ['overview','comparison','categories'] as const;
+ const current=slides[slide];
+ const titles:Record<(typeof slides)[number],string>={
+  overview:'Your home. In numbers.',
+  breakdown:'Your cost breakdown.',
+  comparison:'The specification. In perspective.',
+  categories:'Your build. By category.'
+ };
+ const footers:Record<(typeof slides)[number],string>={
+  overview:'Planning estimate. Taxes, unpriced approval charges and other exclusions are additional.',
+  breakdown:'Selected priced items are included. Items marked to be quoted are excluded from the subtotal.',
+  comparison:'Base construction comparison. Additional items, taxes and approvals are excluded.',
+  categories:'Illustrative base-cost allocation, not a BOQ or agreed payment schedule.'
+ };
+ const maxSlide=slides.length-1;
+ return <><button className="cta presentationButton" type="button" onClick={()=>{setSlide(0);setOpen(true);}}>Present estimate <span aria-hidden="true">↗</span></button><dialog className="estimatePresentation" ref={dialog} aria-label="Estimate presentation" onClose={()=>setOpen(false)} onClick={event=>{if(event.target===event.currentTarget)close();}} onKeyDown={event=>{if(event.key==='ArrowRight'){event.preventDefault();setSlide(value=>Math.min(maxSlide,value+1));}if(event.key==='ArrowLeft'){event.preventDefault();setSlide(value=>Math.max(0,value-1));}}}>
+   {open&&<div className="presentationCanvas"><header><span>BIND BUILDS <small>{example?'Illustrative example':'Planning estimate'}</small></span><button type="button" onClick={close} aria-label="Close presentation">Close <span aria-hidden="true">×</span></button></header><div className="presentationSlide" key={current}><span className="productEyebrow">{data.packageName} · {data.configuration} · {data.area.toLocaleString('en-IN')} sq.ft</span><h2 ref={title} tabIndex={-1}>{titles[current]}</h2>
+    {current==='overview'?<BudgetComposition data={data}/>:
+     current==='breakdown'&&breakdown?<PresentationCostBreakdown breakdown={breakdown}/>:
+     current==='comparison'?<><ComparisonDiagram data={data}/><div className="presentationSpecLinks">{packages.map(item=><Link key={item.key} href={`/packages#${item.key}`} target="_blank" rel="noopener noreferrer">{item.name} specification ↗</Link>)}</div></>:
+     <StageDiagram data={data}/>}
+   </div><footer><p>{footers[current]}</p><div><button type="button" disabled={slide===0} onClick={()=>setSlide(slide-1)} aria-label="Previous slide">←</button><span>{slide+1} / {slides.length}</span><button type="button" disabled={slide===maxSlide} onClick={()=>setSlide(slide+1)} aria-label="Next slide">→</button></div></footer></div>}
  </dialog></>;
 }
+
 const exampleInput={plot:1400,floors:[1000,1000],rate:packages[1].rate,headroom:0,reservePercent:0,allowances:[{key:'example',label:'Illustrative extras',selected:true,amount:250000}]};
 const example=calculateEstimate(exampleInput);
 const exampleData=createVisualData(exampleInput,example,'Elevate',packages.map(item=>({name:item.name,rate:item.rate,base:example.area*item.rate})));
