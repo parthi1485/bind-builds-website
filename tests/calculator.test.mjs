@@ -18,7 +18,7 @@ test('unpriced selections stay visible and do not masquerade as included items',
   assert.equal(result.allowanceTotal, 125000);
   assert.equal(result.unpriced.length, 1);
   assert.equal(result.reserve, 0);
-  assert.equal(result.total, 5158100);
+  assert.equal(result.total, 5128200);
 });
 test('invalid and nonfinite inputs cannot produce an estimate', () => {
   for (const change of [{floors: []}, {floors: [NaN]}, {floors: [-1]}, {floors: [1.2]}, {plot: 0}, {rate: Infinity}, {headroom: -1}, {reservePercent: 26}, {floors: [1,1,1,1,1]}]) assert.throws(() => calculateEstimate({ ...input, ...change }), RangeError);
@@ -39,11 +39,11 @@ test('report diagrams reconcile area and budget without pricing unknown extras',
   ]};
   const estimate = calculateEstimate(scenario);
   const visual = createVisualData(scenario, estimate, 'Elevate', [{name:'Elevate',rate:2649,base:estimate.base}]);
-  assert.equal(visual.parts.reduce((sum, item) => sum + item.value, 0), 5158100);
+  assert.equal(visual.parts.reduce((sum, item) => sum + item.value, 0), 5128200);
   assert.equal(visual.floors.reduce((sum, item) => sum + item.area, 0), 1900);
   assert.equal(visual.allocation.reduce((sum, item) => sum + item.amount, 0), estimate.base);
   assert.equal(visual.unpricedCount, 1);
-  assert.equal(visual.comparisons[0].base, 5033100);
+  assert.equal(visual.comparisons[0].base, 5003200);
 });
 test('EMI follows amortization and handles zero interest', () => {
   assert.ok(Math.abs(calculateEmi(5000000, 8.5, 20).monthly - 43391.16) < 0.01);
@@ -62,7 +62,7 @@ test('car presets charge parking once as an extra, not again at the package rate
   assert.equal(amount,cars*200*2350);
   const result=calculateEstimate({...input,allowances:[{key:'parking',label:'Parking',selected:true,amount}]});
   assert.equal(result.area,1900);
-  assert.equal(result.total,5033100+amount);
+  assert.equal(result.total,5003200+amount);
  }
  assert.throws(()=>parkingArea(0),RangeError);
 });
@@ -94,4 +94,31 @@ test('reference categories reconcile with additional items and no reserve',()=>{
  assert.equal(visual.extras.reduce((sum,x)=>sum+x.value,0),125000);
  assert.equal(visual.parts.reduce((sum,x)=>sum+x.value,0),result.total);
  assert.equal(visual.unpricedCount,1);
+});
+
+test('headroom pricing modes stay distinct and decimal areas are accepted',()=> {
+ const unit=calculateEstimate({...input,headroom:200.5,headroomRate:2350,headroomMode:'unit'});
+ assert.equal(unit.headroomCost,471175);
+ assert.equal(unit.area,2000.5);
+ const custom=calculateEstimate({...input,headroom:200,headroomRate:3000,headroomMode:'unit'});
+ assert.equal(custom.headroomCost,600000);
+ const lump=calculateEstimate({...input,headroom:200,headroomMode:'lump',headroomAmount:500000});
+ assert.equal(lump.headroomCost,500000);
+ const quote=calculateEstimate({...input,headroom:200,headroomMode:'unpriced'});
+ assert.equal(quote.headroomCost,0);
+ assert.equal(quote.unpriced.at(-1).key,'headroom');
+ assert.throws(()=>calculateEstimate({...input,headroom:10000.01}),RangeError);
+});
+
+test('package comparison can keep headroom allowance fixed while package floor rate changes',()=> {
+ const scenario={...input,headroom:200,headroomRate:2350,headroomMode:'unit'};
+ const estimate=calculateEstimate(scenario);
+ const comparisons=[
+  {name:'Essential',rate:2399,base:estimate.floorArea*2399+estimate.headroomCost},
+  {name:'Elevate',rate:2649,base:estimate.floorArea*2649+estimate.headroomCost},
+  {name:'Signature',rate:3199,base:estimate.floorArea*3199+estimate.headroomCost},
+ ];
+ assert.equal(comparisons[1].base,estimate.base);
+ assert.equal(comparisons[1].base-comparisons[0].base,estimate.floorArea*(2649-2399));
+ assert.equal(comparisons[2].base-comparisons[1].base,estimate.floorArea*(3199-2649));
 });
