@@ -206,21 +206,21 @@ export function BrandEcosystem() {
     <div className="ecosystemIntro reveal">
       <div>
         <span className="productEyebrow">Project ecosystem</span>
-        <h2>Trusted vendors.<br/><span>Banking partners.</span></h2>
+        <h2>Material brands.<br/><span>Home-loan lenders.</span></h2>
       </div>
       <p>Reference brands and financial institutions commonly considered while planning, specifying and delivering residential construction projects.</p>
     </div>
 
     <div className="ecosystemBlock reveal">
-      <div className="ecosystemLabel"><span>01</span><div><strong>Trusted vendors</strong><small>Materials, fittings, paint, piping, steel, switches, tiles, tanks and sanitaryware considered across project specifications.</small></div></div>
+      <div className="ecosystemLabel"><span>01</span><div><strong>Reference material brands</strong><small>Materials, fittings, paint, piping, steel, switches, tiles, tanks and sanitaryware commonly considered while developing project specifications.</small></div></div>
       <Marquee items={materialBrands}/>
     </div>
 
     <div className="ecosystemBlock reveal">
-      <div className="ecosystemLabel"><span>02</span><div><strong>Banking partners</strong><small>Major lenders homeowners may explore for construction finance and home-loan support.</small></div></div>
+      <div className="ecosystemLabel"><span>02</span><div><strong>Home-loan lenders</strong><small>Major financial institutions homeowners may independently explore for construction finance and home-loan support.</small></div></div>
       <Marquee items={lenders} reverse/>
     </div>
 
-    <p className="ecosystemDisclaimer">Brand and lender selection depend on the final specification, project scope, local availability, client approval, eligibility and lender terms. Displayed names are reference ecosystems and do not imply an exclusive partnership or endorsement.</p>
+    <p className="ecosystemDisclaimer">Brand and lender selection depend on the final specification, project scope, local availability, client approval, eligibility and lender terms. Displayed names are references only and do not imply a partnership, endorsement or financing arrangement with Bind Builds.</p>
   </section>;
 }
