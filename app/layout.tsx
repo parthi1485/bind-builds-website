@@ -7,6 +7,7 @@ import Motion from '@/components/Motion';
 import PageScroll from '@/components/PageScroll';
 import Analytics from '@/components/Analytics';
 import { site } from '@/lib/site';
+const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: 'Architect-Led Home Construction in Chennai | Bind Builds', template: '%s | Bind Builds' },
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
   openGraph: { type: 'website', url: site.url, locale: 'en_IN', siteName: 'Bind Builds', title: 'Bind Builds — Your home. Thought through.', description: 'Architect-led home construction in Chennai. Design first. Build with clarity.' },
   twitter: { card: 'summary_large_image', title: 'Bind Builds — Your home. Thought through.', description: 'Architect-led home construction in Chennai. Design first. Build with clarity.', images: ['/opengraph-image'] },
+  verification: googleSiteVerification ? { google: googleSiteVerification } : undefined,
 };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return <html lang="en"><body><PageScroll /><Motion /><Analytics />{children}</body></html>;
