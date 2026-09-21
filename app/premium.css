@@ -108,3 +108,133 @@ html[data-motion=paused]{scroll-behavior:auto}html[data-motion=paused] *,html[da
  .footer{grid-template-columns:1fr;gap:36px;padding-top:55px}.footerIdentity{max-width:none}.footerSitemap{grid-template-columns:1fr 1fr;gap:24px}.footerContact{grid-column:auto;display:flex;gap:12px}.footerBottom{margin-top:2px}
  .homeGuideEditorial{grid-template-columns:1fr}.homeGuideEditorial>a:nth-child(n){grid-column:1;min-height:245px;padding:26px}.homeGuideEditorial>a:nth-child(n) h3{font-size:1.45rem;margin-top:36px}.homeGuideEditorial>a:after{right:20px;top:20px}
 }
+
+/* Stage 6 Batch 2 — conversion surfaces */
+/* Calculator */
+.calculatorShell{padding-top:8px}
+.calcProgress{position:relative;background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:0 18px;overflow:hidden;box-shadow:0 10px 32px #17263a08}
+.calcProgress li[aria-current=step]:after{height:2px;bottom:0;border-radius:4px}
+.calcProgress button{padding:17px 2px;transition:color .2s,transform .2s}
+.calcProgress button:not(:disabled):hover{color:#0071e3;transform:translateY(-1px)}
+.calcProgress button>span{transition:background .22s,border-color .22s,color .22s,transform .22s}
+.calcProgress .complete button:hover>span,.calcProgress [aria-current=step] button>span{transform:scale(1.05)}
+.calcLayout{gap:22px}
+.calcForm{border-color:#e4e6ea;box-shadow:0 18px 55px #19293b08}
+.calcStepContent{min-height:520px}
+.calcStepContent>.eyebrow{display:inline-flex;align-items:center;min-height:27px;padding:5px 10px;border:1px solid #e3e7ec;border-radius:100px;background:#f8fafc}
+.calcForm h2{text-wrap:balance;margin-top:18px}
+.calcIntro{line-height:1.75}
+.calcFields input[type=number],.calcPlanning input,.extraEditor select{transition:border-color .18s,box-shadow .18s,background .18s}
+.calcFields input[type=number]:focus,.calcPlanning input:focus,.extraEditor select:focus{outline:0;border-color:#0071e3;box-shadow:0 0 0 4px #0071e315;background:#fff}
+.calcPresets button{border-color:#dfe3e9;background:#fff;transition:background .2s,border-color .2s,color .2s,transform .2s}
+.calcPresets button:hover{transform:translateY(-1px);border-color:#b9d4f2;color:#006bd6}
+.calcPresets button[aria-pressed=true]{background:#eef6ff;border-color:#8fc0f3;color:#0068d1}
+.floorChoices label>span,.calcPackageChoices label>span{transition:border-color .22s,background .22s,box-shadow .22s,transform .22s}
+.floorChoices label:hover>span,.calcPackageChoices label:hover>span{transform:translateY(-2px);border-color:#b8cce4;box-shadow:0 8px 25px #18324e09}
+.floorChoices input:checked+span,.calcPackageChoices input:checked+span{border-color:#78afea;background:#f2f8ff;box-shadow:0 0 0 3px #0071e30a}
+.calcExtra{background:#fff;transition:border-color .2s,background .2s,box-shadow .2s}
+.calcExtra:hover{border-color:#cfd9e7}
+.calcExtra.selected{box-shadow:0 8px 24px #31577b09}
+.extraEditor{animation:detailOpen .28s ease-out}
+.extraTotal{border-radius:12px}
+.calcActions{position:relative;padding-top:22px;border-top:1px solid #eceef1;margin-top:30px}
+.calcActions .cta{min-width:170px;justify-content:center;box-shadow:0 8px 20px #0071e318}
+.calcActions .cta:hover{box-shadow:0 11px 28px #0071e326}
+.calcPreview{position:sticky;top:96px;border:1px solid #232a37;box-shadow:0 22px 60px #0a12201c;overflow:hidden}
+.calcPreview:before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#ffffff08,transparent 38%);pointer-events:none}
+.calcLive{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border:1px solid #ffffff17;border-radius:100px;background:#ffffff08}
+.calcPreviewAmount{letter-spacing:-.055em}
+.calcReportHero{box-shadow:0 22px 60px #0a12201a}
+.calcReportCard{box-shadow:0 10px 30px #16283d07}
+.calcReportToolbar{padding:15px 0 5px}
+.calcReportToolbar>.cta{box-shadow:0 8px 20px #15283d0c}
+.calcNextStep{background:linear-gradient(145deg,#f0f6ff,#f8fbff);border-color:#dce9f8}
+.calcNextStep .cta{box-shadow:0 8px 22px #0071e31a}
+
+/* PDF gate */
+.estimateDownloadGate{border:1px solid #ffffff44}
+.estimateDownloadGate>form{position:relative;overflow:hidden}
+.estimateDownloadGate>form:before{content:'';position:absolute;width:230px;height:230px;border-radius:50%;right:-115px;top:-125px;background:radial-gradient(circle,#dcecff,transparent 68%);pointer-events:none}
+.estimateDownloadGateHead,.estimateDownloadGate h3,.estimateDownloadGate>form>p,.estimateDownloadFields,.estimateDownloadSubmit,.estimateDownloadGateStatus,.estimateDownloadPrivacy{position:relative;z-index:1}
+.estimateDownloadFields input{transition:border-color .18s,box-shadow .18s,background .18s}
+.estimateDownloadGateHead>button{transition:transform .2s,background .2s}
+.estimateDownloadGateHead>button:hover{transform:rotate(8deg);background:#eef3f9}
+
+/* Packages */
+.simplePackageGrid{gap:18px;align-items:start}
+.simplePackageCard{position:relative;overflow:hidden;border:1px solid #e5e7eb;background:#fff;box-shadow:0 10px 34px #17263a06;transition:transform .3s cubic-bezier(.2,.75,.2,1),box-shadow .3s,border-color .3s}
+.simplePackageCard:hover{transform:translateY(-4px);box-shadow:0 20px 55px #17263a0d;border-color:#d7dde6}
+.simplePackageCard.featured{background:linear-gradient(155deg,#f2f7ff 0%,#fbfdff 65%);border-color:#bfd8f5;box-shadow:0 18px 50px #1765b70e}
+.simplePackageCard.featured:before{content:'Balanced specification';position:absolute;right:18px;top:18px;padding:7px 10px;border-radius:100px;background:#0071e3;color:#fff;font-size:.56rem;letter-spacing:.035em;font-weight:600}
+.simplePackageHead{padding-bottom:28px}
+.simplePackageHead>.eyebrow{padding-right:120px}
+.simplePrice strong{font-variant-numeric:tabular-nums}
+.simpleCategory button{transition:color .2s,padding-left .2s}
+.simpleCategory button:hover{padding-left:5px}
+.simpleCategory button b{width:30px;height:30px;display:grid;place-items:center;border-radius:50%;background:#f1f3f6;transition:transform .22s,background .22s}
+.simpleCategory button[aria-expanded=true] b{background:#e8f3ff;transform:rotate(180deg)}
+.simpleCategoryPanel ul{animation:detailOpen .28s ease-out}
+.packageSelect{justify-content:center;margin-top:28px}
+.packageProcess{border-color:#e6e8ec}
+.packageProcessNode>span{transition:transform .22s,box-shadow .22s}
+.packageProcessTrack>li:hover .packageProcessNode>span{transform:translateY(-2px);box-shadow:0 0 0 7px #fff,0 8px 20px #18324e12}
+.budgetPlanner{border:1px solid #e1e4e8;background:linear-gradient(145deg,#f5f6f8,#eef2f7);box-shadow:0 14px 45px #17263a08}
+.budgetResult{position:relative}
+.budgetResult output{font-variant-numeric:tabular-nums}
+
+/* Lead form */
+.enquiryLayout{gap:clamp(42px,7vw,100px)}
+.enquiryAside{position:sticky;top:115px}
+.enquiryAside ol{list-style:none;padding:0;counter-reset:enquiry}
+.enquiryAside li{counter-increment:enquiry;display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start;padding:13px 0;margin:0;border-bottom:1px solid #e7e8eb}
+.enquiryAside li:before{content:'0' counter(enquiry);font-size:.625rem;color:#0071e3;padding-top:4px}
+.projectForm{border-color:#e3e5e9;box-shadow:0 20px 65px #17263a09}
+.formSteps{position:relative;border-bottom:0;padding-bottom:0;margin-bottom:44px}
+.formSteps:before{content:'';position:absolute;left:14px;right:14px;top:14px;height:1px;background:#e0e4e9;z-index:0}
+.formSteps li{position:relative;z-index:1;background:#fff;padding-right:8px;min-width:92px}
+.formSteps li>span{background:#fff;transition:background .2s,border-color .2s,color .2s,transform .2s}
+.formSteps li.complete{color:#4b6179}
+.formSteps li.complete>span{background:#e9f4ff;border-color:#9ac6f4;color:#006bd6}
+.formSteps li[aria-current=step]>span{box-shadow:0 0 0 5px #eaf4ff;transform:scale(1.04)}
+.fields input,.fields select,.fields textarea{transition:border-color .18s,box-shadow .18s,background .18s}
+.fields input:focus,.fields select:focus,.fields textarea:focus{outline:0;border-color:#0071e3;box-shadow:0 0 0 4px #0071e315;background:#fff}
+.formActions{padding-top:22px;border-top:1px solid #eceef1}
+.formActions .cta{min-width:150px;justify-content:center;box-shadow:0 8px 20px #0071e316}
+.preparedBrief{border-color:#dbe8f7;background:linear-gradient(145deg,#fff,#f8fbff)}
+.briefPreview{border-radius:14px;background:#fff}
+.sendActions{display:flex;flex-wrap:wrap}
+.formSubmitStatus:not(:empty){margin-top:18px;padding:12px 14px;border-radius:10px;background:#fff4f2;color:#8d2c25}
+
+/* Micro-interaction accessibility */
+.cta:focus-visible,.textButton:focus-visible,.simpleCategory button:focus-visible,.calcProgress button:focus-visible,.calcPresets button:focus-visible{outline:3px solid #0071e333;outline-offset:3px}
+
+@media(max-width:1099px){
+ .calcPreview{position:relative;top:auto}
+ .enquiryAside{position:relative;top:auto}
+ .simplePackageCard.featured:before{right:14px;top:14px}
+}
+@media(max-width:760px){
+ .calcProgress{padding:0 10px;gap:7px;border-radius:14px;overflow-x:auto;scrollbar-width:none}
+ .calcProgress::-webkit-scrollbar{display:none}
+ .calcProgress li{min-width:68px}.calcProgress button{justify-content:center;flex-direction:column;gap:6px;padding:12px 2px;min-height:70px;text-align:center}.calcProgress button>b{font-size:.625rem}
+ .calcStepContent{min-height:0}
+ .calcForm{box-shadow:0 10px 35px #19293b07}
+ .calcActions{position:sticky;bottom:0;z-index:12;margin:28px -22px -22px;padding:14px 22px calc(14px + env(safe-area-inset-bottom));background:#fffffff2;backdrop-filter:blur(16px);border-top:1px solid #e3e6ea}
+ .calcActions .cta{min-width:0;flex:1}
+ .calcActions .textButton{min-height:44px}
+ .calcPreview{box-shadow:0 14px 38px #0a122018}
+ .simplePackageCard{padding:28px 22px}
+ .simplePackageCard.featured:before{font-size:.5rem;padding:6px 8px}
+ .simplePackageHead>.eyebrow{padding-right:108px}
+ .packageProcessTrack>li:hover .packageProcessNode>span{transform:none}
+ .enquiryLayout{gap:32px}
+ .enquiryAside{padding-bottom:4px}
+ .projectForm{padding:24px 20px}
+ .formSteps{gap:8px;margin-bottom:34px}
+ .formSteps li{font-size:.68rem;min-width:0;padding-right:5px}
+ .formSteps li>span{width:27px;height:27px}
+ .formSteps:before{top:13px}
+ .formActions{position:sticky;bottom:0;z-index:10;margin:30px -20px -20px;padding:13px 20px calc(13px + env(safe-area-inset-bottom));background:#fffffff3;backdrop-filter:blur(15px)}
+ .formActions .cta{min-width:0}
+ .sendActions{flex-direction:column}.sendActions .cta{width:100%;justify-content:center}
+}
