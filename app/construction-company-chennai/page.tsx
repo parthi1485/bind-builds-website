@@ -53,7 +53,7 @@ export default function ConstructionCompanyChennai(){
       ['Scope before execution','The package specification, exclusions, project-specific additions and payment stages are discussed before they become site disputes.'],
       ['Progress with context','Site documentation and professional review are tied back to the issued drawings, selected specification and agreed construction scope.']
     ].map(([h,p])=><article key={h}><h3>{h}</h3><p>{p}</p></article>)}</div>
-    <div className="guideActions"><Link className="productTextLink" href="/process">See the complete process →</Link><Link className="productTextLink" href="/about">Meet the practice behind Bind Builds →</Link></div>
+    <div className="guideActions"><Link className="productTextLink" href="/project-evidence">Review project evidence →</Link><Link className="productTextLink" href="/process">See the complete process →</Link><Link className="productTextLink" href="/about">Meet the practice behind Bind Builds →</Link></div>
    </section>
 
    <section className="guideSection">

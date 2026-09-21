@@ -6,6 +6,7 @@ export default function sitemap():MetadataRoute.Sitemap{
  const pages=[
   ['',1],
   ['/about',.7],
+  ['/project-evidence',.88],
   ['/packages',.9],
   ['/cost-calculator',.95],
   ['/construction-cost-chennai',.95],

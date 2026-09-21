@@ -50,3 +50,29 @@
  .guideFaq{padding:27px 22px 6px;margin-top:55px;border-radius:18px}
  .guideClosing{padding:30px 24px}
 }
+
+
+/* Authority / project evidence */
+.evidencePrinciples{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:32px 0}
+.evidencePrinciples article{padding:22px;border:1px solid #e5e8ed;border-radius:16px;background:#fff}
+.evidencePrinciples span{display:inline-flex;padding:6px 9px;border-radius:100px;background:#f1f6fd;color:#006bd6;font-size:.58rem;letter-spacing:.055em;font-weight:650}
+.evidencePrinciples h3{font-size:1rem;letter-spacing:-.02em;margin:18px 0 8px}
+.evidencePrinciples p{font-size:.75rem;line-height:1.7;color:#686d74;margin:0}
+.evidenceGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:34px 0}
+.evidenceCard{border:1px solid #e4e7ec;border-radius:20px;padding:28px;background:#fff;box-shadow:0 10px 34px #17263a05;display:flex;flex-direction:column;min-width:0}
+.evidenceCardTop{display:flex;justify-content:space-between;align-items:flex-start;gap:15px}
+.evidenceStatus{display:inline-flex;padding:7px 10px;border-radius:100px;background:#eef6ff;color:#006bd6;font-size:.58rem;letter-spacing:.045em;font-weight:650;text-transform:uppercase}
+.evidenceMeta{font-size:.65rem;color:#848991;text-align:right;line-height:1.5}
+.evidenceCard h3{font-size:1.35rem;line-height:1.22;letter-spacing:-.035em;margin:26px 0 12px}
+.evidenceCard p{font-size:.8rem;line-height:1.75;color:#666c74;margin:0 0 18px}
+.evidenceFacts{list-style:none;padding:0;margin:0;border-top:1px solid #eceef1}
+.evidenceFacts li{display:grid;grid-template-columns:92px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid #eceef1;font-size:.72rem;line-height:1.55}
+.evidenceFacts strong{font-weight:550;color:#2e3339}.evidenceFacts span{color:#6f747b}
+.evidenceCard .productTextLink{font-size:.75rem;margin-top:20px}
+.evidencePolicy{display:grid;grid-template-columns:.8fr 1.2fr;gap:45px;align-items:start;padding:32px;background:#f6f7f9;border-radius:20px;margin:32px 0}
+.evidencePolicy h3{font-size:1.4rem;line-height:1.25;margin:0;letter-spacing:-.03em}
+.evidencePolicy ul{margin:0;padding-left:18px;color:#636971;font-size:.8rem;line-height:1.8}
+.evidenceUpdated{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:.68rem;color:#7b8087;margin-top:18px}
+@media(hover:hover) and (pointer:fine){.evidenceCard{transition:transform .25s,box-shadow .25s,border-color .25s}.evidenceCard:hover{transform:translateY(-3px);border-color:#d7e1ec;box-shadow:0 18px 44px #17263a0a}}
+@media(max-width:950px){.evidencePrinciples{grid-template-columns:repeat(2,minmax(0,1fr))}.evidenceGrid{grid-template-columns:1fr}.evidencePolicy{grid-template-columns:1fr}}
+@media(max-width:600px){.evidencePrinciples{grid-template-columns:1fr}.evidenceCard{padding:23px 20px}.evidenceFacts li{grid-template-columns:80px minmax(0,1fr)}.evidencePolicy{padding:24px 21px;gap:20px}}
