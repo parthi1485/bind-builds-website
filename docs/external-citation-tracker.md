@@ -23,11 +23,11 @@ Use this NAP exactly on every external profile. Do not keyword-stuff the busines
 |---|---|---|---|---|
 | P0 | Google Business Profile | Live | Keep NAP, website, hours, services and real photos consistent; collect honest reviews | Direct review: https://www.bindbuilds.com/review |
 | P0 | Studio Bind Architects website | Partial | Add a visible contextual backlink from Studio Bind to Bind Builds | Anchor: Architect-Led Construction by Bind Builds |
-| P1 | Apple Business / Apple Maps | To create / claim | Claim location and complete place card | Official business platform |
-| P1 | Bing Places / Microsoft local listing | To create / claim | Claim or import listing; verify NAP and website | Microsoft local business profile |
-| P1 | Justdial | Audit / claim | Search existing records first; claim/update rather than duplicate | Use exact Bind Builds NAP |
-| P1 | Houzz India | To create | Create professional profile under the closest accurate construction / design-build category | Add website + real project evidence |
-| P1 | Sulekha | Audit / claim | Create or correct business profile only if a genuine company profile can be maintained | Avoid duplicate listings |
+| P1 | Apple Business / Apple Maps | Ready — owner verification required | Sign in at Apple Business, create/claim organisation + location, then verify using Apple-supported methods | https://business.apple.com/ |
+| P1 | Bing Places / Microsoft local listing | Ready — owner verification required | Sign in to Bing Places, search existing listing first, then claim/update or create if absent | https://www.bingplaces.com/ |
+| P1 | Justdial | Ready — mobile OTP required | Start Free Listing with +91 80727 01454; search for duplicates before completing | https://www.justdial.com/Free-Listing |
+| P1 | Houzz India | Ready — account creation required | Create free professional profile, use Construction / Design-Build category closest to actual service, add real project evidence | https://www.houzz.in/ |
+| P1 | Sulekha | Ready — mobile OTP required | List/claim business under Building Consultants & Contractors / relevant category, then complete profile | https://www.sulekha.com/list-your-business |
 | P2 | LinkedIn | To create / strengthen | Create Bind Builds company presence; connect founder profile to company | Use bindbuilds.com |
 | P2 | Instagram | Live | Keep website, phone and exact brand spelling consistent | https://www.instagram.com/bindbuilds/ |
 | P2 | Studio Bind Architects | Live | Keep relationship wording consistent: architecture/design practice → construction chapter | https://www.bindarchitects.com/ |
@@ -38,9 +38,13 @@ Use this NAP exactly on every external profile. Do not keyword-stuff the busines
 
 - Studio Bind Architects has an indexed public website and Studio page.
 - Public search currently surfaces Studio Bind Architects more clearly than Bind Builds.
-- No clear Bind Builds company profile was found in a targeted search for Houzz / Sulekha / LinkedIn company results.
-- Justdial was not reliably crawlable in search tooling, so it must be checked manually before creating anything.
-- Apple and Bing listings should be claimed through their official business platforms rather than through third-party SEO services.
+- No clear indexed Bind Builds company profile surfaced in targeted public searches for Houzz, Sulekha or LinkedIn company results.
+- No clear exact-match Bind Builds listing surfaced in the public search checks for Apple Maps or Bing Maps; because Apple Maps and some directory pages limit crawler access, owner-side duplicate checks are still required before creating a new listing.
+- Justdial's free-listing flow is available and requires a mobile number / OTP. Search for an existing Bind Builds record first and claim/update it rather than creating a duplicate.
+- Apple Business is the current Apple business-management platform in 2026. It can manage organisation, brand and location information; organisation verification is required.
+- Bing Places remains the Microsoft flow for adding or managing business data shown in Bing Maps/search.
+- Houzz supports a free business profile / professional directory presence; use real project photos and correct role labels only.
+- Sulekha allows a business profile and lists Building Consultants & Contractors among its supported categories; its lead products are optional and separate from the citation value.
 - A separate public website using the name "BIND BUILD STUDIO" and overlapping pricing/content also appears in search. Treat this as a brand-confusion issue to investigate separately before citing or linking to it.
 
 ## QA rule before publishing any listing
@@ -66,3 +70,24 @@ Confirm all of the following:
 - Check Search Console for new branded and Chennai construction queries
 - Check backlinks and referring domains
 - Add one genuine project evidence or educational asset
+
+
+## Wave 1 launch order
+
+1. Apple Business / Apple Maps
+2. Bing Places
+3. Justdial
+4. Houzz India
+5. Sulekha
+6. LinkedIn company page
+
+For each platform:
+- search for an existing exact or near-exact listing before creating a new one;
+- claim/update an existing record where possible;
+- publish the canonical NAP above;
+- add https://www.bindbuilds.com as the website;
+- use https://www.bindbuilds.com/project-evidence for proof where a secondary link is allowed;
+- use only real office / team / drawing / site-progress images;
+- do not add AI-generated buildings as project evidence;
+- do not pay for ads merely to obtain a citation;
+- store the final live profile URL in this tracker after verification.
