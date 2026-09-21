@@ -1,4 +1,4 @@
-import { classifyLead, type LeadPriority, type LeadQualityInput } from './lead-quality';
+import { classifyLead, type LeadPriority, type LeadQualityInput } from './lead-quality.ts';
 
 export type LeadFollowupInput = LeadQualityInput & {
   name: string;
