@@ -14,6 +14,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
   const [downloading, setDownloading] = useState(false);
   const downloadGate = useRef<HTMLDialogElement>(null);
   const [downloadLead, setDownloadLead] = useState({ name: '', phone: '', email: '' });
+  const [downloadLeadStatus, setDownloadLeadStatus] = useState('');
   const [months, setMonths] = useState(String(constructionMonths(input.floors.length)));
   const [loan, setLoan] = useState(String(Math.round(estimate.total * .8)));
   const [interest, setInterest] = useState('8.5');
@@ -69,18 +70,63 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     finally { setDownloading(false); }
   };
   const requestDownload = () => {
-    try {
-      if (window.localStorage.getItem('bind-builds-estimate-download-signup')) { download(); return; }
-    } catch {}
+    setDownloadLeadStatus('');
     downloadGate.current?.showModal();
   };
-  const unlockDownload = (event: FormEvent<HTMLFormElement>) => {
+  const unlockDownload = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const digits = downloadLead.phone.replace(/\D/g, '').length;
-    if (digits < 10 || digits > 15) { setStatus('Please enter a valid phone number with 10–15 digits.'); return; }
-    try { window.localStorage.setItem('bind-builds-estimate-download-signup', JSON.stringify(downloadLead)); } catch {}
-    downloadGate.current?.close();
-    download();
+    if (digits < 10 || digits > 15) { setDownloadLeadStatus('Please enter a valid phone number with 10–15 digits.'); return; }
+
+    const parking = input.allowances.find(item => item.key === 'parking' && item.selected);
+    const extras = estimate.selected
+      .filter(item => item.key !== 'parking')
+      .map(item => `${item.label}: ${item.amount === null ? 'To be quoted' : money(item.amount)}${item.detail ? ' · ' + item.detail : ''}`)
+      .join(' | ');
+
+    const headroomPricing = input.headroom
+      ? estimate.headroomUnpriced ? 'Request a quote'
+      : estimate.headroomMode === 'lump' ? `Custom allowance · ${money(estimate.headroomCost)}`
+      : `${input.headroom.toLocaleString('en-IN')} sq.ft × ${money(estimate.headroomRate)} / sq.ft = ${money(estimate.headroomCost)}`
+      : '';
+
+    setDownloading(true);
+    setDownloadLeadStatus('Saving your details…');
+    try {
+      const response = await fetch('/api/website-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'Website – Estimate PDF',
+          name: downloadLead.name,
+          phone: downloadLead.phone,
+          email: downloadLead.email,
+          package: selected.name,
+          configuration: configuration(input.floors.length),
+          plotArea: String(input.plot),
+          calculatedArea: String(estimate.area),
+          packageRate: money(input.rate) + ' / sq.ft',
+          estimateTotal: money(estimate.total),
+          headroomArea: input.headroom ? String(input.headroom) : '',
+          headroomPricing,
+          parkingArea: parking?.detail?.match(/^([\d.]+) sq\.ft/)?.[1] || '',
+          parkingPricing: parking ? (parking.detail || (parking.amount === null ? 'To be quoted' : money(parking.amount))) : '',
+          additionalItems: extras,
+          pdfDownloaded: 'Yes',
+          pageUrl: window.location.href,
+          website: ''
+        }),
+      });
+      const result = await response.json().catch(() => ({ ok: false }));
+      if (!response.ok || !result.ok) throw new Error('Lead capture failed');
+
+      setDownloadLeadStatus('Details received. Preparing your PDF…');
+      downloadGate.current?.close();
+      await download();
+    } catch {
+      setDownloading(false);
+      setDownloadLeadStatus('We could not save your details. Please try again before downloading.');
+    }
   };
 
   return <div className="calcReport">
@@ -100,8 +146,9 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
           <label>Phone number <span>required</span><input required type="tel" inputMode="tel" autoComplete="tel" maxLength={22} pattern="[+0-9() -]{10,22}" value={downloadLead.phone} onChange={e=>setDownloadLead(v=>({...v,phone:e.target.value}))}/></label>
           <label>Email <span>required</span><input required type="email" autoComplete="email" maxLength={150} value={downloadLead.email} onChange={e=>setDownloadLead(v=>({...v,email:e.target.value}))}/></label>
         </div>
-        <button className="cta primary estimateDownloadSubmit" type="submit">Sign up & download PDF ↓</button>
-        <p className="estimateDownloadPrivacy">No password or account setup. Your presentation remains available without signing up. <Link href="/privacy">Privacy details ↗</Link></p>
+        <button className="cta primary estimateDownloadSubmit" type="submit" disabled={downloading}>{downloading ? 'Saving details…' : 'Sign up & download PDF ↓'}</button>
+        <p className="estimateDownloadGateStatus" role="status">{downloadLeadStatus}</p>
+        <p className="estimateDownloadPrivacy">No password or account setup. Your presentation remains available without signing up. Your details are sent to Bind Builds for project follow-up. <Link href="/privacy">Privacy details ↗</Link></p>
       </form>
     </dialog>
     <p role="status" className="calcStatus">{status}</p>
