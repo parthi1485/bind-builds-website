@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
+import { classifyLead } from '../lib/lead-quality.ts';
 
 const read = path => readFileSync(new URL('../'+path, import.meta.url), 'utf8');
 
@@ -55,6 +56,8 @@ test('lead conversion events remain wired to the conversion paths', () => {
   assert.match(project,/lead_intent_selected/);
   assert.match(project,/Just researching/);
   assert.match(project,/qualificationNextStep/);
+  assert.match(project,/lead_priority/);
+  assert.match(project,/leadHandoffLine/);
   assert.match(analytics,/trust_evidence_click/);
   const home=read('app/page.tsx');
   const slug=read('app/[slug]/page.tsx');
@@ -74,4 +77,15 @@ test('baseline production security headers are configured', () => {
   const config=read('next.config.ts');
   for(const header of ['X-Content-Type-Options','Referrer-Policy','X-Frame-Options','Permissions-Policy']) assert.ok(config.includes(header));
   assert.match(config,/poweredByHeader:false/);
+});
+
+
+test('lead handoff scoring separates ready and early-stage enquiries', () => {
+  const priority=classifyLead({intent:'Ready to discuss scope and next steps',stage:'Land purchased',timeline:'Within 3 months',budget:'₹50 lakh–₹1 crore',area:'1800',package:'Elevate'});
+  assert.equal(priority.priority,'Priority');
+  assert.ok(priority.score >= 8);
+
+  const nurture=classifyLead({intent:'Just researching',stage:'Looking for a plot',timeline:'Exploring options',budget:'Not decided yet',area:'',package:''});
+  assert.equal(nurture.priority,'Nurture');
+  assert.ok(nurture.score <= 3);
 });
