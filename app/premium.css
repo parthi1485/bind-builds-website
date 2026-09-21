@@ -186,8 +186,8 @@ html[data-motion=paused]{scroll-behavior:auto}html[data-motion=paused] *,html[da
 .enquiryLayout{gap:clamp(42px,7vw,100px)}
 .enquiryAside{position:sticky;top:115px}
 .enquiryAside ol{list-style:none;padding:0;counter-reset:enquiry}
-.enquiryAside li{counter-increment:enquiry;display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start;padding:13px 0;margin:0;border-bottom:1px solid #e7e8eb}
-.enquiryAside li:before{content:'0' counter(enquiry);font-size:.625rem;color:#0071e3;padding-top:4px}
+.enquiryAside>ol>li{counter-increment:enquiry;display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;align-items:start;padding:13px 0;margin:0;border-bottom:1px solid #e7e8eb}
+.enquiryAside>ol>li:before{content:'0' counter(enquiry);font-size:.625rem;color:#0071e3;padding-top:4px}
 .projectForm{border-color:#e3e5e9;box-shadow:0 20px 65px #17263a09}
 .formSteps{position:relative;border-bottom:0;padding-bottom:0;margin-bottom:44px}
 .formSteps:before{content:'';position:absolute;left:14px;right:14px;top:14px;height:1px;background:#e0e4e9;z-index:0}
