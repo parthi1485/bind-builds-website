@@ -46,6 +46,10 @@ test('lead conversion events remain wired to the conversion paths', () => {
   assert.match(analytics,/whatsapp_click/);
   assert.match(analytics,/project_cta_click/);
   assert.match(analytics,/calculator_cta_click/);
+  assert.match(analytics,/scroll_depth/);
+  assert.match(project,/project_form_step_view/);
+  assert.match(project,/project_form_step_complete/);
+  assert.match(report,/pdf_gate_open/);
 });
 
 test('lead API accepts only known website sources and keeps the honeypot check', () => {
