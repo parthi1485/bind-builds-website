@@ -400,3 +400,93 @@ button:disabled,.cta[aria-disabled=true]{opacity:.58}
  .projectFitLinks{flex-direction:column;gap:10px}
  .researchRoute{padding:18px 16px}
 }
+
+
+/* Stage 6 Batch 2 — calculator, packages, forms and micro-interactions */
+.calculatorShell{position:relative}
+.calcProgress{padding:8px 12px;border:1px solid #e4e6ea;border-radius:18px;background:#ffffffd9;box-shadow:0 8px 28px #17263a05;backdrop-filter:blur(12px)}
+.calcProgress button{position:relative;border-radius:12px;transition:background .2s,color .2s,transform .2s}
+.calcProgress [aria-current=step] button{background:#f1f7ff;color:#0e62ba}
+.calcProgress [aria-current=step] button:after{content:'';position:absolute;left:12px;right:12px;bottom:4px;height:2px;border-radius:2px;background:#0071e3}
+.calcProgress .complete button>span{background:#eaf4ff;border-color:#9cc8f5;color:#0068cf}
+.calcForm{background:linear-gradient(180deg,#fff 0%,#fdfdfe 100%);border-radius:24px}
+.calcStepContent{animation:calcStepPolish .32s cubic-bezier(.2,.7,.2,1)}
+.calcStepContent>.eyebrow{letter-spacing:.055em}
+.calcFields>label,.calcFloorFields label,.extraEditor label{color:#2b2d32}
+.calcFields input[type=number],.calcPlanning input,.extraEditor input,.extraEditor select{border-color:#d8dbe0;background:#fff;box-shadow:inset 0 1px 0 #00000003}
+.calcFields input[type=number]:hover,.calcPlanning input:hover,.extraEditor input:hover,.extraEditor select:hover{border-color:#bfc7d1}
+.floorChoices label>span,.calcPackageChoices label>span{position:relative;overflow:hidden}
+.floorChoices input:checked+span:after,.calcPackageChoices input:checked+span:after{content:'✓';position:absolute;right:12px;top:12px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#0071e3;color:#fff;font-size:.7rem;box-shadow:0 5px 14px #0071e326}
+.calcPackageChoices label>span{padding-top:22px}
+.calcPackageChoices input:checked+span{background:linear-gradient(145deg,#eef6ff,#fafcff)}
+.calcPreview{border-radius:24px;box-shadow:0 24px 70px #07132222}
+.calcPreviewTop{padding-bottom:13px;border-bottom:1px solid #ffffff14}
+.calcPreviewAmount{font-variant-numeric:tabular-nums}
+.calcActions .cta span,.estimateConversionActions .cta span{display:inline-block;transition:transform .2s}
+.calcActions .cta:hover span,.estimateConversionActions .cta:hover span{transform:translateX(3px)}
+.calcReportToolbar{padding:18px 0 8px;border-bottom:1px solid #eceef1}
+.calcReportToolbar button{transition:transform .2s,box-shadow .2s,background .2s}
+.calcReportToolbar button:active{transform:scale(.98)}
+
+.simplePackageGrid{gap:22px}
+.simplePackageCard{border-radius:24px;padding:34px 28px 28px}
+.simplePackageCard:after{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:#d7dbe2;opacity:.9}
+.simplePackageCard.package-essential:after{background:#c9ced7}
+.simplePackageCard.package-elevate:after{background:#0071e3}
+.simplePackageCard.package-signature:after{background:#555d6a}
+.simplePackageHead h2{margin-bottom:18px}
+.simplePrice{align-items:baseline}
+.simpleRateNote{display:block;margin:9px 0 3px;color:#7b7f86;font-size:.68rem;line-height:1.55}
+.simpleCategory{border-color:#e5e7eb}
+.simpleCategory button{min-height:56px;padding-block:14px}
+.simpleCategory button span{line-height:1.35}
+.simpleCategoryPanel{padding-bottom:8px}
+.simpleCategoryPanel li{position:relative;padding-left:20px;line-height:1.65}
+.simpleCategoryPanel li:before{content:'✓';position:absolute;left:0;top:0;color:#0071e3;font-size:.72rem}
+.packageSelect{width:100%;min-height:46px}
+.simplePackageCard.featured .packageSelect{background:#0071e3;color:#fff;border-color:#0071e3}
+.simplePackageCard.featured .packageSelect:hover{background:#0077ed}
+
+.enquiryAside>p:first-of-type{max-width:440px;line-height:1.7}
+.enquiryAside>ol{margin-top:26px}
+.enquiryFit,.enquiryConfidence{border-radius:14px}
+.enquiryFit{padding:18px;background:#f8fafc;border:1px solid #e7ebf0}
+.enquiryConfidence{padding:18px;background:#fff;border:1px solid #eceef1}
+.projectForm{border-radius:24px;background:linear-gradient(180deg,#fff,#fefefe);overflow:hidden}
+.formSteps{padding:2px 0 6px}
+.formSteps li{transition:color .2s}
+.formSteps li[aria-current=step]{font-weight:600}
+.formSteps li.complete>span{box-shadow:0 0 0 4px #f1f7ff}
+.projectForm form>h2{text-wrap:balance}
+.fields label{letter-spacing:-.01em}
+.fields input,.fields select,.fields textarea{border-radius:12px;transition:border-color .18s,box-shadow .18s,background .18s,transform .18s}
+.fields input:hover,.fields select:hover,.fields textarea:hover{border-color:#adb8c6}
+.fields input:focus,.fields select:focus,.fields textarea:focus{transform:translateY(-1px)}
+.formOptionalNote,.researchRoute{box-shadow:0 7px 22px #17263a05}
+.formActions .cta{min-height:46px}
+.formActions .cta:active,.packageSelect:active{transform:scale(.985)}
+.preparedBrief{box-shadow:0 22px 70px #17263a09}
+.sendActions .cta{min-height:46px}
+.textButton{transition:color .18s,transform .18s}
+.textButton:hover{transform:translateX(1px)}
+
+@keyframes calcStepPolish{from{opacity:.45;transform:translateY(7px)}to{opacity:1;transform:none}}
+@media(hover:hover) and (pointer:fine){
+ .calcProgress button:not(:disabled):hover{background:#f7f9fc}
+ .simplePackageCard:hover .packageSelect{box-shadow:0 8px 22px #17263a0c}
+ .simpleCategory button:hover b{transform:scale(1.06)}
+ .simpleCategory button[aria-expanded=true]:hover b{transform:rotate(180deg) scale(1.06)}
+}
+@media(max-width:760px){
+ .calcProgress{padding:7px 8px;border-radius:15px}
+ .calcProgress [aria-current=step] button:after{left:6px;right:6px;bottom:3px}
+ .calcForm,.calcPreview,.projectForm,.simplePackageCard{border-radius:18px}
+ .simplePackageGrid{gap:16px}
+ .simplePackageCard{padding:28px 22px 24px}
+ .enquiryFit,.enquiryConfidence{padding:16px}
+ .fields input:focus,.fields select:focus,.fields textarea:focus{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .calcStepContent{animation:none!important}
+ .calcActions .cta span,.estimateConversionActions .cta span,.fields input,.fields select,.fields textarea,.textButton{transition:none!important}
+}
