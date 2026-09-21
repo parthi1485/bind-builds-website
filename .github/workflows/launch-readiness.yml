@@ -1,0 +1,44 @@
+name: Launch Readiness
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: launch-readiness-main
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Build + regression tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Run regression tests
+        run: npm test
+      - name: Production build
+        run: npm run build
+
+  production-smoke:
+    name: Live production smoke
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Wait for matching Vercel production deployment and test it
+        env:
+          BASE_URL: https://www.bindbuilds.com
+          EXPECTED_SHA: ${{ github.sha }}
+        run: node scripts/production-smoke.mjs
