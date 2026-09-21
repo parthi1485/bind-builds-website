@@ -62,6 +62,9 @@ export default function Analytics() {
           if (url.origin !== window.location.origin) trackEvent('outbound_click', { ...base, link_domain: url.hostname.replace(/^www\./, '') });
         } catch {}
       }
+      if (anchor.closest('#confidence-before-commit') || anchor.closest('.aboutTransparency') || anchor.closest('.enquiryConfidence')) {
+        trackEvent('trust_evidence_click', { ...base, destination: href.slice(0, 180) });
+      }
     };
     document.addEventListener('click', onClick);
     return () => document.removeEventListener('click', onClick);
