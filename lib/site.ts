@@ -5,6 +5,13 @@ export const site = {
   telephone: '+918072701454',
   whatsapp: '918072701454',
   email: 'bindbuilds@gmail.com',
+  address: {
+    streetAddress: 'No. B/28, 2nd Cross Street, Ramapuram',
+    addressLocality: 'Chennai',
+    addressRegion: 'Tamil Nadu',
+    postalCode: '600089',
+    addressCountry: 'IN',
+  },
   instagram: 'https://www.instagram.com/bindbuilds/',
   portfolio: 'https://www.bindarchitects.com/',
   studio: 'https://www.bindarchitects.com/studio',

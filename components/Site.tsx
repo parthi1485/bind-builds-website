@@ -58,6 +58,7 @@ export function Nav() {
 }
 export function Footer() {
   const guideLinks = [
+    ['Construction company', '/construction-company-chennai'],
     ['House construction', '/house-construction-chennai'],
     ['Construction cost 2026', '/construction-cost-chennai'],
     ['Turnkey construction', '/turnkey-house-construction-chennai'],
@@ -71,7 +72,7 @@ export function Footer() {
       <div><span className="footerLabel">Explore</span><nav className="footerLinks" aria-label="Footer navigation">{navigation.map(([name, href]) => href.startsWith('http') ? <a href={href} key={href} target="_blank" rel="noopener noreferrer">{name}</a> : <Link href={href} key={href}>{name}</Link>)}</nav></div>
       <div><span className="footerLabel">Chennai guides</span><nav className="footerLinks footerGuideLinks" aria-label="Chennai construction guides">{guideLinks.map(([name,href])=><Link className="footerGuideLink" href={href} key={href}>{name}</Link>)}</nav></div>
     </div>
-    <div className="footerContact"><span className="footerLabel">Contact</span><a href={`tel:${site.telephone}`}>{site.phone}</a><a href={`mailto:${site.email}`}>{site.email}</a><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">Chat on WhatsApp ↗</a><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a></div>
+    <div className="footerContact"><span className="footerLabel">Contact</span><address style={{fontStyle:'normal',lineHeight:1.7}}>{site.address.streetAddress}<br/>{site.address.addressLocality} {site.address.postalCode}</address><a href={`tel:${site.telephone}`}>{site.phone}</a><a href={`mailto:${site.email}`}>{site.email}</a><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">Chat on WhatsApp ↗</a><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a></div>
     <div className="footerBottom"><span>© {new Date().getFullYear()} Bind Builds</span><span>Plan • Build • Deliver</span><Link href="/privacy">Privacy</Link></div>
   </footer>;
 }

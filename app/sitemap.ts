@@ -9,6 +9,7 @@ export default function sitemap():MetadataRoute.Sitemap{
   ['/packages',.9],
   ['/cost-calculator',.95],
   ['/construction-cost-chennai',.95],
+  ['/construction-company-chennai',.97],
   ['/house-construction-chennai',.95],
   ['/turnkey-house-construction-chennai',.9],
   ['/building-plan-approval-chennai',.9],
