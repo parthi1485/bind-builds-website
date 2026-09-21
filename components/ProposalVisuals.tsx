@@ -22,7 +22,7 @@ export function AreaDiagram({data}:{data:VisualEstimate}){
 }
 export function ComparisonDiagram({data}:{data:VisualEstimate}){
  const max=Math.max(...data.comparisons.map(item=>item.base));
- return <figure className="comparisonDiagram"><figcaption><span className="productEyebrow">Same area. Different specifications.</span><h3>Find your starting point.</h3><p>{data.area.toLocaleString('en-IN')} sq.ft · Base construction only</p></figcaption><div>{data.comparisons.map(item=><div className={item.name===data.packageName?'chosen':''} key={item.name}><div><strong>{item.name}</strong><span>{money(item.base)}</span></div><div className="comparisonTrack" aria-hidden="true"><i style={{width:`${item.base/max*100}%`}}/></div><small>{money(item.rate)} / sq.ft{item.name===data.packageName?' · Selected':''}</small></div>)}</div></figure>;
+ return <figure className="comparisonDiagram"><figcaption><span className="productEyebrow">Same area. Different specifications.</span><h3>Find your starting point.</h3><p>{data.floorArea.toLocaleString('en-IN')} sq.ft floor area{data.headroomArea ? ` + ${data.headroomArea.toLocaleString('en-IN')} sq.ft headroom allowance` : ''} · Base construction only</p></figcaption><div>{data.comparisons.map(item=><div className={item.name===data.packageName?'chosen':''} key={item.name}><div><strong>{item.name}</strong><span>{money(item.base)}</span></div><div className="comparisonTrack" aria-hidden="true"><i style={{width:`${item.base/max*100}%`}}/></div><small>{money(item.rate)} / sq.ft{item.name===data.packageName?' · Selected':''}</small></div>)}</div></figure>;
 }
 export function StageDiagram({data}:{data:VisualEstimate}){
  const parts=data.allocation.map(stage=>({label:stage.name,value:stage.amount,color:stage.color}));
