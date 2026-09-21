@@ -17,6 +17,7 @@ Keep these as the primary GA4 key events.
 - `project_form_step_view`
 - `project_form_step_complete`
 - `project_form_optional_skipped`
+- `lead_intent_selected`
 - `project_enquiry`
 - `project_enquiry_error`
 
@@ -28,6 +29,9 @@ Useful dimensions:
 - `budget_band`
 - `timeline`
 - `package_interest`
+- `lead_intent`
+- `site_stage`
+- `area_provided`
 
 ### Construction calculator
 
@@ -116,3 +120,17 @@ Measure these changes with the existing CTA/funnel events before making the next
 - Explains that project/site visits depend on relevance, owner permission, scheduling and safety; unavailable visits are not replaced with unrelated claims.
 - Added an About-page assessment framework and a trust link beside the enquiry form.
 - Added `trust_evidence_click` to measure whether visitors use these confidence-building resources.
+
+
+## Stage 8 Batch 4 lead-quality changes
+
+- Added one required intent field: ready to discuss, comparing proposals, planning for later, or just researching.
+- The intent is stored with the lead inside the existing Requirements field and passed to GA4 without adding new Google Sheet columns.
+- Project enquiry conversion events now include intent, site stage and whether an area was supplied.
+- Visitors who select “Just researching” are shown the calculator and Chennai cost guide before contact details, but they are not blocked from enquiring.
+- The dedicated Start a Project page now explains service-area context, what information is useful and that qualification happens before a site visit.
+- The enquiry sidebar states the best use of the form and directs price-only research to the calculator.
+- Successful enquiries now set the expectation that a qualification conversation happens before site meetings/proposal work.
+- Added a Working with us FAQ explaining why projects are qualified before a site visit.
+
+Review lead quality by `lead_intent`, `site_stage`, budget band and timeline before introducing harder filters or minimum-value gates.
