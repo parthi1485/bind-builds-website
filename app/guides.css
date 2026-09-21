@@ -12,3 +12,11 @@
 .guideCostTable tbody th{font-weight:550;color:#3a3a42}
 .guideCostTable tbody tr:last-child th,.guideCostTable tbody tr:last-child td{border-bottom:0}
 @media(max-width:600px){.guideTableWrap{margin-inline:-2px;border-radius:14px}.guideCostTable th,.guideCostTable td{padding:17px 14px;font-size:.8125rem}}
+
+.serviceAreaGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:32px 0}
+.serviceAreaGrid article{padding:28px;background:#f5f5f7;border-radius:20px;min-width:0}
+.serviceAreaGrid h3{font-size:1.15rem;margin:0 0 18px;letter-spacing:-.02em}
+.serviceAreaGrid ul{list-style:none;padding:0;margin:0}
+.serviceAreaGrid li{padding:10px 0;border-bottom:1px solid #dedee5;font-size:.8125rem;color:#60606a}
+.serviceAreaGrid li:last-child{border-bottom:0}
+@media(max-width:950px){.serviceAreaGrid{grid-template-columns:1fr}}
