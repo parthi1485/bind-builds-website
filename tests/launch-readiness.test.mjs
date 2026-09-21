@@ -64,6 +64,7 @@ test('lead conversion events remain wired to the conversion paths', () => {
   assert.match(project,/leadFollowupSummary/);
   assert.match(project,/followup_mode/);
   assert.match(analytics,/trust_evidence_click/);
+  assert.match(analytics,/review_click/);
   const home=read('app/page.tsx');
   const slug=read('app/[slug]/page.tsx');
   assert.match(slug,/projectFitIntro/);
