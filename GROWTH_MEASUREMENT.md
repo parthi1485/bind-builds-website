@@ -32,6 +32,8 @@ Useful dimensions:
 - `lead_intent`
 - `site_stage`
 - `area_provided`
+- `lead_priority`
+- `lead_score`
 
 ### Construction calculator
 
@@ -134,3 +136,23 @@ Measure these changes with the existing CTA/funnel events before making the next
 - Added a Working with us FAQ explaining why projects are qualified before a site visit.
 
 Review lead quality by `lead_intent`, `site_stage`, budget band and timeline before introducing harder filters or minimum-value gates.
+
+
+## Stage 8 Batch 5 sales handoff
+
+Website project enquiries are now classified into three internal follow-up buckets using readiness signals already supplied by the visitor:
+
+- **Priority** — strong immediate intent, a more advanced site/project stage and/or near-term timing.
+- **Develop** — credible project but timing, scope or decision readiness still needs qualification.
+- **Nurture** — early research, plot not finalised or timing still exploratory.
+
+The score is deterministic and does not reject enquiries. It is based only on the visitor's project intent, project stage, timeline, whether a budget band was selected, whether an area was supplied and whether a package was selected.
+
+The existing Google Sheet schema is unchanged. The internal classification, score, recommended next action and signal summary are prepended to the existing **Requirements** value, which should also make the current email notification more useful without requiring an Apps Script migration.
+
+GA4 `project_enquiry` now includes `lead_priority` and `lead_score`.
+
+Suggested handling:
+- Priority: call first and qualify site/scope/decision-makers before booking a site meeting.
+- Develop: ask the clearest missing scope/timing question, then move to qualification.
+- Nurture: send useful cost/process content and avoid heavy follow-up until intent changes.
