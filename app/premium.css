@@ -322,3 +322,48 @@ button:disabled,.cta[aria-disabled=true]{opacity:.58}
  .formActions .cta{order:1}
  .formActions>span,.formActions>button:first-child{order:0}
 }
+
+/* Stage 8 Batch 3 — trust and proof */
+.confidenceSection{background:linear-gradient(180deg,#f7f8fa 0%,#fff 100%);border-block:1px solid #e8e9ed}
+.confidenceSection .productSectionHeader{max-width:850px}
+.confidenceGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:42px}
+.confidenceCard{display:grid;grid-template-columns:52px minmax(0,1fr);gap:22px;padding:30px;border:1px solid #e4e6ea;border-radius:20px;background:#fff;box-shadow:0 10px 34px #17263a05;min-width:0}
+.confidenceNo{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#eff6ff;color:#006bd6;font-size:.625rem;font-weight:650;letter-spacing:.04em}
+.confidenceCard h3{font-size:1.28rem;font-weight:520;letter-spacing:-.03em;margin:5px 0 11px}
+.confidenceCard p{font-size:.82rem;line-height:1.72;color:#666b72;margin:0 0 18px}
+.confidenceCard .productTextLink{font-size:.75rem}
+.confidenceActions{display:flex;align-items:center;flex-wrap:wrap;gap:18px 28px;margin-top:28px}
+.aboutTransparency{background:#f6f7f9}
+.aboutTransparencyHead{display:grid;grid-template-columns:minmax(150px,.65fr) minmax(0,1.25fr) minmax(240px,.8fr);gap:clamp(25px,5vw,70px);align-items:start;margin-bottom:42px}
+.aboutTransparencyHead .lead{margin:0}
+.aboutTransparencyHead>p{font-size:.88rem;line-height:1.75;color:#686b70;margin:0}
+.transparencyGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid #dfe1e5;border-bottom:1px solid #dfe1e5}
+.transparencyGrid article{padding:28px 24px 30px;border-right:1px solid #dfe1e5}
+.transparencyGrid article:last-child{border-right:0}
+.transparencyGrid article>span{display:block;color:#0071e3;font-size:.625rem;margin-bottom:24px}
+.transparencyGrid h3{font-size:1rem;font-weight:550;letter-spacing:-.02em;margin:0 0 10px}
+.transparencyGrid p{font-size:.76rem;line-height:1.7;color:#686b70;margin:0}
+.aboutTransparencyLinks{display:flex;flex-wrap:wrap;gap:18px 30px;margin-top:25px}
+.enquiryConfidence{margin-top:28px;padding:18px 0 0;border-top:1px solid #e1e4e8}
+.enquiryConfidence strong{font-size:.78rem;font-weight:600}
+.enquiryConfidence p{font-size:.72rem;line-height:1.65;color:#6b7077;margin:7px 0 9px}
+.enquiryConfidence a{font-size:.72rem;color:#0071e3}
+@media(hover:hover) and (pointer:fine){
+ .confidenceCard{transition:transform .25s,box-shadow .25s,border-color .25s}
+ .confidenceCard:hover{transform:translateY(-3px);border-color:#d5dfeb;box-shadow:0 18px 44px #17263a0a}
+}
+@media(max-width:950px){
+ .aboutTransparencyHead{grid-template-columns:1fr 2fr}.aboutTransparencyHead>p{grid-column:2}
+ .transparencyGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .transparencyGrid article:nth-child(2){border-right:0}.transparencyGrid article:nth-child(-n+2){border-bottom:1px solid #dfe1e5}
+}
+@media(max-width:700px){
+ .confidenceGrid{grid-template-columns:1fr;margin-top:30px}
+ .confidenceCard{grid-template-columns:42px minmax(0,1fr);gap:16px;padding:24px 21px;border-radius:17px}
+ .confidenceNo{width:36px;height:36px}
+ .confidenceActions{align-items:stretch}.confidenceActions .cta{width:100%;justify-content:center}
+ .aboutTransparencyHead{grid-template-columns:1fr;gap:14px}.aboutTransparencyHead>p{grid-column:auto}
+ .transparencyGrid{grid-template-columns:1fr}.transparencyGrid article{border-right:0;border-bottom:1px solid #dfe1e5;padding:23px 0}.transparencyGrid article:nth-child(-n+2){border-bottom:1px solid #dfe1e5}.transparencyGrid article:last-child{border-bottom:0}
+ .aboutTransparencyLinks{flex-direction:column;gap:12px}
+ .enquiryConfidence{margin-top:22px}
+}
