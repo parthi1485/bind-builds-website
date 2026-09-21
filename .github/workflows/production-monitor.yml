@@ -1,0 +1,69 @@
+name: Production Monitor
+
+on:
+  schedule:
+    # 08:00 India Standard Time
+    - cron: '30 2 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/production-monitor.yml'
+      - 'scripts/production-smoke.mjs'
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: production-monitor
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    name: Daily live-site monitor
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run production smoke checks
+        id: smoke
+        env:
+          BASE_URL: https://www.bindbuilds.com
+        run: node scripts/production-smoke.mjs
+
+      - name: Open or update incident issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="Production monitor failed"
+          issue_number="$(gh issue list --state open --search "$title in:title" --json number --jq '.[0].number // empty')"
+          body="The scheduled Bind Builds production smoke check failed.
+
+          Run: $RUN_URL
+          Commit checked: ${GITHUB_SHA}
+          Time (UTC): $(date -u +'%Y-%m-%d %H:%M:%S')
+
+          Check the workflow log before changing production."
+
+          if [ -n "$issue_number" ]; then
+            gh issue comment "$issue_number" --body "$body"
+          else
+            gh issue create --title "$title" --body "$body"
+          fi
+
+      - name: Close resolved production incident
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Production monitor failed"
+          issue_number="$(gh issue list --state open --search "$title in:title" --json number --jq '.[0].number // empty')"
+          if [ -n "$issue_number" ]; then
+            gh issue comment "$issue_number" --body "Production smoke checks are passing again. Closing this incident automatically."
+            gh issue close "$issue_number" --reason completed
+          fi
