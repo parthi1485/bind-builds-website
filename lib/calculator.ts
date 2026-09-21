@@ -24,7 +24,7 @@ export function calculateEstimate(input: EstimateInput) {
   const headroomMode = input.headroomMode ?? 'unit';
   if (!validNumber(input.plot, 1, 100000) || !validNumber(input.rate, 1, 100000) ||
       input.floors.length < 1 || input.floors.length > 4 || input.floors.some(area => !validNumber(area, 1, 100000, true)) ||
-      !validNumber(input.headroom, 0, 10000, true) || !validNumber(input.reservePercent, 0, 25)) throw new RangeError('Invalid estimate inputs');
+      !validNumber(input.headroom, 0, 10000) || !validNumber(input.reservePercent, 0, 25)) throw new RangeError('Invalid estimate inputs');
   if (input.headroom > 0 && headroomMode === 'unit' && !validNumber(headroomRate, 1, 10000000)) throw new RangeError('Invalid headroom rate');
   if (input.headroom > 0 && headroomMode === 'lump' && input.headroomAmount !== null && input.headroomAmount !== undefined &&
       !validNumber(input.headroomAmount, 1, 100000000)) throw new RangeError('Invalid headroom allowance');
@@ -75,7 +75,7 @@ export const compactMoney = (value: number) => value >= 10000000
 /** One numeric source for on-screen charts, presentation slides and PDF diagrams. */
 export function createVisualData(input: EstimateInput, estimate: Estimate, packageName: string, comparisons: {name:string; rate:number; base:number}[]) {
   return {
-    packageName, plot: input.plot, area: estimate.area, configuration: configuration(input.floors.length), total: estimate.total, unpricedCount: estimate.unpriced.length,
+    packageName, plot: input.plot, area: estimate.area, floorArea: estimate.floorArea, headroomArea: input.headroom, configuration: configuration(input.floors.length), total: estimate.total, unpricedCount: estimate.unpriced.length,
     parts: [{ label: 'Base construction', value: estimate.base, color: '#0071e3' }, { label: 'Additional items', value: estimate.allowanceTotal, color: '#7974e8' }],
     floors: [...input.floors.map((area,index)=>({label:floorName(index),area})), ...(input.headroom?[{label:'Separate headroom',area:input.headroom}]:[])],
     extras: estimate.selected.filter(item=>item.amount!==null).map((item,index)=>({label:item.label,value:item.amount!,color:stages[index%stages.length].color})),
