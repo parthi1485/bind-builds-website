@@ -1,14 +1,12 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Nav, Footer } from '@/components/Site';
 import ConstructionCalculator from '@/components/ConstructionCalculator';
-import { site } from '@/lib/site';
-export const metadata: Metadata = {
-  title: 'House Construction Cost Calculator in Chennai',
-  description: 'Plan your Chennai home with Bind Builds. Calculate floor-wise construction costs, compare Essential, Elevate and Signature packages, add allowances and download your estimate PDF. No sign-up required.',
-  alternates: { canonical: '/cost-calculator' },
-  openGraph: { title: 'Plan your home. Understand your budget. | Bind Builds', description: 'A free construction cost calculator for Chennai, using Bind Builds package rates.', url: site.url + '/cost-calculator' },
-};
+import { pageMetadata } from '@/lib/seo';
+export const metadata=pageMetadata(
+  'House Construction Cost Calculator in Chennai',
+  'Calculate floor-wise Chennai house construction costs, compare Essential, Elevate and Signature packages, add allowances and download a planning estimate PDF. No account required.',
+  '/cost-calculator'
+);
 export default function CostCalculatorPage() {
   return <><Nav /><main id="main-content" className="calculatorPage"><header className="calcPageHeader"><div><span className="eyebrow">Chennai / Construction cost calculator</span><h1>Your home.<br /><span>In numbers.</span></h1></div><div><p>Turn your ideas into a starting budget. Explore your floors, compare finishes and take the next step with confidence.</p><span className="calcHeaderBadge">Free to use <i /> No sign-up <i /> PDF estimate</span></div></header><div className="calculatorShell"><ConstructionCalculator /></div><section className="calcPageHelp"><span className="eyebrow">Before you begin building</span><h2>A useful estimate starts<br />with a clear scope.</h2><div className="calcHelpGrid"><article><h3>Plot area isn’t built-up area.</h3><p>Your budget uses the combined building area across all floors. Outdoor spaces, parking and headroom need consistent measurement so nothing is counted twice.</p></article><article><h3>A rate needs a specification.</h3><p>Compare material allowances, technical scope and exclusions together. Our package sheets explain the differences behind the starting rates.</p><Link className="textLink" href="/packages">Explore all three packages ↗</Link><br/><Link className="textLink" href="/construction-cost-chennai">Read the 2026 Chennai cost guide ↗</Link></article><article><h3>Your Chennai site matters.</h3><p>Soil, access, drainage, approvals and your design affect the final proposal. This calculator helps you start that conversation.</p><Link className="textLink" href="/building-plan-approval-chennai">Plan for approvals and documents ↗</Link></article></div></section><noscript><p className="section">Enable JavaScript to use the interactive calculator, or <Link href="/contact">contact Bind Builds for help with your construction budget</Link>.</p></noscript></main><Footer /></>;
 }
