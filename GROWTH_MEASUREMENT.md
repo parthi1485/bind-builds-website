@@ -57,6 +57,7 @@ Useful dimensions:
 - `call_click`
 - `whatsapp_click`
 - `outbound_click`
+- `trust_evidence_click`
 - CTA events include `cta_location`.
 
 ## First-touch attribution
@@ -104,3 +105,14 @@ Change one meaningful conversion variable at a time when possible. Keep the meas
 - Project enquiry step 2 is explicitly optional and can be skipped without abandoning the form.
 
 Measure these changes with the existing CTA/funnel events before making the next major conversion-layout change.
+
+
+## Stage 8 Batch 3 trust changes
+
+- Added a homepage “Confidence before you commit” section focused on verifiable process rather than unsupported testimonials or completion claims.
+- Explicitly separates Studio Bind Architects (design practice since 2019) from Bind Builds (construction chapter launched in 2026).
+- Makes the distinction between design work, site coordination, ongoing construction and completed construction visible before enquiry.
+- Surfaces written scope, specifications, exclusions, payment stages and project-specific documentation as trust evidence.
+- Explains that project/site visits depend on relevance, owner permission, scheduling and safety; unavailable visits are not replaced with unrelated claims.
+- Added an About-page assessment framework and a trust link beside the enquiry form.
+- Added `trust_evidence_click` to measure whether visitors use these confidence-building resources.
