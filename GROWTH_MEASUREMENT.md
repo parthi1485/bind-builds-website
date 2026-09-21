@@ -16,6 +16,7 @@ Keep these as the primary GA4 key events.
 - `project_cta_click`
 - `project_form_step_view`
 - `project_form_step_complete`
+- `project_form_optional_skipped`
 - `project_enquiry`
 - `project_enquiry_error`
 
@@ -92,3 +93,14 @@ Monthly:
 ## Decision rule
 
 Change one meaningful conversion variable at a time when possible. Keep the measurement names stable so before/after performance remains comparable.
+
+
+## Stage 8 Batch 2 conversion changes
+
+- Homepage hero keeps one primary action (project brief) and makes the budget action explicit: “Calculate my construction cost”.
+- Homepage hero now states the expected friction up front: roughly two minutes, no commitment, English or Tamil.
+- Estimate results surface the site-specific project CTA immediately after the total instead of burying it lower in the report.
+- The estimate CTA carries package, area and estimate context into the project brief.
+- Project enquiry step 2 is explicitly optional and can be skipped without abandoning the form.
+
+Measure these changes with the existing CTA/funnel events before making the next major conversion-layout change.
