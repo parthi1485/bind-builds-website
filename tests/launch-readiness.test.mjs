@@ -52,8 +52,13 @@ test('lead conversion events remain wired to the conversion paths', () => {
   assert.match(report,/pdf_gate_open/);
   assert.match(report,/estimateConversionBar/);
   assert.match(project,/project_form_optional_skipped/);
+  assert.match(project,/lead_intent_selected/);
+  assert.match(project,/Just researching/);
+  assert.match(project,/qualificationNextStep/);
   assert.match(analytics,/trust_evidence_click/);
   const home=read('app/page.tsx');
+  const slug=read('app/[slug]/page.tsx');
+  assert.match(slug,/projectFitIntro/);
   assert.match(home,/confidence-before-commit/);
   assert.match(home,/One practice\. Two chapters\./);
 });
