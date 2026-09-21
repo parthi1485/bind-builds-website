@@ -6,7 +6,7 @@ export const site = {
   whatsapp: '918072701454',
   email: 'bindbuilds@gmail.com',
   address: {
-    streetAddress: 'No. B/28, 2nd Cross Street, Ramapuram',
+    streetAddress: 'No. B/28, 2nd Cross Street, Kurinji Nagar, Ramapuram',
     addressLocality: 'Chennai',
     addressRegion: 'Tamil Nadu',
     postalCode: '600089',
