@@ -57,10 +57,21 @@ export function Nav() {
   </>;
 }
 export function Footer() {
+  const guideLinks = [
+    ['House construction', '/house-construction-chennai'],
+    ['Construction cost 2026', '/construction-cost-chennai'],
+    ['Turnkey construction', '/turnkey-house-construction-chennai'],
+    ['Building approvals', '/building-plan-approval-chennai'],
+    ['Service areas', '/service-areas-chennai'],
+    ['Demolition + rebuild', '/demolition-rebuild-house-chennai'],
+  ];
   return <footer className="footer">
-    <div className="footerIdentity"><Link href="/" className="brandImage" aria-label="Bind Builds home"><Image src="/bind-builds-logo.svg" alt="Bind Builds" width={190} height={66} /></Link><p>Architect-led construction.<br />Chennai, Tamil Nadu.</p></div>
-    <nav className="footerLinks" aria-label="Footer navigation">{navigation.map(([name, href]) => href.startsWith('http') ? <a href={href} key={href} target="_blank" rel="noopener noreferrer">{name}</a> : <Link href={href} key={href}>{name}</Link>)}<Link className="footerGuideLink" href="/house-construction-chennai">House construction in Chennai</Link><Link className="footerGuideLink" href="/construction-cost-chennai">Construction cost Chennai 2026</Link><Link className="footerGuideLink" href="/turnkey-house-construction-chennai">Turnkey house construction Chennai</Link><Link className="footerGuideLink" href="/service-areas-chennai">Construction service areas Chennai</Link><Link className="footerGuideLink" href="/demolition-rebuild-house-chennai">Demolition & rebuild Chennai</Link></nav>
-    <div className="footerContact"><a href={`tel:${site.telephone}`}>{site.phone}</a><a href={`mailto:${site.email}`}>{site.email}</a><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">Chat on WhatsApp ↗</a><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a></div>
+    <div className="footerIdentity"><Link href="/" className="brandImage" aria-label="Bind Builds home"><Image src="/bind-builds-logo.svg" alt="Bind Builds" width={190} height={66} /></Link><p>Architect-led construction.<br />Chennai, Tamil Nadu.</p><Link className="footerPrimaryLink" href="/start-a-project">Plan my home ↗</Link></div>
+    <div className="footerSitemap">
+      <div><span className="footerLabel">Explore</span><nav className="footerLinks" aria-label="Footer navigation">{navigation.map(([name, href]) => href.startsWith('http') ? <a href={href} key={href} target="_blank" rel="noopener noreferrer">{name}</a> : <Link href={href} key={href}>{name}</Link>)}</nav></div>
+      <div><span className="footerLabel">Chennai guides</span><nav className="footerLinks footerGuideLinks" aria-label="Chennai construction guides">{guideLinks.map(([name,href])=><Link className="footerGuideLink" href={href} key={href}>{name}</Link>)}</nav></div>
+    </div>
+    <div className="footerContact"><span className="footerLabel">Contact</span><a href={`tel:${site.telephone}`}>{site.phone}</a><a href={`mailto:${site.email}`}>{site.email}</a><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">Chat on WhatsApp ↗</a><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a></div>
     <div className="footerBottom"><span>© {new Date().getFullYear()} Bind Builds</span><span>Plan • Build • Deliver</span><Link href="/privacy">Privacy</Link></div>
   </footer>;
 }
