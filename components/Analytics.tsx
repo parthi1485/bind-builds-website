@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { trackEvent } from '@/lib/analytics';
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-3JP7ZM2MXT';
 
 export default function Analytics() {
   const pathname = usePathname();
