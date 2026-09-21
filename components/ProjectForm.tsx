@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import { site, whatsappUrl } from '@/lib/site';
+import { trackEvent } from '@/lib/analytics';
 
 type Brief = {type:string;location:string;stage:string;area:string;budget:string;timeline:string;notes:string;name:string;phone:string;email:string;package:string};
 type Props = { source?: 'Website – Project Enquiry' | 'Website – Contact Form' };
@@ -35,6 +36,7 @@ export default function ProjectForm({source='Website – Project Enquiry'}:Props
    })});
    const result=await response.json().catch(()=>({ok:false}));
    if(!response.ok||!result.ok)throw new Error('Lead capture failed');
+   trackEvent('project_enquiry',{source,project_type:form.type,budget_band:form.budget,timeline:form.timeline});
    setPrepared(true);
   }catch{
    setSubmitStatus('We could not send your enquiry right now. Please try again, or use WhatsApp below.');
