@@ -1,3 +1,22 @@
 import type { MetadataRoute } from 'next';
 import { site } from '@/lib/site';
-export default function sitemap():MetadataRoute.Sitemap{return ['', '/about','/packages','/cost-calculator','/house-construction-chennai','/building-plan-approval-chennai','/process','/faq','/contact','/start-a-project','/privacy'].map(path=>({url:site.url+path,lastModified:path==='/faq'?'2026-09-18':['','/building-plan-approval-chennai','/house-construction-chennai','/faq','/packages'].includes(path)?'2026-09-17':undefined,changeFrequency:'monthly',priority:path===''?1:path==='/faq'?.9:.7}));}
+
+const updated='2026-09-21';
+export default function sitemap():MetadataRoute.Sitemap{
+ const pages=[
+  ['',1],
+  ['/about',.7],
+  ['/packages',.9],
+  ['/cost-calculator',.95],
+  ['/construction-cost-chennai',.95],
+  ['/house-construction-chennai',.95],
+  ['/turnkey-house-construction-chennai',.9],
+  ['/building-plan-approval-chennai',.9],
+  ['/process',.8],
+  ['/faq',.85],
+  ['/contact',.7],
+  ['/start-a-project',.8],
+  ['/privacy',.3],
+ ] as const;
+ return pages.map(([path,priority])=>({url:site.url+path,lastModified:updated,changeFrequency:'monthly',priority}));
+}
