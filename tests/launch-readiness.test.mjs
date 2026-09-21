@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import { classifyLead } from '../lib/lead-quality.ts';
+import { createLeadFollowup } from '../lib/lead-followup.ts';
 
 const read = path => readFileSync(new URL('../'+path, import.meta.url), 'utf8');
 
@@ -58,6 +59,8 @@ test('lead conversion events remain wired to the conversion paths', () => {
   assert.match(project,/qualificationNextStep/);
   assert.match(project,/lead_priority/);
   assert.match(project,/leadHandoffLine/);
+  assert.match(project,/leadFollowupSummary/);
+  assert.match(project,/followup_mode/);
   assert.match(analytics,/trust_evidence_click/);
   const home=read('app/page.tsx');
   const slug=read('app/[slug]/page.tsx');
@@ -88,4 +91,22 @@ test('lead handoff scoring separates ready and early-stage enquiries', () => {
   const nurture=classifyLead({intent:'Just researching',stage:'Looking for a plot',timeline:'Exploring options',budget:'Not decided yet',area:'',package:''});
   assert.equal(nurture.priority,'Nurture');
   assert.ok(nurture.score <= 3);
+});
+
+
+test('lead follow-up intelligence changes by priority', () => {
+  const priority=createLeadFollowup({
+    name:'Ramesh Kumar', type:'New home', location:'Pallikaranai', intent:'Ready to discuss scope and next steps', stage:'Land purchased', timeline:'Within 3 months', budget:'₹50 lakh–₹1 crore', area:'1800', package:'Elevate'
+  });
+  assert.equal(priority.priority,'Priority');
+  assert.match(priority.responseMode,/Call first/i);
+  assert.match(priority.whatsapp,/Ramesh/);
+  assert.match(priority.whatsapp,/Pallikaranai/);
+  const develop=createLeadFollowup({name:'Priya',type:'New home',location:'Porur',intent:'Comparing construction proposals',stage:'Design in progress',timeline:'3–6 months',budget:'Not decided yet',area:'',package:''});
+  assert.equal(develop.priority,'Develop');
+  assert.match(develop.firstQuestion,/built-up area|budget|proposal/i);
+  const nurture=createLeadFollowup({name:'Arun',type:'New home',location:'Chennai',intent:'Just researching',stage:'Looking for a plot',timeline:'Exploring options',budget:'Not decided yet',area:'',package:''});
+  assert.equal(nurture.priority,'Nurture');
+  assert.match(nurture.responseMode,/Resource-first/i);
+  assert.ok(nurture.nurtureAsset);
 });
