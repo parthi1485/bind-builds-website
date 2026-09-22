@@ -12,11 +12,11 @@ export const extraOptions: ExtraOption[] = [
  {key:'parking',label:'Separate car parking',detail:'Exclude this area from the floor areas to avoid counting it twice. Layout and access need review.',unit:'sq.ft',quantity:'200',rate:'2350'},
  {key:'compound',label:'Compound wall',detail:'Enter wall length and average height. Wall only; gate is a separate item. Foundations and finishes affect cost.',unit:'sq.ft',quantity:'600',rate:'450'},
  {key:'gate',label:'Main gate · MS / sliding',detail:'Size, finish and automation need confirmation.',unit:'item',quantity:'1',rate:'125000'},
- {key:'sump',label:'Underground sump',detail:'Choose a family-size capacity preset or enter litres manually. Actual sizing depends on occupancy, water supply and site requirements.',unit:'litres',quantity:'1000',rate:'30',quantityPresets:[
-  {label:'1–4 members',quantity:1000,note:'1,000 L'},
-  {label:'5–8 members',quantity:2000,note:'2,000 L'},
-  {label:'9–12 members',quantity:3000,note:'3,000 L'},
-  {label:'13–16 members',quantity:4000,note:'4,000 L'},
+ {key:'sump',label:'Underground sump',detail:'Choose a practical family-size planning capacity or enter litres manually. Presets include a multi-day storage buffer; actual sizing depends on occupancy, supply frequency, tanker dependence, overhead storage and site requirements.',unit:'litres',quantity:'3000',rate:'30',quantityPresets:[
+  {label:'1–4 members',quantity:3000,note:'3,000 L'},
+  {label:'5–8 members',quantity:5000,note:'5,000 L'},
+  {label:'9–12 members',quantity:6000,note:'6,000 L'},
+  {label:'13–16 members',quantity:9000,note:'9,000 L'},
  ]},
  {key:'septic',label:'Conventional septic tank',detail:'Capacity is a planning allowance only. Final sizing and drainage solution require professional review.',unit:'litres',quantity:'2000',rate:'25'},
  {key:'solar',label:'Solar panels · 3 kW',detail:'Reference equipment allowance; capacity and installation scope need confirmation.',unit:'system',quantity:'1',rate:'150000'},
