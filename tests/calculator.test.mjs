@@ -73,7 +73,7 @@ test('floor configurations produce 6, 10, 14, 18 month planning scenarios',()=>{
 test('unit rates, custom totals and unpriced choices remain distinct',()=>{
  const sump=extraOptions.find(item=>item.key==='sump');
  const value={...initialExtra(sump),selected:true};
- assert.equal(extraAmount(value),90000);
+ assert.equal(extraAmount(value),180000);
  assert.equal(extraAmount({...value,quantity:'7500',rate:'45'}),337500);
  assert.equal(extraAmount({...value,mode:'lump',amount:'123456'}),123456);
  assert.equal(extraAmount({...value,mode:'unpriced'}),null);
@@ -82,7 +82,7 @@ test('unit rates, custom totals and unpriced choices remain distinct',()=>{
  assert.ok(Number.isNaN(extraAmount({...value,quantity:'-10'})));
  assert.ok(Number.isNaN(extraAmount({...value,rate:'Infinity'})));
  assert.equal(extraDescription(sump,{...value,quantity:'7500',rate:'45'}),'7500 litres × ₹45 / litres');
- assert.deepEqual(sump.quantityPresets.map(p=>p.quantity),[3000,5000,6000,9000]);
+ assert.deepEqual(sump.quantityPresets.map(p=>p.quantity),[6000,9000,12000,15000]);
  const septic=extraOptions.find(item=>item.key==='septic');
  assert.equal(septic.rate,'25');
  const tank=extraOptions.find(item=>item.key==='tank');
