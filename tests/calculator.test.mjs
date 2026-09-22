@@ -53,7 +53,7 @@ test('EMI follows amortization and handles zero interest', () => {
   assert.equal(calculateEmi(NaN, 8, 20), null);
 });
 
-import { constructionMonths, parkingArea, extraAmount, extraOptions, initialExtra, extraDescription } from '../lib/calculator-options.ts';
+import { compoundWallArea, constructionMonths, parkingArea, extraAmount, extraOptions, initialExtra, extraDescription } from '../lib/calculator-options.ts';
 test('car presets charge parking once as an extra, not again at the package rate', () => {
  const parking=extraOptions.find(item=>item.key==='parking');
  for(const cars of [1,2,3,4]) {
@@ -73,7 +73,7 @@ test('floor configurations produce 6, 10, 14, 18 month planning scenarios',()=>{
 test('unit rates, custom totals and unpriced choices remain distinct',()=>{
  const sump=extraOptions.find(item=>item.key==='sump');
  const value={...initialExtra(sump),selected:true};
- assert.equal(extraAmount(value),200000);
+ assert.equal(extraAmount(value),30000);
  assert.equal(extraAmount({...value,quantity:'7500',rate:'45'}),337500);
  assert.equal(extraAmount({...value,mode:'lump',amount:'123456'}),123456);
  assert.equal(extraAmount({...value,mode:'unpriced'}),null);
@@ -82,8 +82,14 @@ test('unit rates, custom totals and unpriced choices remain distinct',()=>{
  assert.ok(Number.isNaN(extraAmount({...value,quantity:'-10'})));
  assert.ok(Number.isNaN(extraAmount({...value,rate:'Infinity'})));
  assert.equal(extraDescription(sump,{...value,quantity:'7500',rate:'45'}),'7500 litres × ₹45 / litres');
+ assert.deepEqual(sump.quantityPresets.map(p=>p.quantity),[1000,2000,3000,4000]);
+ const septic=extraOptions.find(item=>item.key==='septic');
+ assert.equal(septic.rate,'25');
  const tank=extraOptions.find(item=>item.key==='tank');
+ assert.equal(tank.rate,'35');
  assert.equal(extraAmount(initialExtra(tank)),null,'included overhead capacity is not automatically charged twice');
+ assert.equal(extraOptions.some(item=>item.key==='recycling'),false);
+ assert.equal(extraOptions.some(item=>item.key==='smart'),false);
 });
 
 test('reference categories reconcile with additional items and no reserve',()=>{
@@ -121,4 +127,14 @@ test('package comparison can keep headroom allowance fixed while package floor r
  assert.equal(comparisons[1].base,estimate.base);
  assert.equal(comparisons[1].base-comparisons[0].base,estimate.floorArea*(2649-2399));
  assert.equal(comparisons[2].base-comparisons[1].base,estimate.floorArea*(3199-2649));
+});
+
+test('compound wall uses length × height square-foot pricing at the reference rate',()=> {
+ const compound=extraOptions.find(item=>item.key==='compound');
+ const value={...initialExtra(compound),selected:true};
+ assert.equal(compound.unit,'sq.ft');
+ assert.equal(compound.rate,'450');
+ assert.equal(compoundWallArea(value.length,value.height),'600');
+ assert.equal(extraAmount(value),270000);
+ assert.match(extraDescription(compound,value),/100 ft × 6 ft = 600 sq.ft × ₹450 \/ sq.ft/);
 });

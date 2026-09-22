@@ -1,21 +1,50 @@
 /** Reference-based allowances for exploration, not confirmed Bind Builds prices. */
-export type ExtraOption = {key:string; label:string; detail:string; unit:string; quantity:string; rate:string; presets?:{label:string;rate:number}[]};
+export type ExtraOption = {
+ key:string;
+ label:string;
+ detail:string;
+ unit:string;
+ quantity:string;
+ rate:string;
+ quantityPresets?:{label:string;quantity:number;note?:string}[];
+};
 export const extraOptions: ExtraOption[] = [
  {key:'parking',label:'Separate car parking',detail:'Exclude this area from the floor areas to avoid counting it twice. Layout and access need review.',unit:'sq.ft',quantity:'200',rate:'2350'},
- {key:'compound',label:'Compound wall',detail:'Wall only; gate is a separate item. Height, foundations and finishes affect cost.',unit:'running ft',quantity:'100',rate:'2750'},
+ {key:'compound',label:'Compound wall',detail:'Enter wall length and average height. Wall only; gate is a separate item. Foundations and finishes affect cost.',unit:'sq.ft',quantity:'600',rate:'450'},
  {key:'gate',label:'Main gate · MS / sliding',detail:'Size, finish and automation need confirmation.',unit:'item',quantity:'1',rate:'125000'},
- {key:'sump',label:'Underground sump',detail:'Select a capacity for budgeting; actual sizing depends on demand and supply.',unit:'litres',quantity:'5000',rate:'40'},
- {key:'septic',label:'Conventional septic tank',detail:'Alternative to the recycling allowance here. The site drainage solution requires professional review.',unit:'litres',quantity:'2000',rate:'35'},
- {key:'recycling',label:'Wastewater recycling system',detail:'Choose an occupancy allowance. Suitability, treatment, discharge and scope need review.',unit:'system',quantity:'1',rate:'170000',presets:[{label:'1–6 people',rate:170000},{label:'7–10 people',rate:200000},{label:'11–15 people',rate:250000}]},
+ {key:'sump',label:'Underground sump',detail:'Choose a family-size capacity preset or enter litres manually. Actual sizing depends on occupancy, water supply and site requirements.',unit:'litres',quantity:'1000',rate:'30',quantityPresets:[
+  {label:'1–4 members',quantity:1000,note:'1,000 L'},
+  {label:'5–8 members',quantity:2000,note:'2,000 L'},
+  {label:'9–12 members',quantity:3000,note:'3,000 L'},
+  {label:'13–16 members',quantity:4000,note:'4,000 L'},
+ ]},
+ {key:'septic',label:'Conventional septic tank',detail:'Capacity is a planning allowance only. Final sizing and drainage solution require professional review.',unit:'litres',quantity:'2000',rate:'25'},
  {key:'solar',label:'Solar panels · 3 kW',detail:'Reference equipment allowance; capacity and installation scope need confirmation.',unit:'system',quantity:'1',rate:'150000'},
  {key:'cctv',label:'CCTV & security',detail:'Devices and cabling beyond the package provision.',unit:'system',quantity:'1',rate:'30000'},
- {key:'smart',label:'Smart-home automation',detail:'Equipment beyond package provisions; devices and controls to be agreed.',unit:'system',quantity:'1',rate:'20000'},
  {key:'lift',label:'Lift · 4 passengers',detail:'Equipment allowance; stops and installation affect price. Check shaft and civil-work scope separately.',unit:'item',quantity:'1',rate:'800000'},
- {key:'tank',label:'Additional overhead tank capacity',detail:'Only extra capacity beyond the included tank. This reference RCC rate is not an upgrade credit calculation.',unit:'litres',quantity:'',rate:'55'},
+ {key:'tank',label:'Additional overhead tank capacity',detail:'Only extra capacity beyond the included tank. This reference rate is not an upgrade credit calculation.',unit:'litres',quantity:'',rate:'35'},
  {key:'interiors',label:'Interiors & fitted furniture',detail:'Enter an allowance or leave unpriced for a project-specific proposal.',unit:'item',quantity:'1',rate:''},
 ];
-export type ExtraSelection = {selected:boolean;mode:'unit'|'lump'|'unpriced';quantity:string;rate:string;amount:string;cars:number};
-export const initialExtra = (item:ExtraOption):ExtraSelection => ({selected:false,mode:item.rate?'unit':'unpriced',quantity:item.quantity,rate:item.rate,amount:'',cars:item.key==='parking'?1:0});
+export type ExtraSelection = {
+ selected:boolean;
+ mode:'unit'|'lump'|'unpriced';
+ quantity:string;
+ rate:string;
+ amount:string;
+ cars:number;
+ length?:string;
+ height?:string;
+};
+export const initialExtra = (item:ExtraOption):ExtraSelection => ({
+ selected:false,
+ mode:item.rate?'unit':'unpriced',
+ quantity:item.quantity,
+ rate:item.rate,
+ amount:'',
+ cars:item.key==='parking'?1:0,
+ length:item.key==='compound'?'100':'',
+ height:item.key==='compound'?'6':'',
+});
 export function extraAmount(value:ExtraSelection):number|null {
  if(value.mode==='unpriced')return null;
  if(value.mode==='lump')return value.amount.trim()===''?null:Number(value.amount);
@@ -23,6 +52,12 @@ export function extraAmount(value:ExtraSelection):number|null {
  const quantity=Number(value.quantity),rate=Number(value.rate);
  if(!Number.isFinite(quantity)||!Number.isFinite(rate)||quantity<=0||quantity>100000||rate<=0||rate>10000000)return NaN;
  return Math.round(quantity*rate);
+}
+export function compoundWallArea(length:string,height:string):string {
+ if(!length.trim()||!height.trim())return '';
+ const l=Number(length),h=Number(height);
+ if(!Number.isFinite(l)||!Number.isFinite(h)||l<=0||h<=0||l>10000||h>100)return '';
+ return String(Math.round(l*h*100)/100);
 }
 export function parkingArea(cars:number) {
  if(!Number.isInteger(cars)||cars<1||cars>4)throw new RangeError('Select 1–4 cars');
@@ -33,6 +68,7 @@ export function constructionMonths(floors:number) {
  return 6+(floors-1)*4;
 }
 export function extraDescription(item:ExtraOption,value:ExtraSelection) {
+ if(item.key==='compound'&&value.mode==='unit'&&value.length?.trim()&&value.height?.trim()&&value.quantity.trim()&&value.rate.trim())return `${value.length} ft × ${value.height} ft = ${value.quantity} sq.ft × ₹${Number(value.rate).toLocaleString('en-IN')} / sq.ft`;
  if(value.mode==='unit' && value.quantity.trim() && value.rate.trim())return `${value.quantity} ${item.unit} × ₹${Number(value.rate).toLocaleString('en-IN')} / ${item.unit}${item.key==='parking'&&value.cars?` · ${value.cars}-car preset`:''}`;
  return value.mode==='lump'?'Custom total allowance':'To be quoted';
 }

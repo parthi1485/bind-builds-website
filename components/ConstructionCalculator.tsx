@@ -80,7 +80,6 @@ export default function ConstructionCalculator() {
   const updateExtra = (key:string,change:Partial<ExtraSelection>) => setAllowances(current => {
     const item=extraOptions.find(item=>item.key===key)!;
     const updated={...current,[key]:{...initialExtra(item),...current[key],...change}};
-    if(change.selected && (key==='septic'||key==='recycling')) {const other=key==='septic'?'recycling':'septic'; updated[other]={...initialExtra(extraOptions.find(item=>item.key===other)!),...current[other],selected:false};}
     return updated;
   });
   const duration=constructionMonths(floorCount);
