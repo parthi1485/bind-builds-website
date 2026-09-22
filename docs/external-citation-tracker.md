@@ -25,7 +25,7 @@ Use this NAP exactly on every external profile. Do not keyword-stuff the busines
 | P0 | Studio Bind Architects website | Partial | Add a visible contextual backlink from Studio Bind to Bind Builds | Anchor: Architect-Led Construction by Bind Builds |
 | P1 | Apple Business / Apple Maps | Ready — owner verification required | Sign in at Apple Business, create/claim organisation + location, then verify using Apple-supported methods | https://business.apple.com/ |
 | P1 | Bing Places / Microsoft local listing | Ready — owner verification required | Sign in to Bing Places, search existing listing first, then claim/update or create if absent | https://www.bingplaces.com/ |
-| P1 | Justdial | Ready — mobile OTP required | Start Free Listing with +91 80727 01454; search for duplicates before completing | https://www.justdial.com/Free-Listing |
+| P1 | Justdial | Registered — profile completion pending | Free listing created for Bind Builds; complete profile to 90%+ before considering any paid lead/ranking package | https://www.justdial.com/Free-Listing |
 | P1 | Houzz India | Ready — account creation required | Create free professional profile, use Construction / Design-Build category closest to actual service, add real project evidence | https://www.houzz.in/ |
 | P1 | Sulekha | Ready — mobile OTP required | List/claim business under Building Consultants & Contractors / relevant category, then complete profile | https://www.sulekha.com/list-your-business |
 | P2 | LinkedIn | To create / strengthen | Create Bind Builds company presence; connect founder profile to company | Use bindbuilds.com |
@@ -91,3 +91,10 @@ For each platform:
 - do not add AI-generated buildings as project evidence;
 - do not pay for ads merely to obtain a citation;
 - store the final live profile URL in this tracker after verification.
+
+
+### Justdial update — 22 September 2026
+- Bind Builds free listing registered successfully.
+- Current profile score shown by Justdial: 36%.
+- Paid Premium / ranking offer intentionally not required for citation authority.
+- Next task: complete free profile fields, categories, hours, website, email, description, services, social links and real business/project images.
