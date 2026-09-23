@@ -9,12 +9,12 @@ const title='House Construction Service Areas in Chennai + Coimbatore';
 const description='Priority Bind Builds house-construction areas: Ramapuram, Valasaravakkam, Porur, Virugambakkam, Anna Nagar, OMR, ECR, Poonamallee and selected Coimbatore projects.';
 export const metadata=pageMetadata(title,description,path);
 
-const priorityZones=[
+const priorityZones:Array<[string,Array<[string,string]>]>=[
  ['Inner West Chennai',[['Valasaravakkam','/house-construction-west-chennai#valasaravakkam'],['Ramapuram','/house-construction-west-chennai#ramapuram'],['Virugambakkam','/house-construction-west-chennai#virugambakkam'],['Porur','/house-construction-west-chennai#porur'],['Vadapalani','/house-construction-west-chennai#vadapalani'],['Saligramam','/house-construction-west-chennai#saligramam']]],
  ['West growth belt',[['Gerugambakkam','/house-construction-west-chennai#gerugambakkam'],['Mangadu','/house-construction-west-chennai#mangadu'],['Kundrathur','/house-construction-west-chennai#kundrathur'],['Kolapakkam','/house-construction-west-chennai#kolapakkam'],['Maduravoyal','/house-construction-west-chennai#maduravoyal'],['Vanagaram','/house-construction-west-chennai#vanagaram'],['Kattupakkam','/house-construction-west-chennai#kattupakkam'],['Poonamallee','/house-construction-west-chennai#poonamallee']]],
  ['Central / North-West',[['Anna Nagar','/house-construction-anna-nagar-chennai#anna-nagar'],['Padi','/house-construction-anna-nagar-chennai#padi'],['Koyambedu','/house-construction-anna-nagar-chennai#koyambedu']]],
  ['South-East corridors',[['OMR','/house-construction-omr-ecr-chennai#omr'],['ECR','/house-construction-omr-ecr-chennai#ecr']]],
-] as const;
+];
 
 const faqs=[
  ['Do you work in all of these Chennai localities?','These are priority enquiry areas, not an automatic service guarantee. We confirm fit from the exact site, access, project type, approximate construction value, timeline and current site-management capacity.'],
