@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Page } from '@/components/Site';
 import StructuredData from '@/components/StructuredData';
+import LocalityIntentGrid from '@/components/LocalityIntentGrid';
 import { pageMetadata, breadcrumbSchema } from '@/lib/seo';
 import { site, whatsappUrl } from '@/lib/site';
 
@@ -10,6 +11,11 @@ const description='Architect-led house construction in Anna Nagar, Padi and Koya
 export const metadata=pageMetadata(title,description,path);
 
 const areas=['Anna Nagar','Padi','Koyambedu'];
+const localityIntent=[
+ {id:'anna-nagar',name:'House construction in Anna Nagar',eyebrow:'Anna Nagar',copy:'Established plots often bring rebuild decisions, close neighbours, mature street conditions, parking expectations and a high bar for design quality. We review the existing context before finalising the new-home brief.'},
+ {id:'padi',name:'House construction in Padi',eyebrow:'Padi',copy:'For independent homes and rebuilds, we review street access, plot dimensions, adjoining buildings, parking, utilities and construction logistics together with the architectural programme.'},
+ {id:'koyambedu',name:'House construction in Koyambedu',eyebrow:'Koyambedu',copy:'Urban access, mixed surrounding uses and tight site logistics can influence the execution plan. The proposal should separate base construction from demolition, approvals and site-specific external works.'},
+];
 const faqs=[
  ['Do you take independent house projects in Anna Nagar?','Yes, subject to project fit. We review the exact plot, existing building if any, access, family programme, approximate area, budget and timeline before confirming the next step.'],
  ['Can Bind Builds handle demolition and rebuild in Anna Nagar, Padi or Koyambedu?','Yes, where the project fits. Demolition, utility disconnection, neighbour protection and existing-condition risks are separated from the new construction scope.'],
@@ -25,6 +31,7 @@ export default function AnnaNagar(){
    <nav className="guideBreadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><Link href="/service-areas-chennai">Service areas</Link><span aria-hidden="true">/</span><span>Anna Nagar + nearby</span></nav>
    <header className="guideIntro"><span className="productEyebrow">Anna Nagar · Padi · Koyambedu</span><h2>New home or rebuild.<br/><span>Start with the existing context.</span></h2><p>For established Chennai neighbourhoods, the surrounding buildings, street access, demolition conditions, family requirements, parking and approval constraints can matter as much as the plot area itself. Bind Builds coordinates the design and construction conversation around those real conditions.</p><div className="guideActions"><Link className="cta primary" href="/start-a-project">Discuss my site ↗</Link><Link className="productTextLink" href="/demolition-rebuild-house-chennai">Planning a rebuild? Start here →</Link></div></header>
    <section className="guideSection"><span className="productEyebrow">Priority areas</span><h2>One cluster.<br/><span>Three site contexts.</span></h2><div className="serviceAreaGrid">{areas.map(area=><article key={area}><h3>{area}</h3><p>We review the exact street, plot dimensions, adjoining buildings, access, existing structure and proposed family programme before confirming the construction route.</p><Link href="/start-a-project">Check a {area} project →</Link></article>)}</div></section>
+   <section className="guideSection" id="locality-guides"><span className="productEyebrow">Local search, useful answers</span><h2>Three neighbourhoods.<br/><span>Three real site contexts.</span></h2><LocalityIntentGrid items={localityIntent}/></section>
    <section className="guideSection"><span className="productEyebrow">Typical early decisions</span><h2>Make the difficult decisions<br/><span>before site work begins.</span></h2><div className="documentGrid">{[
     ['01','Retain or demolish','Understand the existing structure and whether the project is a rebuild, renovation or new construction before mixing scopes.'],
     ['02','Neighbour protection','Demolition, excavation and new structural work need a site-specific approach where neighbouring buildings sit close to the plot.'],
