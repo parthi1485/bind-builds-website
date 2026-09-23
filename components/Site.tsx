@@ -65,10 +65,14 @@ export function Footer() {
     ['Turnkey construction', '/turnkey-house-construction-chennai'],
     ['Building approvals', '/building-plan-approval-chennai'],
     ['Service areas', '/service-areas-chennai'],
+    ['West Chennai', '/house-construction-west-chennai'],
+    ['OMR + ECR', '/house-construction-omr-ecr-chennai'],
+    ['Anna Nagar + nearby', '/house-construction-anna-nagar-chennai'],
+    ['Coimbatore', '/house-construction-coimbatore'],
     ['Demolition + rebuild', '/demolition-rebuild-house-chennai'],
   ];
   return <footer className="footer">
-    <div className="footerIdentity"><Link href="/" className="brandImage" aria-label="Bind Builds home"><Image src="/bind-builds-logo.svg" alt="Bind Builds" width={190} height={66} /></Link><p>Architect-led construction.<br />Chennai, Tamil Nadu.</p><Link className="footerPrimaryLink" href="/start-a-project">Plan my home ↗</Link></div>
+    <div className="footerIdentity"><Link href="/" className="brandImage" aria-label="Bind Builds home"><Image src="/bind-builds-logo.svg" alt="Bind Builds" width={190} height={66} /></Link><p>Architect-led construction.<br />Chennai · Selected Coimbatore projects.</p><Link className="footerPrimaryLink" href="/start-a-project">Plan my home ↗</Link></div>
     <div className="footerSitemap">
       <div><span className="footerLabel">Explore</span><nav className="footerLinks" aria-label="Footer navigation">{navigation.map(([name, href]) => href.startsWith('http') ? <a href={href} key={href} target="_blank" rel="noopener noreferrer">{name}</a> : <Link href={href} key={href}>{name}</Link>)}</nav></div>
       <div><span className="footerLabel">Chennai guides</span><nav className="footerLinks footerGuideLinks" aria-label="Chennai construction guides">{guideLinks.map(([name,href])=><Link className="footerGuideLink" href={href} key={href}>{name}</Link>)}</nav></div>
