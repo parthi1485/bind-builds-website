@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { site, whatsappUrl } from '@/lib/site';
 
-const navigation = [['Projects', site.portfolio], ['Packages', '/packages'], ['Calculator', '/cost-calculator'], ['Process', '/process'], ['Approvals', '/building-plan-approval-chennai'], ['About', '/about'], ['FAQs', '/faq'], ['Contact', '/contact']];
+const navigation = [['Projects', '/project-evidence'], ['Packages', '/packages'], ['Calculator', '/cost-calculator'], ['Process', '/process'], ['Approvals', '/building-plan-approval-chennai'], ['About', '/about'], ['FAQs', '/faq'], ['Contact', '/contact']];
 export function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
