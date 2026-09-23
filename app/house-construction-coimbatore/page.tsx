@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Page } from '@/components/Site';
 import StructuredData from '@/components/StructuredData';
+import LocalityIntentGrid from '@/components/LocalityIntentGrid';
 import { pageMetadata, breadcrumbSchema } from '@/lib/seo';
 import { site, whatsappUrl } from '@/lib/site';
 
@@ -9,6 +10,12 @@ const title='Architect-Led House Construction Company in Coimbatore | Bind Build
 const description='Architect-led house construction in Coimbatore for selected residential projects. Design, engineering coordination, budgeting, supervision planning and construction scope by Bind Builds.';
 export const metadata=pageMetadata(title,description,path);
 
+const coimbatoreIntent=[
+ {id:'independent-house',name:'Independent house construction in Coimbatore',eyebrow:'Own plot / Family home',copy:'For an independent house, the first inputs are the plot, users, floor requirements, parking, budget and realistic start date. Architecture and engineering should be coordinated before the construction scope is frozen.'},
+ {id:'turnkey',name:'Turnkey house construction in Coimbatore',eyebrow:'End-to-end delivery',copy:'A turnkey proposal should make the area basis, design responsibility, engineering, approvals, material specification, site supervision, exclusions and change process clear—not just quote one square-foot rate.'},
+ {id:'villa',name:'Villa construction in Coimbatore',eyebrow:'Custom residential',copy:'Villa planning can involve larger openings, landscape, outdoor living, premium finishes and more complex services. We treat those choices as part of the design-and-budget conversation before execution.'},
+ {id:'rebuild',name:'Demolition and rebuild in Coimbatore',eyebrow:'Existing house / New home',copy:'For rebuilds, the existing structure, utilities, demolition, salvage, neighbour protection and new foundation strategy should be separated from the new construction scope before pricing.'},
+];
 const faqs=[
  ['Does Bind Builds have a Coimbatore office?','Bind Builds is Chennai-based. We consider selected Coimbatore residential projects when the project size, design scope, supervision plan, travel and local execution logistics can be agreed clearly.'],
  ['Do you undertake turnkey house construction in Coimbatore?','We consider selected end-to-end residential projects. The exact delivery model, local site responsibility, consultant coordination, visit frequency, commercial basis and exclusions are confirmed project by project.'],
@@ -23,6 +30,7 @@ export default function CoimbatoreConstruction(){
   <article className="guidePage">
    <nav className="guideBreadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><Link href="/service-areas-chennai">Service areas</Link><span aria-hidden="true">/</span><span>House construction in Coimbatore</span></nav>
    <header className="guideIntro"><span className="productEyebrow">Selected residential projects · Coimbatore</span><h2>Design first.<br/><span>Build with a clear delivery model.</span></h2><p>Bind Builds considers selected residential construction projects in Coimbatore where the project size, architecture scope, site conditions, travel and supervision model can be agreed clearly. We are Chennai-based, so we state that operating model upfront rather than presenting a local office we do not have.</p><div className="guideActions"><Link className="cta primary" href="/start-a-project">Discuss my Coimbatore project ↗</Link><a className="productTextLink" href={whatsappUrl('Hello Bind Builds, I am planning a house construction project in Coimbatore and would like to discuss project fit.')} target="_blank" rel="noopener noreferrer">Talk on WhatsApp ↗</a></div></header>
+   <section className="guideSection" id="project-types"><span className="productEyebrow">Coimbatore search + project intent</span><h2>What are you<br/><span>planning to build?</span></h2><LocalityIntentGrid items={coimbatoreIntent}/></section>
    <section className="guideSection"><span className="productEyebrow">How we approach Coimbatore enquiries</span><h2>Confirm the operating model<br/><span>before promising the build.</span></h2><div className="documentGrid">{[
     ['01','Site + project fit','We first review location, plot, access, approximate built-up area, budget, programme and the expected construction start.'],
     ['02','Architecture + engineering','The design, structure and services need one coordinated drawing direction before execution quantities and scope can be meaningful.'],
