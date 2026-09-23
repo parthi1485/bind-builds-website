@@ -529,3 +529,49 @@ button:disabled,.cta[aria-disabled=true]{opacity:.58}
  .floorChoices{gap:9px}
  .floorChoices label>span{min-height:82px;padding:14px}
 }
+
+
+/* Packages accordion refinement — compact, premium and mobile-first */
+.simpleCategoryList{border-bottom:1px solid #e5e7eb}
+.simpleCategory{border-top:1px solid #e5e7eb}
+.simpleCategory button{min-height:60px;padding:14px 0;gap:18px;color:#23262b;transition:color .18s ease}
+.simpleCategoryTitle{min-width:0;font-size:.82rem;font-weight:520;letter-spacing:-.005em;line-height:1.35}
+.simpleCategoryToggle{width:32px;height:32px;flex:0 0 32px;display:grid;place-items:center;border-radius:50%;background:#f3f4f6;color:#5f6873;transition:transform .22s ease,background .22s ease,color .22s ease}
+.simpleCategoryToggle svg{width:17px;height:17px;display:block;transition:transform .22s ease}
+.simpleCategory.isOpen .simpleCategoryToggle{background:#eaf3ff;color:#0071e3}
+.simpleCategory.isOpen .simpleCategoryToggle svg{transform:rotate(180deg)}
+.simpleCategory.isOpen>button{color:#006bd6}
+.simpleCategoryPanel{padding:0 0 15px;animation:detailOpen .22s ease-out}
+.simpleCategoryPanel ul{margin:0;padding:1px 0 0;list-style:none}
+.simpleCategoryPanel li{position:relative;margin:0;padding:8px 0 8px 20px;font-size:.79rem;line-height:1.58;color:#626971}
+.simpleCategoryPanel li:before{content:'✓';position:absolute;left:0;top:8px;color:#0071e3;font-size:.68rem}
+@media(hover:hover) and (pointer:fine){
+ .simpleCategory button:hover{color:#006bd6}
+ .simpleCategory button:hover .simpleCategoryToggle{background:#eaf3ff;color:#0071e3}
+}
+
+@media(max-width:760px){
+ .simplePackageGrid{gap:18px}
+ .simplePackageCard{padding:24px 20px 22px;border-radius:18px;background:#fff}
+ .simplePackageCard.featured{background:#fff;border-color:#d7e5f5}
+ .simplePackageHead{padding-bottom:16px}
+ .simplePackageHead h2{margin:18px 0 12px}
+ .simplePackageHead p{margin:22px 0 0;font-size:.68rem;letter-spacing:.085em}
+ .simpleCategoryList{margin-inline:-2px}
+ .simpleCategory button{min-height:58px;padding:13px 0;gap:14px}
+ .simpleCategoryTitle{font-size:.87rem;font-weight:510;letter-spacing:-.012em}
+ .simpleCategoryToggle{width:30px;height:30px;flex-basis:30px;background:transparent;border:1px solid #e0e4e9}
+ .simpleCategoryToggle svg{width:16px;height:16px}
+ .simpleCategory.isOpen .simpleCategoryToggle{background:#eef6ff;border-color:#c8def6}
+ .simpleCategoryPanel{padding:0 0 12px}
+ .simpleCategoryPanel ul{padding-right:2px}
+ .simpleCategoryPanel li{font-size:.78rem;line-height:1.55;padding:7px 0 7px 19px}
+ .simpleCategoryPanel li:before{top:7px}
+ .packageSelect{margin-top:20px}
+}
+
+@media(max-width:390px){
+ .simplePackageCard{padding-inline:17px}
+ .simpleCategoryTitle{font-size:.83rem}
+ .simpleCategory button{min-height:56px}
+}
