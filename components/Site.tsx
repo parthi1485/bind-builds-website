@@ -53,7 +53,7 @@ export function Nav() {
       <Link className="cta primary" href="/start-a-project" onClick={() => setOpen(false)}>Plan my home ↗</Link>
       <a className="menuPhone" href={`tel:${site.telephone}`}>{site.phone}</a>
     </div>
-    {pathname !== '/start-a-project' && pathname !== '/cost-calculator' && <div className="mobileProjectBar"><a href={`tel:${site.telephone}`}>Call the studio</a><Link href="/start-a-project">Plan my home ↗</Link></div>}
+    {pathname !== '/start-a-project' && pathname !== '/cost-calculator' && <div className={`mobileProjectBar ${pathname !== '/' || scrolled ? 'isVisible' : ''}`}><a href={`tel:${site.telephone}`}>Call the studio</a><Link href="/start-a-project">Plan my home ↗</Link></div>}
   </>;
 }
 export function Footer() {
