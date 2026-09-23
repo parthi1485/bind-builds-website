@@ -5,7 +5,7 @@ import { pageMetadata, breadcrumbSchema, founderPersonSchema } from '@/lib/seo';
 import { site } from '@/lib/site';
 
 const path='/project-evidence';
-const title='Project Evidence & Track Record | Bind Builds Chennai';
+const title='Project Evidence & Construction Track Record in Chennai';
 const description='Review how Bind Builds labels design experience, ongoing construction, pre-construction and completed work. See current project evidence and the Studio Bind Architects practice behind the construction studio.';
 export const metadata=pageMetadata(title,description,path);
 
@@ -17,7 +17,7 @@ const principles=[
 ];
 
 export default function ProjectEvidence(){
- const pageSchema={'@context':'https://schema.org','@type':'CollectionPage',name:title,description,url:site.url+path,about:{'@id':site.url+'/#organization'},author:{'@id':site.url+'/#founder'},dateModified:'2026-09-21'};
+ const pageSchema={'@context':'https://schema.org','@type':'CollectionPage',name:title,description,url:site.url+path,about:{'@id':site.url+'/#organization'},author:{'@id':site.url+'/#founder'},dateModified:'2026-09-23'};
  return <Page kicker="AUTHORITY / PROJECT EVIDENCE" title="Proof should come with context.">
   <article className="guidePage">
    <nav className="guideBreadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><span>Project evidence</span></nav>
@@ -27,7 +27,7 @@ export default function ProjectEvidence(){
     <h2>We would rather label the work clearly<br/><span>than make a bigger claim.</span></h2>
     <p>Bind Builds is the construction chapter of a practice that began with Studio Bind Architects in 2019. Because design experience, site coordination, ongoing construction and completed construction are different kinds of evidence, we separate them instead of presenting every project image as the same thing.</p>
     <div className="guideActions"><a className="cta primary" href={site.portfolio} target="_blank" rel="noopener noreferrer">Explore the design portfolio ↗</a><Link className="productTextLink" href="/about">Understand Studio Bind → Bind Builds →</Link></div>
-    <div className="evidenceUpdated"><span>Evidence framework updated: 21 September 2026</span><span>Founder: Ar. Parthiban Moorthy</span><span>Chennai</span></div>
+    <div className="evidenceUpdated"><span>Evidence framework updated: 23 September 2026</span><span>Founder: Ar. Parthiban Moorthy</span><span>Chennai</span></div>
    </header>
 
    <section className="guideSection">
