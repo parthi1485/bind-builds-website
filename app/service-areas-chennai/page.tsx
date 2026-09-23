@@ -24,7 +24,8 @@ const faqs=[
 ];
 
 export default function ServiceAreasChennai(){
- const serviceSchema={'@context':'https://schema.org','@type':'Service',name:title,description,serviceType:'Architect-led house construction',url:site.url+path,provider:{'@type':'Organization','@id':site.url+'/#organization',name:site.name,url:site.url},areaServed:[{'@type':'City',name:'Chennai'},{'@type':'City',name:'Coimbatore'}]};
+ const serviceAreas=(priorityZones.flatMap(([,areas])=>areas as string[])).map(name=>({'@type':'Place',name:name+', Chennai'}));
+ const serviceSchema={'@context':'https://schema.org','@type':'Service',name:title,description,serviceType:'Architect-led house construction',url:site.url+path,provider:{'@type':'Organization','@id':site.url+'/#organization',name:site.name,url:site.url},areaServed:[{'@type':'City',name:'Chennai'},...serviceAreas,{'@type':'City',name:'Coimbatore'}]};
  const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:faqs.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))};
  return <Page kicker="PRIORITY SERVICE AREAS" title="Chennai first. Selected Coimbatore projects.">
   <article className="guidePage">
