@@ -10,11 +10,11 @@ const description='Priority Bind Builds house-construction areas: Ramapuram, Val
 export const metadata=pageMetadata(title,description,path);
 
 const priorityZones=[
- ['Inner West Chennai',['Valasaravakkam','Ramapuram','Virugambakkam','Porur','Vadapalani','Saligramam']],
- ['West growth belt',['Gerugambakkam','Mangadu','Kundrathur','Kolapakkam','Maduravoyal','Vanagaram','Kattupakkam','Poonamallee']],
- ['Central / North-West',['Anna Nagar','Padi','Koyambedu']],
- ['South-East corridors',['OMR','ECR']],
-];
+ ['Inner West Chennai',[['Valasaravakkam','/house-construction-west-chennai#valasaravakkam'],['Ramapuram','/house-construction-west-chennai#ramapuram'],['Virugambakkam','/house-construction-west-chennai#virugambakkam'],['Porur','/house-construction-west-chennai#porur'],['Vadapalani','/house-construction-west-chennai#vadapalani'],['Saligramam','/house-construction-west-chennai#saligramam']]],
+ ['West growth belt',[['Gerugambakkam','/house-construction-west-chennai#gerugambakkam'],['Mangadu','/house-construction-west-chennai#mangadu'],['Kundrathur','/house-construction-west-chennai#kundrathur'],['Kolapakkam','/house-construction-west-chennai#kolapakkam'],['Maduravoyal','/house-construction-west-chennai#maduravoyal'],['Vanagaram','/house-construction-west-chennai#vanagaram'],['Kattupakkam','/house-construction-west-chennai#kattupakkam'],['Poonamallee','/house-construction-west-chennai#poonamallee']]],
+ ['Central / North-West',[['Anna Nagar','/house-construction-anna-nagar-chennai#anna-nagar'],['Padi','/house-construction-anna-nagar-chennai#padi'],['Koyambedu','/house-construction-anna-nagar-chennai#koyambedu']]],
+ ['South-East corridors',[['OMR','/house-construction-omr-ecr-chennai#omr'],['ECR','/house-construction-omr-ecr-chennai#ecr']]],
+] as const;
 
 const faqs=[
  ['Do you work in all of these Chennai localities?','These are priority enquiry areas, not an automatic service guarantee. We confirm fit from the exact site, access, project type, approximate construction value, timeline and current site-management capacity.'],
@@ -24,7 +24,7 @@ const faqs=[
 ];
 
 export default function ServiceAreasChennai(){
- const serviceAreas=(priorityZones.flatMap(([,areas])=>areas as string[])).map(name=>({'@type':'Place',name:name+', Chennai'}));
+ const serviceAreas=priorityZones.flatMap(([,areas])=>areas).map(([name])=>({'@type':'Place',name:name+', Chennai'}));
  const serviceSchema={'@context':'https://schema.org','@type':'Service',name:title,description,serviceType:'Architect-led house construction',url:site.url+path,provider:{'@type':'Organization','@id':site.url+'/#organization',name:site.name,url:site.url},areaServed:[{'@type':'City',name:'Chennai'},...serviceAreas,{'@type':'City',name:'Coimbatore'}]};
  const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:faqs.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))};
  return <Page kicker="PRIORITY SERVICE AREAS" title="Chennai first. Selected Coimbatore projects.">
@@ -40,7 +40,7 @@ export default function ServiceAreasChennai(){
     <span className="productEyebrow">Priority Chennai enquiry areas</span>
     <h2>Neighbourhood clusters.<br/><span>Useful context, not repeated pages.</span></h2>
     <p>We group nearby localities into useful construction contexts instead of publishing a near-identical page for every pin code. Each cluster links to guidance that is relevant to the site conditions and project type.</p>
-    <div className="serviceAreaGrid">{priorityZones.map(([name,areas])=><article key={name as string}><h3>{name}</h3><ul>{(areas as string[]).map(area=><li key={area}>{area}</li>)}</ul></article>)}</div>
+    <div className="serviceAreaGrid">{priorityZones.map(([name,areas])=><article key={name}><h3>{name}</h3><ul>{areas.map(([area,href])=><li key={area}><Link href={href}>{area}<span aria-hidden="true">→</span></Link></li>)}</ul></article>)}</div>
    </section>
    <section className="guideSection">
     <span className="productEyebrow">Location guides</span>
