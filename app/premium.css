@@ -575,3 +575,222 @@ button:disabled,.cta[aria-disabled=true]{opacity:.58}
  .simpleCategoryTitle{font-size:.83rem}
  .simpleCategory button{min-height:56px}
 }
+
+
+/* Stage 6 — mobile experience audit + immersive polish */
+@media(max-width:760px){
+ html,body{max-width:100%;overflow-x:clip}
+ body:has(.mobileProjectBar){padding-bottom:calc(86px + env(safe-area-inset-bottom))}
+ .motionToggle{display:none!important}
+
+ .nav,.navScrolled{
+  min-height:72px;
+  padding:9px 18px;
+  transition:min-height .22s ease,padding .22s ease,background .22s ease,box-shadow .22s ease;
+ }
+ .nav .brandImage{width:98px;transition:width .22s ease}
+ .nav.navScrolled{min-height:64px;padding-block:6px;box-shadow:0 8px 28px #11182708}
+ .nav.navScrolled .brandImage{width:88px}
+ .menuButton{
+  min-height:44px;
+  padding:8px 15px;
+  border-radius:999px;
+  font-size:.78rem;
+  background:#f7f7f9;
+  border-color:#dedfe4;
+ }
+ .menuButton>span{font-size:1.1rem;line-height:1}
+
+ .mobileMenu{
+  padding:96px 22px calc(34px + env(safe-area-inset-bottom));
+  background:
+   radial-gradient(circle at 85% 8%,#eaf3ff 0,transparent 30%),
+   linear-gradient(180deg,#fff 0%,#fafbfc 100%);
+ }
+ .mobileMenu>p{font-size:.62rem;letter-spacing:.08em;color:#767b84;margin-bottom:14px}
+ .mobileMenu nav{margin:12px 0 22px}
+ .mobileMenu nav>a{
+  min-height:58px;
+  grid-template-columns:28px minmax(0,1fr) 22px;
+  padding:11px 0;
+  border-color:#e7e9ed;
+ }
+ .mobileMenu nav>a>span:nth-child(2){
+  font-size:clamp(1.45rem,6.6vw,2rem);
+  line-height:1.05;
+  letter-spacing:-.04em;
+ }
+ .mobileMenu nav>a>span:last-child{color:#8b929c}
+ .mobileMenu .cta{width:100%;justify-content:center;min-height:50px}
+ .menuPhone{font-size:.82rem;margin-top:18px;color:#5d6773}
+
+ .mobileProjectBar{
+  left:12px;
+  right:12px;
+  bottom:calc(10px + env(safe-area-inset-bottom));
+  grid-template-columns:.9fr 1.15fr;
+  gap:7px;
+  padding:6px;
+  border:1px solid #e2e5ea;
+  border-radius:20px;
+  background:#fffffff2;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 14px 38px #0b13201a;
+  opacity:0;
+  transform:translateY(18px) scale(.985);
+  pointer-events:none;
+  transition:opacity .24s ease,transform .24s ease;
+ }
+ .mobileProjectBar.isVisible{opacity:1;transform:none;pointer-events:auto}
+ .mobileProjectBar a{
+  min-height:50px;
+  border:0;
+  border-radius:14px;
+  font-size:.78rem;
+  padding:8px 10px;
+ }
+ .mobileProjectBar a:first-child{background:#f3f4f6;color:#22252a}
+ .mobileProjectBar a:last-child{box-shadow:0 7px 18px #0071e329}
+
+ .pageHero{
+  min-height:0;
+  padding:116px 22px 44px;
+ }
+ .pageHero h1{
+  font-size:clamp(2.3rem,9.2vw,3.85rem);
+  line-height:1.02;
+  text-wrap:balance;
+  margin-top:18px;
+ }
+ .pageHero>.eyebrow{font-size:.62rem}
+
+ .productHero{
+  padding:108px 20px 24px;
+  background:
+   radial-gradient(circle at 50% 60%,#edf4ff 0,transparent 34%),
+   linear-gradient(#fff 46%,#f8fafc 100%);
+ }
+ .productHeroCopy>.productEyebrow{font-size:.58rem;line-height:1.5}
+ .productHero h1{
+  font-size:clamp(2.5rem,11vw,4rem);
+  line-height:.96;
+  max-width:360px;
+  margin:22px auto 18px;
+  text-wrap:balance;
+ }
+ .productHeroCopy>p{max-width:320px;margin-bottom:20px}
+ .productHeroActions{flex-direction:column;gap:10px}
+ .productHeroActions .cta{
+  width:min(100%,340px);
+  min-height:50px;
+  justify-content:center;
+  padding:13px 20px;
+ }
+ .productHeroActions .productTextLink{
+  min-height:44px;
+  justify-content:center;
+  padding:8px 12px;
+ }
+ .productHeroTrust{
+  justify-content:center;
+  gap:8px 10px;
+  margin-top:18px;
+  flex-wrap:wrap;
+ }
+ .productHeroTrust span{font-size:.58rem}
+ .architectureScene{margin-top:16px}
+ .homeObject{width:132%;margin-left:-16%;margin-top:-2px}
+ .sceneControls{margin-top:-8px}
+ .segmentedControl{
+  width:min(100%,340px);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  padding:4px;
+ }
+ .segmentedControl button{padding:10px 6px;min-height:40px}
+ .sceneControls>p{min-height:20px}
+ .architectureScene>figcaption{margin-top:12px}
+
+ .proofRail{padding:38px 22px 24px;gap:28px 14px}
+ .proofRail strong{font-size:2.35rem}
+ .proofFootnote{padding-bottom:34px}
+
+ .productSection{padding:58px 20px}
+ .productSectionHeader{margin-bottom:28px}
+ .productSectionHeader h2,.studioStatement h2,.finalInvitation h2{
+  text-wrap:balance;
+  margin-bottom:17px;
+ }
+ .productSectionHeader p{max-width:36em}
+
+ .highlightGrid{gap:14px}
+ .highlightCard{
+  padding:25px 22px 0;
+  border-radius:18px;
+  box-shadow:0 10px 34px #11182708;
+ }
+ .highlightCard:active{transform:scale(.992)}
+ .highlightCard h3{font-size:1.9rem}
+ .highlightMetric{padding-bottom:4px}
+
+ .homePackageGrid>button{
+  padding:22px;
+  border:1px solid #e4e7ec;
+  background:#fff;
+  box-shadow:0 7px 24px #11182706;
+ }
+ .homePackageGrid>button.selected{
+  border-color:#9bc5f4;
+  background:linear-gradient(145deg,#f2f7ff,#fff);
+  box-shadow:0 10px 30px #0071e312;
+ }
+ .homePackageBar{margin-top:18px}
+
+ .projectForm{padding:22px 18px}
+ .formSteps{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:6px;
+  margin-bottom:24px;
+ }
+ .formSteps li{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:7px;
+  font-size:.62rem;
+  line-height:1.25;
+ }
+ .formSteps li>span{width:25px;height:25px;flex:0 0 25px}
+ .fields input,.fields select,.fields textarea{min-height:52px;font-size:16px}
+
+ .simplePackageGrid{margin-top:34px}
+ .simplePackageCard{box-shadow:0 10px 34px #11182708}
+
+ .footer{
+  padding:48px 22px calc(112px + env(safe-area-inset-bottom));
+  gap:28px;
+ }
+ .footerIdentity p{margin-top:18px}
+ .footerSitemap{gap:28px}
+ .footerLinks{gap:13px 20px;font-size:.82rem}
+ .footerContact{gap:13px;font-size:.84rem}
+ .footerBottom{margin-top:4px;gap:10px 18px}
+}
+
+@media(max-width:390px){
+ .nav,.navScrolled{padding-inline:14px}
+ .mobileMenu{padding-inline:18px}
+ .mobileProjectBar{left:8px;right:8px}
+ .mobileProjectBar a{font-size:.74rem}
+ .productHero{padding-inline:17px}
+ .productSection{padding-inline:17px}
+ .pageHero{padding-inline:18px}
+ .projectForm{padding-inline:16px}
+}
+
+@media(prefers-reduced-motion:reduce){
+ .mobileProjectBar,.nav,.nav .brandImage,.simpleCategoryToggle,.simpleCategoryToggle svg{transition:none!important}
+}
