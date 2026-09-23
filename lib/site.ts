@@ -19,7 +19,7 @@ export const site = {
   studio: 'https://www.bindarchitects.com/studio',
 };
 // Public Bind Builds contact details used across the website.
-export function whatsappUrl(message = 'Hello Bind Builds, I am planning a construction project in Chennai. I would like to discuss my site, requirements and budget.') {
+export function whatsappUrl(message = 'Hello Bind Builds, I am planning a construction project. I would like to discuss my site, requirements and budget.') {
   return 'https://wa.me/' + site.whatsapp + '?text=' + encodeURIComponent(message);
 }
 export const packages = [
