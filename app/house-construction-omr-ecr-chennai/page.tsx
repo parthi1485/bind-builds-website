@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Page } from '@/components/Site';
 import StructuredData from '@/components/StructuredData';
+import LocalityIntentGrid from '@/components/LocalityIntentGrid';
 import { pageMetadata, breadcrumbSchema } from '@/lib/seo';
 import { site, whatsappUrl } from '@/lib/site';
 
@@ -9,6 +10,10 @@ const title='House Construction Company in OMR & ECR Chennai | Bind Builds';
 const description='Architect-led home and villa construction in OMR and ECR Chennai with site-specific planning for soil, drainage, access, exposure, approvals and construction scope.';
 export const metadata=pageMetadata(title,description,path);
 
+const corridorIntent=[
+ {id:'omr',name:'House construction on OMR',eyebrow:'Old Mahabalipuram Road',copy:'OMR plots range from dense residential streets to developing layouts. We review ground conditions, access, drainage, utilities, heat control, parking and the approval route before fixing the design-and-build scope.'},
+ {id:'ecr',name:'House and villa construction on ECR',eyebrow:'East Coast Road',copy:'For more exposed or coastal residential sites, the building envelope, waterproofing, hardware/material durability, drainage, outdoor spaces and structural coordination deserve project-specific attention.'},
+];
 const faqs=[
  ['Do you undertake house and villa construction on OMR and ECR?','Yes, subject to project fit. We discuss independent homes, villas, rebuilds and selected residential construction where the site, scope, budget and supervision model fit our delivery capacity.'],
  ['Is the same construction specification suitable for every OMR or ECR plot?','No. Ground conditions, road access, drainage, exposure, utilities and the exact property context can change the design, structural and external-work requirements.'],
@@ -23,6 +28,7 @@ export default function OmrEcr(){
   <article className="guidePage">
    <nav className="guideBreadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><Link href="/service-areas-chennai">Service areas</Link><span aria-hidden="true">/</span><span>OMR + ECR</span></nav>
    <header className="guideIntro"><span className="productEyebrow">OMR · ECR · Site-specific planning</span><h2>Architecture first.<br/><span>Then engineer the build.</span></h2><p>OMR and ECR include very different plots—from dense urban edges to more exposed residential sites. Bind Builds treats site investigation, drainage, soil information, access, structural coordination and material specification as early design-and-build decisions rather than assuming one standard solution across the corridor.</p><div className="guideActions"><Link className="cta primary" href="/start-a-project">Discuss my OMR / ECR site ↗</Link><Link className="productTextLink" href="/cost-calculator">Build a planning estimate →</Link></div></header>
+   <section className="guideSection" id="corridor-guides"><span className="productEyebrow">OMR + ECR search intent</span><h2>Same city.<br/><span>Different site questions.</span></h2><LocalityIntentGrid items={corridorIntent}/></section>
    <section className="guideSection"><span className="productEyebrow">Before the floor plan is frozen</span><h2>Read the site.<br/><span>Then design the home.</span></h2><div className="documentGrid">{[
     ['01','Ground and soil','Foundation assumptions should follow the actual site and structural advice, not a generic package assumption.'],
     ['02','Rain and drainage','Plot levels, road levels, roof falls and the external drainage strategy should be understood before fixing entry and landscape levels.'],
