@@ -37,12 +37,14 @@ export function calculateEstimate(input: EstimateInput) {
   const headroomCost = input.headroom <= 0 || headroomUnpriced ? 0 :
     headroomMode === 'lump' ? Math.round(input.headroomAmount ?? 0) :
     Math.round(input.headroom * headroomRate);
-  const base = floorCost + headroomCost;
-  const allowanceTotal = selected.reduce((total, item) => total + (item.amount ?? 0), 0);
+  const parking = selected.find(item => item.key === 'parking');
+  const parkingCost = parking?.amount ?? 0;
+  const base = floorCost + headroomCost + parkingCost;
+  const allowanceTotal = selected.filter(item => item.key !== 'parking').reduce((total, item) => total + (item.amount ?? 0), 0);
   const subtotal = base + allowanceTotal;
   const reserve = 0; // Estimates contain base construction and selected additional items only.
   const headroomFollowUp: Allowance[] = headroomUnpriced ? [{key:'headroom',label:'Staircase headroom',selected:true,amount:null,detail:`${input.headroom} sq.ft · to be quoted`}] : [];
-  return { area, floorArea, floorCost, headroomRate, headroomMode, headroomUnpriced, headroomCost, base, allowanceTotal, subtotal, reserve, total: subtotal + reserve,
+  return { area, floorArea, floorCost, headroomRate, headroomMode, headroomUnpriced, headroomCost, parkingCost, base, allowanceTotal, subtotal, reserve, total: subtotal + reserve,
     unpriced: [...selected.filter(item => item.amount === null), ...headroomFollowUp], selected,
     coverage: input.floors[0] / input.plot * 100,
   };
@@ -78,7 +80,7 @@ export function createVisualData(input: EstimateInput, estimate: Estimate, packa
     packageName, plot: input.plot, area: estimate.area, floorArea: estimate.floorArea, headroomArea: input.headroom, configuration: configuration(input.floors.length), total: estimate.total, unpricedCount: estimate.unpriced.length,
     parts: [{ label: 'Base construction', value: estimate.base, color: '#0071e3' }, { label: 'Additional items', value: estimate.allowanceTotal, color: '#7974e8' }],
     floors: [...input.floors.map((area,index)=>({label:floorName(index),area})), ...(input.headroom?[{label:'Separate headroom',area:input.headroom}]:[])],
-    extras: estimate.selected.filter(item=>item.amount!==null).map((item,index)=>({label:item.label,value:item.amount!,color:stages[index%stages.length].color})),
+    extras: estimate.selected.filter(item=>item.key!=='parking'&&item.amount!==null).map((item,index)=>({label:item.label,value:item.amount!,color:stages[index%stages.length].color})),
     comparisons, allocation: splitStages(estimate.base),
   };
 }

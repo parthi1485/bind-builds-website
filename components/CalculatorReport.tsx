@@ -25,22 +25,24 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
   const allocation = splitStages(estimate.base);
   const rows: [string, string][] = input.floors.map((area, index) => [`${floorName(index)} · ${area.toLocaleString('en-IN')} sq.ft`, money(area * input.rate)]);
   if (input.headroom) rows.push([`Separate headroom · ${input.headroom.toLocaleString('en-IN')} sq.ft${estimate.headroomMode==='unit'?` × ${money(estimate.headroomRate)}/sq.ft`:estimate.headroomMode==='lump'?' · custom allowance':' · quote requested'}`, estimate.headroomUnpriced ? 'To be quoted' : money(estimate.headroomCost)]);
+  const parking = estimate.selected.find(item => item.key === 'parking');
+  if (parking) rows.push([`Separate car parking · base construction${parking.detail ? ' · '+parking.detail : ''}`, parking.amount === null ? 'To be quoted' : money(parking.amount)]);
   rows.push(['Base construction total', money(estimate.base)]);
-  estimate.selected.forEach(item => rows.push([`${item.label}${item.detail ? ' · '+item.detail : ''}${item.amount === null ? '' : ' · allowance'}`, item.amount === null ? 'To be quoted' : money(item.amount)]));
+  estimate.selected.filter(item => item.key !== 'parking').forEach(item => rows.push([`${item.label}${item.detail ? ' · '+item.detail : ''}${item.amount === null ? '' : ' · allowance'}`, item.amount === null ? 'To be quoted' : money(item.amount)]));
   const notes = [
     'Bind Builds planning estimate (not a quotation)',
     `Plot: ${input.plot.toLocaleString('en-IN')} sq.ft | ${configuration(input.floors.length)}`,
     ...input.floors.map((area, index) => `${floorName(index)}: ${area} sq.ft`),
     input.headroom ? `Separate headroom: ${input.headroom} sq.ft · ${estimate.headroomUnpriced?'TO BE QUOTED':estimate.headroomMode==='lump'?money(estimate.headroomCost):`${money(estimate.headroomRate)}/sq.ft = ${money(estimate.headroomCost)}`}` : '',
     `${selected.name}: ${money(input.rate)}/sq.ft | Base: ${money(estimate.base)}`,
-    ...estimate.selected.map(item => `${item.label}${item.detail ? " · "+item.detail : ""}: ${item.amount === null ? 'TO BE QUOTED (excluded)' : money(item.amount) + ' allowance'}`),
+    ...estimate.selected.map(item => `${item.label}${item.detail ? " · "+item.detail : ""}: ${item.amount === null ? 'TO BE QUOTED (excluded)' : money(item.amount) + (item.key==='parking' ? ' · included in base construction' : ' allowance')}`),
     `Planning subtotal: ${money(estimate.total)}`,
     `Construction scenario: approximately ${constructionMonths(input.floors.length)} months; 6 months + 4 per additional floor. Design and approvals excluded; not a delivery commitment.`,
     'Only priced additional items are included. Taxes, unpriced approval charges, site-specific work and other exclusions are additional.',
     'Please review the scope and prepare a project-specific proposal.',
   ].filter(Boolean).join('\n');
   const enquiryUrl = '/start-a-project?' + new URLSearchParams({ package: selected.name, area: String(estimate.area), notes }).toString();
-  const comparisons = packages.map(item => ({ name: item.name, rate: item.rate, base: estimate.floorArea * item.rate + estimate.headroomCost }));
+  const comparisons = packages.map(item => ({ name: item.name, rate: item.rate, base: estimate.floorArea * item.rate + estimate.headroomCost + estimate.parkingCost }));
   const visuals = createVisualData(input, estimate, selected.name, comparisons);
   const assumptions = [
     'This is a planning estimate, not a quotation or construction agreement. Published package rates are starting rates and need confirmation for your design and site.',
@@ -160,7 +162,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     <p role="status" className="calcStatus">{status}</p>
     <section className="calcReportCard calcDuration"><span className="eyebrow">Construction planning scenario</span><strong>~{constructionMonths(input.floors.length)}<small> months</small></strong><div className="durationTrack"><span style={{width:`${constructionMonths(input.floors.length)/18*100}%`}}/></div><p>6 months for ground only + 4 months per additional floor. Design and approval time is separate. Actual duration depends on area, site conditions, scope and the agreed programme.</p></section><ProposalVisuals data={visuals}/>
     <div className="calcReportColumns">
-      <section className="calcReportCard"><span className="eyebrow">01 / Where the number comes from</span><h3>Your cost breakdown.</h3><p className="calcHint">{estimate.area.toLocaleString('en-IN')} sq.ft calculated area, plus selected additional items.</p><dl className="calcCostRows">{rows.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}<div className="calcCostTotal"><dt>Planning subtotal</dt><dd>{money(estimate.total)}</dd></div></dl></section>
+      <section className="calcReportCard"><span className="eyebrow">01 / Where the number comes from</span><h3>Your cost breakdown.</h3><p className="calcHint">{estimate.area.toLocaleString('en-IN')} sq.ft calculated floor/headroom area. Selected car parking is included in base construction; other selected extras remain additional.</p><dl className="calcCostRows">{rows.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}<div className="calcCostTotal"><dt>Planning subtotal</dt><dd>{money(estimate.total)}</dd></div></dl></section>
       <section className="calcReportCard calcNextStep"><span className="eyebrow">What happens after the estimate?</span><h3>Three useful checks.<br />Before a proposal.</h3><ol className="calcNextChecklist"><li><span>01</span><p><strong>Site + access</strong>Review location, road access and existing conditions.</p></li><li><span>02</span><p><strong>Design + area</strong>Confirm the spaces, floor areas and planning direction.</p></li><li><span>03</span><p><strong>Scope + specification</strong>Turn the planning estimate into a project-specific proposal.</p></li></ol><p className="calcHint">No details are needed to view or present your estimate. Contact details are requested only before downloading the PDF.</p></section>
     </div>
     <section className="calcReportCard calcCompare"><ComparisonDiagram data={visuals}/><p className="calcHint">Additional items are excluded from this comparison.</p><div className="comparisonSpecLinks">{packages.map(item=><Link key={item.key} href={`/packages#${item.key}`} target="_blank" rel="noopener noreferrer">{item.name} specification ↗</Link>)}</div></section>

@@ -54,7 +54,7 @@ test('EMI follows amortization and handles zero interest', () => {
 });
 
 import { compoundWallArea, constructionMonths, parkingArea, extraAmount, extraOptions, initialExtra, extraDescription } from '../lib/calculator-options.ts';
-test('car presets charge parking once as an extra, not again at the package rate', () => {
+test('car parking is charged once inside base construction, not additional items', () => {
  const parking=extraOptions.find(item=>item.key==='parking');
  for(const cars of [1,2,3,4]) {
   const value={...initialExtra(parking),selected:true,cars,quantity:String(parkingArea(cars))};
@@ -62,7 +62,14 @@ test('car presets charge parking once as an extra, not again at the package rate
   assert.equal(amount,cars*200*2350);
   const result=calculateEstimate({...input,allowances:[{key:'parking',label:'Parking',selected:true,amount}]});
   assert.equal(result.area,1900);
+  assert.equal(result.parkingCost,amount);
+  assert.equal(result.base,5003200+amount);
+  assert.equal(result.allowanceTotal,0);
   assert.equal(result.total,5003200+amount);
+  const visual=createVisualData({...input,allowances:[{key:'parking',label:'Parking',selected:true,amount}]},result,'Elevate',[]);
+  assert.equal(visual.parts[0].value,result.base);
+  assert.equal(visual.parts[1].value,0);
+  assert.equal(visual.extras.some(item=>item.label==='Parking'),false);
  }
  assert.throws(()=>parkingArea(0),RangeError);
 });
@@ -137,4 +144,20 @@ test('compound wall uses length × height square-foot pricing at the reference r
  assert.equal(compoundWallArea(value.length,value.height),'600');
  assert.equal(extraAmount(value),270000);
  assert.match(extraDescription(compound,value),/100 ft × 6 ft = 600 sq.ft × ₹450 \/ sq.ft/);
+});
+
+test('package comparison keeps selected parking inside base construction at a fixed parking allowance',()=> {
+ const parking=extraOptions.find(item=>item.key==='parking');
+ const value={...initialExtra(parking),selected:true,cars:1,quantity:'200'};
+ const parkingAmount=extraAmount(value);
+ const scenario={...input,headroom:200,headroomRate:2350,headroomMode:'unit',allowances:[{key:'parking',label:'Parking',selected:true,amount:parkingAmount}]};
+ const estimate=calculateEstimate(scenario);
+ const comparisons=[
+  {name:'Essential',rate:2399,base:estimate.floorArea*2399+estimate.headroomCost+estimate.parkingCost},
+  {name:'Elevate',rate:2649,base:estimate.floorArea*2649+estimate.headroomCost+estimate.parkingCost},
+  {name:'Signature',rate:3199,base:estimate.floorArea*3199+estimate.headroomCost+estimate.parkingCost},
+ ];
+ assert.equal(comparisons[1].base,estimate.base);
+ assert.equal(comparisons[1].base-comparisons[0].base,estimate.floorArea*(2649-2399));
+ assert.equal(comparisons[2].base-comparisons[1].base,estimate.floorArea*(3199-2649));
 });
