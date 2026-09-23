@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { site } from '@/lib/site';
 
-const updated='2026-09-21';
+const updated='2026-09-23';
 export default function sitemap():MetadataRoute.Sitemap{
  const pages=[
   ['',1],
