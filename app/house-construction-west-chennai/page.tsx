@@ -5,31 +5,39 @@ import { pageMetadata, breadcrumbSchema } from '@/lib/seo';
 import { site, whatsappUrl } from '@/lib/site';
 
 const path='/house-construction-west-chennai';
-const title='House Construction in West Chennai | Porur, Ramapuram & Valasaravakkam';
-const description='Architect-led house construction across West Chennai including Porur, Ramapuram, Valasaravakkam, Virugambakkam, Mangadu, Kundrathur, Poonamallee and nearby areas.';
+const title='House Construction Company in West Chennai | Porur, Ramapuram & Valasaravakkam';
+const description='Architect-led house construction in Porur, Ramapuram, Valasaravakkam, Virugambakkam, Vadapalani, Saligramam, Mangadu, Kundrathur, Poonamallee and West Chennai.';
 export const metadata=pageMetadata(title,description,path);
 
-const innerWest=['Ramapuram','Valasaravakkam','Virugambakkam','Porur','Vadapalani','Saligramam'];
-const growthBelt=['Gerugambakkam','Kolapakkam','Mangadu','Kundrathur','Maduravoyal','Vanagaram','Kattupakkam','Poonamallee'];
+const innerWest=['Valasaravakkam','Ramapuram','Virugambakkam','Porur','Vadapalani','Saligramam'];
+const growthBelt=['Gerugambakkam','Mangadu','Kundrathur','Kolapakkam','Maduravoyal','Vanagaram','Kattupakkam','Poonamallee'];
+const faqs=[
+ ['Do you undertake house construction in Porur, Ramapuram and Valasaravakkam?','Yes. These are priority West Chennai enquiry areas for Bind Builds. We still confirm project fit from the exact plot, road access, built-up area, scope, budget, timeline and current site-management capacity before committing to a proposal.'],
+ ['Do you handle demolition and rebuild projects in West Chennai?','Yes, subject to project fit. We separate demolition, neighbour protection, utility disconnection and existing-condition risks from the new construction scope before pricing the rebuild.'],
+ ['What is the construction cost per sq.ft in West Chennai?','Our published package rates are starting references for base construction. The project-specific proposal confirms the actual area basis, specification, exclusions, access constraints and additional works for the site.'],
+ ['Can you visit a site in Mangadu, Kundrathur, Poonamallee or nearby areas?','Site visits are arranged after an initial qualification conversation when the plot, scope, budget and timeline appear to fit our delivery model.'],
+];
 
 export default function WestChennai(){
- const serviceSchema={'@context':'https://schema.org','@type':'Service',name:title,description,serviceType:'Architect-led house construction',url:site.url+path,provider:{'@type':'Organization','@id':site.url+'/#organization',name:site.name,url:site.url},areaServed:[...innerWest,...growthBelt].map(name=>({'@type':'Place',name}))};
- return <Page kicker="WEST CHENNAI / HOUSE CONSTRUCTION" title="Build around the site. Not just the square feet.">
+ const serviceSchema={'@context':'https://schema.org','@type':'Service',name:title,description,serviceType:'Architect-led house construction',url:site.url+path,provider:{'@type':'Organization','@id':site.url+'/#organization',name:site.name,url:site.url},areaServed:[...innerWest,...growthBelt].map(name=>({'@type':'Place',name:name+', Chennai'}))};
+ const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:faqs.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))};
+ return <Page kicker="WEST CHENNAI / HOUSE CONSTRUCTION" title="House construction across West Chennai.">
   <article className="guidePage">
    <nav className="guideBreadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><Link href="/service-areas-chennai">Service areas</Link><span aria-hidden="true">/</span><span>West Chennai</span></nav>
    <header className="guideIntro">
     <span className="productEyebrow">Porur · Ramapuram · Valasaravakkam + nearby</span>
-    <h2>Architect-led house construction.<br/><span>Across West Chennai.</span></h2>
-    <p>Bind Builds discusses new homes, demolition-and-rebuild projects and selected residential construction across West Chennai. We start with the actual plot: road width, neighbours, access, existing structures, approval route, family programme and the construction scope that can realistically be executed there.</p>
+    <h2>Architect-led house construction.<br/><span>Built around the actual site.</span></h2>
+    <p>Bind Builds discusses new homes, demolition-and-rebuild projects and selected residential construction across West Chennai. We start with road access, plot dimensions, neighbours, existing structures, parking, approval route and the family programme before treating a square-foot rate as meaningful.</p>
     <div className="guideActions"><Link className="cta primary" href="/start-a-project">Discuss my West Chennai site ↗</Link><Link className="productTextLink" href="/cost-calculator">Estimate my construction budget →</Link></div>
    </header>
-   <section className="guideSection">
+   <section className="guideSection" id="priority-localities">
     <span className="productEyebrow">Priority localities</span>
-    <h2>Two connected belts.<br/><span>Different site conditions.</span></h2>
+    <h2>Our main West Chennai<br/><span>search + service cluster.</span></h2>
+    <p>These are the localities we are prioritising for relevant residential enquiries. A listing here means we actively consider projects in the area; it is not an automatic service guarantee.</p>
     <div className="serviceAreaGrid">
-     <article><h3>Inner West Chennai</h3><p>Established neighbourhoods where plot efficiency, adjoining buildings, demolition, parking and construction access often deserve early attention.</p><ul>{innerWest.map(area=><li key={area}>{area}</li>)}</ul></article>
-     <article><h3>West growth belt</h3><p>Residential growth areas where access, site levels, soil information, utilities and the exact approval jurisdiction need to be confirmed before assumptions are locked.</p><ul>{growthBelt.map(area=><li key={area}>{area}</li>)}</ul></article>
-     <article><h3>How we qualify a project</h3><p>Locality alone does not confirm fit. We review plot dimensions, built-up requirement, budget, timeline, road access and our current site-management capacity before committing to a visit or proposal.</p><Link href="/start-a-project">Share my site details →</Link></article>
+     <article><h3>Inner West Chennai</h3><p>Established neighbourhoods where plot efficiency, adjoining buildings, parking, demolition and construction access often deserve early attention.</p><ul>{innerWest.map(area=><li key={area}>{area}</li>)}</ul></article>
+     <article><h3>West growth belt</h3><p>Residential growth areas where road access, site levels, utilities, soil information and the exact approval jurisdiction need to be checked early.</p><ul>{growthBelt.map(area=><li key={area}>{area}</li>)}</ul></article>
+     <article><h3>Project-fit check</h3><p>Send the exact locality, plot size, road width, approximate built-up area, intended floors, budget and desired start date. We use that information before scheduling the next step.</p><Link href="/start-a-project">Share my site details →</Link></article>
     </div>
    </section>
    <section className="guideSection">
@@ -53,8 +61,9 @@ export default function WestChennai(){
      <article><h3>Compare package scope</h3><p>See the starting specifications before comparing proposals or committing to a headline rate.</p><Link href="/packages">Compare construction packages →</Link></article>
     </div>
    </section>
+   <section className="guideSection guideFaq"><span className="productEyebrow">West Chennai FAQs</span><h2>Before the first site meeting.</h2>{faqs.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</section>
    <section className="guideClosing"><h2>Have a plot in West Chennai?</h2><p>Send the locality, plot size, road width, approximate built-up area and what your family needs from the home.</p><div className="guideActions"><Link className="cta primary" href="/start-a-project">Check project fit ↗</Link><a className="productTextLink" href={whatsappUrl('Hello Bind Builds, I have a site in West Chennai and would like to discuss house construction.')} target="_blank" rel="noopener noreferrer">WhatsApp my locality ↗</a></div></section>
   </article>
-  <StructuredData data={[breadcrumbSchema('House construction in West Chennai',path),serviceSchema]}/>
+  <StructuredData data={[breadcrumbSchema('House construction company in West Chennai',path),serviceSchema,faqSchema]}/>
  </Page>;
 }
