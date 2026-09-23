@@ -5,7 +5,7 @@ import { packages } from '@/lib/site';
 
 export type PackageCategory={no:string;title:string;essential:string[];elevate:string[];signature:string[]};
 
-function Chevron({expanded}:{expanded:boolean}){
+function Chevron(){
  return <span className="simpleCategoryToggle" aria-hidden="true">
   <svg viewBox="0 0 20 20" focusable="false">
    <path d="M5.25 7.5 10 12.25 14.75 7.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
@@ -31,7 +31,7 @@ export default function PackageComparison({categories}:{categories:PackageCatego
      return <div className={'simpleCategory '+(expanded?'isOpen':'')} key={category.no}>
       <button type="button" aria-expanded={expanded} aria-controls={id} onClick={()=>setOpen(current=>({...current,[tier.key]:expanded?-1:i}))}>
        <span className="simpleCategoryTitle">{category.title}</span>
-       <Chevron expanded={expanded}/>
+       <Chevron/>
       </button>
       <div id={id} className="simpleCategoryPanel" hidden={!expanded}>
        <ul>{category[tier.key].map(text=><li key={text}>{text}</li>)}</ul>
