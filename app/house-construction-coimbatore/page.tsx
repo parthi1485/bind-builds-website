@@ -6,7 +6,7 @@ import { pageMetadata, breadcrumbSchema } from '@/lib/seo';
 import { site, whatsappUrl } from '@/lib/site';
 
 const path='/house-construction-coimbatore';
-const title='Architect-Led House Construction Company in Coimbatore | Bind Builds';
+const title='Architect-Led House Construction Company in Coimbatore';
 const description='Architect-led house construction in Coimbatore for selected residential projects. Design, engineering coordination, budgeting, supervision planning and construction scope by Bind Builds.';
 export const metadata=pageMetadata(title,description,path);
 
@@ -44,6 +44,15 @@ export default function CoimbatoreConstruction(){
     <article><h3>Family + building brief</h3><p>Users, bedrooms, floors, parking, rental requirements, future expansion and any special lifestyle priorities.</p></article>
     <article><h3>Budget + timing</h3><p>Approximate total construction budget, finance status and when you realistically want design and site work to begin.</p></article>
    </div><div className="guideActions"><Link className="productTextLink" href="/process">See the pre-construction process →</Link><Link className="productTextLink" href="/project-evidence">Review project evidence →</Link></div></section>
+   <section className="guideSection">
+    <span className="productEyebrow">Authority + operating transparency</span>
+    <h2>Chennai-based.<br/><span>Coimbatore delivery agreed project by project.</span></h2>
+    <div className="guideCards three">
+     <article><h3>Real business base</h3><p>Bind Builds is based at {site.address.streetAddress}, {site.address.addressLocality} {site.address.postalCode}. We do not present a Coimbatore office we do not operate.</p><a href={site.maps} target="_blank" rel="noopener noreferrer">View the Chennai base on Google Maps ↗</a></article>
+     <article><h3>Evidence before travel</h3><p>Review our stated project roles and status before deciding whether the architecture, construction process and supervision model suit your project.</p><Link href="/project-evidence">Review project evidence →</Link></article>
+     <article><h3>Design practice lineage</h3><p>Studio Bind Architects began in 2019. Bind Builds is the construction chapter launched in 2026, led by the same architecture-first thinking.</p><a href={site.studio} target="_blank" rel="noopener noreferrer">Explore Studio Bind Architects ↗</a></article>
+    </div>
+   </section>
    <section className="guideSection guideFaq"><span className="productEyebrow">Coimbatore construction FAQs</span><h2>Before we plan travel or supervision.</h2>{faqs.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</section>
    <section className="guideClosing"><h2>Planning a home in Coimbatore?</h2><p>Start with the site and programme. We will tell you whether the project fits our current delivery model before moving into a detailed proposal.</p><div className="guideActions"><Link className="cta primary" href="/start-a-project">Check Coimbatore project fit ↗</Link><Link className="productTextLink" href="/packages">Review specification levels →</Link></div></section>
   </article>

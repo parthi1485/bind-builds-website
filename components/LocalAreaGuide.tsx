@@ -71,6 +71,16 @@ export default function LocalAreaGuide({data}:{data:LocalAreaGuideData}){
    </section>
 
    <section className="guideSection">
+    <span className="productEyebrow">Authority before appointment</span>
+    <h2>Verify the business.<br/><span>Then assess the proposal.</span></h2>
+    <div className="guideCards three">
+     <article><h3>Chennai business base</h3><p>{site.address.streetAddress}, {site.address.addressLocality} {site.address.postalCode}. Studio discussions are by appointment.</p><a href={site.maps} target="_blank" rel="noopener noreferrer">Find the Chennai base on Google Maps ↗</a></article>
+     <article><h3>Project evidence by status</h3><p>We separate design experience, ongoing construction and completed work so the role behind each example stays clear.</p><Link href="/project-evidence">Review project evidence →</Link></article>
+     <article><h3>Architecture practice behind the build</h3><p>Studio Bind Architects began in 2019. Bind Builds is the architect-led construction chapter, connecting design thinking with site execution.</p><a href={site.studio} target="_blank" rel="noopener noreferrer">Explore Studio Bind Architects ↗</a></article>
+    </div>
+   </section>
+
+   <section className="guideSection">
     <span className="productEyebrow">Nearby service areas</span>
     <h2>Continue by locality.</h2>
     <div className="relatedGuides">{data.nearby.map(([name,href])=><Link href={href} key={href}>{name} →</Link>)}</div>

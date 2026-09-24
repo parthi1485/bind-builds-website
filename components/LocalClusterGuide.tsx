@@ -72,11 +72,11 @@ export default function LocalClusterGuide({data}:{data:LocalClusterGuideData}){
 
    <section className="guideSection">
     <span className="productEyebrow">Authority before appointment</span>
-    <h2>Verify the process.<br/><span>Then decide.</span></h2>
+    <h2>Verify the business.<br/><span>Then assess the proposal.</span></h2>
     <div className="guideCards three">
-     <article><h3>Chennai-based practice</h3><p>Bind Builds operates from Kurinji Nagar, Ramapuram and qualifies each site before promising delivery.</p><Link href="/about">About Bind Builds →</Link></article>
+     <article><h3>Chennai business base</h3><p>{site.address.streetAddress}, {site.address.addressLocality} {site.address.postalCode}. Site visits and studio discussions are arranged after the project-fit conversation.</p><a href={site.maps} target="_blank" rel="noopener noreferrer">Find the Chennai base on Google Maps ↗</a></article>
      <article><h3>Project evidence by status</h3><p>We separate design experience, ongoing construction and completed work instead of presenting them as the same thing.</p><Link href="/project-evidence">Review project evidence →</Link></article>
-     <article><h3>Scope before headline price</h3><p>Packages, exclusions, approvals and additional items are published so a proposal can be compared on the same basis.</p><Link href="/packages">Compare package scope →</Link></article>
+     <article><h3>Architecture practice behind the build</h3><p>Studio Bind Architects began in 2019. Bind Builds is the architect-led construction chapter, connecting design thinking with site execution.</p><a href={site.studio} target="_blank" rel="noopener noreferrer">Explore Studio Bind Architects ↗</a></article>
     </div>
    </section>
 

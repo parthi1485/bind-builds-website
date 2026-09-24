@@ -6,7 +6,7 @@ import { pageMetadata, breadcrumbSchema } from '@/lib/seo';
 import { site, whatsappUrl } from '@/lib/site';
 
 const path='/house-construction-omr-ecr-chennai';
-const title='House Construction Company in OMR & ECR Chennai | Bind Builds';
+const title='House Construction Company in OMR & ECR Chennai';
 const description='Architect-led home and villa construction in OMR and ECR Chennai with site-specific planning for soil, drainage, access, exposure, approvals and construction scope.';
 export const metadata=pageMetadata(title,description,path);
 

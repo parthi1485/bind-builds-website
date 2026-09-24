@@ -16,6 +16,21 @@ const priorityZones:Array<[string,Array<[string,string]>]>=[
  ['South-East corridors',[['OMR','/house-construction-omr-ecr-chennai#omr'],['ECR','/house-construction-omr-ecr-chennai#ecr']]],
 ];
 
+const locationLandingPages=[
+ ['West Chennai','/house-construction-west-chennai'],
+ ['Ramapuram','/house-construction-ramapuram-chennai'],
+ ['Porur','/house-construction-porur-chennai'],
+ ['Valasaravakkam','/house-construction-valasaravakkam-chennai'],
+ ['Poonamallee','/house-construction-poonamallee-chennai'],
+ ['Virugambakkam + Vadapalani + Saligramam','/house-construction-virugambakkam-vadapalani-saligramam'],
+ ['Mangadu + Kundrathur','/house-construction-mangadu-kundrathur-chennai'],
+ ['Gerugambakkam + Kolapakkam','/house-construction-gerugambakkam-kolapakkam-chennai'],
+ ['Maduravoyal + Vanagaram + Kattupakkam','/house-construction-maduravoyal-vanagaram-kattupakkam'],
+ ['Anna Nagar + Padi + Koyambedu','/house-construction-anna-nagar-chennai'],
+ ['OMR + ECR','/house-construction-omr-ecr-chennai'],
+ ['Coimbatore','/house-construction-coimbatore'],
+] as const;
+
 const faqs=[
  ['Do you work in all of these Chennai localities?','These are priority enquiry areas, not an automatic service guarantee. We confirm fit from the exact site, access, project type, approximate construction value, timeline and current site-management capacity.'],
  ['Do you take projects in Coimbatore?','Yes, we consider selected residential projects in Coimbatore. The supervision model, travel, local execution logistics and commercial basis are confirmed project by project before a proposal.'],
@@ -27,6 +42,7 @@ export default function ServiceAreasChennai(){
  const serviceAreas=priorityZones.flatMap(([,areas])=>areas).map(([name])=>({'@type':'Place',name:name+', Chennai'}));
  const serviceSchema={'@context':'https://schema.org','@type':'Service',name:title,description,serviceType:'Architect-led house construction',url:site.url+path,provider:{'@type':'Organization','@id':site.url+'/#organization',name:site.name,url:site.url},areaServed:[{'@type':'City',name:'Chennai'},...serviceAreas,{'@type':'City',name:'Coimbatore'}]};
  const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:faqs.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))};
+ const locationListSchema={'@context':'https://schema.org','@type':'ItemList',name:'Bind Builds priority construction service areas',itemListElement:locationLandingPages.map(([name,href],index)=>({'@type':'ListItem',position:index+1,name,url:site.url+href}))};
  return <Page kicker="PRIORITY SERVICE AREAS" title="Chennai first. Selected Coimbatore projects.">
   <article className="guidePage">
    <nav className="guideBreadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><span>Service areas</span></nav>
@@ -64,9 +80,18 @@ export default function ServiceAreasChennai(){
       ['06','Timeline and decision readiness','Land ownership, family decisions, finance, desired start date and design readiness shape the next step.']
     ].map(([n,h,p])=><article key={n}><span>{n}</span><div><h3>{h}</h3><p>{p}</p></div></article>)}</div>
    </section>
+   <section className="guideSection">
+    <span className="productEyebrow">Local authority signals</span>
+    <h2>One real Chennai base.<br/><span>Clear service-area pages.</span></h2>
+    <div className="guideCards three">
+     <article><h3>Ramapuram business address</h3><p>{site.address.streetAddress}, {site.address.addressLocality} {site.address.postalCode}. We keep this identity consistent across the website and local listings.</p><a href={site.maps} target="_blank" rel="noopener noreferrer">Find our Chennai base on Google Maps ↗</a></article>
+     <article><h3>Project evidence</h3><p>Review what is design experience, ongoing construction and completed work before deciding whether our current track record fits your project.</p><Link href="/project-evidence">Review project evidence →</Link></article>
+     <article><h3>Design practice lineage</h3><p>Studio Bind Architects began in 2019. Bind Builds extends that architecture-led approach into construction from 2026.</p><a href={site.studio} target="_blank" rel="noopener noreferrer">Explore Studio Bind Architects ↗</a></article>
+    </div>
+   </section>
    <section className="guideSection guideFaq"><span className="productEyebrow">Service area FAQs</span><h2>Before we schedule the site.</h2>{faqs.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</section>
    <section className="guideClosing"><h2>Tell us where the site is.</h2><p>Share the locality, plot dimensions, road width, approximate built-up area and what you want to build.</p><div className="guideActions"><Link className="cta primary" href="/start-a-project">Check my project fit ↗</Link><Link className="productTextLink" href="/house-construction-chennai">Read the Chennai construction guide →</Link></div></section>
   </article>
-  <StructuredData data={[breadcrumbSchema('House construction service areas',path),serviceSchema,faqSchema]}/>
+  <StructuredData data={[breadcrumbSchema('House construction service areas',path),serviceSchema,faqSchema,locationListSchema]}/>
  </Page>;
 }

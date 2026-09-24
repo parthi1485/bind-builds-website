@@ -6,7 +6,7 @@ import { pageMetadata, breadcrumbSchema } from '@/lib/seo';
 import { site, whatsappUrl } from '@/lib/site';
 
 const path='/house-construction-anna-nagar-chennai';
-const title='House Construction Company in Anna Nagar, Padi & Koyambedu | Bind Builds';
+const title='House Construction Company in Anna Nagar, Padi & Koyambedu';
 const description='Architect-led house construction in Anna Nagar, Padi and Koyambedu Chennai for new homes, demolition and rebuild, coordinated design, engineering and site execution.';
 export const metadata=pageMetadata(title,description,path);
 
