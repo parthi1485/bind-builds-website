@@ -946,3 +946,325 @@ button:disabled,.cta[aria-disabled=true]{opacity:.58}
  .processEndCta{grid-template-columns:1fr;gap:22px;margin-top:52px}
  .processEndCta h2{font-size:2.45rem}
 }
+
+
+/* Process QC — attached stage selector experience */
+.qualityStageExperience{
+  display:grid;
+  grid-template-columns:minmax(210px,250px) minmax(0,1fr);
+  gap:16px;
+  align-items:start;
+  margin-top:8px;
+}
+.qualityStageRail{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  position:sticky;
+  top:104px;
+}
+.qualityStageTab{
+  appearance:none;
+  width:100%;
+  min-height:76px;
+  display:grid;
+  grid-template-columns:38px minmax(0,1fr) 24px;
+  gap:12px;
+  align-items:center;
+  text-align:left;
+  padding:13px 14px;
+  border:1px solid #e0e4e9;
+  border-radius:16px;
+  background:#fff;
+  color:#48505a;
+  cursor:pointer;
+  transition:border-color .2s ease,background .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+.qualityStageTab:hover{border-color:#b8cce7;background:#fbfdff}
+.qualityStageTab:focus-visible{outline:2px solid #1674dc;outline-offset:3px}
+.qualityStageTab.isActive{
+  border-color:#9cc8f5;
+  background:linear-gradient(135deg,#eef6ff,#f7fbff);
+  color:#086fd8;
+  box-shadow:0 10px 28px #0b70d90d;
+}
+.qualityStageTabMark{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  background:#f4f6f9;
+  color:#68727e;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.62rem;
+}
+.qualityStageTab.isActive .qualityStageTabMark{background:#fff;color:#0876e4;box-shadow:0 5px 16px #0b70d90c}
+.qualityStageTabCopy{min-width:0;transform:none!important}
+.qualityStageTabCopy strong{
+  display:block;
+  font-size:.76rem;
+  line-height:1.3;
+  font-weight:580;
+  letter-spacing:-.01em;
+  color:inherit;
+  transform:none!important;
+}
+.qualityStageTabCopy small{
+  display:block;
+  margin-top:5px;
+  font-size:.52rem;
+  line-height:1.3;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  color:#9299a2;
+  transform:none!important;
+}
+.qualityStageTab.isActive .qualityStageTabCopy small{color:#6e97c0}
+.qualityStageTabNo{
+  justify-self:end;
+  align-self:start;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.5rem;
+  color:#a9afb6;
+}
+
+.qualityStagePanel{
+  min-width:0;
+  border:1px solid #dfe5ec;
+  border-radius:26px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 20px 60px #10243b0b;
+}
+.qualityStagePanelHero{
+  min-height:340px;
+  display:grid;
+  grid-template-columns:minmax(0,1.25fr) minmax(220px,.75fr);
+  gap:28px;
+  align-items:center;
+  padding:48px clamp(30px,5vw,58px);
+  background:
+    radial-gradient(circle at 84% 78%,#214b6d 0,#173c5e 24%,transparent 48%),
+    linear-gradient(135deg,#102a43 0%,#153653 56%,#173f62 100%);
+  color:#fff;
+}
+.qualityStagePanelCopy{transform:none!important}
+.qualityStageKicker{
+  display:block;
+  margin-bottom:28px;
+  font-size:.61rem;
+  letter-spacing:.09em;
+  color:#8ec8ff;
+  text-transform:none;
+}
+.qualityStagePanelHero h3{
+  max-width:680px;
+  margin:0;
+  font-size:clamp(2rem,4.2vw,4rem);
+  line-height:.98;
+  letter-spacing:-.055em;
+  font-weight:540;
+  text-wrap:balance;
+  transform:none!important;
+}
+.qualityStagePanelHero p{
+  max-width:600px;
+  margin:24px 0 0;
+  color:#b8c9d9;
+  font-size:.82rem;
+  line-height:1.75;
+  transform:none!important;
+}
+.qualityStageMetrics{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 26px;
+  margin-top:34px;
+  padding-top:22px;
+  border-top:1px solid #ffffff20;
+}
+.qualityStageMetrics div{min-width:86px}
+.qualityStageMetrics strong{
+  display:block;
+  color:#fff;
+  font-size:1.35rem;
+  font-weight:520;
+  letter-spacing:-.03em;
+}
+.qualityStageMetrics span{
+  display:block;
+  margin-top:3px;
+  color:#809bb4;
+  font-size:.55rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.qualityStageSignal{
+  position:relative;
+  width:min(100%,270px);
+  aspect-ratio:1;
+  justify-self:center;
+  display:grid;
+  place-items:center;
+  color:#8fc8fb;
+}
+.qualityStageSignal svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:#94bde3;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:.95}
+.qualityStageSignal span{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:1.05rem;
+  letter-spacing:.18em;
+  color:#d8ecff;
+}
+
+.qualityStageChecklist{padding:30px clamp(22px,4vw,42px) 38px}
+.qualityStageChecklistHead{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(260px,.72fr);
+  gap:30px;
+  align-items:end;
+  margin-bottom:22px;
+}
+.qualityStageChecklistHead h4{
+  margin:8px 0 0;
+  font-size:1.35rem;
+  font-weight:550;
+  letter-spacing:-.03em;
+  color:#20262d;
+}
+.qualityStageChecklistHead>p{
+  margin:0;
+  color:#727983;
+  font-size:.69rem;
+  line-height:1.6;
+}
+.qualityStageChecklistHead>p strong{color:#a53b3b}
+.qualityCheckGrid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.qualityCheckCard{
+  min-width:0;
+  min-height:148px;
+  padding:18px 18px 20px;
+  border:1px solid #e6e9ed;
+  border-radius:14px;
+  background:#fbfcfd;
+}
+.qualityCheckCard.isHold{border-color:#efd1d1;background:#fffafa}
+.qualityCheckCardTop{min-height:20px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.qualityCheckIndex{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.53rem;
+  color:#99a0a9;
+}
+.qualityCheckCard h5{
+  margin:16px 0 7px;
+  color:#252b32;
+  font-size:.76rem;
+  line-height:1.42;
+  font-weight:600;
+  transform:none!important;
+}
+.qualityCheckCard p{
+  margin:0;
+  color:#707782;
+  font-size:.68rem;
+  line-height:1.58;
+  transform:none!important;
+}
+.qualityStageGate{
+  display:grid;
+  grid-template-columns:42px minmax(0,1fr);
+  gap:14px;
+  align-items:center;
+  margin-top:12px;
+  padding:15px 16px;
+  border:1px solid #d7e7f7;
+  border-radius:13px;
+  background:#f5f9fe;
+}
+.qualityStageGateIcon{
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#e4f1ff;
+  color:#0876dd;
+  font-size:1rem;
+}
+.qualityStageGate small{
+  display:block;
+  margin-bottom:3px;
+  color:#6c8cac;
+  font-size:.52rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.qualityStageGate strong{
+  display:block;
+  color:#315a80;
+  font-size:.7rem;
+  line-height:1.45;
+  font-weight:570;
+}
+
+@media(max-width:960px){
+  .qualityStageExperience{grid-template-columns:190px minmax(0,1fr);gap:12px}
+  .qualityStageTab{grid-template-columns:32px minmax(0,1fr);padding:12px}
+  .qualityStageTabNo{display:none}
+  .qualityStagePanelHero{grid-template-columns:1fr;min-height:0;padding:38px 34px}
+  .qualityStageSignal{display:none}
+  .qualityCheckGrid{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .qualityStageExperience{display:block;margin-inline:-2px}
+  .qualityStageRail{
+    position:static;
+    display:flex;
+    flex-direction:row;
+    gap:8px;
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+    padding:0 2px 12px;
+    margin:0 -2px;
+    scroll-snap-type:x proximity;
+  }
+  .qualityStageRail::-webkit-scrollbar{display:none}
+  .qualityStageTab{
+    flex:0 0 174px;
+    min-height:70px;
+    grid-template-columns:30px minmax(0,1fr);
+    gap:9px;
+    padding:11px 12px;
+    border-radius:14px;
+    scroll-snap-align:start;
+  }
+  .qualityStageTabMark{width:30px;height:30px;border-radius:9px}
+  .qualityStageTabCopy strong{font-size:.7rem}
+  .qualityStageTabCopy small{font-size:.48rem}
+  .qualityStagePanel{border-radius:20px}
+  .qualityStagePanelHero{padding:30px 22px 28px}
+  .qualityStageKicker{margin-bottom:20px}
+  .qualityStagePanelHero h3{font-size:clamp(2rem,10vw,3rem);line-height:1}
+  .qualityStagePanelHero p{font-size:.75rem;margin-top:18px}
+  .qualityStageMetrics{gap:16px;margin-top:24px;padding-top:18px}
+  .qualityStageMetrics div{min-width:72px}
+  .qualityStageMetrics strong{font-size:1.15rem}
+  .qualityStageChecklist{padding:24px 16px 28px}
+  .qualityStageChecklistHead{grid-template-columns:1fr;gap:10px;margin-bottom:18px}
+  .qualityStageChecklistHead h4{font-size:1.1rem}
+  .qualityStageChecklistHead>p{font-size:.65rem}
+  .qualityCheckGrid{gap:8px}
+  .qualityCheckCard{min-height:0;padding:16px;border-radius:12px}
+  .qualityCheckCard h5{margin-top:12px;font-size:.73rem}
+  .qualityCheckCard p{font-size:.66rem}
+  .qualityStageGate{grid-template-columns:34px minmax(0,1fr);padding:13px}
+  .qualityStageGateIcon{width:30px;height:30px}
+}
+@media(prefers-reduced-motion:reduce){
+  .qualityStageTab{transition:none}
+}

@@ -237,3 +237,18 @@ test('process page presents stage-wise QC, variation control and snag handover',
   assert.match(process,/Open','In progress','Rectified','Closed/);
   assert.match(process,/Handover follows snag closure/);
 });
+
+
+test('process QC uses attached stage selector instead of dropdown accordions', () => {
+  const process=read('app/process/page.tsx');
+  const component=read('components/QualityStageTabs.tsx');
+  const css=read('app/premium.css');
+  assert.match(process,/QualityStageTabs stages={qualityStages}/);
+  assert.doesNotMatch(process,/className="qualityStageList"/);
+  assert.match(component,/role="tablist"/);
+  assert.match(component,/qualityStagePanel/);
+  assert.match(component,/qualityStageRail/);
+  assert.match(css,/\.qualityStageExperience/);
+  assert.match(css,/grid-template-columns:minmax\(210px,250px\) minmax\(0,1fr\)/);
+  assert.match(css,/@media\(max-width:760px\)[\s\S]*\.qualityStageRail/);
+});

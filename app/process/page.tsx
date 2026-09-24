@@ -1,6 +1,7 @@
 import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import { Page } from '@/components/Site';
+import QualityStageTabs, { type QualityStage } from '@/components/QualityStageTabs';
 
 export const metadata=pageMetadata(
   'Home Construction Process in Chennai',
@@ -21,7 +22,7 @@ const milestones=[
   {no:'10',title:'BHOOMI POOJA + CONSTRUCTION COMMENCEMENT',body:'With applicable approvals received, the site ready, and structural inputs and commencement drawings in place, the project formally transitions from pre-construction to site execution.',output:'Project ready for site mobilisation and construction commencement.'}
 ];
 
-const qualityStages=[
+const qualityStages: QualityStage[]=[
   {no:'01',title:'Foundation — before pour',note:'Once the concrete is in, everything below is permanent. This is the most expensive checklist to skip on the whole job.',checks:[
     ['Excavation depth and width','As per foundation drawing',true],
     ['Soil at founding level','Matches the strata assumed in the soil report — call the structural engineer if it does not',true],
@@ -175,28 +176,7 @@ export default function Process(){
         <div><span className="eyebrow">01 / Stage quality control</span><h2 className="lead">Check it before<br/><span className="muted">it disappears.</span></h2></div>
         <div><p>Quality control is most useful before concrete is poured, services are concealed or finishes cover the work. Each stage below has normal checks and <strong>HOLD</strong> points.</p><p className="processControlRule"><strong>HOLD means stop.</strong> The next activity is not released until that check is passed and recorded.</p></div>
       </div>
-      <div className="qualityStageList">
-        {qualityStages.map((stage,index)=>{
-          const holds=stage.checks.filter(([, ,hold])=>hold).length;
-          return <details className="qualityStage" key={stage.no} open={index===0}>
-            <summary>
-              <span className="qualityStageNo">{stage.no}</span>
-              <span className="qualityStageTitle"><strong>{stage.title}</strong><small>{stage.checks.length} checks · {holds} hold points</small></span>
-              <span className="qualityStagePlus" aria-hidden="true">+</span>
-            </summary>
-            <div className="qualityStageBody">
-              <p>{stage.note}</p>
-              <div className="qualityCheckList">
-                {stage.checks.map(([check,spec,hold])=><div className="qualityCheck" key={check as string}>
-                  <div className="qualityCheckName">{hold&&<span className="holdBadge">HOLD</span>}<strong>{check}</strong></div>
-                  <p>{spec}</p>
-                </div>)}
-              </div>
-              <div className="qualityRelease"><span>Release logic</span><strong>{holds} hold point{holds===1?'':'s'} must be cleared before the next dependent activity proceeds.</strong></div>
-            </div>
-          </details>;
-        })}
-      </div>
+      <QualityStageTabs stages={qualityStages} />
       <p className="processSourceNote">The exact checklist is adjusted to the project drawings, structural design, specification, site conditions and agreed scope. The stage gate is a control process—not a substitute for project-specific consultant instructions.</p>
     </section>
 
