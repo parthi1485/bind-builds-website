@@ -842,3 +842,107 @@ button:disabled,.cta[aria-disabled=true]{opacity:.58}
  .calcProgress button>b{font-size:.54rem}
  .calcProgress button>span{width:21px;height:21px}
 }
+
+
+/* Process page — stage QC, change control and snag / handover */
+.processControlSection,.processVariationSection,.processSnagSection{overflow:hidden}
+.processControlIntro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:clamp(34px,7vw,110px);align-items:start;margin-bottom:42px}
+.processControlIntro>div:last-child{padding-top:7px}
+.processControlIntro p{margin:0 0 14px;max-width:620px;color:#636a73;line-height:1.78;font-size:.86rem}
+.processControlRule{padding:17px 18px;border-left:3px solid #e14b4b;background:#fff7f7;border-radius:0 12px 12px 0;color:#4c5056!important}
+.processControlRule strong{color:#a93434}
+.qualityStageList{border-top:1px solid #dfe3e8}
+.qualityStage{border-bottom:1px solid #dfe3e8}
+.qualityStage>summary{list-style:none;display:grid;grid-template-columns:54px minmax(0,1fr) 38px;gap:18px;align-items:center;padding:24px 4px;cursor:pointer}
+.qualityStage>summary::-webkit-details-marker{display:none}
+.qualityStageNo{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.69rem;color:#7b8490}
+.qualityStageTitle strong{display:block;font-size:clamp(1.06rem,2vw,1.42rem);font-weight:540;letter-spacing:-.025em;color:#20242a}
+.qualityStageTitle small{display:block;margin-top:5px;font-size:.66rem;color:#7c828a;letter-spacing:.04em;text-transform:uppercase}
+.qualityStagePlus{width:32px;height:32px;border:1px solid #dfe3e8;border-radius:50%;display:grid;place-items:center;font-size:1.1rem;color:#626b75;transition:transform .22s ease,background .22s ease}
+.qualityStage[open] .qualityStagePlus{transform:rotate(45deg);background:#f0f6fd;color:#006bd6}
+.qualityStageBody{padding:0 0 28px 72px}
+.qualityStageBody>p{max-width:780px;color:#696f77;line-height:1.72;font-size:.8rem;margin:0 0 20px}
+.qualityCheckList{border:1px solid #e2e5e9;border-radius:16px;overflow:hidden;max-width:980px;background:#fff}
+.qualityCheck{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(300px,1.1fr);gap:26px;padding:15px 18px;border-bottom:1px solid #edf0f2;align-items:start}
+.qualityCheck:last-child{border-bottom:0}
+.qualityCheck:nth-child(even){background:#fafbfc}
+.qualityCheckName{display:flex;gap:9px;align-items:flex-start}
+.qualityCheckName strong{font-size:.76rem;font-weight:590;line-height:1.5;color:#262b31}
+.qualityCheck p{margin:0;font-size:.73rem;line-height:1.58;color:#737982}
+.holdBadge{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:20px;border:1px solid #f0c5c5;background:#fff2f2;color:#a53636;border-radius:5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.52rem;letter-spacing:.08em;flex:0 0 auto;margin-top:1px}
+.qualityRelease{max-width:980px;margin-top:10px;padding:13px 16px;border:1px solid #d9e7f7;background:#f5f9fe;border-radius:12px;display:flex;gap:18px;align-items:baseline}
+.qualityRelease span{font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#4777aa}
+.qualityRelease strong{font-size:.7rem;font-weight:550;color:#31587d}
+.processSourceNote{max-width:930px;margin:20px 0 0;color:#818791;font-size:.68rem;line-height:1.65}
+
+.processVariationSection{background:#f7f8fa}
+.variationFlow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#dde2e8;border:1px solid #dde2e8;border-radius:18px;overflow:hidden}
+.variationFlow article{background:#fff;padding:28px 25px;min-height:185px}
+.variationFlow article>span{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.62rem;color:#7c8490}
+.variationFlow h3{font-size:1rem;font-weight:560;letter-spacing:-.02em;margin:28px 0 9px}
+.variationFlow p{font-size:.75rem;line-height:1.65;color:#6c727b;margin:0}
+.variationLedger{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
+.variationLedger>div{padding:22px;border:1px solid #e0e3e8;border-radius:16px;background:#fff}
+.variationLedger strong{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82rem;letter-spacing:.06em;margin:12px 0 8px}
+.variationLedger p{font-size:.73rem;line-height:1.65;color:#707680;margin:0}
+.variationLedger .variationApproval{background:#111923;color:#fff;border-color:#111923}
+.variationApproval .eyebrow,.variationApproval p{color:#9caabd}
+.variationApproval strong{color:#fff}
+
+.snagStatusFlow{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #e0e4e9;border-radius:16px;overflow:hidden;margin-bottom:24px}
+.snagStatusFlow>div{position:relative;display:flex;flex-direction:column;gap:4px;padding:19px 20px;border-right:1px solid #e7eaee;background:#fff}
+.snagStatusFlow>div:last-child{border-right:0;background:#f2faf6}
+.snagStatusFlow span{font-size:.56rem;color:#8b929b}
+.snagStatusFlow strong{font-size:.8rem;font-weight:570}
+.snagStatusFlow b{position:absolute;right:-7px;top:50%;transform:translateY(-50%);z-index:2;width:14px;height:14px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#9da3ab;font-size:.65rem}
+.snagGrid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.snagGrid>article{border:1px solid #e0e4e8;border-radius:18px;padding:28px;background:#fff}
+.snagGrid h3{font-size:1.25rem;font-weight:550;letter-spacing:-.025em;margin:14px 0}
+.snagGrid p{font-size:.76rem;line-height:1.68;color:#6d737b}
+.snagFields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:22px 0}
+.snagFields span{padding:11px 12px;border:1px solid #e5e8ec;border-radius:9px;font-size:.66rem;color:#606873;background:#fafbfc}
+.handoverDocumentList{list-style:none;margin:18px 0 0;padding:0;columns:2;column-gap:22px}
+.handoverDocumentList li{break-inside:avoid;position:relative;padding:6px 0 6px 18px;font-size:.7rem;line-height:1.48;color:#666e78}
+.handoverDocumentList li:before{content:'✓';position:absolute;left:0;color:#218458;font-size:.66rem}
+.handoverGate{margin-top:20px;padding:28px 30px;display:grid;grid-template-columns:54px minmax(0,1fr);gap:20px;align-items:start;border-radius:18px;background:#0f1a24;color:#fff}
+.handoverGateMark{width:46px;height:46px;border:1px solid #3b5d50;border-radius:50%;display:grid;place-items:center;background:#16352b;color:#7fd4ad;font-size:1.1rem}
+.handoverGate h3{font-size:1.3rem;font-weight:550;letter-spacing:-.02em;margin:10px 0 7px}
+.handoverGate p{margin:0;max-width:780px;color:#aab5c1;font-size:.76rem;line-height:1.65}
+.handoverGate .eyebrow{color:#8aa0b6}
+.processEndCta{margin-top:72px;padding-top:40px;border-top:1px solid #e0e4e8;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end}
+.processEndCta h2{font-size:clamp(2rem,4.8vw,4.3rem);line-height:1;letter-spacing:-.055em;margin:18px 0 0}
+.processEndCta p{font-size:.8rem;line-height:1.72;color:#696f77;max-width:520px;margin:0 0 18px}
+
+@media(max-width:900px){
+ .variationFlow{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .variationLedger{grid-template-columns:1fr}
+ .snagGrid{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+ .processControlIntro{grid-template-columns:1fr;gap:20px;margin-bottom:28px}
+ .processControlIntro>div:last-child{padding-top:0}
+ .processControlIntro p{font-size:.78rem}
+ .qualityStage>summary{grid-template-columns:36px minmax(0,1fr) 32px;gap:10px;padding:20px 0}
+ .qualityStageTitle strong{font-size:1rem;line-height:1.3}
+ .qualityStageTitle small{font-size:.57rem;line-height:1.45}
+ .qualityStageBody{padding:0 0 24px}
+ .qualityStageBody>p{font-size:.74rem}
+ .qualityCheck{grid-template-columns:1fr;gap:7px;padding:14px}
+ .qualityCheckName{align-items:center}
+ .qualityCheck p{padding-left:0}
+ .qualityRelease{display:block;padding:13px 14px}
+ .qualityRelease span{display:block;margin-bottom:5px}
+ .variationFlow{grid-template-columns:1fr;border-radius:14px}
+ .variationFlow article{min-height:0;padding:22px 20px}
+ .variationFlow h3{margin-top:18px}
+ .snagStatusFlow{grid-template-columns:1fr 1fr}
+ .snagStatusFlow>div:nth-child(2){border-right:0}
+ .snagStatusFlow>div:nth-child(-n+2){border-bottom:1px solid #e7eaee}
+ .snagStatusFlow b{display:none}
+ .snagGrid>article{padding:22px 18px}
+ .handoverDocumentList{columns:1}
+ .handoverGate{grid-template-columns:40px minmax(0,1fr);padding:22px 18px;gap:14px}
+ .handoverGateMark{width:38px;height:38px}
+ .processEndCta{grid-template-columns:1fr;gap:22px;margin-top:52px}
+ .processEndCta h2{font-size:2.45rem}
+}

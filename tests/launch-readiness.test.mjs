@@ -223,3 +223,17 @@ test('lead submissions preserve explicit first-touch attribution for CRM reporti
   assert.match(route,/'firstMedium'/);
   assert.match(route,/'firstLandingPath'/);
 });
+
+
+test('process page presents stage-wise QC, variation control and snag handover', () => {
+  const process=read('app/process/page.tsx');
+  assert.match(process,/Stage quality control/);
+  assert.match(process,/Foundation — before pour/);
+  assert.match(process,/Column & slab reinforcement — before pour/);
+  assert.match(process,/Waterproofing & pre-flooring/);
+  assert.match(process,/HOLD means stop/);
+  assert.match(process,/Change order \+ variation control/);
+  assert.match(process,/Approve before execution/);
+  assert.match(process,/Open','In progress','Rectified','Closed/);
+  assert.match(process,/Handover follows snag closure/);
+});
