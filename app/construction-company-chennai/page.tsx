@@ -4,6 +4,7 @@ import StructuredData from '@/components/StructuredData';
 import { pageMetadata, breadcrumbSchema } from '@/lib/seo';
 import { packages, site, whatsappUrl } from '@/lib/site';
 import { money } from '@/lib/calculator';
+import PriorityAreaLinks from '@/components/PriorityAreaLinks';
 
 const path='/construction-company-chennai';
 const title='Construction Company in Chennai | Architect-Led Home Construction';
@@ -81,6 +82,13 @@ export default function ConstructionCompanyChennai(){
     <h2>The city is one market.<br/><span>Every site is still different.</span></h2>
     <p>Road width and unloading access, existing neighbouring buildings, soil and drainage conditions, demolition, local approval jurisdiction and the intended number of floors can all change the project route. That is why a Chennai construction quotation should eventually become site- and design-specific.</p>
     <div className="guideActions"><Link className="productTextLink" href="/individual-house-construction-chennai">Individual house construction →</Link><Link className="productTextLink" href="/service-areas-chennai">Check Chennai service areas →</Link><Link className="productTextLink" href="/building-plan-approval-chennai">Understand building-plan approvals →</Link><Link className="productTextLink" href="/demolition-rebuild-house-chennai">Planning a demolition + rebuild? →</Link></div>
+   </section>
+
+   <section className="guideSection">
+    <span className="productEyebrow">Priority construction areas</span>
+    <h2>Local search should lead<br/><span>to useful site context.</span></h2>
+    <p>We prioritise residential enquiries across our Ramapuram / Porur / Valasaravakkam base cluster, the wider West Chennai growth belt, Anna Nagar and nearby areas, OMR–ECR, and selected Coimbatore projects. Each location still begins with the exact plot, access, scope and delivery fit.</p>
+    <PriorityAreaLinks/>
    </section>
 
    <section className="guideSection">
