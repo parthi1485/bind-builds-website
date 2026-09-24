@@ -4,6 +4,7 @@ import StructuredData from '@/components/StructuredData';
 import { pageMetadata, breadcrumbSchema } from '@/lib/seo';
 import { packages, site, whatsappUrl } from '@/lib/site';
 import { money } from '@/lib/calculator';
+import PriorityAreaLinks from '@/components/PriorityAreaLinks';
 
 const path='/construction-cost-chennai';
 const title='House Construction Cost in Chennai 2026';
@@ -47,7 +48,7 @@ export default function ConstructionCostChennai(){
     <h2>What does the area<br/><span>mean in rupees?</span></h2>
     <p>The table below multiplies the same built-up area by each published package rate. It is a base-cost comparison before additional items.</p>
     <div className="guideTableWrap"><table className="guideCostTable"><thead><tr><th>Built-up area</th>{packages.map(item=><th key={item.key}>{item.name}<small>{money(item.rate)} / sq.ft</small></th>)}</tr></thead><tbody>{sizes.map(size=><tr key={size}><th>{size.toLocaleString('en-IN')} sq.ft</th>{packages.map(item=><td key={item.key}>{money(size*item.rate)}</td>)}</tr>)}</tbody></table></div>
-    <div className="guideNote"><strong>Formula</strong><p>Base construction estimate = confirmed built-up construction area × selected package rate. Add parking, headroom, approval allowances and other selected items separately where applicable.</p></div>
+    <div className="guideNote"><strong>Formula</strong><p>Base construction estimate = confirmed built-up construction area × selected package rate. Add separately measured parking or headroom to the base construction where applicable, then add approval allowances and other selected extras.</p></div>
     <Link href="/cost-calculator" className="productTextLink">Use your actual floor areas in the calculator →</Link>
    </section>
 
@@ -60,7 +61,7 @@ export default function ConstructionCostChennai(){
       ['03','Material specification and allowances','Flooring, sanitaryware, windows, doors, electrical and other finish allowances differ between package levels.'],
       ['04','Site access and existing conditions','Narrow roads, demolition, difficult storage, dewatering or other site constraints can create project-specific work.'],
       ['05','Approvals and statutory charges','Building-plan approvals, authority fees and related professional work are budgeted separately from the published base rate.'],
-      ['06','External and optional works','Compound walls, gates, sumps, recycling systems, solar, lifts and other additions should be priced visibly instead of hidden inside the headline rate.']
+      ['06','External and optional works','Compound walls, gates, sumps, septic tanks, additional overhead storage, solar, lifts and other additions should be priced visibly instead of hidden inside the headline rate.']
     ].map(([n,h,p])=><article key={n}><span>{n}</span><div><h3>{h}</h3><p>{p}</p></div></article>)}</div>
    </section>
 
@@ -73,6 +74,13 @@ export default function ConstructionCostChennai(){
       ['Exclusions','Put approvals, taxes, compound wall, gate, sump, lift, utility connections and site-specific items on one visible list.']
     ].map(([h,p])=><article key={h}><h3>{h}</h3><p>{p}</p></article>)}</div>
     <div className="guideActions"><Link href="/packages" className="productTextLink">Compare Bind Builds packages →</Link><Link href="/house-construction-chennai" className="productTextLink">Read the Chennai house-construction guide →</Link></div>
+   </section>
+
+   <section className="guideSection" id="service-areas">
+    <span className="productEyebrow">Priority construction service areas</span>
+    <h2>Search by locality.<br/><span>Plan by the actual site.</span></h2>
+    <p>Our strongest Chennai focus is around Ramapuram, Porur, Valasaravakkam and the wider West Chennai belt, with additional priority enquiries around Anna Nagar, OMR and ECR. Selected Coimbatore residential projects are assessed project by project.</p>
+    <PriorityAreaLinks/>
    </section>
 
    <section className="guideSection guideFaq" id="faq"><span className="productEyebrow">Construction cost FAQs</span><h2>Questions behind the number.</h2>{faqs.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</section>
