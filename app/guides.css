@@ -121,3 +121,208 @@
  .localityIntentCard h3{font-size:1.05rem}
  .localityIntentCard p{font-size:.78rem}
 }
+
+
+/* Stage 6 — mobile content experience pass */
+@media(max-width:600px){
+ .guidePage{padding:20px 18px 64px}
+ .guideBreadcrumb{
+  margin-bottom:26px;
+  padding:7px 0 15px;
+  white-space:nowrap;
+  overflow-x:auto;
+  flex-wrap:nowrap;
+  scrollbar-width:none;
+ }
+ .guideBreadcrumb::-webkit-scrollbar{display:none}
+ .guideIntro{padding-bottom:8px}
+ .guideIntro h2,.guideSection>h2,.readinessIntro h2,.guideClosing h2{
+  font-size:clamp(2rem,9vw,2.65rem);
+  line-height:1.04;
+  margin:16px 0 20px;
+  text-wrap:balance;
+ }
+ .guideIntro>p,.guideSection>p{line-height:1.75}
+
+ .guideActions{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+  margin:22px 0;
+ }
+ .guideActions .cta{
+  width:100%;
+  min-height:50px;
+  justify-content:center;
+ }
+ .guideActions .productTextLink{
+  min-height:44px;
+  width:100%;
+  padding:8px 2px;
+  justify-content:flex-start;
+ }
+
+ .guideJump{
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  margin:28px -18px 0;
+  padding:16px 18px;
+  gap:8px;
+  scroll-snap-type:x proximity;
+  scrollbar-width:none;
+  border-color:#eceef1;
+ }
+ .guideJump::-webkit-scrollbar{display:none}
+ .guideJump a{
+  flex:0 0 auto;
+  min-height:38px;
+  display:flex;
+  align-items:center;
+  scroll-snap-align:start;
+  background:#f4f6f8;
+ }
+
+ .guideSection{padding-top:50px}
+ .guideSection:not(.guideFaq):before{margin-bottom:18px}
+ .guideCards,.serviceRates,.serviceAreaGrid{gap:11px;margin:24px 0}
+ .guideCards article,.serviceRates article,.serviceAreaGrid article{
+  padding:21px 19px;
+  border-radius:16px;
+  background:linear-gradient(180deg,#fff,#fafbfc);
+  box-shadow:0 8px 26px #15263b06;
+ }
+ .guideCards h3,.documentGrid h3{font-size:1.03rem}
+ .guideCards p,.documentGrid p,.guideNote p,.guideDisclosure p,.guideTiming p{
+  font-size:.82rem;
+  line-height:1.72;
+ }
+
+ .documentGrid{margin:20px 0}
+ .documentGrid article{padding:19px 0;gap:13px}
+ .documentGrid article>span{
+  min-width:26px;
+  height:26px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#eef6ff;
+  padding:0;
+  font-size:.64rem;
+ }
+
+ .approvalSteps{margin:25px 0 16px;gap:20px}
+ .approvalSteps li{padding-left:52px;min-height:82px}
+ .approvalSteps li>span{width:36px;height:36px}
+ .approvalSteps li:not(:last-child):after{left:18px;top:43px;bottom:-14px}
+ .approvalSteps h3{font-size:.96rem}
+ .approvalSteps p{font-size:.78rem;line-height:1.65}
+
+ .constructionExample{
+  padding:24px 20px;
+  border-radius:18px;
+  margin:24px 0;
+ }
+ .constructionExample h3{font-size:1.75rem}
+ .constructionExample dl>div{padding:14px 0;font-size:.8rem}
+
+ .guideFaq{
+  margin-inline:-2px;
+  padding:24px 20px 5px;
+  border-radius:17px;
+ }
+ .guideFaq summary{
+  min-height:56px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  list-style:none;
+  padding:16px 0;
+ }
+ .guideFaq summary::-webkit-details-marker{display:none}
+ .guideFaq summary:after{
+  content:'+';
+  margin-left:auto;
+  width:28px;
+  height:28px;
+  flex:0 0 28px;
+  display:grid;
+  place-items:center;
+  border:1px solid #dfe3e8;
+  border-radius:50%;
+  color:#0071e3;
+  font-size:1rem;
+  font-weight:400;
+ }
+ .guideFaq details[open] summary:after{content:'−'}
+ .guideFaq details p{padding-right:8px}
+
+ .guideClosing{
+  margin-top:48px;
+  padding:28px 22px;
+  border-radius:18px;
+ }
+ .guideClosing .guideActions{margin-bottom:6px}
+ .guideClosing .cta{box-shadow:0 8px 24px #0071e32e}
+
+ .guideTableWrap{
+  margin:24px -18px;
+  border-radius:0;
+  border-left:0;
+  border-right:0;
+  box-shadow:none;
+  position:relative;
+ }
+ .guideCostTable th,.guideCostTable td{padding:15px 13px}
+ .guideTableWrap:after{
+  content:'Swipe to compare →';
+  position:sticky;
+  left:14px;
+  display:inline-block;
+  margin:10px 14px 12px;
+  padding:6px 9px;
+  border-radius:100px;
+  background:#f2f6fb;
+  color:#627185;
+  font-size:.6rem;
+  pointer-events:none;
+ }
+
+ .relatedGuides{
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  gap:8px;
+  margin:24px -18px 0;
+  padding:14px 18px;
+  scrollbar-width:none;
+  scroll-snap-type:x proximity;
+ }
+ .relatedGuides::-webkit-scrollbar{display:none}
+ .relatedGuides a{
+  flex:0 0 auto;
+  max-width:260px;
+  min-height:42px;
+  padding:9px 13px;
+  border:1px solid #e1e7ee;
+  border-radius:100px;
+  background:#fff;
+  scroll-snap-align:start;
+  font-size:.75rem;
+ }
+
+ .homeGuideLinks{gap:11px}
+ .homeGuideLinks>a{
+  padding:22px 20px;
+  border-radius:16px;
+  border:1px solid #eceef1;
+  background:#fff;
+  box-shadow:0 8px 28px #17263a05;
+ }
+ .homeGuideLinks h3{font-size:1.35rem;margin:15px 0 11px}
+
+ .serviceAreaGrid li{padding:11px 0}
+ .localityIntentGrid{gap:9px}
+ .localityIntentCard{padding:20px 18px}
+
+ .evidenceCard{border-radius:17px}
+ .evidencePolicy{border-radius:17px}
+}

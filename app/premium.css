@@ -794,3 +794,51 @@ button:disabled,.cta[aria-disabled=true]{opacity:.58}
 @media(prefers-reduced-motion:reduce){
  .mobileProjectBar,.nav,.nav .brandImage,.simpleCategoryToggle,.simpleCategoryToggle svg{transition:none!important}
 }
+
+
+/* Mobile audit pass 2 — calculator navigation clarity */
+.calcProgress .progressShort{display:none}
+@media(max-width:760px){
+ .calcProgress{
+  position:relative;
+  padding:5px 4px;
+  gap:0;
+  border-radius:15px;
+  box-shadow:0 6px 24px #17263a05;
+ }
+ .calcProgress button{
+  min-height:66px;
+  padding:9px 2px 11px;
+  align-items:center;
+  justify-content:flex-start;
+  text-align:center;
+  gap:6px;
+ }
+ .calcProgress button>span{
+  width:23px;
+  height:23px;
+  font-size:.54rem;
+ }
+ .calcProgress button>b{
+  min-height:0;
+  width:100%;
+  display:block;
+  font-size:.58rem;
+  line-height:1.1;
+  white-space:nowrap;
+ }
+ .calcProgress .progressLong{display:none}
+ .calcProgress .progressShort{display:block}
+ .calcProgress li[aria-current=step]:after{
+  left:9px;
+  right:9px;
+  bottom:1px;
+  height:2px;
+ }
+ .calcProgress li.complete button>b{color:#66717d}
+ .calcProgress button:disabled{opacity:.56}
+}
+@media(max-width:374px){
+ .calcProgress button>b{font-size:.54rem}
+ .calcProgress button>span{width:21px;height:21px}
+}

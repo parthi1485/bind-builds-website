@@ -11,6 +11,7 @@ import { constructionMonths, extraOptions, extraAmount, extraDescription, initia
 import { trackEvent } from '@/lib/analytics';
 
 const stepNames = ['Your site', 'Your floors', 'Your package', 'Your extras'];
+const progressShortNames = ['Site', 'Floors', 'Package', 'Extras', 'Estimate'];
 const tankIncluded = ['2,000 L three-layer overhead tank', '3,000 L overhead tank with sensor', 'RCC overhead tank up to 6,000 L'];
 const highlights = [
   ['2D plans & 3D exterior elevation', 'M20 concrete specification', 'Main flooring allowance up to ₹65/sq.ft', 'Parryware fittings allowance up to ₹20,000/bathroom'],
@@ -88,7 +89,7 @@ export default function ConstructionCalculator() {
   const next = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); if (step === 3 && !estimate) return; if(step===0&&!analyticsStarted.current){analyticsStarted.current=true;trackEvent('calculator_started',{plot_area:Number(plot)||0});} trackEvent('calculator_step_complete',{step_number:step+1,step_name:stepNames[step],package_name:selected.name}); if(step===3&&estimate){trackEvent('estimate_generated',{package_name:selected.name,floors:floorCount,calculated_area:estimate.area,value:estimate.total,currency:'INR'});} setFurthest(Math.max(furthest, step + 1)); setStep(step + 1); };
 
   return <div className="calculator" id="calculator" ref={root}>
-    <ol className="calcProgress" aria-label="Estimate progress">{[...stepNames, 'Your estimate'].map((label, index) => <li key={label} aria-current={step === index ? 'step' : undefined} className={index < step ? 'complete' : ''}><button type="button" disabled={index > furthest || index === 4 && !estimate} onClick={() => setStep(index)}><span>{index < step ? '✓' : String(index + 1).padStart(2, '0')}</span><b>{label}</b></button></li>)}</ol>
+    <ol className="calcProgress" aria-label="Estimate progress">{[...stepNames, 'Your estimate'].map((label, index) => <li key={label} aria-current={step === index ? 'step' : undefined} className={index < step ? 'complete' : ''}><button type="button" disabled={index > furthest || index === 4 && !estimate} onClick={() => setStep(index)}><span>{index < step ? '✓' : String(index + 1).padStart(2, '0')}</span><b><span className="progressLong">{label}</span><span className="progressShort">{progressShortNames[index]}</span></b></button></li>)}</ol>
     {step === 4 && estimate ? <CalculatorReport input={input} estimate={estimate} packageIndex={tier} headingRef={heading} onEdit={() => setStep(0)} /> : <div className="calcLayout">
       <form className="calcForm" onSubmit={next}>
         <div className="calcStepContent" key={step}>
@@ -129,7 +130,7 @@ export default function ConstructionCalculator() {
           {step === 3 && <div className="calcFields">
             <ApprovalFeeExtra value={approval} builtArea={builtArea} onChange={change => setApproval(current => ({...current, ...change}))}/>
             <div className="calcNote"><span aria-hidden="true">✓</span><p>Your {selected.name} package already lists a <strong>{tankIncluded[tier].toLowerCase()}</strong>. Add an allowance only for an upgrade beyond that scope.</p></div>
-            <p className="calcHint">Reference allowances from the supplied example: ₹40/L sump, ₹35/L septic, ₹55/L additional RCC tank and ₹2,750/running ft wall. They are not verified Bind Builds rates. Edit each amount before relying on the budget. Septic and recycling are alternative scenarios here.</p>
+            <p className="calcHint">Planning reference rates: ₹30/L underground sump, ₹25/L conventional septic tank, ₹35/L additional overhead-tank capacity and ₹450/sq.ft compound wall. These are editable budgeting allowances, not a confirmed project quotation.</p>
             <div className="calcExtras">{extraOptions.filter(item=>item.key!=='parking').map(item=><CalculatorExtra key={item.key} item={item} value={allowances[item.key]} onChange={change=>updateExtra(item.key,change)}/>)}</div>
           </div>}
         </div>
