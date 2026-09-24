@@ -12,6 +12,8 @@ test('launch-critical routes are represented in the sitemap', () => {
     "''",
     "'/about'",
     "'/project-evidence'",
+    "'/projects/sunguvarchathiram-multigenerational-home'",
+    "'/projects/pallikaranai-family-home'",
     "'/packages'",
     "'/cost-calculator'",
     "'/construction-cost-chennai'",
@@ -138,4 +140,17 @@ test('canonical and legacy-domain migration signals remain configured', () => {
   assert.match(config,/type:'host'/);
   assert.match(config,/https:\/\/www\.bindbuilds\.com\/packages/);
   assert.match(config,/https:\/\/www\.bindbuilds\.com\/project-evidence/);
+});
+
+
+test('project evidence links to substantive case-study pages', () => {
+  const evidence=read('app/project-evidence/page.tsx');
+  const sung=read('app/projects/sunguvarchathiram-multigenerational-home/page.tsx');
+  const palli=read('app/projects/pallikaranai-family-home/page.tsx');
+  assert.match(evidence,/sunguvarchathiram-multigenerational-home/);
+  assert.match(evidence,/pallikaranai-family-home/);
+  assert.match(sung,/6,519 sq\.ft\./);
+  assert.match(sung,/Not a completed Bind Builds handover/);
+  assert.match(palli,/17 ft × 44 ft/);
+  assert.match(palli,/PRE-CONSTRUCTION/);
 });

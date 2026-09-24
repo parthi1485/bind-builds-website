@@ -7,6 +7,8 @@ export default function sitemap():MetadataRoute.Sitemap{
   ['',1],
   ['/about',.7],
   ['/project-evidence',.88],
+  ['/projects/sunguvarchathiram-multigenerational-home',.86],
+  ['/projects/pallikaranai-family-home',.86],
   ['/packages',.9],
   ['/cost-calculator',.95],
   ['/construction-cost-chennai',.95],
