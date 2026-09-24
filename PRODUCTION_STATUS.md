@@ -6,9 +6,9 @@
 
 ## Current production gates
 
-- 15 public routes return expected content.
+- 33 public routes return expected content.
 - `robots.txt` and `sitemap.xml` are available.
-- Sitemap contains all 15 public routes.
+- Sitemap contains all 33 public routes.
 - Open Graph preview image is available.
 - Unknown routes return HTTP 404.
 - Lead API rejects unsupported GET requests.

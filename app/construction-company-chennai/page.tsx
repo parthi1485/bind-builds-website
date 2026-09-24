@@ -58,6 +58,16 @@ export default function ConstructionCompanyChennai(){
    </section>
 
    <section className="guideSection">
+    <span className="productEyebrow">Real project evidence</span>
+    <h2>Two project stages.<br/><span>Two different kinds of proof.</span></h2>
+    <div className="guideCards">
+      <article><span className="guideNumber">ONGOING</span><h3>6,519 sq.ft multi-generational residence</h3><p>Sunguvarchathiram shows active site sequencing, coordination and construction progress. It is explicitly presented as ongoing work—not as a completed handover.</p><Link href="/projects/sunguvarchathiram-multigenerational-home">Open the ongoing project case study →</Link></article>
+      <article><span className="guideNumber">PRE-CONSTRUCTION</span><h3>17 × 44 ft Pallikaranai family home</h3><p>A narrow-plot Bind Builds project showing how three generations, parking, privacy, Vastu and floor stacking are resolved before construction begins.</p><Link href="/projects/pallikaranai-family-home">Open the pre-construction case study →</Link></article>
+    </div>
+    <p className="guideSmall">We separate design, pre-construction, ongoing execution and completed handover evidence so each example is judged for what it actually demonstrates.</p>
+   </section>
+
+   <section className="guideSection">
     <span className="productEyebrow">House construction packages in Chennai</span>
     <h2>A rate is useful<br/><span>when the specification is visible.</span></h2>
     <div className="serviceRates">{packages.map(item=><article key={item.key}><h3>{item.name}</h3><strong>{money(item.rate)}<small> / sq.ft*</small></strong><p>{item.description}</p><Link href={'/packages#'+item.key}>Read the {item.name} specification →</Link></article>)}</div>

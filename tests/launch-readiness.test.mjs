@@ -154,3 +154,22 @@ test('project evidence links to substantive case-study pages', () => {
   assert.match(palli,/17 ft × 44 ft/);
   assert.match(palli,/PRE-CONSTRUCTION/);
 });
+
+
+test('high-authority Chennai pages link into real project evidence', () => {
+  const company=read('app/construction-company-chennai/page.tsx');
+  const house=read('app/house-construction-chennai/page.tsx');
+  for(const page of [company,house]){
+    assert.match(page,/project-evidence/);
+    assert.match(page,/projects\/sunguvarchathiram-multigenerational-home/);
+    assert.match(page,/projects\/pallikaranai-family-home/);
+  }
+});
+
+test('production smoke list covers every current public sitemap route', () => {
+  const smoke=read('scripts/production-smoke.mjs');
+  const sitemap=read('app/sitemap.ts');
+  const matches=[...sitemap.matchAll(/\['(\/[^']*)',/g)].map(match=>match[1]);
+  if(sitemap.includes("['',1]")) matches.unshift('/');
+  for(const route of matches) assert.ok(smoke.includes("['"+route+"'"), 'Production smoke missing '+route);
+});
