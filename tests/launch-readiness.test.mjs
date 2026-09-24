@@ -33,6 +33,7 @@ test('launch-critical routes are represented in the sitemap', () => {
     "'/house-construction-anna-nagar-chennai'",
     "'/house-construction-omr-ecr-chennai'",
     "'/house-construction-coimbatore'",
+    "'/construction-cost-coimbatore'",
     "'/demolition-rebuild-house-chennai'",
     "'/process'",
     "'/faq'",

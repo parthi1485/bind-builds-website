@@ -74,6 +74,7 @@ export function Footer() {
     ['OMR + ECR', '/house-construction-omr-ecr-chennai'],
     ['Anna Nagar + nearby', '/house-construction-anna-nagar-chennai'],
     ['Coimbatore', '/house-construction-coimbatore'],
+    ['Coimbatore cost 2026', '/construction-cost-coimbatore'],
     ['Demolition + rebuild', '/demolition-rebuild-house-chennai'],
   ];
   return <footer className="footer">

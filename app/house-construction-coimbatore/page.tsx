@@ -43,7 +43,7 @@ export default function CoimbatoreConstruction(){
     <article><h3>Plot information</h3><p>Location, dimensions, road width, orientation and whether the site is vacant or has an existing building.</p></article>
     <article><h3>Family + building brief</h3><p>Users, bedrooms, floors, parking, rental requirements, future expansion and any special lifestyle priorities.</p></article>
     <article><h3>Budget + timing</h3><p>Approximate total construction budget, finance status and when you realistically want design and site work to begin.</p></article>
-   </div><div className="guideActions"><Link className="productTextLink" href="/process">See the pre-construction process →</Link><Link className="productTextLink" href="/project-evidence">Review project evidence →</Link></div></section>
+   </div><div className="guideActions"><Link className="productTextLink" href="/construction-cost-coimbatore">Plan Coimbatore construction cost →</Link><Link className="productTextLink" href="/process">See the pre-construction process →</Link><Link className="productTextLink" href="/project-evidence">Review project evidence →</Link></div></section>
    <section className="guideSection">
     <span className="productEyebrow">Authority + operating transparency</span>
     <h2>Chennai-based.<br/><span>Coimbatore delivery agreed project by project.</span></h2>
@@ -54,7 +54,7 @@ export default function CoimbatoreConstruction(){
     </div>
    </section>
    <section className="guideSection guideFaq"><span className="productEyebrow">Coimbatore construction FAQs</span><h2>Before we plan travel or supervision.</h2>{faqs.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</section>
-   <section className="guideClosing"><h2>Planning a home in Coimbatore?</h2><p>Start with the site and programme. We will tell you whether the project fits our current delivery model before moving into a detailed proposal.</p><div className="guideActions"><Link className="cta primary" href="/start-a-project">Check Coimbatore project fit ↗</Link><Link className="productTextLink" href="/packages">Review specification levels →</Link></div></section>
+   <section className="guideClosing"><h2>Planning a home in Coimbatore?</h2><p>Start with the site and programme. We will tell you whether the project fits our current delivery model before moving into a detailed proposal.</p><div className="guideActions"><Link className="cta primary" href="/start-a-project?location=Coimbatore%2C%20Tamil%20Nadu">Check Coimbatore project fit ↗</Link><Link className="productTextLink" href="/construction-cost-coimbatore">Plan the construction budget →</Link></div></section>
   </article>
   <StructuredData data={[breadcrumbSchema('House construction in Coimbatore',path),serviceSchema,faqSchema]}/>
  </Page>;

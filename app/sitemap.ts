@@ -28,6 +28,7 @@ export default function sitemap():MetadataRoute.Sitemap{
   ['/house-construction-anna-nagar-chennai',.88],
   ['/house-construction-omr-ecr-chennai',.9],
   ['/house-construction-coimbatore',.9],
+  ['/construction-cost-coimbatore',.9],
   ['/demolition-rebuild-house-chennai',.9],
   ['/process',.8],
   ['/faq',.85],
