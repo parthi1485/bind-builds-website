@@ -6,10 +6,63 @@ const priorityAreaServed=[
  {'@type':'City',name:'Coimbatore'},
 ];
 export function pageMetadata(title:string,description:string,path:string):Metadata {
- return {title:path==='/'?{absolute:title+' | '+site.name}:title,description,authors:[{name:site.name,url:site.url}],creator:site.name,publisher:site.name,alternates:{canonical:path},robots:{index:true,follow:true},openGraph:{type:'website',locale:'en_IN',siteName:site.name,title:title+' | '+site.name,description,url:site.url+path,images:[{url:'/opengraph-image',width:1200,height:630,alt:title+' | '+site.name}]},twitter:{card:'summary_large_image',title:title+' | '+site.name,description,images:['/opengraph-image']}};
+ const canonical=site.url+path;
+ return {
+  title:path==='/'?{absolute:title+' | '+site.name}:title,
+  description,
+  authors:[{name:site.name,url:site.url}],
+  creator:site.name,
+  publisher:site.name,
+  alternates:{canonical},
+  robots:{index:true,follow:true},
+  openGraph:{type:'website',locale:'en_IN',siteName:site.name,title:title+' | '+site.name,description,url:canonical,images:[{url:'/opengraph-image',width:1200,height:630,alt:title+' | '+site.name}]},
+  twitter:{card:'summary_large_image',title:title+' | '+site.name,description,images:['/opengraph-image']}
+ };
 }
 export function breadcrumbSchema(name:string,path:string){return {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:site.url},{'@type':'ListItem',position:2,name,item:site.url+path}]};}
-export const organizationSchema={'@context':'https://schema.org','@type':'Organization','@id':site.url+'/#organization',name:site.name,url:site.url,logo:{'@type':'ImageObject',url:site.url+'/bind-builds-logo.svg'},image:site.url+'/opengraph-image',description:'Architect-led construction from Chennai, connecting design, engineering and site execution for priority Chennai corridors and selected Coimbatore projects.',telephone:site.telephone,email:site.email,address:{'@type':'PostalAddress',...site.address},sameAs:[site.instagram],hasMap:site.maps,areaServed:priorityAreaServed,founder:{'@id':site.url+'/#founder'},contactPoint:{'@type':'ContactPoint',telephone:site.telephone,email:site.email,contactType:'project enquiries',areaServed:'IN',availableLanguage:['English','Tamil']}};
-export const localBusinessSchema={'@context':'https://schema.org','@type':'GeneralContractor','@id':site.url+'/#localbusiness',name:site.name,url:site.url,logo:site.url+'/bind-builds-logo.svg',image:site.url+'/opengraph-image',description:'Architect-led home construction company serving priority Chennai areas and selected Coimbatore residential projects.',telephone:site.telephone,email:site.email,priceRange:'₹₹₹',address:{'@type':'PostalAddress',...site.address},areaServed:priorityAreaServed,sameAs:[site.instagram],hasMap:site.maps,founder:{'@id':site.url+'/#founder'},parentOrganization:{'@id':site.url+'/#organization'},contactPoint:{'@type':'ContactPoint',telephone:site.telephone,email:site.email,contactType:'project enquiries',areaServed:'IN',availableLanguage:['English','Tamil']}};
+export const organizationSchema={
+ '@context':'https://schema.org',
+ '@type':'Organization',
+ '@id':site.url+'/#organization',
+ name:site.name,
+ alternateName:['Bind Builds Chennai','Studio Bind construction chapter'],
+ url:site.url,
+ foundingDate:'2026',
+ slogan:'Plan • Build • Deliver',
+ logo:{'@type':'ImageObject',url:site.url+'/bind-builds-logo.svg'},
+ image:site.url+'/opengraph-image',
+ description:'Architect-led construction from Chennai, connecting design, engineering and site execution for priority Chennai corridors and selected Coimbatore projects.',
+ telephone:site.telephone,
+ email:site.email,
+ address:{'@type':'PostalAddress',...site.address},
+ sameAs:[site.instagram],
+ hasMap:site.maps,
+ areaServed:priorityAreaServed,
+ founder:{'@id':site.url+'/#founder'},
+ contactPoint:{'@type':'ContactPoint',telephone:site.telephone,email:site.email,contactType:'project enquiries',areaServed:'IN',availableLanguage:['English','Tamil']}
+};
+export const localBusinessSchema={
+ '@context':'https://schema.org',
+ '@type':'GeneralContractor',
+ '@id':site.url+'/#localbusiness',
+ name:site.name,
+ alternateName:'Bind Builds Chennai',
+ url:site.url,
+ foundingDate:'2026',
+ slogan:'Plan • Build • Deliver',
+ logo:site.url+'/bind-builds-logo.svg',
+ image:site.url+'/opengraph-image',
+ description:'Architect-led home construction company serving priority Chennai areas and selected Coimbatore residential projects.',
+ telephone:site.telephone,
+ email:site.email,
+ priceRange:'₹₹₹',
+ address:{'@type':'PostalAddress',...site.address},
+ areaServed:priorityAreaServed,
+ sameAs:[site.instagram],
+ hasMap:site.maps,
+ founder:{'@id':site.url+'/#founder'},
+ parentOrganization:{'@id':site.url+'/#organization'},
+ contactPoint:{'@type':'ContactPoint',telephone:site.telephone,email:site.email,contactType:'project enquiries',areaServed:'IN',availableLanguage:['English','Tamil']}
+};
 
 export const founderPersonSchema={'@context':'https://schema.org','@type':'Person','@id':site.url+'/#founder',name:'Parthiban Moorthy',jobTitle:'Founder & Principal Architect',url:site.url+'/about',worksFor:{'@id':site.url+'/#organization'},knowsAbout:['Architecture','Residential construction','Interior design','Project coordination','Chennai home construction']};

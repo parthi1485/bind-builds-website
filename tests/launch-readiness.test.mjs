@@ -127,3 +127,15 @@ test('lead follow-up intelligence changes by priority', () => {
   assert.match(nurture.responseMode,/Resource-first/i);
   assert.ok(nurture.nurtureAsset);
 });
+
+
+test('canonical and legacy-domain migration signals remain configured', () => {
+  const seo=read('lib/seo.ts');
+  const config=read('next.config.ts');
+  assert.match(seo,/const canonical=site\.url\+path/);
+  assert.match(seo,/alternates:\{canonical\}/);
+  for(const host of ['bindconstructions.com','www.bindconstructions.com']) assert.ok(config.includes(host));
+  assert.match(config,/type:'host'/);
+  assert.match(config,/https:\/\/www\.bindbuilds\.com\/packages/);
+  assert.match(config,/https:\/\/www\.bindbuilds\.com\/project-evidence/);
+});
