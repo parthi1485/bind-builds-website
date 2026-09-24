@@ -68,7 +68,7 @@ export default function TurnkeyHouseConstruction(){
     <p>We prefer visible boundaries. Your proposal identifies what the package covers and what remains separate, so optional or site-specific work can be decided consciously.</p>
     <div className="documentGrid">{[
       ['01','Inside the agreed construction package','The applicable architecture, structural work, civil construction, selected finishes, electrical, plumbing, supervision and documentation stated in your package and agreement.'],
-      ['02','Project-specific additions','Parking, headroom, compound wall, main gate, sump, recycling systems, solar, lift and other extras can be added as priced allowances or quotations.'],
+      ['02','Project-specific additions','Separately measured headroom, compound wall, main gate, sump, septic tank, additional overhead storage, solar, lift and other extras can be added as priced allowances or quotations. Car parking, when selected in the estimator, is treated inside the base-construction calculation rather than as an additional-item allowance.'],
       ['03','Approvals and statutory fees','Authority charges and professional approval scope are kept visible instead of assumed inside the base rate.'],
       ['04','Existing conditions','Demolition, unusual access, dewatering, special foundation requirements or other site-specific work is confirmed after the site and design are understood.']
     ].map(([n,h,p])=><article key={n}><span>{n}</span><div><h3>{h}</h3><p>{p}</p></div></article>)}</div>
