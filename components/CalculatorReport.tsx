@@ -6,7 +6,7 @@ import { calculateEmi, compactMoney, configuration, createVisualData, floorName,
 import ProposalVisuals, { EstimatePresentation, ComparisonDiagram, StageDiagram } from './ProposalVisuals';
 import { constructionMonths } from '@/lib/calculator-options';
 import type { PdfReportData } from '@/lib/estimate-pdf';
-import { attributedPageUrl, trackEvent } from '@/lib/analytics';
+import { attributedPageUrl, leadAttributionFields, leadAttributionSummary, trackEvent } from '@/lib/analytics';
 
 type Props = { input: EstimateInput; estimate: Estimate; packageIndex: number; headingRef: RefObject<HTMLHeadingElement | null>; onEdit: () => void };
 export default function CalculatorReport({ input, estimate, packageIndex, headingRef, onEdit }: Props) {
@@ -95,6 +95,8 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
       : `${input.headroom.toLocaleString('en-IN')} sq.ft × ${money(estimate.headroomRate)} / sq.ft = ${money(estimate.headroomCost)}`
       : '';
 
+    const attribution = leadAttributionFields();
+    const attributionSummary = leadAttributionSummary();
     setDownloading(true);
     setDownloadLeadStatus('Saving your details…');
     try {
@@ -117,8 +119,10 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
           parkingArea: parking?.detail?.match(/^([\d.]+) sq\.ft/)?.[1] || '',
           parkingPricing: parking ? (parking.detail || (parking.amount === null ? 'To be quoted' : money(parking.amount))) : '',
           additionalItems: extras,
+          requirements: attributionSummary,
           pdfDownloaded: 'Yes',
           pageUrl: attributedPageUrl(),
+          ...attribution,
           website: ''
         }),
       });

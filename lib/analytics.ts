@@ -8,6 +8,7 @@ type Attribution = {
   term?: string;
   clickId?: string;
   landingPath: string;
+  referrer?: string;
 };
 
 const ATTRIBUTION_KEY = 'bindbuilds_first_touch_v1';
@@ -46,6 +47,7 @@ export function captureAttribution(): Attribution | null {
       term: (params.get('utm_term') || '').slice(0, 120) || undefined,
       clickId: (gclid || fbclid).slice(0, 180) || undefined,
       landingPath: (window.location.pathname + window.location.search).slice(0, 500),
+      referrer: externalReferrer ? document.referrer.slice(0, 500) : undefined,
     };
     window.sessionStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(attribution));
     return attribution;
@@ -65,6 +67,30 @@ export function analyticsContext(): AnalyticsParams {
     first_term: attribution.term,
     first_landing_path: attribution.landingPath,
   };
+}
+
+export function leadAttributionFields() {
+  const attribution = captureAttribution();
+  return {
+    firstSource: attribution?.source || '',
+    firstMedium: attribution?.medium || '',
+    firstCampaign: attribution?.campaign || '',
+    firstContent: attribution?.content || '',
+    firstTerm: attribution?.term || '',
+    firstLandingPath: attribution?.landingPath || '',
+    referrer: attribution?.referrer || '',
+  };
+}
+
+export function leadAttributionSummary() {
+  const attribution = captureAttribution();
+  if (!attribution) return '';
+  return [
+    `Attribution: ${attribution.source} / ${attribution.medium}`,
+    attribution.campaign ? `campaign ${attribution.campaign}` : '',
+    attribution.term ? `term ${attribution.term}` : '',
+    attribution.landingPath ? `landing ${attribution.landingPath}` : '',
+  ].filter(Boolean).join(' · ');
 }
 
 export function attributedPageUrl() {

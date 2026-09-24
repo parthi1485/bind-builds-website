@@ -207,3 +207,19 @@ test('desktop and mobile navigation keep Projects directly below Approvals', () 
   assert.match(site,/className="links".*navigation\.map/s);
   assert.match(site,/aria-label="Mobile navigation".*navigation\.map/s);
 });
+
+
+test('lead submissions preserve explicit first-touch attribution for CRM reporting', () => {
+  const analytics=read('lib/analytics.ts');
+  const project=read('components/ProjectForm.tsx');
+  const calculator=read('components/CalculatorReport.tsx');
+  const route=read('app/api/website-lead/route.ts');
+  assert.match(analytics,/leadAttributionFields/);
+  assert.match(analytics,/firstSource/);
+  assert.match(analytics,/firstLandingPath/);
+  assert.match(project,/\.\.\.attribution/);
+  assert.match(calculator,/\.\.\.attribution/);
+  assert.match(route,/'firstSource'/);
+  assert.match(route,/'firstMedium'/);
+  assert.match(route,/'firstLandingPath'/);
+});

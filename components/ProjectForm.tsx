@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import { site, whatsappUrl } from '@/lib/site';
-import { attributedPageUrl, trackEvent } from '@/lib/analytics';
+import { attributedPageUrl, leadAttributionFields, leadAttributionSummary, trackEvent } from '@/lib/analytics';
 import { classifyLead, leadHandoffLine } from '@/lib/lead-quality';
 import { createLeadFollowup, leadFollowupSummary } from '@/lib/lead-followup';
 
@@ -35,10 +35,12 @@ export default function ProjectForm({source='Website – Project Enquiry'}:Props
   if(step<2){trackEvent('project_form_step_complete',{form_source:source,step_number:step+1,step_name:['project','priorities'][step]});setStep(step+1);return;}
   setSubmitting(true);
   try{
+   const attribution=leadAttributionFields();
+   const attributedRequirements=[requirements,leadAttributionSummary()].filter(Boolean).join(' | ');
    const response=await fetch('/api/website-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
     source,name:form.name,phone:form.phone,email:form.email,projectType:form.type,location:form.location,stage:form.stage,
-    builtUpArea:form.area,budget:form.budget,timeline:form.timeline,requirements,package:form.package,
-    pdfDownloaded:'No',pageUrl:attributedPageUrl(),website:''
+    builtUpArea:form.area,budget:form.budget,timeline:form.timeline,requirements:attributedRequirements,package:form.package,
+    pdfDownloaded:'No',pageUrl:attributedPageUrl(),...attribution,website:''
    })});
    const result=await response.json().catch(()=>({ok:false}));
    if(!response.ok||!result.ok)throw new Error('Lead capture failed');
