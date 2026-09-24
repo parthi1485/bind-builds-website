@@ -81,6 +81,17 @@ export default function ServiceAreasChennai(){
     ].map(([n,h,p])=><article key={n}><span>{n}</span><div><h3>{h}</h3><p>{p}</p></div></article>)}</div>
    </section>
    <section className="guideSection">
+    <span className="productEyebrow">Official planning resources</span>
+    <h2>Use the current authority source.<br/><span>Then confirm the route for the exact property.</span></h2>
+    <p>Approval responsibility can change with the property, local body, building category and current Tamil Nadu planning process. These official links are a better starting point than relying on copied approval advice from another project.</p>
+    <div className="guideCards three">
+     <article><h3>Tamil Nadu Single Window</h3><p>Planning-permission applications across Tamil Nadu are routed through the state Single Window system. Check the current portal before preparing an application.</p><a href="https://onlineppa.tn.gov.in/" target="_blank" rel="noopener noreferrer">Open the official Single Window ↗</a></article>
+     <article><h3>Greater Chennai Corporation</h3><p>For properties within GCC responsibility, use the Corporation’s current Town Planning information to check the applicable building-plan process and official links.</p><a href="https://chennaicorporation.gov.in/gcc/online-services/town-planning/" target="_blank" rel="noopener noreferrer">Open GCC Town Planning ↗</a></article>
+     <article><h3>Prepare before applying</h3><p>Our Chennai approval guide explains the documents, cost considerations and questions to resolve before the professional submission process begins.</p><Link href="/building-plan-approval-chennai">Read the approval guide →</Link></article>
+    </div>
+    <p className="guideSmall">The exact authority and approval path must be confirmed for the actual survey number, site location and proposed building. This page does not replace advice from the relevant authority or registered professional.</p>
+   </section>
+   <section className="guideSection">
     <span className="productEyebrow">Local authority signals</span>
     <h2>One real Chennai base.<br/><span>Clear service-area pages.</span></h2>
     <div className="guideCards three">

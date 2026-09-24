@@ -1,7 +1,7 @@
 import { pageMetadata } from '@/lib/seo';
 import LocalClusterGuide,{type LocalClusterGuideData} from '@/components/LocalClusterGuide';
 const path='/house-construction-maduravoyal-vanagaram-kattupakkam';
-export const metadata=pageMetadata('House Construction in Maduravoyal, Vanagaram & Kattupakkam','Architect-led house construction in Maduravoyal, Vanagaram and Kattupakkam, Chennai with site-specific planning for access, levels, utilities and scope.',path);
+export const metadata=pageMetadata('House Construction Company in Maduravoyal, Vanagaram & Kattupakkam','Architect-led house construction in Maduravoyal, Vanagaram and Kattupakkam, Chennai with site-specific planning for access, levels, utilities and scope.',path);
 const data:LocalClusterGuideData={
  path,areas:['Maduravoyal','Vanagaram','Kattupakkam'],kicker:'MADURAVOYAL + VANAGARAM + KATTUPAKKAM',heroTitle:'House construction in Maduravoyal, Vanagaram & Kattupakkam.',
  introEyebrow:'West Chennai · Residential growth corridor',introLead:'Start with access, levels',introAccent:'and the way the family will use the building.',

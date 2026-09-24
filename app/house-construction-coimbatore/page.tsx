@@ -45,6 +45,15 @@ export default function CoimbatoreConstruction(){
     <article><h3>Budget + timing</h3><p>Approximate total construction budget, finance status and when you realistically want design and site work to begin.</p></article>
    </div><div className="guideActions"><Link className="productTextLink" href="/construction-cost-coimbatore">Plan Coimbatore construction cost →</Link><Link className="productTextLink" href="/process">See the pre-construction process →</Link><Link className="productTextLink" href="/project-evidence">Review project evidence →</Link></div></section>
    <section className="guideSection">
+    <span className="productEyebrow">Official Coimbatore planning sources</span>
+    <h2>Check the authority route<br/><span>before treating any approval advice as final.</span></h2>
+    <div className="guideCards three">
+     <article><h3>Coimbatore Corporation</h3><p>Use the Coimbatore City Municipal Corporation’s current plan-approval information when the property falls within its jurisdiction.</p><a href="https://ccmc.gov.in/index.php/createpage/online-plan-approval" target="_blank" rel="noopener noreferrer">Open CCMC plan approval ↗</a></article>
+     <article><h3>Tamil Nadu Single Window</h3><p>The statewide planning-permission portal is the official starting point for current online application routing across participating authorities.</p><a href="https://onlineppa.tn.gov.in/" target="_blank" rel="noopener noreferrer">Open the Single Window ↗</a></article>
+     <article><h3>Project-specific coordination</h3><p>The correct authority, documents and professional submission route depend on the exact Coimbatore site and proposed building. We confirm that before treating approval scope as fixed.</p><Link href="/start-a-project?location=Coimbatore%2C%20Tamil%20Nadu">Share my Coimbatore site →</Link></article>
+    </div>
+   </section>
+   <section className="guideSection">
     <span className="productEyebrow">Authority + operating transparency</span>
     <h2>Chennai-based.<br/><span>Coimbatore delivery agreed project by project.</span></h2>
     <div className="guideCards three">

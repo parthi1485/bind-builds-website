@@ -1,7 +1,7 @@
 import { pageMetadata } from '@/lib/seo';
 import LocalClusterGuide,{type LocalClusterGuideData} from '@/components/LocalClusterGuide';
 const path='/house-construction-virugambakkam-vadapalani-saligramam';
-export const metadata=pageMetadata('House Construction in Virugambakkam, Vadapalani & Saligramam','Architect-led house construction in Virugambakkam, Vadapalani and Saligramam, Chennai for new homes and rebuilds with coordinated design, engineering and execution.',path);
+export const metadata=pageMetadata('House Construction Company in Virugambakkam, Vadapalani & Saligramam','Architect-led house construction in Virugambakkam, Vadapalani and Saligramam, Chennai for new homes and rebuilds with coordinated design, engineering and execution.',path);
 const data:LocalClusterGuideData={
  path,areas:['Virugambakkam','Vadapalani','Saligramam'],kicker:'INNER WEST CHENNAI / HOUSE CONSTRUCTION',heroTitle:'House construction in Virugambakkam, Vadapalani & Saligramam.',
  introEyebrow:'Established urban plots · New homes + rebuilds',introLead:'Compact city sites need',introAccent:'careful coordination before execution.',

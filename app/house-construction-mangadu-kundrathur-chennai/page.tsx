@@ -1,7 +1,7 @@
 import { pageMetadata } from '@/lib/seo';
 import LocalClusterGuide,{type LocalClusterGuideData} from '@/components/LocalClusterGuide';
 const path='/house-construction-mangadu-kundrathur-chennai';
-export const metadata=pageMetadata('House Construction in Mangadu & Kundrathur, Chennai','Architect-led house construction in Mangadu and Kundrathur, Chennai. Plan access, levels, utilities, soil inputs, approvals and construction scope before execution.',path);
+export const metadata=pageMetadata('House Construction Company in Mangadu & Kundrathur, Chennai','Architect-led house construction in Mangadu and Kundrathur, Chennai. Plan access, levels, utilities, soil inputs, approvals and construction scope before execution.',path);
 const data:LocalClusterGuideData={
  path,areas:['Mangadu','Kundrathur'],kicker:'MANGADU + KUNDRATHUR / HOUSE CONSTRUCTION',heroTitle:'House construction in Mangadu & Kundrathur.',
  introEyebrow:'Western growth corridor · Site-specific planning',introLead:'The locality is familiar.',introAccent:'The exact plot still decides the build.',

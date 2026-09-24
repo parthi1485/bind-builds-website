@@ -1,7 +1,7 @@
 import { pageMetadata } from '@/lib/seo';
 import LocalClusterGuide,{type LocalClusterGuideData} from '@/components/LocalClusterGuide';
 const path='/house-construction-gerugambakkam-kolapakkam-chennai';
-export const metadata=pageMetadata('House Construction in Gerugambakkam & Kolapakkam, Chennai','Architect-led house construction in Gerugambakkam and Kolapakkam, Chennai with planning for access, plot levels, utilities, engineering and execution.',path);
+export const metadata=pageMetadata('House Construction Company in Gerugambakkam & Kolapakkam, Chennai','Architect-led house construction in Gerugambakkam and Kolapakkam, Chennai with planning for access, plot levels, utilities, engineering and execution.',path);
 const data:LocalClusterGuideData={
  path,areas:['Gerugambakkam','Kolapakkam'],kicker:'GERUGAMBAKKAM + KOLAPAKKAM / HOUSE CONSTRUCTION',heroTitle:'House construction in Gerugambakkam & Kolapakkam.',
  introEyebrow:'Near our Ramapuram base · Site-specific planning',introLead:'Independent-home planning',introAccent:'starts with the street and the plot.',
