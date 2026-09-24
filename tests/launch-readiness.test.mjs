@@ -198,3 +198,12 @@ test('ongoing project evidence includes verified documentation without exposing 
   assert.match(evidence,/52-page internal construction-documentation set/);
   assert.doesNotMatch(sung,/Mr\.S\.K|80727|bindhomes@gmail\.com/);
 });
+
+
+test('desktop and mobile navigation keep Projects directly below Approvals', () => {
+  const site=read('components/Site.tsx');
+  const navigationLine=site.split('\n').find(line=>line.startsWith('const navigation = ')) || '';
+  assert.match(navigationLine,/\['Approvals', '\/building-plan-approval-chennai'\], \['Projects', '\/project-evidence'\]/);
+  assert.match(site,/className="links".*navigation\.map/s);
+  assert.match(site,/aria-label="Mobile navigation".*navigation\.map/s);
+});
