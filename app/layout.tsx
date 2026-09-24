@@ -2,6 +2,7 @@ import './globals.css';
 import './premium.css';
 import './assurance.css';
 import './guides.css';
+import './ui-fixes.css';
 import type { Metadata, Viewport } from 'next';
 import Motion from '@/components/Motion';
 import PageScroll from '@/components/PageScroll';

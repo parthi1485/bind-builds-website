@@ -13,3 +13,91 @@
   .hero h1{font-size:13.7vw}
   .heroStatement{font-size:4.8vw!important}
 }
+
+/* Interaction polish: one clear active state, comfortable tap targets and restrained controls. */
+.progressLong{display:inline}
+.progressShort{display:none}
+.calcProgress li[aria-current=step]:after{display:none}
+
+.simpleCategoryToggle{
+  flex:0 0 32px;
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  border:1px solid #d7d7da;
+  border-radius:50%;
+  color:#5f6065;
+  transition:background .2s ease,border-color .2s ease,color .2s ease;
+}
+.simpleCategoryToggle svg{width:16px;height:16px;transition:transform .2s ease}
+.simpleCategory.isOpen .simpleCategoryToggle{background:#f1f5fb;border-color:#a8bddf;color:var(--blue)}
+.simpleCategory.isOpen .simpleCategoryToggle svg{transform:rotate(180deg)}
+.simpleCategory button:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+
+.milestone summary{min-height:72px;align-items:center;cursor:pointer}
+.milestone summary>span{transition:transform .2s ease,color .2s ease}
+.milestone[open] summary>span{transform:rotate(45deg);color:var(--blue)}
+
+@media (max-width:760px){
+  .calcProgress{
+    gap:0;
+    margin-bottom:16px;
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+  }
+  .calcProgress::-webkit-scrollbar{display:none}
+  .calcProgress li{min-width:64px}
+  .calcProgress button{
+    min-height:64px;
+    padding:10px 4px;
+    gap:6px;
+    flex-direction:column;
+    justify-content:center;
+    text-align:center;
+    font-size:.6875rem;
+  }
+  .calcProgress button>b{max-width:none;min-height:0}
+  .calcProgress button>span{width:26px;height:26px;font-size:.625rem}
+  .progressLong{display:none}
+  .progressShort{display:inline}
+
+  .floorChoices{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .floorChoices label>span{
+    min-height:82px;
+    padding:15px;
+    align-items:flex-start;
+    justify-content:center;
+    border-radius:12px;
+  }
+  .floorChoices strong{font-size:1.125rem}
+  .floorChoices small{font-size:.75rem}
+
+  .calcPackageChoices{grid-template-columns:1fr}
+  .calcPackageChoices label>span{min-height:0;padding:18px;border-radius:12px}
+
+  .simplePackageGrid{margin:32px 0 24px;gap:16px}
+  .simplePackageCard{padding:22px 18px;border-radius:14px}
+  .simplePackageHead{padding-bottom:14px}
+  .simplePackageHead h2{font-size:1.9rem;margin:18px 0 10px}
+  .simplePrice strong{font-size:2.45rem}
+  .simpleRateNote{display:block;margin-top:7px;line-height:1.55}
+  .simplePackageHead>p{margin-top:20px}
+  .simpleCategory button{min-height:58px;padding:14px 0;font-size:.875rem}
+  .simpleCategoryTitle{font-weight:500;letter-spacing:-.01em}
+  .simpleCategory ul{font-size:.875rem;line-height:1.65;margin-bottom:18px}
+  .packageSelect{width:100%;justify-content:center}
+
+  .packageProcessNode>span{box-shadow:0 0 0 4px #fff}
+  .packageProcessTrack:before{background:#d9dde4}
+  .milestone summary{min-height:76px}
+}
+@media (max-width:420px){
+  .calcForm{padding:22px 18px}
+}
+@media (prefers-reduced-motion:reduce){
+  .simpleCategoryToggle,
+  .simpleCategoryToggle svg,
+  .milestone summary>span{transition:none}
+}
