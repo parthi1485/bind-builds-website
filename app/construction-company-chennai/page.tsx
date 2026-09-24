@@ -80,7 +80,7 @@ export default function ConstructionCompanyChennai(){
     <span className="productEyebrow">Chennai-specific checks</span>
     <h2>The city is one market.<br/><span>Every site is still different.</span></h2>
     <p>Road width and unloading access, existing neighbouring buildings, soil and drainage conditions, demolition, local approval jurisdiction and the intended number of floors can all change the project route. That is why a Chennai construction quotation should eventually become site- and design-specific.</p>
-    <div className="guideActions"><Link className="productTextLink" href="/service-areas-chennai">Check Chennai service areas →</Link><Link className="productTextLink" href="/building-plan-approval-chennai">Understand building-plan approvals →</Link><Link className="productTextLink" href="/demolition-rebuild-house-chennai">Planning a demolition + rebuild? →</Link></div>
+    <div className="guideActions"><Link className="productTextLink" href="/individual-house-construction-chennai">Individual house construction →</Link><Link className="productTextLink" href="/service-areas-chennai">Check Chennai service areas →</Link><Link className="productTextLink" href="/building-plan-approval-chennai">Understand building-plan approvals →</Link><Link className="productTextLink" href="/demolition-rebuild-house-chennai">Planning a demolition + rebuild? →</Link></div>
    </section>
 
    <section className="guideSection">

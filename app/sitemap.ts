@@ -12,6 +12,7 @@ export default function sitemap():MetadataRoute.Sitemap{
   ['/construction-cost-chennai',.95],
   ['/construction-company-chennai',.97],
   ['/house-construction-chennai',.95],
+  ['/individual-house-construction-chennai',.93],
   ['/turnkey-house-construction-chennai',.9],
   ['/building-plan-approval-chennai',.9],
   ['/service-areas-chennai',.92],
