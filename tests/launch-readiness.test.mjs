@@ -252,3 +252,18 @@ test('process QC uses attached stage selector instead of dropdown accordions', (
   assert.match(css,/grid-template-columns:minmax\(210px,250px\) minmax\(0,1fr\)/);
   assert.match(css,/@media\(max-width:760px\)[\s\S]*\.qualityStageRail/);
 });
+
+
+test('homepage brand ecosystem does not hotlink third-party logo assets', () => {
+  const assurance=read('components/BuildAssurance.tsx');
+  assert.doesNotMatch(assurance,/cloudfront\.net/);
+  assert.doesNotMatch(assurance,/commons\.wikimedia\.org/);
+  assert.doesNotMatch(assurance,/assettype\.com/);
+  assert.doesNotMatch(assurance,/kajariaceramics\.com/);
+  assert.doesNotMatch(assurance,/infinixindia\.co\.in/);
+  assert.doesNotMatch(assurance,/<img\s+src={brand\.src}/);
+  assert.match(assurance,/brandTextLogo/);
+  assert.match(assurance,/BANK OF BARODA/);
+  assert.match(assurance,/HDFC BANK/);
+  assert.match(assurance,/SBI/);
+});

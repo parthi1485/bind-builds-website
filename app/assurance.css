@@ -52,27 +52,22 @@
 .brandMarquee:hover .brandMarqueeTrack{animation-play-state:paused}
 .brandWordmarkWrap{display:block}
 .brandWordmark{width:178px;height:84px;padding:0 22px;border:1px solid #e6e6eb;background:#fff;border-radius:16px;display:grid;place-items:center;overflow:hidden}
-.brandWordmark img{display:block;width:auto;height:auto;max-width:128px;max-height:38px;object-fit:contain}
-
-.brand-icici img{max-width:138px;max-height:34px}
-.brand-axis img{max-width:144px;max-height:35px}
-.brand-bob img{max-width:132px;max-height:38px}
-.brand-hdfc img{max-width:126px;max-height:34px}
-.brand-sbi img{max-width:118px;max-height:36px}
-.brand-ultratech img{max-width:126px;max-height:42px}
-.brand-jsw img{max-width:104px;max-height:44px}
-.brand-tata img{max-width:126px;max-height:32px}
-.brand-kohler img{max-width:112px;max-height:24px}
-.brand-parryware img{max-width:126px;max-height:34px}
-.brand-nippon img{max-width:138px;max-height:34px}
-.brand-asian-paints img{max-width:126px;max-height:34px}
-.brand-kajaria img{max-width:116px;max-height:26px}
-.brand-jaquar img{max-width:118px;max-height:38px}
-.brand-finolex img{max-width:116px;max-height:30px}
-.brand-ashirvad img{max-width:118px;max-height:30px}
-.brand-astral img{max-width:108px;max-height:34px}
-.brand-gm-switches img{max-width:84px;max-height:30px}
-.brand-legrand img{max-width:124px;max-height:30px}
+.brandTextLogo{
+ display:block;
+ max-width:138px;
+ color:#252a31;
+ font-size:.78rem;
+ line-height:1.08;
+ font-weight:680;
+ letter-spacing:.035em;
+ text-align:center;
+ white-space:normal;
+}
+.brand-legrand .brandTextLogo,.brand-ultratech .brandTextLogo{font-size:.86rem;text-transform:none;letter-spacing:-.02em;font-weight:650}
+.brand-kohler .brandTextLogo,.brand-parryware .brandTextLogo,.brand-jaquar .brandTextLogo{letter-spacing:.09em}
+.brand-gm-switches .brandTextLogo,.brand-kag .brandTextLogo,.brand-sbi .brandTextLogo{font-size:1rem;letter-spacing:.06em}
+.brand-bob .brandTextLogo,.brand-asian-paints .brandTextLogo,.brand-tata .brandTextLogo{font-size:.68rem;letter-spacing:.055em}
+.brand-hdfc .brandTextLogo,.brand-icici .brandTextLogo,.brand-axis .brandTextLogo{font-size:.72rem;letter-spacing:.045em}
 .ecosystemDisclaimer{max-width:1150px;margin:0 auto;border-top:1px solid #eeeeF2;padding-top:20px;color:#8a8a93;font-size:.625rem;line-height:1.7}
 @keyframes assuranceDraw{from{stroke-dashoffset:520}to{stroke-dashoffset:0}}
 @keyframes assurancePulse{0%{opacity:.4;transform:scale(.95);transform-origin:center}100%{opacity:1;transform:scale(1)}}
@@ -115,7 +110,9 @@
  .ecosystemLabel{margin-bottom:20px}
  .brandMarquee{margin-inline:-22px}
  .brandWordmark{width:150px;height:72px;padding-inline:18px}
- .brandWordmark img{max-width:108px;max-height:32px}
+ .brandTextLogo{max-width:110px;font-size:.7rem}
+ .brand-gm-switches .brandTextLogo,.brand-kag .brandTextLogo,.brand-sbi .brandTextLogo{font-size:.9rem}
+ .brand-bob .brandTextLogo,.brand-asian-paints .brandTextLogo,.brand-tata .brandTextLogo{font-size:.62rem}
 
  .ecosystemDisclaimer{margin:0 22px;padding-top:18px;font-size:.5625rem}
 }

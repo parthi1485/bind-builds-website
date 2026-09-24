@@ -159,43 +159,49 @@ export function BuildAssurance() {
 }
 
 
-type BrandLogo = { key: string; name: string; src: string };
+type BrandLogo = { key: string; name: string; display?: string };
 
 const materialBrands: BrandLogo[] = [
-  { key: 'legrand', name: 'Legrand', src: 'https://d2ol7oe51mr4n9.cloudfront.net/user_3JENGxCkh6sU1LBJaltMuv37VI2/5ef35bc7-6e67-4b66-b336-36244070846e.webp' },
-  { key: 'ars-crs', name: 'ARS / CRS Steel', src: 'https://d2ol7oe51mr4n9.cloudfront.net/user_3JENGxCkh6sU1LBJaltMuv37VI2/c0e784d2-5b31-42fa-a391-20aa9f94e8ac.webp' },
-  { key: 'orbit', name: 'Orbit Wires & Cables', src: 'https://d2ol7oe51mr4n9.cloudfront.net/user_3JENGxCkh6sU1LBJaltMuv37VI2/48277821-bd58-4d61-920f-90f38a55ede9.png' },
-  { key: 'nippon', name: 'Nippon Paint', src: 'https://d2ol7oe51mr4n9.cloudfront.net/user_3JENGxCkh6sU1LBJaltMuv37VI2/e1b69406-cefd-4e61-bb6a-bf1157dbc8c0.png' },
-  { key: 'parryware', name: 'Parryware', src: 'https://d2ol7oe51mr4n9.cloudfront.net/user_3JENGxCkh6sU1LBJaltMuv37VI2/f3df702a-0dba-4a9f-99be-aa7534d9c443.jpg' },
-  { key: 'kohler', name: 'Kohler', src: 'https://d2ol7oe51mr4n9.cloudfront.net/user_3JENGxCkh6sU1LBJaltMuv37VI2/13fd5b8f-ee50-4da9-bf16-7048ccf2232f.jpg' },
-  { key: 'astral', name: 'Astral Pipes', src: 'https://d2ol7oe51mr4n9.cloudfront.net/user_3JENGxCkh6sU1LBJaltMuv37VI2/69a02129-7097-4f6c-8d3a-b95e56812b68.jpg' },
-  { key: 'gm-switches', name: 'GM Switches', src: 'https://d2ol7oe51mr4n9.cloudfront.net/user_3JENGxCkh6sU1LBJaltMuv37VI2/b0b90367-a8c6-4189-ae19-78102f5a4434.png' },
-  { key: 'sintex', name: 'Sintex', src: 'https://d2ol7oe51mr4n9.cloudfront.net/user_3JENGxCkh6sU1LBJaltMuv37VI2/45f6a32a-c4ac-44c9-aa3e-0da8b995c616.jpg' },
-  { key: 'kag', name: 'KAG Tiles', src: 'https://www.infinixindia.co.in/catalog/view/image/og-img/og-img1.jpg' },
-  { key: 'ashirvad', name: 'Ashirvad Pipes', src: 'https://images.assettype.com/fortune-india/import/company/logos/Ashirvad%20Pipes%20Pvt%20Ltd.png' },
-  { key: 'ultratech', name: 'UltraTech Cement', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/UltraTech_logo.jpg' },
-  { key: 'jsw', name: 'JSW Steel', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/JSW_Group_logo.svg' },
-  { key: 'tata', name: 'Tata Tiscon / Tata Steel', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Tata_Steel_Logo.svg' },
-  { key: 'asian-paints', name: 'Asian Paints', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Asian_Paints_Logo.svg' },
-  { key: 'jaquar', name: 'Jaquar', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Official_Jaquar_Group_Logo.png' },
-  { key: 'kajaria', name: 'Kajaria', src: 'https://www.kajariaceramics.com/assets/images/logo.svg' },
-  { key: 'finolex', name: 'Finolex', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Finolex_Logo.svg' },
+  { key: 'legrand', name: 'Legrand' },
+  { key: 'ars-crs', name: 'ARS / CRS Steel', display: 'ARS / CRS' },
+  { key: 'orbit', name: 'Orbit Wires & Cables', display: 'ORBIT' },
+  { key: 'nippon', name: 'Nippon Paint', display: 'NIPPON PAINT' },
+  { key: 'parryware', name: 'Parryware', display: 'PARRYWARE' },
+  { key: 'kohler', name: 'Kohler', display: 'KOHLER' },
+  { key: 'astral', name: 'Astral Pipes', display: 'ASTRAL' },
+  { key: 'gm-switches', name: 'GM Switches', display: 'GM' },
+  { key: 'sintex', name: 'Sintex', display: 'SINTEX' },
+  { key: 'kag', name: 'KAG Tiles', display: 'KAG' },
+  { key: 'ashirvad', name: 'Ashirvad Pipes', display: 'ASHIRVAD' },
+  { key: 'ultratech', name: 'UltraTech Cement', display: 'UltraTech' },
+  { key: 'jsw', name: 'JSW Steel', display: 'JSW STEEL' },
+  { key: 'tata', name: 'Tata Tiscon / Tata Steel', display: 'TATA TISCON' },
+  { key: 'asian-paints', name: 'Asian Paints', display: 'ASIAN PAINTS' },
+  { key: 'jaquar', name: 'Jaquar', display: 'JAQUAR' },
+  { key: 'kajaria', name: 'Kajaria', display: 'KAJARIA' },
+  { key: 'finolex', name: 'Finolex', display: 'FINOLEX' },
 ];
 
 const lenders: BrandLogo[] = [
-  { key: 'sbi', name: 'State Bank of India', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/State_Bank_of_India.svg' },
-  { key: 'hdfc', name: 'HDFC Bank', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/HDFC_Bank_Logo.svg' },
-  { key: 'icici', name: 'ICICI Bank', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/ICICI_Bank_Logo.svg' },
-  { key: 'axis', name: 'Axis Bank', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Axis_Bank_logo.svg' },
-  { key: 'bob', name: 'Bank of Baroda', src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Bank_of_Baroda_logo.svg' },
+  { key: 'sbi', name: 'State Bank of India', display: 'SBI' },
+  { key: 'hdfc', name: 'HDFC Bank', display: 'HDFC BANK' },
+  { key: 'icici', name: 'ICICI Bank', display: 'ICICI BANK' },
+  { key: 'axis', name: 'Axis Bank', display: 'AXIS BANK' },
+  { key: 'bob', name: 'Bank of Baroda', display: 'BANK OF BARODA' },
 ];
 
 function Marquee({ items, reverse = false }: { items: BrandLogo[]; reverse?: boolean }) {
   const repeated = [...items, ...items];
   return <div className={'brandMarquee' + (reverse ? ' reverse' : '')} aria-label={items.map(item => item.name).join(', ')}>
     <div className="brandMarqueeTrack">
-      {repeated.map((brand, index) => <span className={'brandWordmark brand-' + brand.key} key={brand.key + index} aria-hidden={index >= items.length}>
-        <img src={brand.src} alt={index < items.length ? brand.name : ''} loading="lazy" decoding="async" referrerPolicy="no-referrer"/>
+      {repeated.map((brand, index) => <span
+        className={'brandWordmark brand-' + brand.key}
+        key={brand.key + index}
+        aria-hidden={index >= items.length}
+        aria-label={index < items.length ? brand.name : undefined}
+        title={brand.name}
+      >
+        <span className="brandTextLogo">{brand.display || brand.name}</span>
       </span>)}
     </div>
   </div>;
