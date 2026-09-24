@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { pageMetadata, organizationSchema, localBusinessSchema, founderPersonSchema } from '@/lib/seo';
 import StructuredData from '@/components/StructuredData';
-export const metadata=pageMetadata('Architect-Led Construction Company in Chennai','Bind Builds brings design, engineering and construction together for your Chennai home. Compare packages, calculate your budget and prepare for building approvals.','/');
+export const metadata=pageMetadata('Architect-Led Home Construction in Chennai','Bind Builds brings design, engineering and construction together for your Chennai home. Compare packages, calculate your budget and prepare for building approvals.','/');
 import { Nav, Footer } from '@/components/Site';
 import { HomeHero, HomeBudget, DetailIcon } from '@/components/HomeExperience';
 import { BuildAssurance, BrandEcosystem } from '@/components/BuildAssurance';

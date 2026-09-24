@@ -7,9 +7,9 @@ import { money } from '@/lib/calculator';
 import PriorityAreaLinks from '@/components/PriorityAreaLinks';
 
 const path='/construction-cost-chennai';
-const title='House Construction Cost in Chennai 2026';
-const description='Understand Bind Builds house construction costs in Chennai for 2026. Compare ₹2,399, ₹2,649 and ₹3,199/sq.ft packages, sample budgets, exclusions and cost drivers.';
-const updated='2026-09-21';
+const title='House Construction Cost in Chennai 2026 | Per Sq Ft Rates';
+const description='See 2026 house construction cost per sq.ft in Chennai with Bind Builds. Compare ₹2,399, ₹2,649 and ₹3,199/sq.ft packages, sample budgets, exclusions and cost drivers.';
+const updated='2026-09-24';
 const sizes=[1000,1500,2000,2500];
 
 export const metadata=pageMetadata(title,description,path);
@@ -29,9 +29,9 @@ export default function ConstructionCostChennai(){
   <article className="guidePage">
    <nav className="guideBreadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><span>Construction cost in Chennai</span></nav>
    <header className="guideIntro">
-    <span className="productEyebrow">Updated 21 September 2026</span>
+    <span className="productEyebrow">Updated 24 September 2026</span>
     <h2>Start with the rate.<br/><span>Then look behind it.</span></h2>
-    <p>A useful Chennai construction budget starts with the built-up area and a written specification. Bind Builds publishes three starting package rates, then separates site-specific work, approvals and additional items so the planning number stays understandable.</p>
+    <p>A useful house construction cost per sq.ft in Chennai starts with the built-up area and a written specification. Bind Builds publishes three starting package rates, then separates site-specific work, approvals and additional items so the planning number stays understandable.</p>
     <div className="guideActions"><Link className="cta primary" href="/cost-calculator">Calculate my construction cost ↗</Link><Link className="productTextLink" href="/packages">Compare package specifications →</Link></div>
     <p className="guideSmall">Published rates are planning starting points, not a final quotation. Taxes and exclusions are confirmed in the project proposal.</p>
    </header>

@@ -173,3 +173,15 @@ test('production smoke list covers every current public sitemap route', () => {
   if(sitemap.includes("['',1]")) matches.unshift('/');
   for(const route of matches) assert.ok(smoke.includes("['"+route+"'"), 'Production smoke missing '+route);
 });
+
+
+test('homepage and dedicated Chennai SEO pages own distinct search intents', () => {
+  const home=read('app/page.tsx');
+  const company=read('app/construction-company-chennai/page.tsx');
+  const cost=read('app/construction-cost-chennai/page.tsx');
+  assert.match(home,/Architect-Led Home Construction in Chennai/);
+  assert.doesNotMatch(home,/pageMetadata\('Architect-Led Construction Company in Chennai'/);
+  assert.match(company,/Construction Company in Chennai \| Architect-Led Home Construction/);
+  assert.match(cost,/House Construction Cost in Chennai 2026 \| Per Sq Ft Rates/);
+  assert.match(cost,/house construction cost per sq\.ft in Chennai/i);
+});
