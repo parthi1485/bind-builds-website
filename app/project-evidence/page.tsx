@@ -49,6 +49,7 @@ export default function ProjectEvidence(){
           <li><strong>Type</strong><span>Multi-generational residence</span></li>
           <li><strong>Role</strong><span>Architecture + construction / site execution in progress</span></li>
           <li><strong>Status</strong><span>Ongoing — not a completed handover</span></li>
+          <li><strong>Documentation</strong><span>52-page internal construction-documentation set verified for the project</span></li>
         </ul>
         <Link className="productTextLink" href="/projects/sunguvarchathiram-multigenerational-home">Open ongoing project case study →</Link>
       </article>

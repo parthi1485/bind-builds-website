@@ -34,6 +34,13 @@ const stages=[
  ['06','Concrete milestone','A large roof-concrete operation became a useful site record of labour, sequencing and execution coordination.']
 ];
 
+const documentation=[
+ ['01','Drawing register','The internal construction-documentation PDF opens with a drawing register and project-wide general notes.'],
+ ['02','Site + area planning','The set includes site-plan and area-statement information before the detailed working drawings.'],
+ ['03','Working floor drawings','Dimensioned architectural working drawings carry room layouts, openings, joinery references and site-check notes.'],
+ ['04','Sections + elevations','Building sections, profile sections, staircase information and east/west elevations connect the plan to the vertical construction intent.'],
+];
+
 export default function SunguvarchathiramCaseStudy(){
  return <Page kicker="PROJECT EVIDENCE / ONGOING" title="A multi-generational home. Still in progress.">
   <article className="guidePage projectCaseStudy">
@@ -54,6 +61,14 @@ export default function SunguvarchathiramCaseStudy(){
      <article><span>Type</span><strong>Multi-generational</strong><small>Family residence</small></article>
      <article><span>Role</span><strong>Architecture + site execution</strong><small>Construction in progress</small></article>
     </div>
+   </section>
+
+   <section className="guideSection">
+    <span className="productEyebrow">Documentation behind the site</span>
+    <h2>Not just progress photos.<br/><span>A working drawing trail.</span></h2>
+    <p>The current internal construction-documentation set for this residence runs to 52 PDF pages. It records the architectural information used to coordinate the project rather than relying on verbal site decisions alone.</p>
+    <div className="caseEvidenceLedger">{documentation.map(([no,h,p])=><article key={no}><span>{no}</span><div><h3>{h}</h3><p>{p}</p></div></article>)}</div>
+    <div className="caseDocumentNote"><strong>Why the full set is not public</strong><p>Client-identifying information, professional drawing ownership and construction-sensitive details stay inside the project record. Relevant drawings can be discussed in a project meeting when they help you assess our role and process.</p></div>
    </section>
 
    <section className="guideSection">

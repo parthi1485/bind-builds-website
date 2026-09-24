@@ -185,3 +185,16 @@ test('homepage and dedicated Chennai SEO pages own distinct search intents', () 
   assert.match(cost,/House Construction Cost in Chennai 2026 \| Per Sq Ft Rates/);
   assert.match(cost,/house construction cost per sq\.ft in Chennai/i);
 });
+
+
+test('ongoing project evidence includes verified documentation without exposing client records', () => {
+  const sung=read('app/projects/sunguvarchathiram-multigenerational-home/page.tsx');
+  const evidence=read('app/project-evidence/page.tsx');
+  assert.match(sung,/52 PDF pages/);
+  assert.match(sung,/Drawing register/);
+  assert.match(sung,/Working floor drawings/);
+  assert.match(sung,/Sections \+ elevations/);
+  assert.match(sung,/full set is not public/i);
+  assert.match(evidence,/52-page internal construction-documentation set/);
+  assert.doesNotMatch(sung,/Mr\.S\.K|80727|bindhomes@gmail\.com/);
+});
