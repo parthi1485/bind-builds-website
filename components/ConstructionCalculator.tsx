@@ -129,7 +129,6 @@ export default function ConstructionCalculator() {
           </div>}
           {step === 3 && <div className="calcFields">
             <ApprovalFeeExtra value={approval} builtArea={builtArea} onChange={change => setApproval(current => ({...current, ...change}))}/>
-            <div className="calcNote"><span aria-hidden="true">✓</span><p>Your {selected.name} package already lists a <strong>{tankIncluded[tier].toLowerCase()}</strong>. Add an allowance only for an upgrade beyond that scope.</p></div>
             <p className="calcHint">Planning reference rates: ₹30/L underground sump, ₹25/L conventional septic tank, ₹35/L additional overhead-tank capacity and ₹450/sq.ft compound wall. These are editable budgeting allowances, not a confirmed project quotation.</p>
             <div className="calcExtras">{extraOptions.filter(item=>item.key!=='parking').map(item=><CalculatorExtra key={item.key} item={item} value={allowances[item.key]} onChange={change=>updateExtra(item.key,change)}/>)}</div>
           </div>}
