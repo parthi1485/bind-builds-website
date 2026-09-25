@@ -387,3 +387,45 @@
  .caseEvidenceLedger article{padding:19px 18px}
  .caseDocumentNote{grid-template-columns:1fr;gap:8px;padding:18px 0}
 }
+
+
+/* Completed project evidence — CCBM Commercial Complex */
+.evidenceGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.evidenceCardFeatured{overflow:hidden}
+.evidenceCardVisual{
+ width:calc(100% + 56px);
+ max-width:none;
+ height:auto;
+ aspect-ratio:1012/583;
+ object-fit:cover;
+ display:block;
+ margin:-28px -28px 24px;
+ border-bottom:1px solid #e4e7ec;
+ background:#f3f5f7;
+}
+.evidenceStatusCompleted{background:#eef9f2;color:#197347}
+.caseProjectVisual{
+ margin:34px 0 0;
+ border:1px solid #e4e7ec;
+ border-radius:20px;
+ overflow:hidden;
+ background:#f5f6f8;
+}
+.caseProjectVisual img{display:block;width:100%;height:auto}
+.caseProjectVisual figcaption{
+ padding:12px 16px;
+ border-top:1px solid #e4e7ec;
+ color:#7b8087;
+ font-size:.65rem;
+ line-height:1.55;
+}
+.caseBoundaryCompleted{background:#f2f8f4;border-color:#dbeadd}
+.caseSourceActions{margin-top:22px}
+@media(max-width:950px){.evidenceGrid{grid-template-columns:1fr}}
+@media(max-width:600px){
+ .evidenceCardVisual{
+  width:calc(100% + 40px);
+  margin:-23px -20px 20px;
+ }
+ .caseProjectVisual{border-radius:16px}
+}

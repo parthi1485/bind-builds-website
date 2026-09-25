@@ -14,6 +14,7 @@ test('launch-critical routes are represented in the sitemap', () => {
     "'/project-evidence'",
     "'/projects/sunguvarchathiram-multigenerational-home'",
     "'/projects/pallikaranai-family-home'",
+    "'/projects/ccbm-commercial-complex'",
     "'/packages'",
     "'/cost-calculator'",
     "'/construction-cost-chennai'",
@@ -149,6 +150,7 @@ test('project evidence links to substantive case-study pages', () => {
   const palli=read('app/projects/pallikaranai-family-home/page.tsx');
   assert.match(evidence,/sunguvarchathiram-multigenerational-home/);
   assert.match(evidence,/pallikaranai-family-home/);
+  assert.match(evidence,/ccbm-commercial-complex/);
   assert.match(sung,/6,519 sq\.ft\./);
   assert.match(sung,/Not a completed Bind Builds handover/);
   assert.match(palli,/17 ft × 44 ft/);
@@ -266,4 +268,18 @@ test('homepage brand ecosystem does not hotlink third-party logo assets', () => 
   assert.match(assurance,/BANK OF BARODA/);
   assert.match(assurance,/HDFC BANK/);
   assert.match(assurance,/SBI/);
+});
+
+
+test('completed CCBM project is presented with role and construction boundary intact', () => {
+  const evidence=read('app/project-evidence/page.tsx');
+  const ccbm=read('app/projects/ccbm-commercial-complex/page.tsx');
+  assert.match(evidence,/CCBM Commercial Complex/);
+  assert.match(evidence,/12,494 sq\.ft\./);
+  assert.match(evidence,/Studio Bind Architects — Architectural Design/);
+  assert.match(ccbm,/Basement \+ 3\.5 floors/);
+  assert.match(ccbm,/4,000 sq\.ft\./);
+  assert.match(ccbm,/Architectural Design/);
+  assert.match(ccbm,/not use it to claim that Bind Builds delivered the construction contract/i);
+  assert.match(ccbm,/bindarchitects\.com\/project\/ccbm/);
 });

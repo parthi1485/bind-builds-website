@@ -17,7 +17,7 @@ const principles=[
 ];
 
 export default function ProjectEvidence(){
- const pageSchema={'@context':'https://schema.org','@type':'CollectionPage',name:title,description,url:site.url+path,about:{'@id':site.url+'/#organization'},author:{'@id':site.url+'/#founder'},dateModified:'2026-09-24'};
+ const pageSchema={'@context':'https://schema.org','@type':'CollectionPage',name:title,description,url:site.url+path,about:{'@id':site.url+'/#organization'},author:{'@id':site.url+'/#founder'},dateModified:'2026-09-25'};
  return <Page kicker="AUTHORITY / PROJECT EVIDENCE" title="Proof should come with context.">
   <article className="guidePage">
    <nav className="guideBreadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><span>Project evidence</span></nav>
@@ -27,7 +27,7 @@ export default function ProjectEvidence(){
     <h2>We would rather label the work clearly<br/><span>than make a bigger claim.</span></h2>
     <p>Bind Builds is the construction chapter of a practice that began with Studio Bind Architects in 2019. Because design experience, site coordination, ongoing construction and completed construction are different kinds of evidence, we separate them instead of presenting every project image as the same thing.</p>
     <div className="guideActions"><a className="cta primary" href={site.portfolio} target="_blank" rel="noopener noreferrer">Explore the design portfolio ↗</a><Link className="productTextLink" href="/about">Understand Studio Bind → Bind Builds →</Link></div>
-    <div className="evidenceUpdated"><span>Evidence framework updated: 24 September 2026</span><span>Founder: Ar. Parthiban Moorthy</span><span>Chennai</span></div>
+    <div className="evidenceUpdated"><span>Evidence framework updated: 25 September 2026</span><span>Founder: Ar. Parthiban Moorthy</span><span>Chennai</span></div>
    </header>
 
    <section className="guideSection">
@@ -40,6 +40,22 @@ export default function ProjectEvidence(){
     <span className="productEyebrow">Current evidence</span>
     <h2>What we can show<br/><span>without overstating the stage.</span></h2>
     <div className="evidenceGrid">
+      <article className="evidenceCard evidenceCardFeatured">
+        <img className="evidenceCardVisual" src="/projects/ccbm-commercial-complex.webp" alt="CCBM Commercial Complex in Maduravoyal — completed Studio Bind architectural design project sheet" loading="lazy"/>
+        <div className="evidenceCardTop"><span className="evidenceStatus evidenceStatusCompleted">Completed design project</span><span className="evidenceMeta">Maduravoyal<br/>Chennai</span></div>
+        <h3>CCBM Commercial Complex</h3>
+        <p>A completed commercial project from Studio Bind Architects, designed around flexible floor-wise planning so multiple businesses can lease independently. The construction status is complete; our documented role here is architectural design.</p>
+        <ul className="evidenceFacts">
+          <li><strong>Site area</strong><span>4,000 sq.ft.</span></li>
+          <li><strong>Built-up</strong><span>12,494 sq.ft.</span></li>
+          <li><strong>Configuration</strong><span>Basement + 3.5 floors</span></li>
+          <li><strong>Role</strong><span>Studio Bind Architects — Architectural Design</span></li>
+          <li><strong>Status</strong><span>Completed project</span></li>
+          <li><strong>Boundary</strong><span>Not presented as a Bind Builds construction handover</span></li>
+        </ul>
+        <Link className="productTextLink" href="/projects/ccbm-commercial-complex">Open completed project case study →</Link>
+      </article>
+
       <article className="evidenceCard">
         <div className="evidenceCardTop"><span className="evidenceStatus">Ongoing residential work</span><span className="evidenceMeta">Sunguvarchathiram<br/>Chennai region</span></div>
         <h3>SK’s Multi-Generational Home</h3>
