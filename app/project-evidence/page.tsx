@@ -18,27 +18,17 @@ const principles=[
 
 export default function ProjectEvidence(){
  const pageSchema={'@context':'https://schema.org','@type':'CollectionPage',name:title,description,url:site.url+path,about:{'@id':site.url+'/#organization'},author:{'@id':site.url+'/#founder'},dateModified:'2026-09-25'};
- return <Page kicker="AUTHORITY / PROJECT EVIDENCE" title="Proof should come with context.">
+ return <Page kicker="AUTHORITY / PROJECT EVIDENCE" title="Explore the work. Meet the thinking.">
   <article className="guidePage">
    <nav className="guideBreadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><span>Project evidence</span></nav>
 
    <header className="guideIntro">
-    <span className="productEyebrow">Role. Stage. Evidence.</span>
-    <h2>We would rather label the work clearly<br/><span>than make a bigger claim.</span></h2>
-    <p>Bind Builds is the construction chapter of a practice that began with Studio Bind Architects in 2019. Because design experience, site coordination, ongoing construction and completed construction are different kinds of evidence, we separate them instead of presenting every project image as the same thing.</p>
-    <div className="guideActions"><a className="cta primary" href={site.portfolio} target="_blank" rel="noopener noreferrer">Explore the design portfolio ↗</a><Link className="productTextLink" href="/about">Understand Studio Bind → Bind Builds →</Link></div>
-    <div className="evidenceUpdated"><span>Evidence framework updated: 25 September 2026</span><span>Founder: Ar. Parthiban Moorthy</span><span>Chennai</span></div>
+    <p>Explore completed design work, ongoing construction and homes in planning. Each project identifies our role, its stage and the work behind it.</p>
    </header>
 
    <section className="guideSection">
-    <span className="productEyebrow">How we label evidence</span>
-    <h2>Four labels.<br/><span>No blurred categories.</span></h2>
-    <div className="evidencePrinciples">{principles.map(([status,h,p])=><article key={status}><span>{status}</span><h3>{h}</h3><p>{p}</p></article>)}</div>
-   </section>
-
-   <section className="guideSection">
     <span className="productEyebrow">Current evidence</span>
-    <h2>What we can show<br/><span>without overstating the stage.</span></h2>
+    <h2>Projects. <span>At a glance.</span></h2>
     <div className="evidenceGrid">
       <article className="evidenceCard evidenceCardFeatured">
         <img className="evidenceCardVisual" src="/projects/ccbm-commercial-complex.webp" alt="CCBM Commercial Complex in Maduravoyal — completed Studio Bind architectural design project sheet" loading="lazy"/>
@@ -96,6 +86,12 @@ export default function ProjectEvidence(){
         <a className="productTextLink" href={site.studio} target="_blank" rel="noopener noreferrer">Visit Studio Bind Architects ↗</a>
       </article>
     </div>
+   </section>
+
+   <section className="guideSection">
+    <span className="productEyebrow">How we label evidence</span>
+    <h2>Four labels.<br/><span>No blurred categories.</span></h2>
+    <div className="evidencePrinciples">{principles.map(([status,h,p])=><article key={status}><span>{status}</span><h3>{h}</h3><p>{p}</p></article>)}</div>
    </section>
 
    <section className="guideSection">

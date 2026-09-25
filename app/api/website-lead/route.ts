@@ -42,6 +42,7 @@ export async function POST(request: Request) {
       body: JSON.stringify(payload),
       redirect: 'follow',
       cache: 'no-store',
+      signal: AbortSignal.timeout(15000),
     });
 
     const text = await response.text();
@@ -49,7 +50,7 @@ export async function POST(request: Request) {
     try { result = JSON.parse(text); } catch {}
 
     if (!response.ok || result.ok !== true) {
-      console.error('Lead capture failed', response.status, text.slice(0, 500));
+      console.error('Lead capture failed', response.status);
       return NextResponse.json({ ok: false, error: 'Lead capture unavailable' }, { status: 502 });
     }
 

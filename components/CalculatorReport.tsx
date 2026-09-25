@@ -3,7 +3,7 @@ import { useRef, useState, type FormEvent, type RefObject } from 'react';
 import Link from 'next/link';
 import { packages, site, whatsappUrl } from '@/lib/site';
 import { calculateEmi, compactMoney, configuration, createVisualData, floorName, money, splitStages, validNumber, type Estimate, type EstimateInput } from '@/lib/calculator';
-import ProposalVisuals, { EstimatePresentation, ComparisonDiagram, StageDiagram } from './ProposalVisuals';
+import ProposalVisuals, { EstimatePresentation, ComparisonDiagram } from './ProposalVisuals';
 import { constructionMonths } from '@/lib/calculator-options';
 import type { PdfReportData } from '@/lib/estimate-pdf';
 import { attributedPageUrl, leadAttributionFields, leadAttributionSummary, trackEvent } from '@/lib/analytics';
@@ -67,10 +67,11 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
       };
       const { createEstimatePdf } = await import('@/lib/estimate-pdf');
       const doc = createEstimatePdf(data);
-      doc.save('bind-builds-construction-estimate.pdf');
+      await doc.save('bind-builds-construction-estimate.pdf', { returnPromise: true });
+      trackEvent('estimate_pdf_generated',{package_name:selected.name,calculated_area:estimate.area,value:estimate.total,currency:'INR'});
       trackEvent('estimate_pdf_download',{package_name:selected.name,calculated_area:estimate.area,value:estimate.total,currency:'INR'});
       setStatus('PDF prepared. Check your browser downloads.');
-    } catch { setStatus('The PDF could not be created. Please try again, or copy your estimate.'); }
+    } catch { trackEvent('estimate_pdf_generation_error',{package_name:selected.name}); setStatus('The PDF could not be created. Please try again, or copy your estimate.'); }
     finally { setDownloading(false); }
   };
   const requestDownload = () => {
@@ -120,7 +121,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
           parkingPricing: parking ? (parking.detail || (parking.amount === null ? 'To be quoted' : money(parking.amount))) : '',
           additionalItems: extras,
           requirements: attributionSummary,
-          pdfDownloaded: 'Yes',
+          pdfDownloaded: 'Requested — not yet generated',
           pageUrl: attributedPageUrl(),
           ...attribution,
           website: ''
@@ -170,7 +171,6 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
       <section className="calcReportCard calcNextStep"><span className="eyebrow">What happens after the estimate?</span><h3>Three useful checks.<br />Before a proposal.</h3><ol className="calcNextChecklist"><li><span>01</span><p><strong>Site + access</strong>Review location, road access and existing conditions.</p></li><li><span>02</span><p><strong>Design + area</strong>Confirm the spaces, floor areas and planning direction.</p></li><li><span>03</span><p><strong>Scope + specification</strong>Turn the planning estimate into a project-specific proposal.</p></li></ol><p className="calcHint">No details are needed to view or present your estimate. Contact details are requested only before downloading the PDF.</p></section>
     </div>
     <section className="calcReportCard calcCompare"><ComparisonDiagram data={visuals}/><p className="calcHint">Additional items are excluded from this comparison.</p><div className="comparisonSpecLinks">{packages.map(item=><Link key={item.key} href={`/packages#${item.key}`} target="_blank" rel="noopener noreferrer">{item.name} specification ↗</Link>)}</div></section>
-    <section className="calcReportCard"><StageDiagram data={visuals}/></section>
     <details className="calcPlanning"><summary>Explore a time and loan scenario <span aria-hidden="true">+</span></summary><div className="calcPlanningGrid"><section><h3>A simple spend scenario.</h3><label>Assumed construction duration <span>months</span><input type="number" inputMode="numeric" min="1" max="60" step="1" value={months} onChange={e => setMonths(e.target.value)} /></label><output>{validNumber(parse(months), 1, 60, true) ? money(estimate.base / Number(months)) + ' / month' : 'Enter 1–60 whole months'}</output><p>Base construction cost divided evenly by your chosen duration. Real spending varies by stage. This is not a delivery timeline or a payment commitment; design and approval time is separate.</p></section><section><h3>Explore a loan repayment.</h3><div className="calcLoanFields"><label>Loan amount <span>₹</span><input type="number" inputMode="numeric" min="1" max="1000000000" step="1" value={loan} onChange={e => setLoan(e.target.value)} /></label><label>Annual interest <span>%</span><input type="number" inputMode="decimal" min="0" max="30" step="0.05" value={interest} onChange={e => setInterest(e.target.value)} /></label><label>Loan tenure <span>years</span><input type="number" inputMode="numeric" min="1" max="40" step="1" value={tenure} onChange={e => setTenure(e.target.value)} /></label></div><output>{emi ? money(emi.monthly) + ' / month' : 'Check the loan amount, rate and tenure'}</output>{emi && <p>Total repayment: {money(emi.repayment)}<br />Interest over the term: {money(emi.interest)}</p>}<p>The initial 80% loan amount, 8.5% rate and 20-year term are editable examples, not lender offers. Assumes a fully disbursed loan and constant rate; excludes fees and pre-EMI. <a href="https://homeloans.hdfc.bank.in/home-loan-emi-calculator" target="_blank" rel="noopener noreferrer">EMI formula reference ↗</a></p></section></div><p className="calcPlanningFootnote">These exploratory time and loan scenarios are separate from the construction estimate and are not included in its PDF or enquiry brief.</p></details>
     <section className="calcAssumptions"><h3>Keep these assumptions with your estimate.</h3><ul>{assumptions.map(text => <li key={text}>{text}</li>)}</ul><div><Link href="/faq" className="textLink">Chennai construction FAQs ↗</Link><a href={'tel:' + site.telephone} className="textLink">Questions? Call {site.phone} ↗</a></div></section>
   </div>;

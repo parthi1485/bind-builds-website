@@ -134,7 +134,7 @@ export default function ConstructionCalculator() {
             <div className="calcExtras">{extraOptions.filter(item=>item.key!=='parking').map(item=><CalculatorExtra key={item.key} item={item} value={allowances[item.key]} onChange={change=>updateExtra(item.key,change)}/>)}</div>
           </div>}
         </div>
-        <div className="calcActions">{step > 0 ? <button type="button" className="textButton" onClick={() => setStep(step - 1)}>← Back</button> : <span className="calcHint">No sign-up needed</span>}<button type="submit" className="cta primary">{step === 3 ? 'See my estimate' : ['Choose floors', 'Compare packages', 'Add extras'][step]} <span aria-hidden="true">→</span></button></div>
+        <div className="calcActions">{step > 0 ? <button type="button" className="textButton" onClick={() => setStep(step - 1)}>← Back</button> : <span className="calcHint">View your estimate without contact details</span>}<button type="submit" className="cta primary">{step === 3 ? 'See my estimate' : ['Choose floors', 'Compare packages', 'Add extras'][step]} <span aria-hidden="true">→</span></button></div>
         {step === 3 && !estimate && <p role="alert" className="fieldError">Please check the area and additional item values before creating your estimate.</p>}
       </form>
       <aside className="calcPreview" aria-label="Live estimate preview">
