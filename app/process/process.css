@@ -1,0 +1,68 @@
+/* Quiet chapters and progressive disclosure, scoped to the process page. */
+.processCalm{--process-line:#dedee4}
+.processJourney{display:flex;justify-content:center;gap:clamp(20px,7vw,100px);padding:28px 6vw;border-bottom:1px solid var(--process-line);background:#fff}
+.processJourney a{display:flex;align-items:center;gap:12px;font-size:16px;padding:12px 0;min-height:44px}
+.processJourney span{font-size:12px;color:var(--blue)}
+.processJourney a:hover{color:var(--blue)}
+.processCalm .processChapter{padding-block:clamp(64px,8vw,120px);scroll-margin-top:90px}
+.processChapterIntro{max-width:720px;margin-bottom:44px}
+.processChapterIntro .lead{margin:24px 0}
+.processChapterIntro>p,.processSmallIntro>p,.processChange>p{font-size:clamp(16px,1.4vw,19px);line-height:1.7;color:var(--muted);max-width:660px}
+.processSteps{display:grid}
+.processSteps>article{display:grid;grid-template-columns:40px 1fr;gap:20px;border-top:1px solid var(--process-line);padding:26px 0}
+.processSteps>article>span{color:var(--blue);font-size:12px;padding-top:6px}
+.processSteps h3,.processSteps h4{font-size:clamp(20px,2vw,26px);font-weight:500;letter-spacing:-.035em;margin:0 0 8px}
+.processSteps p{font-size:16px;line-height:1.7;color:var(--muted);max-width:720px;margin:0}
+.processDetail{border-block:1px solid var(--process-line);margin-top:24px}
+.processDetail>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:23px 0;font-size:16px;font-weight:500;min-height:64px}
+.processDetail>summary::-webkit-details-marker{display:none}
+.processDetail>summary>span{font-size:24px;font-weight:300;transition:transform .2s}
+.processDetail[open]>summary>span{transform:rotate(45deg)}
+.processDetail .milestones{margin:0 0 24px}
+.processDetail .milestone summary strong{font-size:15px;font-weight:500;line-height:1.5}
+.processDetail .milestone summary{min-height:70px}
+.processBuildChapter{background:#f5f6f8}
+.processBuildLine{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin:35px 0 52px}
+.processBuildLine>div{border-top:2px solid #cbd8e8;padding-top:18px;display:flex;flex-direction:column;gap:16px}
+.processBuildLine span{font-size:12px;color:var(--blue)}
+.processBuildLine strong{font-size:clamp(17px,2vw,25px);letter-spacing:-.03em;font-weight:500}
+.processSmallIntro{max-width:720px;margin:0 0 26px}
+.processSmallIntro h3,.processChange h3,.processClosing h3{font-size:clamp(28px,3.5vw,44px);font-weight:500;letter-spacing:-.045em;line-height:1.15;margin:18px 0}
+.processQuality{scroll-margin-top:110px}
+.processChange{border-top:1px solid var(--process-line);margin-top:60px;padding-top:48px;scroll-margin-top:110px}
+.processCalm .qualityCalm{display:block;margin:0;border:1px solid var(--process-line);border-radius:18px;overflow:hidden;background:white;box-shadow:none}
+.processCalm .qualityCalm .qualityStageRail{display:flex;gap:0;overflow-x:auto;overscroll-behavior-x:contain;padding:8px;background:white;border:0;border-bottom:1px solid var(--process-line);border-radius:0;scrollbar-width:thin}
+.qualityCalm .qualityStageRail button{flex:0 0 auto;display:flex;align-items:center;gap:9px;min-height:48px;padding:10px 15px;background:transparent;border:0;border-radius:9px;color:#56565f;font:inherit;font-size:14px;white-space:nowrap;cursor:pointer;transition:background .18s,color .18s}
+.qualityCalm .qualityStageRail button>span{font-size:11px;color:var(--muted)}
+.qualityCalm .qualityStageRail button[aria-selected=true]{background:#edf5ff;color:#0067d1}
+.processCalm .qualityCalm .qualityStagePanel{border:0;background:white;border-radius:0;padding:0;box-shadow:none;min-height:0}
+.qualityCalmContent{padding:clamp(24px,4vw,48px);animation:processPanelIn .25s ease-out}
+.qualityCalmContent h4{font-size:clamp(25px,3vw,38px);letter-spacing:-.035em;font-weight:500;line-height:1.2;margin:20px 0 14px}
+.qualityCalmContent>p{color:var(--muted);line-height:1.7;font-size:16px;max-width:700px}
+.qualityPreview{list-style:none;padding:0;margin:24px 0;display:grid;gap:12px}
+.qualityPreview li{font-size:15px;line-height:1.6;padding-left:20px;position:relative}
+.qualityPreview li:before{content:'';position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--blue)}
+.qualityExpand{display:flex;gap:28px;align-items:center;justify-content:space-between;border:0;border-top:1px solid var(--process-line);background:none;width:100%;padding:20px 0 0;min-height:44px;text-align:left;font:inherit;font-size:15px;color:var(--blue);cursor:pointer}
+.qualityCalmChecks{padding-left:20px;margin:26px 0 0}
+.qualityCalmChecks li{padding:16px 0;border-bottom:1px solid var(--process-line);font-size:15px}
+.qualityCalmChecks li>div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.qualityCalmChecks strong{font-weight:500}
+.qualityCalmChecks p{color:var(--muted);font-size:14px;line-height:1.6;margin:8px 0 0}
+.qualityHold{color:#75602e;font-size:11px;white-space:nowrap}
+.processCalm .processSourceNote{font-size:13px;line-height:1.7;margin:20px 0 0;color:var(--muted)}
+.processDetail .processSourceNote{margin-bottom:22px}
+.processDeliveryNote{font-size:16px;line-height:1.7;max-width:700px;color:var(--muted)}
+.processDeliveryNote strong{color:var(--ink);font-weight:500}
+.processDocumentList{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;padding:4px 0 22px 20px;color:var(--muted);font-size:15px;line-height:1.6}
+.processClosing{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:64px}
+.processCalm a:focus-visible,.processCalm button:focus-visible,.processCalm summary:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+@keyframes processPanelIn{from{opacity:.65;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:760px){
+ .processJourney{justify-content:space-between;gap:12px;padding:16px 6vw}.processJourney a{font-size:14px;gap:8px}
+ .processChapterIntro{margin-bottom:30px}.processSteps>article{grid-template-columns:25px 1fr;gap:12px}
+ .processBuildLine{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-bottom:40px}
+ .processDocumentList{grid-template-columns:1fr}.processClosing{align-items:flex-start;flex-direction:column;margin-top:40px}
+ .qualityCalmContent .eyebrow{font-size:10px;letter-spacing:.04em}.processDetail .milestoneContent{padding-left:0}
+}
+@media(prefers-reduced-motion:reduce){.qualityCalmContent{animation:none}.processDetail>summary>span,.qualityCalm .qualityStageRail button{transition:none}}
+html[data-motion=paused] .qualityCalmContent{animation:none}

@@ -1,3 +1,4 @@
+import './process.css';
 import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import { Page } from '@/components/Site';
@@ -150,82 +151,48 @@ const handoverDocuments=[
 
 export default function Process(){
   return <Page kicker="OUR PROCESS / PLAN · BUILD · DELIVER" title="Clear steps. Confident decisions.">
-    <section className="section">
-      <div className="sectionHeading">
-        <span className="eyebrow">Before construction</span>
-        <h2 className="lead">From your first idea.<br/><span className="muted">To a plan we can build.</span></h2>
-        <p>We explain the next decision and what it produces. Project-specific design begins after the design scope, fee and advance are agreed.</p>
+   <div className="processCalm">
+    <nav className="processJourney" aria-label="Explore the construction process">
+      <a href="#plan"><span>01</span>Plan</a><a href="#build"><span>02</span>Build</a><a href="#snag-handover"><span>03</span>Deliver</a>
+    </nav>
+
+    <section className="section processChapter" id="plan">
+      <div className="processChapterIntro"><span className="eyebrow">01 / Plan</span><h2 className="lead">Good homes begin<br/><span className="muted">before the site does.</span></h2><p>Understand your needs. Refine the design. Agree the scope.</p></div>
+      <div className="processSteps">
+       <article><span>01</span><div><h3>Let’s understand your home.</h3><p>A qualification call, site or office meeting and preliminary budget establish the starting point.</p></div></article>
+       <article><span>02</span><div><h3>See your ideas take shape.</h3><p>After the agreed design retainer, we develop your floor plan and 3D facade together.</p></div></article>
+       <article><span>03</span><div><h3>Make it ready to build.</h3><p>Design sign-off, the construction agreement, soil investigation, approvals and coordinated drawings prepare the way.</p></div></article>
       </div>
-      <div className="milestones">{milestones.map((m,i)=><details className="milestone" key={m.no} open={i===0}>
+      <details className="processDetail"><summary>Explore the pre-construction steps <span aria-hidden="true">+</span></summary>
+       <div className="milestones">{milestones.map(m=><details className="milestone" key={m.no}>
         <summary><small>{m.no}</small><strong>{m.title}</strong><span aria-hidden="true">+</span></summary>
         <div className="milestoneContent"><p>{m.body}</p><div className="milestoneOutput"><span className="eyebrow">What you receive</span><strong>{m.output}</strong></div></div>
-      </details>)}</div>
-      <p className="processNote">The sequence is coordinated for your site. Feasibility and approval requirements are reviewed early; work starts only after applicable approvals and the drawings needed for that stage are in place. Existing-building demolition, if needed, is separately scoped and scheduled.</p>
+       </details>)}</div>
+       <p className="processSourceNote">Project-specific design begins after the scope, fee and advance are agreed. Approval requirements are reviewed early. Demolition, where needed, is separately scoped; site work begins with the applicable permissions and drawings in place.</p>
+      </details>
     </section>
 
-    <section className="section dark">
-      <div className="grid"><span className="eyebrow">During construction</span><div>
-        <h2 className="lead">One coordinated team.<br/><span className="muted">Stage by stage.</span></h2>
-        <div className="flow">{['Site mobilisation & setting out','Foundation & structure','Services & finishes','Quality gates & documentation','Snag closure & handover'].map((text,i)=><div key={text}><small>0{i+1}</small><span>{text}</span><span aria-hidden="true">↓</span></div>)}</div>
-        <p className="bigCopy">The project agreement defines the scope, payment milestones, supervision and reporting arrangements. Quality checks happen before work is covered up. Design changes are reviewed for cost and time impact before execution. Handover follows joint snag review and close-out.</p>
-      </div></div>
-    </section>
-
-    <section className="section processControlSection" id="quality-control">
-      <div className="processControlIntro">
-        <div><span className="eyebrow">01 / Stage quality control</span><h2 className="lead">Check it before<br/><span className="muted">it disappears.</span></h2></div>
-        <div><p>Quality control is most useful before concrete is poured, services are concealed or finishes cover the work. Each stage below has normal checks and <strong>HOLD</strong> points.</p><p className="processControlRule"><strong>HOLD means stop.</strong> The next activity is not released until that check is passed and recorded.</p></div>
+    <section className="section processChapter processBuildChapter" id="build">
+      <div className="processChapterIntro"><span className="eyebrow">02 / Build</span><h2 className="lead">One team.<br/><span className="muted">Every stage connected.</span></h2><p>From setting out to the final finishes, drawings, site coordination and progress records stay connected.</p></div>
+      <div className="processBuildLine" aria-label="Construction sequence">{['Set out','Structure','Services','Finishes'].map((text,i)=><div key={text}><span>0{i+1}</span><strong>{text}</strong></div>)}</div>
+      <div className="processQuality" id="quality-control">
+       <div className="processSmallIntro"><span className="eyebrow">Stage quality control</span><h3>Check it before it’s covered.</h3><p>Explore the checks behind each stage. <strong>HOLD means stop</strong> until the required check is passed and recorded.</p></div>
+       <QualityStageTabs stages={qualityStages} />
+       <p className="processSourceNote">Checks follow the project drawings, engineering instructions and agreed specification. Supervision and reporting arrangements are defined in your agreement.</p>
       </div>
-      <QualityStageTabs stages={qualityStages} />
-      <p className="processSourceNote">The exact checklist is adjusted to the project drawings, structural design, specification, site conditions and agreed scope. The stage gate is a control process—not a substitute for project-specific consultant instructions.</p>
-    </section>
-
-    <section className="section processVariationSection" id="change-order">
-      <div className="processControlIntro">
-        <div><span className="eyebrow">02 / Change order + variation control</span><h2 className="lead">A change should never<br/><span className="muted">become a surprise bill.</span></h2></div>
-        <div><p>Extra work, omitted work and client-requested revisions are recorded as a variation before execution. The note connects the change back to the agreement, shows cost and time impact, and records approval.</p></div>
-      </div>
-      <div className="variationFlow">{variationSteps.map(([n,h,p])=><article key={n}><span>{n}</span><h3>{h}</h3><p>{p}</p></article>)}</div>
-      <div className="variationLedger">
-        <div><span className="eyebrow">Cost impact</span><strong>EXTRA + OMIT</strong><p>Added and omitted work are shown separately. Quantities may be measured or estimated at the time of the note, with final billing based on actual measurement where the agreement provides for it.</p></div>
-        <div><span className="eyebrow">Time impact</span><strong>PROGRAMME</strong><p>The note records any extension of time, revised completion implication and the earliest point the changed work can proceed.</p></div>
-        <div className="variationApproval"><span className="eyebrow">Approval gate</span><strong>SIGN BEFORE START</strong><p>Changed work begins after the variation is approved. All unaffected terms continue under the referenced agreement.</p></div>
+      <div className="processChange" id="change-order">
+       <span className="eyebrow">Change order + variation control</span><h3>Changes agreed.<br/><span className="muted">Before work begins.</span></h3><p>See the extra or omitted work, revised cost and time impact. Approve the variation before execution.</p>
+       <details className="processDetail"><summary>How a change is recorded <span aria-hidden="true">+</span></summary><div className="processSteps">{variationSteps.map(([n,h,p])=><article key={n}><span>{n}</span><div><h4>{h}</h4><p>{p}</p></div></article>)}</div></details>
       </div>
     </section>
 
-    <section className="section processSnagSection" id="snag-handover">
-      <div className="processControlIntro">
-        <div><span className="eyebrow">03 / Snag review + handover</span><h2 className="lead">Inspect. Rectify.<br/><span className="muted">Verify. Hand over.</span></h2></div>
-        <div><p>A joint inspection turns the final walk-through into an accountable list. Each observation is tied to an area, trade, responsibility, target date and status.</p></div>
-      </div>
-
-      <div className="snagStatusFlow" aria-label="Snag status flow">
-        {['Open','In progress','Rectified','Closed'].map((status,i)=><div key={status}><span>0{i+1}</span><strong>{status}</strong>{i<3&&<b aria-hidden="true">→</b>}</div>)}
-      </div>
-
-      <div className="snagGrid">
-        <article>
-          <span className="eyebrow">Joint inspection register</span>
-          <h3>Every snag has an owner.</h3>
-          <div className="snagFields">{['Area / room','Observation','Trade','Responsibility','Target date','Status'].map(x=><span key={x}>{x}</span>)}</div>
-          <p>A snag is treated as closed only after rectification is jointly verified. The status sequence keeps open work visible instead of burying it in messages.</p>
-        </article>
-        <article>
-          <span className="eyebrow">Handover pack</span>
-          <h3>Close the work. Close the information.</h3>
-          <ul className="handoverDocumentList">{handoverDocuments.map(item=><li key={item}>{item}</li>)}</ul>
-        </article>
-      </div>
-
-      <div className="handoverGate">
-        <span className="handoverGateMark">✓</span>
-        <div><span className="eyebrow">Handover gate</span><h3>Handover follows snag closure.</h3><p>The working snag template keeps the handover certificate blocked while snags remain open. Defects-liability and warranty periods, where applicable, are recorded against the signed project agreement and handover documents.</p></div>
-      </div>
-
-      <div className="processEndCta">
-        <div><span className="eyebrow">Plan • Build • Deliver</span><h2>More control before<br/><span className="muted">more construction.</span></h2></div>
-        <div><p>For your project, the detailed checklist, variation format, reporting cadence and handover requirements are aligned to the drawings, specification and agreement.</p><Link className="cta primary" href="/start-a-project">Discuss your project ↗</Link></div>
-      </div>
+    <section className="section processChapter" id="snag-handover">
+      <div className="processChapterIntro"><span className="eyebrow">03 / Deliver</span><h2 className="lead">The final details.<br/><span className="muted">Thought through, too.</span></h2><p>Walk through together. Record the snags. Verify the fixes. Receive your home and its project records.</p></div>
+      <div className="processBuildLine" aria-label="Snag status flow">{['Open','In progress','Rectified','Closed'].map((status,i)=><div key={status}><span>0{i+1}</span><strong>{status}</strong></div>)}</div>
+      <p className="processDeliveryNote"><strong>Handover follows snag closure.</strong> Each item has an owner and target date. Closure follows joint verification.</p>
+      <details className="processDetail"><summary>What’s in your handover pack <span aria-hidden="true">+</span></summary><ul className="processDocumentList">{handoverDocuments.map(item=><li key={item}>{item}</li>)}</ul><p className="processSourceNote">Final documents, warranties and defects-liability terms follow the agreed scope and signed project agreement.</p></details>
+      <div className="processClosing"><h3>Let’s plan your next step.</h3><Link className="cta primary" href="/start-a-project">Discuss your home ↗</Link></div>
     </section>
+   </div>
   </Page>;
 }
