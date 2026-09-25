@@ -1,0 +1,32 @@
+.knowSite{scroll-margin-top:100px}
+.knowSiteIntro{max-width:740px}
+.knowSiteRows{margin-top:36px}
+.knowSiteRow{display:grid;grid-template-columns:40px minmax(0,1fr);gap:20px;padding:32px 0;border-top:1px solid #e0e3e8}
+.knowSiteNumber{font-size:13px;color:#0071e3;padding-top:6px}
+.knowSiteRow h3,.knowSiteCta h3{font-size:clamp(23px,2.5vw,32px);letter-spacing:-.035em;line-height:1.2;margin:0 0 14px;font-weight:550}
+.knowSiteRow p{max-width:820px;font-size:16px;line-height:1.75;color:#626a74}
+.knowSiteLinks{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:16px}
+.knowSite a:not(.cta){color:#006acb;font-size:15px;line-height:1.6;text-underline-offset:4px}
+.knowSiteLinks a{display:inline-flex;align-items:center;min-height:44px}
+.knowSite .guideDisclosure{margin-top:14px}
+.knowSite .guideDisclosure summary{min-height:48px;padding-block:16px;font-size:16px;cursor:pointer}
+.knowSite .guideDisclosure p{font-size:15px}
+.knowSiteDiagram{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:30px;margin:26px 0 0;background:#f7f9fc;border:1px solid #e5eaf1;border-radius:14px;padding:28px}
+.knowSiteDiagram figure{margin:0;min-width:0}
+.knowSiteDiagram svg{width:100%;height:auto;display:block}
+.knowSiteDiagram figcaption{font-size:12px;line-height:1.6;text-align:center;color:#626a74;margin-top:12px}
+.knowSiteRule p{font-size:14px;margin-block:12px}
+.knowSiteRule .knowSiteFormula{font-size:20px;font-weight:550;color:#1d2733;line-height:1.4;letter-spacing:-.025em}
+.knowSiteRule small{display:block;font-size:12px;line-height:1.65;color:#69727e;margin-top:10px}
+.knowSiteCosts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;list-style:none;padding:0;margin:26px 0}
+.knowSiteCosts li{border-top:2px solid #d7e4f2;padding-top:16px}
+.knowSiteCosts strong{display:block;font-size:16px;font-weight:550;margin-bottom:10px}
+.knowSiteCosts span{font-size:14px;line-height:1.7;color:#626a74}
+.knowSiteCta{display:flex;align-items:center;justify-content:space-between;gap:32px;border-top:1px solid #e0e3e8;padding-top:30px;margin-top:12px}
+.knowSiteCta h3{font-size:24px}.knowSiteCta p{font-size:15px;line-height:1.7;color:#626a74;max-width:580px}
+.knowSiteCta .cta{flex-shrink:0;max-width:100%;white-space:normal;text-align:center}
+.knowSite .guideSmall{font-size:13px;line-height:1.7}
+.knowSite a:focus-visible,.knowSite summary:focus-visible{outline:2px solid #0071e3;outline-offset:4px}
+.siteReviewDetails{margin:20px 0}.siteReviewDetails summary{cursor:pointer;min-height:48px;padding-block:15px;font-size:15px}.siteReviewDetails .fields{margin-top:18px}
+@media(max-width:900px){.knowSiteCta{align-items:flex-start;flex-direction:column}}
+@media(max-width:760px){.knowSiteRow{grid-template-columns:22px minmax(0,1fr);gap:12px;padding-block:26px}.knowSiteDiagram{grid-template-columns:1fr;padding:18px;gap:24px}.knowSiteCosts{grid-template-columns:1fr;gap:18px}.knowSiteLinks{flex-direction:column;align-items:flex-start;gap:4px}.knowSiteCta .cta{width:100%}.knowSiteRow p{font-size:15px}}
