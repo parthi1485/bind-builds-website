@@ -31,7 +31,7 @@
 .processQuality{scroll-margin-top:110px}
 .processChange{border-top:1px solid var(--process-line);margin-top:60px;padding-top:48px;scroll-margin-top:110px}
 .processCalm .qualityCalm{display:block;margin:0;border:1px solid var(--process-line);border-radius:18px;overflow:hidden;background:white;box-shadow:none}
-.processCalm .qualityCalm .qualityStageRail{display:flex;gap:0;overflow-x:auto;overscroll-behavior-x:contain;padding:8px;background:white;border:0;border-bottom:1px solid var(--process-line);border-radius:0;scrollbar-width:thin}
+.processCalm .qualityCalm .qualityStageRail{display:flex;flex-direction:row;position:static;top:auto;gap:0;overflow-x:auto;overscroll-behavior-x:contain;padding:8px;background:white;border:0;border-bottom:1px solid var(--process-line);border-radius:0;scrollbar-width:thin}
 .qualityCalm .qualityStageRail button{flex:0 0 auto;display:flex;align-items:center;gap:9px;min-height:48px;padding:10px 15px;background:transparent;border:0;border-radius:9px;color:#56565f;font:inherit;font-size:14px;white-space:nowrap;cursor:pointer;transition:background .18s,color .18s}
 .qualityCalm .qualityStageRail button>span{font-size:11px;color:var(--muted)}
 .qualityCalm .qualityStageRail button[aria-selected=true]{background:#edf5ff;color:#0067d1}
