@@ -9,6 +9,7 @@ export type ExtraOption = {
  quantityPresets?:{label:string;quantity:number;note?:string}[];
 };
 export const extraOptions: ExtraOption[] = [
+ {key:'demolition',label:'Existing building demolition',detail:'For sites with an existing structure. Final price depends on building size, structural system, access, debris handling and disposal.',unit:'item',quantity:'1',rate:''},
  {key:'parking',label:'Separate car parking',detail:'Exclude this area from the floor areas to avoid counting it twice. Layout and access need review.',unit:'sq.ft',quantity:'200',rate:'2350'},
  {key:'compound',label:'Compound wall',detail:'Enter wall length and average height. Wall only; gate is a separate item. Foundations and finishes affect cost.',unit:'sq.ft',quantity:'600',rate:'450'},
  {key:'gate',label:'Main gate · MS / sliding',detail:'Size, finish and automation need confirmation.',unit:'item',quantity:'1',rate:'125000'},
