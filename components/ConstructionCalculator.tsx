@@ -40,7 +40,7 @@ export default function ConstructionCalculator() {
   const [furthest, setFurthest] = useState(0);
   const [plot, setPlot] = useState('1200');
   const [areas, setAreas] = useState(['900', '900', '900', '900']);
-  const [floorCount, setFloorCount] = useState(2);
+  const [floorCount, setFloorCount] = useState(1);
   const [tier, setTier] = useState(1);
   const [hasHeadroom, setHasHeadroom] = useState(false);
   const [headroom, setHeadroom] = useState('200');
