@@ -159,35 +159,35 @@ export function BuildAssurance() {
 }
 
 
-type BrandLogo = { key: string; name: string; display?: string };
+type BrandLogo = { key: string; name: string; domain: string; display?: string };
 
 const materialBrands: BrandLogo[] = [
-  { key: 'legrand', name: 'Legrand' },
-  { key: 'ars-crs', name: 'ARS / CRS Steel', display: 'ARS / CRS' },
-  { key: 'orbit', name: 'Orbit Wires & Cables', display: 'ORBIT' },
-  { key: 'nippon', name: 'Nippon Paint', display: 'NIPPON PAINT' },
-  { key: 'parryware', name: 'Parryware', display: 'PARRYWARE' },
-  { key: 'kohler', name: 'Kohler', display: 'KOHLER' },
-  { key: 'astral', name: 'Astral Pipes', display: 'ASTRAL' },
-  { key: 'gm-switches', name: 'GM Switches', display: 'GM' },
-  { key: 'sintex', name: 'Sintex', display: 'SINTEX' },
-  { key: 'kag', name: 'KAG Tiles', display: 'KAG' },
-  { key: 'ashirvad', name: 'Ashirvad Pipes', display: 'ASHIRVAD' },
-  { key: 'ultratech', name: 'UltraTech Cement', display: 'UltraTech' },
-  { key: 'jsw', name: 'JSW Steel', display: 'JSW STEEL' },
-  { key: 'tata', name: 'Tata Tiscon / Tata Steel', display: 'TATA TISCON' },
-  { key: 'asian-paints', name: 'Asian Paints', display: 'ASIAN PAINTS' },
-  { key: 'jaquar', name: 'Jaquar', display: 'JAQUAR' },
-  { key: 'kajaria', name: 'Kajaria', display: 'KAJARIA' },
-  { key: 'finolex', name: 'Finolex', display: 'FINOLEX' },
+  { key: 'legrand', name: 'Legrand', domain: 'legrand.co.in' },
+  { key: 'ars-crs', name: 'ARS / CRS Steel', domain: 'arsgroup.in', display: 'ARS / CRS' },
+  { key: 'orbit', name: 'Orbit Wires & Cables', domain: 'orbitcables.com', display: 'ORBIT' },
+  { key: 'nippon', name: 'Nippon Paint', domain: 'nipponpaint.co.in', display: 'NIPPON PAINT' },
+  { key: 'parryware', name: 'Parryware', domain: 'parryware.in', display: 'PARRYWARE' },
+  { key: 'kohler', name: 'Kohler', domain: 'kohler.co.in', display: 'KOHLER' },
+  { key: 'astral', name: 'Astral Pipes', domain: 'astralpipes.com', display: 'ASTRAL' },
+  { key: 'gm-switches', name: 'GM Switches', domain: 'gmmodular.com', display: 'GM' },
+  { key: 'sintex', name: 'Sintex', domain: 'sintexonline.com', display: 'SINTEX' },
+  { key: 'kag', name: 'KAG Tiles', domain: 'kagindia.com', display: 'KAG' },
+  { key: 'ashirvad', name: 'Ashirvad Pipes', domain: 'ashirvad.com', display: 'ASHIRVAD' },
+  { key: 'ultratech', name: 'UltraTech Cement', domain: 'ultratechcement.com', display: 'UltraTech' },
+  { key: 'jsw', name: 'JSW Steel', domain: 'jsw.in', display: 'JSW STEEL' },
+  { key: 'tata', name: 'Tata Tiscon / Tata Steel', domain: 'tatasteel.com', display: 'TATA STEEL' },
+  { key: 'asian-paints', name: 'Asian Paints', domain: 'asianpaints.com', display: 'ASIAN PAINTS' },
+  { key: 'jaquar', name: 'Jaquar', domain: 'jaquar.com', display: 'JAQUAR' },
+  { key: 'kajaria', name: 'Kajaria', domain: 'kajariaceramics.com', display: 'KAJARIA' },
+  { key: 'finolex', name: 'Finolex', domain: 'finolexpipes.com', display: 'FINOLEX' },
 ];
 
 const lenders: BrandLogo[] = [
-  { key: 'sbi', name: 'State Bank of India', display: 'SBI' },
-  { key: 'hdfc', name: 'HDFC Bank', display: 'HDFC BANK' },
-  { key: 'icici', name: 'ICICI Bank', display: 'ICICI BANK' },
-  { key: 'axis', name: 'Axis Bank', display: 'AXIS BANK' },
-  { key: 'bob', name: 'Bank of Baroda', display: 'BANK OF BARODA' },
+  { key: 'sbi', name: 'State Bank of India', domain: 'bank.sbi', display: 'SBI' },
+  { key: 'hdfc', name: 'HDFC Bank', domain: 'hdfcbank.com', display: 'HDFC BANK' },
+  { key: 'icici', name: 'ICICI Bank', domain: 'icicibank.com', display: 'ICICI BANK' },
+  { key: 'axis', name: 'Axis Bank', domain: 'axisbank.com', display: 'AXIS BANK' },
+  { key: 'bob', name: 'Bank of Baroda', domain: 'bankofbaroda.in', display: 'BANK OF BARODA' },
 ];
 
 function Marquee({ items, reverse = false }: { items: BrandLogo[]; reverse?: boolean }) {
@@ -198,10 +198,17 @@ function Marquee({ items, reverse = false }: { items: BrandLogo[]; reverse?: boo
         className={'brandWordmark brand-' + brand.key}
         key={brand.key + index}
         aria-hidden={index >= items.length}
-        aria-label={index < items.length ? brand.name : undefined}
         title={brand.name}
       >
-        <span className="brandTextLogo">{brand.display || brand.name}</span>
+        <img
+          className="brandLogoImage"
+          src={'https://img.logokit.com/' + brand.domain}
+          alt={index < items.length ? brand.name + ' logo' : ''}
+          loading="lazy"
+          decoding="async"
+          onError={event => event.currentTarget.parentElement?.classList.add('logoFailed')}
+        />
+        <span className="brandLogoFallback">{brand.display || brand.name}</span>
       </span>)}
     </div>
   </div>;
