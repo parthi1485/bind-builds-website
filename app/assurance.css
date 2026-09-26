@@ -52,22 +52,10 @@
 .brandMarquee:hover .brandMarqueeTrack{animation-play-state:paused}
 .brandWordmarkWrap{display:block}
 .brandWordmark{width:178px;height:84px;padding:0 22px;border:1px solid #e6e6eb;background:#fff;border-radius:16px;display:grid;place-items:center;overflow:hidden}
-.brandTextLogo{
- display:block;
- max-width:138px;
- color:#252a31;
- font-size:.78rem;
- line-height:1.08;
- font-weight:680;
- letter-spacing:.035em;
- text-align:center;
- white-space:normal;
-}
-.brand-legrand .brandTextLogo,.brand-ultratech .brandTextLogo{font-size:.86rem;text-transform:none;letter-spacing:-.02em;font-weight:650}
-.brand-kohler .brandTextLogo,.brand-parryware .brandTextLogo,.brand-jaquar .brandTextLogo{letter-spacing:.09em}
-.brand-gm-switches .brandTextLogo,.brand-kag .brandTextLogo,.brand-sbi .brandTextLogo{font-size:1rem;letter-spacing:.06em}
-.brand-bob .brandTextLogo,.brand-asian-paints .brandTextLogo,.brand-tata .brandTextLogo{font-size:.68rem;letter-spacing:.055em}
-.brand-hdfc .brandTextLogo,.brand-icici .brandTextLogo,.brand-axis .brandTextLogo{font-size:.72rem;letter-spacing:.045em}
+.brandLogoImage{display:block;max-width:132px;max-height:46px;width:auto;height:auto;object-fit:contain}
+.brandLogoFallback{display:none;max-width:138px;color:#252a31;font-size:.72rem;line-height:1.08;font-weight:650;letter-spacing:.025em;text-align:center}
+.brandWordmark.logoFailed .brandLogoImage{display:none}
+.brandWordmark.logoFailed .brandLogoFallback{display:block}
 .ecosystemDisclaimer{max-width:1150px;margin:0 auto;border-top:1px solid #eeeeF2;padding-top:20px;color:#8a8a93;font-size:.625rem;line-height:1.7}
 @keyframes assuranceDraw{from{stroke-dashoffset:520}to{stroke-dashoffset:0}}
 @keyframes assurancePulse{0%{opacity:.4;transform:scale(.95);transform-origin:center}100%{opacity:1;transform:scale(1)}}
@@ -110,9 +98,8 @@
  .ecosystemLabel{margin-bottom:20px}
  .brandMarquee{margin-inline:-22px}
  .brandWordmark{width:150px;height:72px;padding-inline:18px}
- .brandTextLogo{max-width:110px;font-size:.7rem}
- .brand-gm-switches .brandTextLogo,.brand-kag .brandTextLogo,.brand-sbi .brandTextLogo{font-size:.9rem}
- .brand-bob .brandTextLogo,.brand-asian-paints .brandTextLogo,.brand-tata .brandTextLogo{font-size:.62rem}
+ .brandLogoImage{max-width:112px;max-height:38px}
+ .brandLogoFallback{max-width:110px;font-size:.65rem}
 
  .ecosystemDisclaimer{margin:0 22px;padding-top:18px;font-size:.5625rem}
 }
