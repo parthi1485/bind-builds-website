@@ -58,7 +58,7 @@ export function Nav() {
 }
 export function Footer() {
   const guideLinks = [
-    ['Project evidence', '/project-evidence'],
+    ['Projects', '/project-evidence'],
     ['Construction company', '/construction-company-chennai'],
     ['House construction', '/house-construction-chennai'],
     ['Individual house construction', '/individual-house-construction-chennai'],
