@@ -52,7 +52,7 @@
 .brandMarquee:hover .brandMarqueeTrack{animation-play-state:paused}
 .brandWordmarkWrap{display:block}
 .brandWordmark{width:178px;height:84px;padding:0 22px;border:1px solid #e6e6eb;background:#fff;border-radius:16px;display:grid;place-items:center;overflow:hidden}
-.brandLogoImage{display:block;max-width:132px;max-height:46px;width:auto;height:auto;object-fit:contain}
+.brandLogoImage{display:block;width:52px;height:52px;object-fit:contain}
 .brandLogoFallback{display:none;max-width:138px;color:#252a31;font-size:.72rem;line-height:1.08;font-weight:650;letter-spacing:.025em;text-align:center}
 .brandWordmark.logoFailed .brandLogoImage{display:none}
 .brandWordmark.logoFailed .brandLogoFallback{display:block}
@@ -98,7 +98,7 @@
  .ecosystemLabel{margin-bottom:20px}
  .brandMarquee{margin-inline:-22px}
  .brandWordmark{width:150px;height:72px;padding-inline:18px}
- .brandLogoImage{max-width:112px;max-height:38px}
+ .brandLogoImage{width:48px;height:48px}
  .brandLogoFallback{max-width:110px;font-size:.65rem}
 
  .ecosystemDisclaimer{margin:0 22px;padding-top:18px;font-size:.5625rem}
