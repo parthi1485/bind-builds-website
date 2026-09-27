@@ -202,7 +202,7 @@ function Marquee({ items, reverse = false }: { items: BrandLogo[]; reverse?: boo
       >
         <img
           className="brandLogoImage"
-          src={'https://img.logokit.com/' + brand.domain}
+          src={'https://www.google.com/s2/favicons?domain=' + encodeURIComponent(brand.domain) + '&sz=128'}
           alt={index < items.length ? brand.name + ' logo' : ''}
           loading="lazy"
           decoding="async"
