@@ -20,6 +20,7 @@ export const extraOptions: ExtraOption[] = [
   {label:'13–16 members',quantity:15000,note:'15,000 L'},
  ]},
  {key:'septic',label:'Conventional septic tank',detail:'Capacity is a planning allowance only. Final sizing and drainage solution require professional review.',unit:'litres',quantity:'2000',rate:'25'},
+ {key:'borewell',label:'Borewell · 100 ft depth',detail:'Reference allowance for up to 100 ft bore drilling, piping, motor and installation. Final cost depends on actual depth, ground conditions, casing, motor capacity, access and water yield.',unit:'100-ft set',quantity:'1',rate:'85000'},
  {key:'solar',label:'Solar panels · 3 kW',detail:'Reference equipment allowance; capacity and installation scope need confirmation.',unit:'system',quantity:'1',rate:'150000'},
  {key:'cctv',label:'CCTV & security',detail:'Devices and cabling beyond the package provision.',unit:'system',quantity:'1',rate:'30000'},
  {key:'lift',label:'Lift · 4 passengers',detail:'Equipment allowance; stops and installation affect price. Check shaft and civil-work scope separately.',unit:'item',quantity:'1',rate:'800000'},
