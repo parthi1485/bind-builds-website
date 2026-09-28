@@ -197,7 +197,8 @@ test('ongoing project evidence includes verified documentation without exposing 
   assert.match(sung,/Working floor drawings/);
   assert.match(sung,/Sections \+ elevations/);
   assert.match(sung,/full set is not public/i);
-  assert.match(evidence,/52-page internal construction-documentation set/);
+  assert.match(evidence,/href="\/projects\/sunguvarchathiram-multigenerational-home"/);
+  assert.match(evidence,/Under construction/);
   assert.doesNotMatch(sung,/Mr\.S\.K|80727|bindhomes@gmail\.com/);
 });
 
@@ -256,15 +257,12 @@ test('process QC uses attached stage selector instead of dropdown accordions', (
 });
 
 
-test('homepage brand ecosystem does not hotlink third-party logo assets', () => {
+test('homepage brand ecosystem renders brand imagery with a readable fallback', () => {
   const assurance=read('components/BuildAssurance.tsx');
-  assert.doesNotMatch(assurance,/cloudfront\.net/);
-  assert.doesNotMatch(assurance,/commons\.wikimedia\.org/);
-  assert.doesNotMatch(assurance,/assettype\.com/);
-  assert.doesNotMatch(assurance,/kajariaceramics\.com/);
-  assert.doesNotMatch(assurance,/infinixindia\.co\.in/);
-  assert.doesNotMatch(assurance,/<img\s+src={brand\.src}/);
-  assert.match(assurance,/brandTextLogo/);
+  assert.match(assurance,/google\.com\/s2\/favicons/);
+  assert.match(assurance,/brandLogoImage/);
+  assert.match(assurance,/brandLogoFallback/);
+  assert.match(assurance,/logoFailed/);
   assert.match(assurance,/BANK OF BARODA/);
   assert.match(assurance,/HDFC BANK/);
   assert.match(assurance,/SBI/);
