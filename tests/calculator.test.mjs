@@ -99,6 +99,19 @@ test('unit rates, custom totals and unpriced choices remain distinct',()=>{
  assert.equal(extraOptions.some(item=>item.key==='smart'),false);
 });
 
+test('borewell reference allowance supports unit rate, custom total and quote modes',()=> {
+ const borewell=extraOptions.find(item=>item.key==='borewell');
+ assert.ok(borewell);
+ assert.equal(borewell.quantity,'1');
+ assert.equal(borewell.unit,'100-ft set');
+ assert.equal(borewell.rate,'85000');
+ const value={...initialExtra(borewell),selected:true};
+ assert.equal(extraAmount(value),85000);
+ assert.equal(extraAmount({...value,mode:'lump',amount:'95000'}),95000);
+ assert.equal(extraAmount({...value,mode:'unpriced'}),null);
+ assert.match(borewell.detail,/100 ft bore drilling, piping, motor and installation/i);
+});
+
 test('reference categories reconcile with additional items and no reserve',()=>{
  const result=calculateEstimate({...input,allowances:[{key:'gate',label:'Gate',selected:true,amount:125000},{key:'tank',label:'Tank',selected:true,amount:null}],reservePercent:5});
  const visual=createVisualData(input,result,'Elevate',[]);
