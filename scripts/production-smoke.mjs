@@ -36,7 +36,7 @@ await waitForDeployment();
 const pages=[
   ['/',/Your home\.|Bind Builds/i],
   ['/about',/Designed with purpose|Bind Builds/i],
-  ['/project-evidence',/Proof should come with context|project evidence/i],
+  ['/project-evidence',/Designed with intent\. Built with discipline\.|Selected projects|Projects/i],
   ['/projects/sunguvarchathiram-multigenerational-home',/multi-generational home|6,519 sq\.ft/i],
   ['/projects/pallikaranai-family-home',/17-foot plot|Pallikaranai/i],
   ['/projects/ccbm-commercial-complex',/CCBM Commercial Complex|Maduravoyal|12,494 sq\.ft/i],
