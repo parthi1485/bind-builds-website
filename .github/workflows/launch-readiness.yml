@@ -3,6 +3,11 @@ name: Launch Readiness
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'tests/**'
+      - '.github/**'
+      - 'scripts/production-smoke.mjs'
+      - 'README.md'
   workflow_dispatch:
 
 concurrency:
