@@ -90,7 +90,7 @@ export default function WhyBindBuilds(){
     </div>
     <div className="whyArchitectCopy">
      <p>Your first construction meeting should not begin only with a square-foot rate. Start with an architect who can understand your site, family, lifestyle, priorities and budget — and turn those inputs into a project that is worth pricing and building.</p>
-     <blockquote>Construction experience is valuable. But having built hundreds of houses does not automatically mean every house was individually planned for its site, family and long-term use.</blockquote>
+     <blockquote>Construction experience is valuable. But even if a builder or contractor has constructed hundreds of houses, that alone does not mean every home was individually planned for its site, family and long-term use.</blockquote>
      <p>A capable contractor is essential for execution. A capable architect is essential for planning. The strongest projects respect both roles instead of expecting one to substitute for the other.</p>
     </div>
    </div>
