@@ -36,6 +36,7 @@ await waitForDeployment();
 const pages=[
   ['/',/Your home\.|Bind Builds/i],
   ['/about',/Designed with purpose|Bind Builds/i],
+  ['/why-bind-builds',/One home\. Many specialists\. One point of contact\.|START WITH THE ARCHITECT|Why Bind Builds/i],
   ['/project-evidence',/Designed with intent\. Built with discipline\.|Selected projects|Projects/i],
   ['/projects/sunguvarchathiram-multigenerational-home',/multi-generational home|6,519 sq\.ft/i],
   ['/projects/pallikaranai-family-home',/17-foot plot|Pallikaranai/i],

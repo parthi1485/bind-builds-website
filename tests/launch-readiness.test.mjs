@@ -11,6 +11,7 @@ test('launch-critical routes are represented in the sitemap', () => {
   const routes=[
     "''",
     "'/about'",
+    "'/why-bind-builds'",
     "'/project-evidence'",
     "'/projects/sunguvarchathiram-multigenerational-home'",
     "'/projects/pallikaranai-family-home'",
@@ -280,4 +281,14 @@ test('completed CCBM project is presented with role and construction boundary in
   assert.match(ccbm,/Architectural Design/);
   assert.match(ccbm,/not use it to claim that Bind Builds delivered the construction contract/i);
   assert.match(ccbm,/bindarchitects\.com\/project\/ccbm/);
+});
+
+
+test('why Bind Builds explains coordinated specialist roles without diminishing specialist responsibility', () => {
+  const page=read('app/why-bind-builds/page.tsx');
+  for(const role of ['Architect','Structural engineer','MEP engineer','Project manager','Site engineer / supervisor','Quantity surveyor']) assert.ok(page.includes(role));
+  assert.match(page,/One home. Many specialists. One point of contact./);
+  assert.match(page,/having built hundreds of houses does not automatically mean every house was individually planned/i);
+  assert.match(page,/specialist responsibility remains specialist responsibility/i);
+  assert.match(page,/Start with an architect/i);
 });
