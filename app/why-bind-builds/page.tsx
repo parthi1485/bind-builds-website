@@ -91,7 +91,7 @@ export default function WhyBindBuilds(){
     <div className="whyArchitectCopy">
      <p>Your first construction meeting should not begin only with a square-foot rate. Start with an architect who can understand your site, family, lifestyle, priorities and budget — and turn those inputs into a project that is worth pricing and building.</p>
      <blockquote>Construction experience is valuable. But even if a builder or contractor has constructed hundreds of houses, that alone does not mean every home was individually planned for its site, family and long-term use.</blockquote>
-     <p>A capable contractor is essential for execution. A capable architect is essential for planning. The strongest projects respect both roles instead of expecting one to substitute for the other.</p>
+     <p>A capable contractor is essential for execution. A capable architect is essential for planning. The strongest projects respect both roles instead of expecting one to substitute for the other. Before you appoint the build team, ask who is responsible for architecture, structure and services — and when each discipline enters the project.</p>
     </div>
    </div>
   </section>

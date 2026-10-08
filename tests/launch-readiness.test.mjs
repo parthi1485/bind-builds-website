@@ -288,7 +288,7 @@ test('why Bind Builds explains coordinated specialist roles without diminishing 
   const page=read('app/why-bind-builds/page.tsx');
   for(const role of ['Architect','Structural engineer','MEP engineer','Project manager','Site engineer / supervisor','Quantity surveyor']) assert.ok(page.includes(role));
   assert.match(page,/One home. Many specialists. One point of contact./);
-  assert.match(page,/having built hundreds of houses does not automatically mean every house was individually planned/i);
+  assert.match(page,/builder or contractor has constructed hundreds of houses.*does not mean every home was individually planned/i);
   assert.match(page,/specialist responsibility remains specialist responsibility/i);
   assert.match(page,/Start with an architect/i);
 });
