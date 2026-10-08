@@ -1,11 +1,12 @@
 import type { MetadataRoute } from 'next';
 import { site } from '@/lib/site';
 
-const updated='2026-09-25';
+const updated='2026-10-09';
 export default function sitemap():MetadataRoute.Sitemap{
  const pages=[
   ['',1],
   ['/about',.7],
+  ['/why-bind-builds',.94],
   ['/project-evidence',.88],
   ['/projects/sunguvarchathiram-multigenerational-home',.86],
   ['/projects/pallikaranai-family-home',.86],

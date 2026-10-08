@@ -1268,3 +1268,112 @@ button:disabled,.cta[aria-disabled=true]{opacity:.58}
 @media(prefers-reduced-motion:reduce){
   .qualityStageTab{transition:none}
 }
+
+
+/* Why Bind Builds — authority + client education */
+.homeWhyLink{max-width:1150px;margin:34px auto 0;display:flex;justify-content:flex-end}
+.whyIntroGrid,.whyArchitectGrid,.whySectionHead{display:grid;grid-template-columns:minmax(160px,.65fr) minmax(0,2.35fr);gap:7vw;align-items:start}
+.whyIntroGrid>.eyebrow,.whySectionHead>.eyebrow{padding-top:9px}
+.whyIntroGrid .lead{margin-top:0;max-width:950px}
+.whyIntroGrid .bigCopy{max-width:880px}
+.whyLeadNote{margin:30px 0 0;padding:22px 0;border-top:1px solid var(--line);max-width:880px;font-size:.9rem;line-height:1.75;color:#66666e}
+.whyLeadNote strong{color:#222227;font-weight:600}
+.whyArchitectFirst{padding-block:105px}
+.whyArchitectGrid .eyebrow{color:#91bdf0}
+.whyArchitectGrid .lead{margin:22px 0 0;max-width:650px;color:#fff}
+.whyArchitectCopy{max-width:760px}
+.whyArchitectCopy>p{font-size:1.05rem;line-height:1.85;color:#c7cbd2;margin:0 0 28px}
+.whyArchitectCopy blockquote{margin:34px 0;padding:28px 0;border-block:1px solid #ffffff25;font-size:clamp(1.55rem,2.6vw,2.7rem);line-height:1.25;letter-spacing:-.035em;font-weight:500;color:#fff}
+.whyRoles{background:#f5f5f7}
+.whySectionHead{margin-bottom:52px}
+.whySectionHead .lead{margin:0 0 20px}
+.whySectionHead .bigCopy{max-width:760px;margin:0}
+.whyRoleGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.whyRoleCard{background:#fff;border:1px solid #e6e7eb;border-radius:22px;padding:28px;min-height:330px;display:flex;flex-direction:column}
+.whyRoleTop{display:flex;align-items:center;gap:14px;color:#8a8e95;font-size:.68rem}
+.whyRoleTop i{height:1px;flex:1;background:#e1e3e7}
+.whyRoleCard h3{font-size:clamp(1.55rem,2.25vw,2.35rem);margin:30px 0 12px;letter-spacing:-.04em}
+.whyRoleCard>strong{font-size:.88rem;line-height:1.5;color:#006bd6;font-weight:550}
+.whyRoleCard>p{font-size:.82rem;line-height:1.75;color:#676b72;margin:18px 0 0}
+.whyContactBand{background:#0f1c2b;color:#fff}
+.whyContactDiagram{max-width:1150px;margin:auto;display:grid;grid-template-columns:1fr 70px 1.2fr 70px 1fr;align-items:stretch}
+.whyContactDiagram>div:not(.whyConnector){border:1px solid #ffffff20;border-radius:20px;padding:28px;background:#ffffff08}
+.whyContactDiagram small{display:block;font-size:.6rem;letter-spacing:.08em;color:#87b8ee}
+.whyContactDiagram strong{display:block;font-size:clamp(1.5rem,2.3vw,2.2rem);letter-spacing:-.04em;margin:18px 0 9px}
+.whyContactDiagram span{font-size:.75rem;line-height:1.65;color:#aeb9c6}
+.whyConnector{display:grid;place-items:center;color:#4b9cec;font-size:1.5rem}
+.whyContactNote{max-width:820px;margin:28px auto 0;text-align:center;font-size:.75rem;line-height:1.75;color:#9eabba}
+.whyCompare{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--line)}
+.whyCompare article{padding:34px 34px 38px}
+.whyCompare article+article{border-left:1px solid var(--line)}
+.whyCompare article>span,.whyUspGrid article>span{font-size:.65rem;color:#8a8e95}
+.whyCompare h3{font-size:clamp(1.55rem,2.2vw,2.25rem);margin:24px 0 14px}
+.whyCompare p{font-size:.85rem;line-height:1.75;color:#676b72}
+.whyUsp{background:#f5f5f7}
+.whyUspGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid #dfe1e5}
+.whyUspGrid article{padding:32px 30px 35px;border-bottom:1px solid #dfe1e5}
+.whyUspGrid article:nth-child(odd){border-right:1px solid #dfe1e5}
+.whyUspGrid h3{font-size:1.3rem;letter-spacing:-.025em;margin:18px 0 12px}
+.whyUspGrid p{font-size:.83rem;line-height:1.75;color:#686c73;max-width:520px}
+.whyQuestions{background:#fff}
+.whyFaq{max-width:950px;margin-left:auto}
+.whyFaq details{border-top:1px solid var(--line)}
+.whyFaq details:last-child{border-bottom:1px solid var(--line)}
+.whyFaq summary{list-style:none;display:grid;grid-template-columns:minmax(0,1fr) 32px;gap:20px;align-items:center;min-height:72px;padding:18px 0;cursor:pointer;font-size:1rem;font-weight:550}
+.whyFaq summary::-webkit-details-marker{display:none}
+.whyFaq summary span{width:30px;height:30px;border:1px solid #dde0e5;border-radius:50%;display:grid;place-items:center;color:#0071e3;font-size:1.1rem;transition:transform .2s}
+.whyFaq details[open] summary span{transform:rotate(45deg)}
+.whyFaq details p{margin:0;padding:0 52px 24px 0;color:#6a6e75;font-size:.86rem;line-height:1.8}
+.whyFinal{display:grid;grid-template-columns:1.4fr .8fr;gap:8vw;align-items:end;color:#fff}
+.whyFinal>.eyebrow,.whyFinal .eyebrow{color:#d7e9ff}
+.whyFinal .lead{margin:22px 0}
+.whyFinal p{max-width:680px;font-size:1rem;line-height:1.75;color:#eaf3ff}
+.whyActions{display:flex;align-items:center;gap:24px;margin-top:30px;flex-wrap:wrap}
+.whyFinal .cta{background:#fff;color:#006bd6;border-color:#fff}
+.whyTextLink{color:#fff;font-size:.9rem;text-decoration:underline;text-underline-offset:5px}
+.whyFinalLinks{display:grid;gap:0;border-top:1px solid #ffffff40}
+.whyFinalLinks a{padding:18px 0;border-bottom:1px solid #ffffff40;font-size:.88rem}
+
+@media(max-width:900px){
+ .whyRoleGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .whyContactDiagram{grid-template-columns:1fr}
+ .whyConnector{height:46px;transform:rotate(90deg)}
+ .whyFinal{grid-template-columns:1fr;gap:45px}
+}
+@media(max-width:760px){
+ .homeWhyLink{margin-top:25px;justify-content:flex-start}
+ .whyIntroGrid,.whyArchitectGrid,.whySectionHead{grid-template-columns:1fr;gap:18px}
+ .whyIntroGrid>.eyebrow,.whySectionHead>.eyebrow{padding-top:0}
+ .whyIntroGrid .lead{font-size:2.15rem}
+ .whyLeadNote{font-size:.8rem;padding-top:18px;margin-top:24px}
+ .whyArchitectFirst{padding-block:65px}
+ .whyArchitectGrid .lead{font-size:2.35rem;margin-top:15px}
+ .whyArchitectCopy>p{font-size:.9rem;line-height:1.8}
+ .whyArchitectCopy blockquote{font-size:1.65rem;padding:23px 0;margin:26px 0}
+ .whySectionHead{margin-bottom:30px}
+ .whySectionHead .lead{font-size:2.15rem}
+ .whyRoleGrid{grid-template-columns:1fr;gap:12px}
+ .whyRoleCard{min-height:0;padding:23px 21px;border-radius:18px}
+ .whyRoleCard h3{font-size:1.8rem;margin-top:23px}
+ .whyRoleCard>p{font-size:.8rem}
+ .whyContactBand{padding-inline:18px}
+ .whyContactDiagram>div:not(.whyConnector){padding:23px 20px;border-radius:17px}
+ .whyContactDiagram strong{font-size:1.75rem}
+ .whyContactNote{text-align:left;font-size:.7rem;margin-top:22px}
+ .whyCompare{grid-template-columns:1fr}
+ .whyCompare article{padding:26px 0}
+ .whyCompare article+article{border-left:0;border-top:1px solid var(--line)}
+ .whyCompare h3{font-size:1.75rem}
+ .whyUspGrid{grid-template-columns:1fr}
+ .whyUspGrid article{padding:25px 0 27px}
+ .whyUspGrid article:nth-child(odd){border-right:0}
+ .whyFaq{margin:0}
+ .whyFaq summary{min-height:68px;font-size:.9rem}
+ .whyFaq details p{padding-right:0;font-size:.8rem}
+ .whyFinal{padding-block:64px 78px}
+ .whyFinal .lead{font-size:2.4rem}
+ .whyFinal p{font-size:.88rem}
+ .whyActions{align-items:stretch;flex-direction:column;gap:15px}
+ .whyActions .cta{justify-content:center;width:100%}
+ .whyTextLink{text-align:center;padding:10px}
+}
