@@ -20,6 +20,21 @@ export function pageMetadata(title:string,description:string,path:string):Metada
  };
 }
 export function breadcrumbSchema(name:string,path:string){return {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:site.url},{'@type':'ListItem',position:2,name,item:site.url+path}]};}
+
+export const serviceOfferCatalog={
+ '@type':'OfferCatalog',
+ name:'Bind Builds construction services',
+ itemListElement:[
+  { '@type':'Offer', itemOffered:{'@type':'Service',name:'Architect-led house construction',url:site.url+'/house-construction-chennai'}},
+  { '@type':'Offer', itemOffered:{'@type':'Service',name:'Individual house construction',url:site.url+'/individual-house-construction-chennai'}},
+  { '@type':'Offer', itemOffered:{'@type':'Service',name:'Turnkey house construction',url:site.url+'/turnkey-house-construction-chennai'}},
+  { '@type':'Offer', itemOffered:{'@type':'Service',name:'Demolition and rebuild construction',url:site.url+'/demolition-rebuild-house-chennai'}},
+  { '@type':'Offer', itemOffered:{'@type':'Service',name:'Construction planning and cost estimation',url:site.url+'/cost-calculator'}},
+  { '@type':'Offer', itemOffered:{'@type':'Service',name:'Building plan approval planning',url:site.url+'/building-plan-approval-chennai'}}
+ ]
+};
+const constructionTopics=['Architect-led construction','Residential construction','Independent house construction','Turnkey construction','Construction cost planning','Building plan approvals','Demolition and rebuild','Structural coordination','MEP coordination','Site execution','Quality control'];
+
 export const organizationSchema={
  '@context':'https://schema.org',
  '@type':'Organization',
@@ -39,7 +54,9 @@ export const organizationSchema={
  hasMap:site.maps,
  areaServed:priorityAreaServed,
  founder:{'@id':site.url+'/#founder'},
- contactPoint:{'@type':'ContactPoint',telephone:site.telephone,email:site.email,contactType:'project enquiries',areaServed:'IN',availableLanguage:['English','Tamil']}
+ contactPoint:{'@type':'ContactPoint',telephone:site.telephone,email:site.email,contactType:'project enquiries',areaServed:'IN',availableLanguage:['English','Tamil']},
+ knowsAbout:constructionTopics,
+ hasOfferCatalog:serviceOfferCatalog
 };
 export const localBusinessSchema={
  '@context':'https://schema.org',
@@ -62,7 +79,9 @@ export const localBusinessSchema={
  hasMap:site.maps,
  founder:{'@id':site.url+'/#founder'},
  parentOrganization:{'@id':site.url+'/#organization'},
- contactPoint:{'@type':'ContactPoint',telephone:site.telephone,email:site.email,contactType:'project enquiries',areaServed:'IN',availableLanguage:['English','Tamil']}
+ contactPoint:{'@type':'ContactPoint',telephone:site.telephone,email:site.email,contactType:'project enquiries',areaServed:'IN',availableLanguage:['English','Tamil']},
+ knowsAbout:constructionTopics,
+ hasOfferCatalog:serviceOfferCatalog
 };
 
 export const founderPersonSchema={'@context':'https://schema.org','@type':'Person','@id':site.url+'/#founder',name:'Parthiban Moorthy',jobTitle:'Founder & Principal Architect',url:site.url+'/about',worksFor:{'@id':site.url+'/#organization'},knowsAbout:['Architecture','Residential construction','Interior design','Project coordination','Chennai home construction']};
