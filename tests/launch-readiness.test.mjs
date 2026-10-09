@@ -62,9 +62,13 @@ test('lead conversion events remain wired to the conversion paths', () => {
   const report=read('components/CalculatorReport.tsx');
   const analytics=read('components/Analytics.tsx');
   assert.match(project,/trackEvent\('project_enquiry'/);
+  assert.match(project,/formRecoveryActions/);
+  assert.match(project,/project_enquiry_recovery_click/);
   assert.match(report,/trackEvent\('pdf_download_lead'/);
   assert.match(report,/trackEvent\('estimate_pdf_download'/);
   assert.match(analytics,/call_click/);
+  assert.match(analytics,/flushPendingEvents/);
+  assert.match(read('lib/analytics.ts'),/pendingEvents\.push/);
   assert.match(analytics,/whatsapp_click/);
   assert.match(analytics,/project_cta_click/);
   assert.match(analytics,/calculator_cta_click/);
