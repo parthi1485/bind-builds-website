@@ -29,6 +29,20 @@ export default function QualityStageTabs({ stages }: Props) {
   const holds = stage.checks.filter(([, , hold]) => hold).length;
   const routine = stage.checks.length - holds;
   const panelId = 'qc-stage-panel';
+  const selectStage = (index: number, focus = false) => {
+    setActiveIndex(index);
+    const tab = tabRefs.current[index];
+    if (focus) tab?.focus();
+    const rail = tab?.parentElement;
+    if (tab && rail && rail.scrollWidth > rail.clientWidth) {
+      const left = rail.scrollLeft + tab.getBoundingClientRect().left -
+        rail.getBoundingClientRect().left - (rail.clientWidth - tab.clientWidth) / 2;
+      rail.scrollTo({
+        left,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
+    }
+  };
 
   return <div className="qualityStageExperience">
     <div className="qualityStageRail" role="tablist" aria-label="Quality control stages">
@@ -45,17 +59,16 @@ export default function QualityStageTabs({ stages }: Props) {
           aria-selected={selected}
           aria-controls={panelId}
           tabIndex={selected ? 0 : -1}
-          onClick={() => setActiveIndex(index)}
+          onClick={() => selectStage(index)}
           onKeyDown={event => {
             let next = index;
-            if (event.key === 'ArrowRight') next = (index + 1) % stages.length;
-            else if (event.key === 'ArrowLeft') next = (index - 1 + stages.length) % stages.length;
+            if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (index + 1) % stages.length;
+            else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = (index - 1 + stages.length) % stages.length;
             else if (event.key === 'Home') next = 0;
             else if (event.key === 'End') next = stages.length - 1;
             else return;
             event.preventDefault();
-            setActiveIndex(next);
-            tabRefs.current[next]?.focus();
+            selectStage(next, true);
           }}
         >
           <span className="qualityStageTabMark" aria-hidden="true">{selected ? '✓' : item.no}</span>
