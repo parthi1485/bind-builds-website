@@ -12,6 +12,8 @@ type Attribution = {
 };
 
 const ATTRIBUTION_KEY = 'bindbuilds_first_touch_v1';
+// Early page views and clicks can happen before the GA4 script initializes.
+const pendingEvents: Array<{ name: string; params: AnalyticsParams }> = [];
 
 declare global {
   interface Window {
@@ -112,6 +114,14 @@ export function trackEvent(name: string, params: AnalyticsParams = {}) {
     window.gtag('event', name, payload);
     return;
   }
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: name, ...payload });
+  // GTM-style dataLayer objects are not guaranteed to be processed by gtag.js.
+  // Keep event order and replay using the actual gtag API after configuration.
+  pendingEvents.push({ name, params: payload });
+}
+
+export function flushPendingEvents() {
+  if (typeof window === 'undefined' || !window.gtag) return;
+  for (const { name, params } of pendingEvents.splice(0)) {
+    window.gtag('event', name, params);
+  }
 }
