@@ -93,7 +93,7 @@ export default function ConstructionCalculator() {
     {step === 4 && estimate ? <CalculatorReport input={input} estimate={estimate} packageIndex={tier} headingRef={heading} onEdit={() => setStep(0)} /> : <div className="calcLayout">
       <form className="calcForm" onSubmit={next}>
         <div className="calcStepContent" key={step}>
-          <span className="eyebrow">Step {step + 1} of 4</span>
+          <span className="eyebrow">Planning step {step + 1} of 4</span>
           <h2 tabIndex={-1} ref={heading}>{['Let’s start with your site.', 'Make room for your plans.', 'Choose your level of finish.', 'Look beyond the square foot.'][step]}</h2>
           <p className="calcIntro">{['A rough area is enough to explore. You can refine every number later.', 'Use the built-up area of each floor, including its walls and circulation.', 'The same design-led approach, with different material and finish allowances.', 'Choose additional work. Use an editable reference rate, enter your own total or request a quote.'][step]}</p>
           {step === 0 && <div className="calcFields">
