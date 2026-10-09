@@ -40,8 +40,10 @@ export default function PageScroll() {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(scrollToTop);
     };
-    const onPageShow = () => { if (!window.location.hash) reset(); };
-    const onPopState = () => { if (!window.location.hash) reset(); };
+    const onPageShow = (event: PageTransitionEvent) => {
+      // Preserve the previous position on a back/forward-cache restoration.
+      if (!event.persisted && !window.location.hash) reset();
+    };
     const onClick = (event: MouseEvent) => {
       if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const link = event.target instanceof Element ? event.target.closest('a[href]') : null;
@@ -57,12 +59,12 @@ export default function PageScroll() {
     };
     document.addEventListener('click', onClick);
     window.addEventListener('pageshow', onPageShow);
-    window.addEventListener('popstate', onPopState);
+
     return () => {
       cancelAnimationFrame(frame);
       document.removeEventListener('click', onClick);
       window.removeEventListener('pageshow', onPageShow);
-      window.removeEventListener('popstate', onPopState);
+
     };
   }, []);
 
