@@ -101,3 +101,13 @@
   .simpleCategoryToggle svg,
   .milestone summary>span{transition:none}
 }
+
+/* Keep contact alternatives immediately visible when an enquiry could not be delivered. */
+.formRecoveryActions{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:16px}
+.formRecoveryActions .cta{min-height:46px;justify-content:center;box-shadow:none}
+.formRecoveryActions .textLink{padding:12px 4px}
+@media (max-width:760px){
+ .formRecoveryActions{flex-direction:column;align-items:stretch;gap:10px}
+ .formRecoveryActions .cta{width:100%;min-height:48px}
+ .formRecoveryActions .textLink{text-align:center}
+}
