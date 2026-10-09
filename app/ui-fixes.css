@@ -206,3 +206,116 @@
   .mobileMenu:not([hidden]){animation:none!important}
   .segmentedControl button{transition:none!important}
 }
+
+/* Product-level package comparison: easy to scan, spacious but compact on mobile. */
+.packageCompareExperience{min-width:0}
+.packageJumpNav{
+  display:grid;gap:12px;max-width:1360px;margin:6px auto 30px;
+}
+.packageJumpLabel{
+  font-size:.67rem;letter-spacing:.07em;text-transform:uppercase;color:#697484;font-weight:600;
+}
+.packageJumpItems{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.packageJumpItem{
+  min-width:0;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:15px 18px;border:1px solid #e0e5eb;border-radius:15px;background:#fff;
+  color:#202c3a;text-decoration:none;transition:border-color .22s,background .22s,transform .22s;
+}
+.packageJumpItem span{font-size:.84rem;font-weight:600}
+.packageJumpItem strong{font-size:.86rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.packageJumpItem small{font-size:.63rem;font-weight:450;color:#747e8b}
+.packageJumpItem.isRecommended{background:#f4f8ff;border-color:#bdd8f6}
+.packageJumpItem:focus-visible{outline:2px solid #0071e3;outline-offset:2px}
+.simplePackageCard{scroll-margin-top:calc(100px + env(safe-area-inset-top))}
+.simplePackageHead{min-width:0}
+.simplePackageHead h2{line-height:1.08;text-wrap:balance}
+.packageCategoryToolbar{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:20px 0 4px;
+}
+.packageCategoryToolbar>span{color:#858c96;letter-spacing:.07em;text-transform:uppercase;font-size:.61rem;font-weight:600}
+.packageExpandAll{
+  min-height:40px;border:1px solid #dbe4ef;border-radius:99px;background:#fff;
+  color:#1764a6;padding:8px 13px;font-size:.72rem;font-weight:600;
+  cursor:pointer;white-space:nowrap;
+}
+.packageExpandAll[aria-expanded="true"]{background:#eaf4ff}
+.simpleCategoryPanel[hidden]{display:none!important}
+.simpleCategoryPanel:not([hidden]){animation:bbAccordionIn .24s cubic-bezier(.2,.7,.2,1) both}
+@keyframes bbAccordionIn{from{opacity:.45;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+
+/* The live estimate belongs with the sticky step CTA, not out of sight below the inputs. */
+.calcActions{display:block}
+.calcActionsControls{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0}
+.calcActionsControls>.calcHint{min-width:0}
+.calcActionsLive{display:none}
+.calcProgress button[aria-current="step"]{color:#006bd6}
+.calcForm input:focus-visible,.calcForm select:focus-visible,.calcForm textarea:focus-visible{
+  outline:2px solid #0071e3;outline-offset:2px;
+}
+.calcStepContent{animation:bbStepArrival .3s cubic-bezier(.2,.7,.2,1) both}
+@keyframes bbStepArrival{from{opacity:.72;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+
+/* Calm entry animations between route changes. No scrolling or content hidden by default. */
+.pageHero>.eyebrow{animation:bbStepArrival .36s cubic-bezier(.2,.7,.2,1) both}
+.pageHero>h1{animation:bbStepArrival .42s .05s cubic-bezier(.2,.7,.2,1) both}
+.calcPageHeader>div>h1{animation:bbStepArrival .42s cubic-bezier(.2,.7,.2,1) both}
+
+@media(hover:hover) and (pointer:fine){
+ .packageJumpItem:hover{border-color:#96bde9;background:#f8fbff;transform:translateY(-2px)}
+ .packageExpandAll:hover{background:#f0f7ff;border-color:#9ec7f3}
+}
+@media(min-width:761px) and (max-width:1023px){
+ /* The four-column tablet footer was 7px wider than its container. */
+ .footerContact{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 24px}
+ .footerContact .footerLabel{grid-column:1/-1}
+ .footerContact address,.footerContact a{min-width:0;overflow-wrap:anywhere}
+ .footerSitemap,.footerSitemap>div{min-width:0}
+}
+@media(max-width:760px){
+ .packageJumpNav{margin:0 -1px 24px;gap:10px}
+ .packageJumpItems{
+  display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+  overscroll-behavior-x:contain;gap:9px;padding:2px 1px 11px;
+  scrollbar-width:none;
+ }
+ .packageJumpItems::-webkit-scrollbar{display:none}
+ .packageJumpItem{flex:0 0 160px;min-width:160px;min-height:70px;padding:11px 13px;flex-direction:column;align-items:flex-start;gap:5px;scroll-snap-align:start}
+ .packageJumpItem span{font-size:.8rem}
+ .packageJumpItem strong{font-size:.91rem}
+ .simplePackageGrid{gap:20px}
+ .simplePackageCard{scroll-margin-top:calc(80px + env(safe-area-inset-top))}
+ .simplePackageHead>.eyebrow{font-size:.58rem;letter-spacing:.04em}
+ .simplePackageHead h2{font-size:clamp(1.85rem,8.2vw,2.35rem)}
+ .simplePrice strong{font-size:clamp(2rem,9.4vw,2.7rem)}
+ .packageCategoryToolbar{padding:17px 0 5px}
+ .packageCategoryToolbar>span{font-size:.59rem}
+ .packageExpandAll{min-height:44px;padding:9px 13px}
+ .simpleCategory button{min-height:58px}
+ .simpleCategoryTitle{line-height:1.32}
+ .calcActionsLive{
+  display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+  padding-bottom:11px;margin-bottom:9px;border-bottom:1px solid #e5e8ed;
+ }
+ .calcActionsLive>span{color:#636c77;font-size:.68rem;line-height:1.25}
+ .calcActionsLive>span small{display:block;color:#8b94a0;font-size:.59rem;margin-top:3px}
+ .calcActionsLive>output{font-size:1.12rem;letter-spacing:-.045em;font-weight:650;color:#153e68;white-space:nowrap;font-variant-numeric:tabular-nums}
+ .calcActionsControls{gap:8px}
+ .calcActionsControls>.calcHint{font-size:.68rem;line-height:1.3}
+ .calcActionsControls>.cta{min-height:49px;padding:12px 13px;justify-content:center}
+ .calcActionsControls>.textButton{padding-inline:10px;white-space:nowrap}
+ .calcProgress{scrollbar-gutter:stable both-edges}
+ body:has(.calculatorPage) .motionToggle{bottom:calc(137px + env(safe-area-inset-bottom))}
+}
+@media(max-width:359px){
+ .packageJumpItem{flex-basis:148px;min-width:148px}
+ .simplePackageHead>.eyebrow{padding-right:0}
+ .packageCategoryToolbar{align-items:flex-start}
+ .packageCategoryToolbar>span{max-width:125px;line-height:1.45}
+ .calcActionsLive>output{font-size:1rem}
+ .calcActionsControls>.textButton{font-size:.76rem}
+}
+@media(prefers-reduced-motion:reduce){
+ .pageHero>.eyebrow,.pageHero>h1,.calcPageHeader>div>h1,.calcStepContent,.simpleCategoryPanel:not([hidden]){animation:none!important}
+ .packageJumpItem,.packageExpandAll{transition:none!important}
+}
