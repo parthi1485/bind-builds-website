@@ -208,6 +208,24 @@ test('ongoing project evidence includes verified documentation without exposing 
 });
 
 
+test('mobile navigation, motion controls and QC stages remain keyboard and touch accessible', () => {
+  const site=read('components/Site.tsx');
+  const motion=read('components/Motion.tsx');
+  const quality=read('components/QualityStageTabs.tsx');
+  const css=read('app/ui-fixes.css');
+  assert.match(site,/role="dialog" aria-modal=\{open \? true : undefined\}/);
+  assert.match(site,/aria-labelledby="mobile-menu-title"/);
+  assert.match(site,/inert=\{open\}/);
+  assert.match(motion,/elements\.forEach\(element => element\.classList\.add\('inView'\)\)/);
+  assert.match(motion,/window\.addEventListener\('resize', onScroll/);
+  assert.match(motion,/progress\.style\.transform/);
+  assert.match(quality,/ArrowDown/);
+  assert.match(quality,/ArrowUp/);
+  assert.match(quality,/rail\.scrollTo/);
+  assert.match(css,/mobileMenu:not\(\[hidden\]\)/);
+  assert.match(css,/\.motionToggle\{display:flex!important/);
+});
+
 test('desktop and mobile navigation keep Projects directly below Approvals', () => {
   const site=read('components/Site.tsx');
   const navigationLine=site.split('\n').find(line=>line.startsWith('const navigation = ')) || '';
