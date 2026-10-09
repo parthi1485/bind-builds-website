@@ -1,6 +1,6 @@
 # Bind Builds — External Citation & Authority Tracker
 
-Updated: 22 September 2026
+Updated: 9 October 2026
 
 ## Canonical business identity
 
@@ -23,9 +23,9 @@ Use this NAP exactly on every external profile. Do not keyword-stuff the busines
 |---|---|---|---|---|
 | P0 | Google Business Profile | Live | Keep NAP, website, hours, services and real photos consistent; collect honest reviews | Direct review: https://www.bindbuilds.com/review |
 | P0 | Studio Bind Architects website | Partial | Add a visible contextual backlink from Studio Bind to Bind Builds | Anchor: Architect-Led Construction by Bind Builds |
-| P1 | Apple Business / Apple Maps | Ready — owner verification required | Sign in at Apple Business, create/claim organisation + location, then verify using Apple-supported methods | https://business.apple.com/ |
-| P1 | Bing Places / Microsoft local listing | Ready — owner verification required | Sign in to Bing Places, search existing listing first, then claim/update or create if absent | https://www.bingplaces.com/ |
-| P1 | Justdial | Registered — profile completion pending | Free listing created for Bind Builds; complete profile to 90%+ before considering any paid lead/ranking package | https://www.justdial.com/Free-Listing |
+| P1 | Apple Business / Apple Maps | Verification pending | Business setup started; phone verification could not send an OTP. Leave pending and retry later rather than creating duplicates | https://business.apple.com/ |
+| P1 | Bing Places / Microsoft local listing | Postal PIN pending | Listing created/claimed and Bing mailed a verification PIN to the canonical Ramapuram address; verify when the letter arrives | https://www.bingplaces.com/ |
+| P1 | Justdial | Submitted — moderation / duplicate reconciliation pending | Bind Builds was submitted twice after success confirmations but is not yet attached to the dashboard. Do not submit again; wait for moderation, then merge/remove any duplicate | https://www.justdial.com/Free-Listing |
 | P1 | Houzz India | Ready — account creation required | Create free professional profile, use Construction / Design-Build category closest to actual service, add real project evidence | https://www.houzz.in/ |
 | P1 | Sulekha | Ready — mobile OTP required | List/claim business under Building Consultants & Contractors / relevant category, then complete profile | https://www.sulekha.com/list-your-business |
 | P2 | LinkedIn | To create / strengthen | Create Bind Builds company presence; connect founder profile to company | Use bindbuilds.com |
@@ -98,3 +98,11 @@ For each platform:
 - Current profile score shown by Justdial: 36%.
 - Paid Premium / ranking offer intentionally not required for citation authority.
 - Next task: complete free profile fields, categories, hours, website, email, description, services, social links and real business/project images.
+
+
+## Search visibility snapshot — 9 October 2026
+
+- Bind Builds locality pages are now being crawled/indexed for Ramapuram, Porur, Valasaravakkam, West Chennai, OMR/ECR, Mangadu/Kundrathur, Gerugambakkam/Kolapakkam and Coimbatore.
+- The current location strategy deliberately groups nearby localities where useful instead of publishing one near-identical page per pin code.
+- Priority on-page coverage now includes Valasaravakkam, Ramapuram, Virugambakkam, Porur, Vadapalani, Saligramam, Gerugambakkam, Mangadu, Kundrathur, Kolapakkam, OMR, ECR, Anna Nagar, Padi, Koyambedu, Maduravoyal, Vanagaram, Kattupakkam, Poonamallee and selected Coimbatore projects.
+- Next authority gains should come from verified external profiles, genuine reviews, project evidence, Studio Bind contextual backlinks and editorial / supplier / consultant mentions — not from creating thin locality pages.
