@@ -3,7 +3,7 @@
 import Script from 'next/script';
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { captureAttribution, trackEvent } from '@/lib/analytics';
+import { captureAttribution, flushPendingEvents, trackEvent } from '@/lib/analytics';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-3JP7ZM2MXT';
 
@@ -75,7 +75,7 @@ export default function Analytics() {
 
   return <>
     <Script src={'https://www.googletagmanager.com/gtag/js?id=' + GA_ID} strategy="afterInteractive" />
-    <Script id="bind-builds-ga4" strategy="afterInteractive">{
+    <Script id="bind-builds-ga4" strategy="afterInteractive" onReady={flushPendingEvents}>{
       "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','" + GA_ID + "',{send_page_view:false});"
     }</Script>
   </>;
