@@ -226,6 +226,24 @@ test('mobile navigation, motion controls and QC stages remain keyboard and touch
   assert.match(css,/\.motionToggle\{display:flex!important/);
 });
 
+test('packages, calculator and responsive polish remain present in production sources', () => {
+  const comparison=read('components/PackageComparison.tsx');
+  const calculator=read('components/ConstructionCalculator.tsx');
+  const css=read('app/ui-fixes.css');
+  assert.match(comparison,/packageJumpNav/);
+  assert.match(comparison,/packageExpandAll/);
+  assert.match(comparison,/aria-expanded=/);
+  assert.match(comparison,/categories\.map\(\(_,i\)=>i\)/);
+  assert.match(calculator,/calcActionsLive/);
+  assert.match(calculator,/calcActionsControls/);
+  assert.match(calculator,/Current planning subtotal/);
+  assert.match(calculator,/step \$\{index \+ 1\} of 5/);
+  assert.match(css,/\.footerContact\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
+  assert.match(css,/\.packageJumpItems\{/);
+  assert.match(css,/\.pageHero>h1\{animation:/);
+  assert.match(css,/prefers-reduced-motion:reduce/);
+});
+
 test('desktop and mobile navigation keep Projects directly below Approvals', () => {
   const site=read('components/Site.tsx');
   const navigationLine=site.split('\n').find(line=>line.startsWith('const navigation = ')) || '';
