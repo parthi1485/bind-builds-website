@@ -74,8 +74,8 @@ export default function Analytics() {
   if (!GA_ID) return null;
 
   return <>
-    <Script src={'https://www.googletagmanager.com/gtag/js?id=' + GA_ID} strategy="afterInteractive" />
-    <Script id="bind-builds-ga4" strategy="afterInteractive" onReady={flushPendingEvents}>{
+    <Script src={'https://www.googletagmanager.com/gtag/js?id=' + GA_ID} strategy="lazyOnload" />
+    <Script id="bind-builds-ga4" strategy="lazyOnload" onReady={flushPendingEvents}>{
       "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','" + GA_ID + "',{send_page_view:false});"
     }</Script>
   </>;
