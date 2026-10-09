@@ -89,7 +89,7 @@ export default function ConstructionCalculator() {
   const next = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); if (step === 3 && !estimate) return; if(step===0&&!analyticsStarted.current){analyticsStarted.current=true;trackEvent('calculator_started',{plot_area:Number(plot)||0});} trackEvent('calculator_step_complete',{step_number:step+1,step_name:stepNames[step],package_name:selected.name}); if(step===3&&estimate){trackEvent('estimate_generated',{package_name:selected.name,floors:floorCount,calculated_area:estimate.area,value:estimate.total,currency:'INR'});} setFurthest(Math.max(furthest, step + 1)); setStep(step + 1); };
 
   return <div className="calculator" id="calculator" ref={root}>
-    <ol className="calcProgress" aria-label="Estimate progress">{[...stepNames, 'Your estimate'].map((label, index) => <li key={label} aria-current={step === index ? 'step' : undefined} className={index < step ? 'complete' : ''}><button type="button" disabled={index > furthest || index === 4 && !estimate} onClick={() => setStep(index)}><span>{index < step ? '✓' : String(index + 1).padStart(2, '0')}</span><b><span className="progressLong">{label}</span><span className="progressShort">{progressShortNames[index]}</span></b></button></li>)}</ol>
+    <ol className="calcProgress" aria-label="Estimate progress">{[...stepNames, 'Your estimate'].map((label, index) => <li key={label} aria-current={step === index ? 'step' : undefined} className={index < step ? 'complete' : ''}><button type="button" aria-label={`${label}, step ${index + 1} of 5${step === index ? ", current" : index < step ? ", completed" : ""}`} disabled={index > furthest || index === 4 && !estimate} onClick={() => setStep(index)}><span>{index < step ? '✓' : String(index + 1).padStart(2, '0')}</span><b><span className="progressLong">{label}</span><span className="progressShort">{progressShortNames[index]}</span></b></button></li>)}</ol>
     {step === 4 && estimate ? <CalculatorReport input={input} estimate={estimate} packageIndex={tier} headingRef={heading} onEdit={() => setStep(0)} /> : <div className="calcLayout">
       <form className="calcForm" onSubmit={next}>
         <div className="calcStepContent" key={step}>
@@ -132,7 +132,10 @@ export default function ConstructionCalculator() {
             <div className="calcExtras">{extraOptions.filter(item=>item.key!=='parking').map(item=><CalculatorExtra key={item.key} item={item} value={allowances[item.key]} onChange={change=>updateExtra(item.key,change)}/>)}</div>
           </div>}
         </div>
-        <div className="calcActions">{step > 0 ? <button type="button" className="textButton" onClick={() => setStep(step - 1)}>← Back</button> : <span className="calcHint">No sign-up required</span>}<button type="submit" className="cta primary">{step === 3 ? 'See my estimate' : ['Choose floors', 'Compare packages', 'Add extras'][step]} <span aria-hidden="true">→</span></button></div>
+        <div className="calcActions">
+          <div className="calcActionsLive"><span>Planning subtotal <small>· {selected.name}</small></span><output aria-label="Current planning subtotal">{estimate ? compactMoney(estimate.total) : 'Check inputs'}</output></div>
+          <div className="calcActionsControls">{step > 0 ? <button type="button" className="textButton" onClick={() => setStep(step - 1)}>← Back</button> : <span className="calcHint">No sign-up required</span>}<button type="submit" className="cta primary">{step === 3 ? 'See my estimate' : ['Choose floors', 'Compare packages', 'Add extras'][step]} <span aria-hidden="true">→</span></button></div>
+        </div>
         {step === 3 && !estimate && <p role="alert" className="fieldError">Please check the area and additional item values before creating your estimate.</p>}
       </form>
       <aside className="calcPreview" aria-label="Live estimate preview">
