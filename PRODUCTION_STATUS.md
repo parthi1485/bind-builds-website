@@ -6,9 +6,9 @@
 
 ## Current production gates
 
-- 33 public routes return expected content.
+- 35 public routes return expected content.
 - `robots.txt` and `sitemap.xml` are available.
-- Sitemap contains all 33 public routes.
+- Sitemap contains all 35 public routes.
 - Open Graph preview image is available.
 - Unknown routes return HTTP 404.
 - Lead API rejects unsupported GET requests.
@@ -16,6 +16,8 @@
 - Calculator and approval-fee regression tests run before production smoke checks.
 - Next.js production build is checked on each push to `main`.
 - Google Analytics conversion events and Search Console were manually verified during launch QA.
+- Enquiry submission failures now offer direct WhatsApp, email and phone recovery, without claiming that an unsuccessful handoff was recorded.
+- GA4 events occurring before tag initialization are queued for replay after configuration.
 
 ## Automated monitoring
 
