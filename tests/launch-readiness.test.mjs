@@ -244,6 +244,19 @@ test('packages, calculator and responsive polish remain present in production so
   assert.match(css,/prefers-reduced-motion:reduce/);
 });
 
+test('performance improvements preserve analytics and calculator report paths', () => {
+  const analytics=read('components/Analytics.tsx');
+  const calculator=read('components/ConstructionCalculator.tsx');
+  const home=read('app/page.tsx');
+  const layout=read('app/layout.tsx');
+  assert.match(analytics,/strategy="lazyOnload"/);
+  assert.match(analytics,/onReady=\{flushPendingEvents\}/);
+  assert.match(calculator,/dynamic\(\(\) => import\('\.\/CalculatorReport'\)/);
+  assert.match(calculator,/calcReportLoading/);
+  assert.match(home,/import '\.\/assurance\.css'/);
+  assert.doesNotMatch(layout,/import '\.\/assurance\.css'/);
+});
+
 test('desktop and mobile navigation keep Projects directly below Approvals', () => {
   const site=read('components/Site.tsx');
   const navigationLine=site.split('\n').find(line=>line.startsWith('const navigation = ')) || '';
