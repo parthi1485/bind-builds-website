@@ -319,3 +319,7 @@
  .pageHero>.eyebrow,.pageHero>h1,.calcPageHeader>div>h1,.calcStepContent,.simpleCategoryPanel:not([hidden]){animation:none!important}
  .packageJumpItem,.packageExpandAll{transition:none!important}
 }
+
+/* Lightweight, accessible skeleton while the on-demand estimate report loads. */
+.calcReportLoading{display:grid;place-items:center;min-height:240px;padding:38px 24px;border:1px solid #e1e7ee;border-radius:20px;background:linear-gradient(135deg,#f4f8ff,#fff);color:#395a7e;font-size:.93rem;text-align:center}
+@media(max-width:760px){.calcReportLoading{min-height:190px;border-radius:16px}}
