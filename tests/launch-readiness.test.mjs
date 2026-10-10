@@ -68,6 +68,8 @@ test('lead conversion events remain wired to the conversion paths', () => {
   assert.match(report,/trackEvent\('estimate_pdf_download'/);
   assert.match(analytics,/call_click/);
   assert.match(analytics,/flushPendingEvents/);
+  assert.match(analytics,/bindbuilds:analytics-ready/);
+  assert.match(read('lib/analytics.ts'),/if \(pendingEvents\.length\) flushPendingEvents\(\)/);
   assert.match(read('lib/analytics.ts'),/pendingEvents\.push/);
   assert.match(analytics,/whatsapp_click/);
   assert.match(analytics,/project_cta_click/);

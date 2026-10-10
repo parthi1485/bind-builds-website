@@ -11,6 +11,13 @@ export default function Analytics() {
   const pathname = usePathname();
 
   useEffect(() => {
+    const flush = () => flushPendingEvents();
+    window.addEventListener('bindbuilds:analytics-ready', flush);
+    flush();
+    return () => window.removeEventListener('bindbuilds:analytics-ready', flush);
+  }, []);
+
+  useEffect(() => {
     if (!GA_ID) return;
     captureAttribution();
     trackEvent('page_view', {
@@ -76,7 +83,7 @@ export default function Analytics() {
   return <>
     <Script src={'https://www.googletagmanager.com/gtag/js?id=' + GA_ID} strategy="lazyOnload" />
     <Script id="bind-builds-ga4" strategy="lazyOnload" onReady={flushPendingEvents}>{
-      "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','" + GA_ID + "',{send_page_view:false});"
+      "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','" + GA_ID + "',{send_page_view:false});window.dispatchEvent(new Event('bindbuilds:analytics-ready'));"
     }</Script>
   </>;
 }

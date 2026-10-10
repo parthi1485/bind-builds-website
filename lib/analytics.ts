@@ -111,6 +111,7 @@ export function trackEvent(name: string, params: AnalyticsParams = {}) {
   if (typeof window === 'undefined') return;
   const payload = { ...analyticsContext(), ...params };
   if (window.gtag) {
+    if (pendingEvents.length) flushPendingEvents();
     window.gtag('event', name, payload);
     return;
   }
