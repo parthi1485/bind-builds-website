@@ -84,3 +84,41 @@
 @media(max-width:960px){.plotWorksheetIntro{grid-template-columns:1fr;gap:8px}.plotWorksheetBody{grid-template-columns:1fr}.plotWorksheetResults{border-left:0;border-top:1px solid #dde4ee}.plotWorksheetActions{flex-direction:column;align-items:flex-start}.plotWorksheetButtons{justify-content:flex-start}}
 @media(max-width:760px){.plotWorksheet{padding-top:22px}.plotWorksheetIntro h2{font-size:clamp(29px,8vw,38px)}.plotWorksheetIntro p{font-size:14px}.plotWorksheetInputs,.plotWorksheetResults{padding:20px 18px}.plotWorksheetInputs{gap:14px}.plotWorksheetBody{border-radius:15px}.plotWorksheetFloors>div{grid-template-columns:repeat(2,minmax(0,1fr))}.plotWorksheetStats{gap:9px}.plotWorksheetStats>div{padding:12px}.plotWorksheetStats strong{font-size:22px}.plotWorksheetActions{padding:22px 0}.plotWorksheetButtons{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.plotWorksheetButtons>.cta{font-size:12px;padding:10px 9px}.plotWorksheetCopy{grid-column:1/-1;justify-self:start}}
 @media(max-width:359px){.plotWorksheetStats{grid-template-columns:1fr}.plotWorksheetButtons{grid-template-columns:1fr}.plotWorksheetCopy{grid-column:auto}}
+
+/* Document preparation assistant: one status per record group, no document uploads. */
+.documentAssistant{scroll-margin-top:calc(100px + env(safe-area-inset-top));background:#fff;border:1px solid #dee5ed;border-radius:16px;padding:24px;margin:26px 0;min-width:0}
+.documentAssistantHeader>h3{font-size:clamp(25px,3vw,36px);line-height:1.12;letter-spacing:-.04em;font-weight:550;margin:12px 0 14px}
+.documentAssistantHeader>h3 span{color:#78838f}
+.documentAssistantHeader>p,.documentAssistant>.guideSmall{font-size:12px;line-height:1.75;color:#67717d;margin:0}
+.documentAssistantProgress{display:flex;align-items:baseline;gap:11px;margin:20px 0 10px}
+.documentAssistantProgress strong{font-size:30px;font-weight:600;letter-spacing:-.045em;color:#1e568b}
+.documentAssistantProgress strong small{font-size:15px;font-weight:400;color:#64717c}
+.documentAssistantProgress span{font-size:11px;color:#60717e}
+.documentAssistant progress{width:100%;height:7px;border:0;border-radius:10px;background:#e1e8f2;accent-color:#2378ca;display:block;overflow:hidden}
+.documentAssistantRows{margin-top:25px;border-top:1px solid #e5eaf1}
+.documentAssistantRow{display:grid;grid-template-columns:minmax(0,1fr) minmax(134px,.44fr);align-items:center;gap:20px;border-bottom:1px solid #e5eaf1;padding:15px 0}
+.documentAssistantRow>div{min-width:0}
+.documentAssistantNumber{font-size:10px;color:#1c74c5;display:inline-block;margin-right:10px}
+.documentAssistantRow strong{font-size:13px;font-weight:600;color:#27384a}
+.documentAssistantRow p{font-size:11px;line-height:1.65;color:#66717e;margin:6px 0 0}
+.documentAssistantRow label{font-size:11px;display:flex;flex-direction:column;gap:7px;color:#60707e;font-weight:500}
+.documentAssistantRow select{min-width:0;max-width:100%;background:#f8fafc;border:1px solid #d9e3ed;border-radius:9px;padding:9px 10px;min-height:44px;font:inherit;font-size:12px;color:#223449;cursor:pointer}
+.documentAssistantRow select:focus-visible,.documentAssistant button:focus-visible{outline:2px solid #0071e3;outline-offset:3px}
+.documentAssistantNext{margin-top:23px;padding:18px 19px;border-radius:13px;background:#f3f7fb}
+.documentAssistantNext>h4{font-size:16px;letter-spacing:-.015em;font-weight:600;color:#253c50;margin:9px 0 14px}
+.documentAssistantNext>ol{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.documentAssistantNext li{padding-top:12px;border-top:1px solid #dbe5ef}
+.documentAssistantNext li span{display:inline-block;font-size:10px;letter-spacing:.015em;color:#416c92;margin-right:9px}
+.documentAssistantNext li strong{font-size:12px;color:#243a50}
+.documentAssistantNext li p,.documentAssistantNext>p{margin:5px 0 0;font-size:12px;line-height:1.6;color:#596c7c}
+.documentAssistantMore,.documentAssistantCopy button{border:0;background:transparent;color:#0069bf;font-size:12px;font-weight:600;padding:10px 2px;min-height:44px;cursor:pointer;text-align:left}
+.documentAssistantMore{margin-top:10px}
+.documentAssistantCopy{display:flex;align-items:center;flex-wrap:wrap;gap:8px 15px;margin:12px 0 6px}
+.documentAssistantCopy p{font-size:11px;color:#2b6950;margin:0}
+.documentAssistant>.guideSmall{margin-top:9px}
+@media(max-width:900px){.documentAssistant{padding:21px}.documentAssistantRow{grid-template-columns:minmax(0,1fr)}.documentAssistantRow label{max-width:100%}}
+@media(max-width:760px){.documentAssistant{padding:18px 16px;margin:22px 0;border-radius:13px}.documentAssistantHeader>h3{font-size:27px}.documentAssistantNext{padding:16px 14px}.documentAssistantRow select{font-size:14px}}
+.documentAssistantProjectNote{border-left:2px solid #b2cce7;padding-left:13px;color:#566c80;line-height:1.65;font-size:12px;margin:17px 0 8px}
+.documentAssistant progress::-webkit-progress-bar{background:#e1e8f2;border-radius:10px}
+.documentAssistant progress::-webkit-progress-value{background:#2378ca;border-radius:10px}
+.documentAssistant progress::-moz-progress-bar{background:#2378ca;border-radius:10px}

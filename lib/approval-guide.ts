@@ -21,3 +21,38 @@ export const approvalQuestions=[
  ['How long will approval take?','Request a programme that separates document collection, drawing preparation, authority review, responses and payment. Missing information or additional clearances can affect the sequence. A target review period is not a guaranteed approval date.'],
  ['Does approval guarantee ownership or a housing loan?','Do not treat a building permission as a substitute for legal title due diligence or a lender’s assessment. Ask your legal adviser and lender which checks and documents they require for your case.'],
 ];
+
+/** Preparation prompts only; site-specific document requirements need professional review. */
+export const approvalDocumentGroups = [
+ {id:'ownership',label:'Ownership records',example:'Sale deed, parent deeds or relevant authorisation.',next:'Gather available title records and ask your professional which documents require verification.'},
+ {id:'revenue',label:'Land and revenue records',example:'Patta, Chitta, TSLR or corresponding extracts.',next:'Use the appropriate land-record service and check which extract applies to the site.'},
+ {id:'survey',label:'Survey and site measurements',example:'FMB or town survey sketch, plot dimensions and road access.',next:'Verify survey sketches, boundaries and site access before planning drawings.'},
+ {id:'encumbrance',label:'Encumbrance records',example:'Encumbrance certificate for the applicable period.',next:'Ask your adviser about the required search period and certificate recency.'},
+ {id:'permissions',label:'Existing permissions',example:'Layout references and any existing building permissions.',next:'Locate available references; confirm their relevance and any further approvals needed.'},
+ {id:'drawings',label:'Professional drawings',example:'Site plan, floor plans, elevations and applicable declarations.',next:'Ask the registered professional which drawings and clearances are required.'},
+] as const;
+export type ApprovalDocumentId=(typeof approvalDocumentGroups)[number]['id'];
+export type ApprovalDocumentStatus='available'|'missing'|'unsure';
+export type ApprovalDocumentAnswers=Partial<Record<ApprovalDocumentId,ApprovalDocumentStatus>>;
+
+export function approvalDocumentSummary(answers:ApprovalDocumentAnswers){
+ const groups=approvalDocumentGroups.map(g=>({...g,status:answers[g.id]||'unreviewed'}));
+ const available=groups.filter(g=>g.status==='available');
+ const missing=groups.filter(g=>g.status==='missing');
+ const unsure=groups.filter(g=>g.status==='unsure');
+ const unreviewed=groups.filter(g=>g.status==='unreviewed');
+ return {reviewed:6-unreviewed.length,available,missing,unsure,unreviewed,next:[...missing,...unsure,...unreviewed]};
+}
+
+export function approvalDocumentBrief(answers:ApprovalDocumentAnswers){
+ const summary=approvalDocumentSummary(answers);
+ const names=(groups:typeof summary.available)=>groups.map(g=>g.label).join('; ')||'None specified';
+ return [
+  `Document preparation: ${summary.reviewed} of 6 groups reviewed (client-reported, not verified)`,
+  'Available, unverified: '+names(summary.available),
+  'Need to obtain: '+names(summary.missing),
+  'Need clarification: '+names(summary.unsure),
+  'Not yet reviewed: '+names(summary.unreviewed),
+  'A registered professional must confirm the current checklist, document validity and applicability.'
+ ].join('\n');
+}
