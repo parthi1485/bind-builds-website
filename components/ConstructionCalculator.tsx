@@ -108,7 +108,14 @@ export default function ConstructionCalculator() {
           </div>}
           {step === 1 && <div className="calcFields">
             <fieldset className="calcChoices"><legend>Number of floors</legend><div className="floorChoices">{[1, 2, 3, 4].map(count => <label key={count}><input type="radio" name="floors" checked={floorCount === count} onChange={() => setFloorCount(count)} /><span><strong>{count === 1 ? 'Ground' : `G + ${count - 1}`}</strong><small>{count} {count === 1 ? 'floor' : 'floors'}</small></span></label>)}</div></fieldset>
-            <div className="calcDuration" aria-live="polite"><span className="eyebrow">Construction planning scenario</span><strong>{duration}<small> months</small></strong><div className="durationTrack"><span style={{width:`${duration/18*100}%`}}/></div><p>6 months for ground only + 4 months per additional floor. Indicative only; area, soil, design, access and weather can change the programme. Design and approvals are separate.</p></div><div className="calcFloorFields">{areas.slice(0, floorCount).map((area, index) => <label key={index}>{floorName(index)} <span>sq.ft</span><input required type="number" inputMode="numeric" min="1" max="100000" step="1" value={area} onChange={e => setArea(index, e.target.value)} /></label>)}</div>
+            <div className="calcDuration">
+              <div className="calcDurationTop" aria-live="polite" aria-atomic="true">
+                <div className="calcDurationSchedule"><span className="eyebrow">Construction planning scenario</span><strong>{duration}<small> months</small></strong></div>
+                <div className="calcDurationBudget"><span className="eyebrow">Live planning subtotal</span><output aria-label="Planning subtotal for selected floors" key={`${floorCount}-${estimate?.total ?? 'invalid'}`}>{estimate ? compactMoney(estimate.total) : 'Check inputs'}</output><small>{estimate ? `${estimate.floorArea.toLocaleString('en-IN')} sq.ft · ${configuration(floorCount)}` : 'Enter valid floor areas'}</small></div>
+              </div>
+              <div className="durationTrack"><span style={{width:`${duration/18*100}%`}}/></div>
+              <p>6 months for ground only + 4 months per additional floor. Indicative only; area, soil, design, access and weather can change the programme. Design and approvals are separate.</p>
+            </div><div className="calcFloorFields">{areas.slice(0, floorCount).map((area, index) => <label key={index}>{floorName(index)} <span>sq.ft</span><input required type="number" inputMode="numeric" min="1" max="100000" step="1" value={area} onChange={e => setArea(index, e.target.value)} /></label>)}</div>
             {floorCount > 1 && <button className="textButton calcCopyArea" type="button" onClick={() => setAreas(areas.map(() => areas[0]))}>Use the ground-floor area for every floor</button>}
             <div className={`calcExtra ${hasHeadroom?'selected':''}`}>
               <label className="calcCheck"><input type="checkbox" checked={hasHeadroom} onChange={e => setHasHeadroom(e.target.checked)} /><span>Add staircase headroom separately<small>Only when it is not already counted in a floor area.</small></span></label>
@@ -134,7 +141,7 @@ export default function ConstructionCalculator() {
           </div>}
         </div>
         <div className="calcActions">
-          <div className="calcActionsLive"><span>Planning subtotal <small>· {selected.name}</small></span><output aria-label="Current planning subtotal">{estimate ? compactMoney(estimate.total) : 'Check inputs'}</output></div>
+          <div className="calcActionsLive"><span>Planning subtotal <small>· {selected.name}</small></span><output key={`${floorCount}-${estimate?.total ?? 'invalid'}`} aria-label="Current planning subtotal">{estimate ? compactMoney(estimate.total) : 'Check inputs'}</output></div>
           <div className="calcActionsControls">{step > 0 ? <button type="button" className="textButton" onClick={() => setStep(step - 1)}>← Back</button> : <span className="calcHint">No sign-up required</span>}<button type="submit" className="cta primary">{step === 3 ? 'See my estimate' : ['Choose floors', 'Compare packages', 'Add extras'][step]} <span aria-hidden="true">→</span></button></div>
         </div>
         {step === 3 && !estimate && <p role="alert" className="fieldError">Please check the area and additional item values before creating your estimate.</p>}
@@ -143,7 +150,7 @@ export default function ConstructionCalculator() {
         <div className="calcPreviewTop"><span className="eyebrow">Your home, taking shape</span><span className="calcLive"><i /> Live estimate</span></div>
         <Building floors={floorCount} />
         <div className="calcPreviewMeta"><span>{configuration(floorCount)}</span><span>{selected.name}</span></div>
-        <p className="calcPreviewTime">~{duration} months <span>construction scenario · excludes design & approvals</span></p><span className="calcPreviewLabel">Planning subtotal</span><output className="calcPreviewAmount" aria-live="polite" aria-atomic="true">{estimate ? compactMoney(estimate.total) : 'Check your inputs'}</output>
+        <p className="calcPreviewTime">~{duration} months <span>construction scenario · excludes design & approvals</span></p><span className="calcPreviewLabel">Planning subtotal</span><output key={`${floorCount}-${estimate?.total ?? 'invalid'}`} className="calcPreviewAmount" aria-live="polite" aria-atomic="true">{estimate ? compactMoney(estimate.total) : 'Check your inputs'}</output>
         <p className="calcPreviewEquation">{estimate ? `${estimate.floorArea.toLocaleString('en-IN')} sq.ft × ${money(selected.rate)}${input.headroom ? estimate.headroomUnpriced ? ` + ${input.headroom.toLocaleString('en-IN')} sq.ft headroom · quote` : estimate.headroomMode==='lump' ? ` + headroom allowance ${money(estimate.headroomCost)}` : ` + ${input.headroom.toLocaleString('en-IN')} sq.ft headroom × ${money(estimate.headroomRate)}` : ''}` : 'Enter valid areas to see your estimate.'}{estimate && estimate.allowanceTotal > 0 ? ' + additional items' : ''}</p>
         {estimate && <dl className="calcMiniBreakdown"><div><dt>Base construction</dt><dd>{money(estimate.base)}</dd></div><div><dt>Additional items</dt><dd>{money(estimate.allowanceTotal)}</dd></div></dl>}
         {estimate && estimate.unpriced.length > 0 && <p className="calcUnpriced">+ {estimate.unpriced.length} {estimate.unpriced.length === 1 ? 'selected extra needs' : 'selected extras need'} a quote</p>}

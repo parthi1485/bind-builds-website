@@ -323,3 +323,32 @@
 /* Lightweight, accessible skeleton while the on-demand estimate report loads. */
 .calcReportLoading{display:grid;place-items:center;min-height:240px;padding:38px 24px;border:1px solid #e1e7ee;border-radius:20px;background:linear-gradient(135deg,#f4f8ff,#fff);color:#395a7e;font-size:.93rem;text-align:center}
 @media(max-width:760px){.calcReportLoading{min-height:190px;border-radius:16px}}
+
+/* Floor selection: planning timeline and total are one immediate, visible state update. */
+.calcDurationTop{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);align-items:start;gap:16px}
+.calcDurationSchedule,.calcDurationBudget{min-width:0}
+.calcDurationSchedule>strong{display:block}
+.calcDurationBudget{border-left:1px solid #dbe3ee;padding-left:19px;display:flex;flex-direction:column;gap:5px}
+.calcDurationBudget>output{display:block;color:#175b9d;font-size:clamp(1.3rem,2.3vw,1.95rem);font-weight:650;letter-spacing:-.045em;line-height:1.24;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.calcDurationBudget>small{font-size:.7rem;color:#656d79;line-height:1.45}
+.calcDurationTop + .durationTrack{margin-top:18px}
+@media(max-width:900px){
+ .calcDurationTop{grid-template-columns:1fr;gap:10px}
+ .calcDurationBudget{padding:13px 0 0;border-left:0;border-top:1px solid #dbe3ee;gap:3px}
+ .calcDurationBudget>output{font-size:clamp(1.4rem,5vw,1.75rem)}
+}
+@media(max-width:760px){
+ .calcDuration{padding:18px}
+ .calcDurationTop{gap:9px}
+ .calcDurationBudget>small{font-size:.67rem}
+}
+@media(prefers-reduced-motion:no-preference){
+ .calcDurationBudget>output{animation:bbSubtotalRefresh .2s ease-out both}
+ @keyframes bbSubtotalRefresh{from{opacity:.7;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+}
+
+/* Safari sticky-bar repaint guard: do not composite live budget values under a blur layer. */
+@media(max-width:760px){
+ .calcActions{background:#fff;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;isolation:isolate}
+ .calcActionsLive>output{position:relative}
+}
