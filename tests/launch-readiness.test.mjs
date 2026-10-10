@@ -391,3 +391,14 @@ test('premium styles exclude retired quality-control and proposal selectors', ()
   assert.match(css, /\.qualityStageTab/);
   assert.match(css, /\.enquiryConfidence/);
 });
+
+test('route navigation preserves Back/Forward reading position while starting new pages at top', () => {
+  const scrolling=read('components/PageScroll.tsx');
+  assert.match(scrolling,/sessionStorage\.setItem/);
+  assert.match(scrolling,/sessionStorage\.getItem/);
+  assert.match(scrolling,/addEventListener\('popstate', onPopState\)/);
+  assert.match(scrolling,/history\.scrollRestoration = 'manual'/);
+  assert.match(scrolling,/if \(destination\.hash\) return/);
+  assert.match(scrolling,/const target = backTarget\.current \?\? 0/);
+  assert.match(scrolling,/behavior: 'instant'/);
+});
