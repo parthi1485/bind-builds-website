@@ -268,6 +268,19 @@ test('real-user Core Web Vitals are emitted through the existing analytics pipel
   assert.match(vitals,/trackEvent\('web_vital'/);
 });
 
+test('visible navigation defers heavy route downloads until visitor intent', () => {
+  const link=read('components/IntentLink.tsx');
+  const nav=read('components/Site.tsx');
+  const hero=read('components/HomeExperience.tsx');
+  assert.match(link,/prefetch=\{false\}/);
+  assert.match(link,/onMouseEnter=/);
+  assert.match(link,/onFocus=/);
+  assert.match(link,/onTouchStart=/);
+  assert.match(link,/router\.prefetch\(href\)/);
+  assert.match(nav,/className="links"[\s\S]*IntentLink/);
+  assert.match(hero,/Calculate my construction cost[\s\S]*<\/IntentLink>/);
+});
+
 test('desktop and mobile navigation keep Projects directly below Approvals', () => {
   const site=read('components/Site.tsx');
   const navigationLine=site.split('\n').find(line=>line.startsWith('const navigation = ')) || '';
@@ -355,4 +368,13 @@ test('why Bind Builds explains coordinated specialist roles without diminishing 
   assert.match(page,/builder or contractor has constructed hundreds of houses.*does not mean every home was individually planned/i);
   assert.match(page,/specialist responsibility remains specialist responsibility/i);
   assert.match(page,/Start with an architect/i);
+});
+
+test('legacy CSS removal does not reintroduce obsolete home and calculator layouts', () => {
+  const css = read('app/globals.css');
+  for (const className of ['heroMedia', 'heroStatement', 'trustStrip', 'priceGrid', 'priceCard', 'journeyStep', 'calcComparisonGrid', 'calcStageTrack']) {
+    assert.ok(!css.includes('.' + className), `Removed legacy selector ${className} reintroduced`);
+  }
+  assert.match(css, /\.calcProgress/);
+  assert.match(read('app/premium.css'), /\.productHero/);
 });
