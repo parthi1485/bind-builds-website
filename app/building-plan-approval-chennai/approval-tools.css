@@ -33,3 +33,54 @@
 .siteReviewDetails{margin:20px 0}.siteReviewDetails summary{cursor:pointer;min-height:48px;padding-block:15px;font-size:15px}.siteReviewDetails .fields{margin-top:18px}
 @media(max-width:900px){.knowSiteCta{align-items:flex-start;flex-direction:column}}
 @media(max-width:760px){.knowSiteRow{grid-template-columns:22px minmax(0,1fr);gap:12px;padding-block:26px}.knowSiteDiagram{grid-template-columns:1fr;padding:18px;gap:24px}.knowSiteCosts{grid-template-columns:1fr;gap:18px}.knowSiteLinks{flex-direction:column;align-items:flex-start;gap:4px}.knowSiteCta .cta{width:100%}.knowSiteRow p{font-size:15px}}
+
+/* Plot planning worksheet: a conceptual arithmetic explainer, not an approval calculator. */
+.plotWorksheet{scroll-margin-top:calc(92px + env(safe-area-inset-top));padding-top:34px;border-top:1px solid #e2e7ee}
+.plotWorksheetIntro{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(210px,.6fr);gap:40px;align-items:end;margin-bottom:26px}
+.plotWorksheetIntro h2{font-size:clamp(32px,4vw,52px);line-height:1.1;letter-spacing:-.045em;font-weight:550;margin:14px 0 17px;text-wrap:balance}
+.plotWorksheetIntro h2 span{color:#7b828c}
+.plotWorksheetIntro p{font-size:15px;line-height:1.75;color:#596471;max-width:680px}
+.plotWorksheetIntro .plotWorksheetAside{font-size:13px;background:#f5f8fc;padding:16px 18px;border-left:2px solid #bed4ed;margin:0;line-height:1.7}
+.plotWorksheetBody{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:0;border:1px solid #dde4ee;border-radius:19px;overflow:hidden;background:#fff}
+.plotWorksheetInputs,.plotWorksheetResults{min-width:0;padding:clamp(20px,3vw,34px)}
+.plotWorksheetInputs{display:flex;flex-direction:column;gap:16px}
+.plotWorksheetInputs>.productEyebrow:not(:first-child){margin-top:10px}
+.plotWorksheetFieldGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.plotWorksheetInputs label{display:flex;flex-direction:column;align-items:stretch;gap:8px;font-size:13px;font-weight:600;color:#2f3947;min-width:0}
+.plotWorksheetInputs label>small{display:inline;font-weight:400;color:#6c7582}
+.plotWorksheetInputs input[type="number"],.plotWorksheetInputs input[type="text"]{font:inherit;font-weight:500;min-width:0;width:100%;min-height:48px;border:1px solid #d3dae4;border-radius:10px;padding:10px 12px;background:#fff;color:#1e2936;box-sizing:border-box;font-variant-numeric:tabular-nums}
+.plotWorksheetInputs input:focus-visible,.plotWorksheetFloors input:focus-visible+span,.plotWorksheetActions a:focus-visible,.plotWorksheetCopy:focus-visible{outline:2px solid #0071e3;outline-offset:3px}
+.plotWorksheetFloors{padding:0;margin:0;border:0;min-width:0}
+.plotWorksheetFloors legend{font-weight:600;color:#2f3947;font-size:13px;padding:0 0 11px}
+.plotWorksheetFloors>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.plotWorksheetFloors label{position:relative;min-width:0;cursor:pointer}
+.plotWorksheetFloors input{position:absolute;opacity:0;width:1px;height:1px}
+.plotWorksheetFloors span{display:grid;place-items:center;min-height:46px;border:1px solid #d9e1ea;border-radius:9px;font-size:12px;font-weight:550;text-align:center;padding:5px 3px;line-height:1.25}
+.plotWorksheetFloors input:checked+span{border-color:#0071e3;background:#ecf5ff;color:#0057a8}
+.plotWorksheetHint{margin:0;color:#687481;font-size:12px;line-height:1.7}
+.plotWorksheetResults{background:linear-gradient(140deg,#f4f8fd,#f9fbfd);border-left:1px solid #dde4ee;display:flex;flex-direction:column;gap:22px}
+.plotWorksheetBigResult>span,.plotWorksheetStats span{display:block;color:#596879;font-size:12px;font-weight:500}
+.plotWorksheetBigResult output{display:block;font-size:clamp(54px,6vw,78px);font-weight:550;letter-spacing:-.07em;line-height:1.1;color:#124b81;margin:9px 0}
+.plotWorksheetBigResult output small{font-size:22px;letter-spacing:-.025em;color:#5c7690}
+.plotWorksheetBigResult p,.plotWorksheetNext p{font-size:13px;color:#596879;line-height:1.7;margin:0}
+.plotWorksheetStats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.plotWorksheetStats>div{background:#fff;border:1px solid #e3e9f2;border-radius:12px;padding:15px;min-width:0}
+.plotWorksheetStats strong{display:block;font-size:clamp(21px,2.25vw,29px);font-weight:600;letter-spacing:-.05em;color:#263b50;margin-top:8px;overflow-wrap:anywhere}
+.plotWorksheetStats strong small{font-size:12px;font-weight:450;letter-spacing:0;color:#677483;white-space:nowrap}
+.plotWorksheetFormula{border-top:1px solid #dbe3ed;border-bottom:1px solid #dbe3ed;padding:12px 0;font-size:13px;letter-spacing:.005em;font-variant-numeric:tabular-nums;color:#57697b;margin:0}
+.plotWorksheetWarning{border:1px solid #e4cc9c;background:#fff8e9;color:#785621;padding:12px 14px;font-size:12px;line-height:1.7;border-radius:9px;margin:0}
+.plotWorksheetNext{margin-top:auto;display:flex;flex-direction:column;gap:10px}
+.plotWorksheetNext strong{font-size:14px;color:#273747}
+.plotWorksheetNext a{font-size:13px;color:#006acb;text-underline-offset:3px;align-self:flex-start;line-height:1.5}
+.plotWorksheetActions{display:flex;justify-content:space-between;gap:24px;align-items:center;padding:24px 0;border-bottom:1px solid #e4e7ed}
+.plotWorksheetActions>div:first-child{max-width:440px}
+.plotWorksheetActions strong{color:#273747;font-weight:600;font-size:16px}
+.plotWorksheetActions p{font-size:13px;line-height:1.7;margin:6px 0 0;color:#647181}
+.plotWorksheetButtons{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:9px;align-items:center}
+.plotWorksheetButtons>.cta{min-height:46px;display:inline-flex;align-items:center;justify-content:center;text-align:center;padding:10px 16px;line-height:1.4;font-size:13px}
+.plotWorksheetButtons>button:disabled{opacity:.4;cursor:not-allowed}
+.plotWorksheetCopy{background:none;color:#1764a6;border:0;cursor:pointer;min-height:44px;font:inherit;font-size:13px;padding:8px 4px}
+.plotWorksheetCopyStatus{font-size:13px;color:#29603f;min-height:0;margin:10px 0 0}
+@media(max-width:960px){.plotWorksheetIntro{grid-template-columns:1fr;gap:8px}.plotWorksheetBody{grid-template-columns:1fr}.plotWorksheetResults{border-left:0;border-top:1px solid #dde4ee}.plotWorksheetActions{flex-direction:column;align-items:flex-start}.plotWorksheetButtons{justify-content:flex-start}}
+@media(max-width:760px){.plotWorksheet{padding-top:22px}.plotWorksheetIntro h2{font-size:clamp(29px,8vw,38px)}.plotWorksheetIntro p{font-size:14px}.plotWorksheetInputs,.plotWorksheetResults{padding:20px 18px}.plotWorksheetInputs{gap:14px}.plotWorksheetBody{border-radius:15px}.plotWorksheetFloors>div{grid-template-columns:repeat(2,minmax(0,1fr))}.plotWorksheetStats{gap:9px}.plotWorksheetStats>div{padding:12px}.plotWorksheetStats strong{font-size:22px}.plotWorksheetActions{padding:22px 0}.plotWorksheetButtons{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.plotWorksheetButtons>.cta{font-size:12px;padding:10px 9px}.plotWorksheetCopy{grid-column:1/-1;justify-self:start}}
+@media(max-width:359px){.plotWorksheetStats{grid-template-columns:1fr}.plotWorksheetButtons{grid-template-columns:1fr}.plotWorksheetCopy{grid-column:auto}}
