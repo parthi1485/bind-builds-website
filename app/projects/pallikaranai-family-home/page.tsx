@@ -1,3 +1,4 @@
+import '../../guides.css';
 import Link from 'next/link';
 import { Page } from '@/components/Site';
 import StructuredData from '@/components/StructuredData';

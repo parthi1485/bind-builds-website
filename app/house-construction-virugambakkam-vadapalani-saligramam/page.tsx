@@ -1,3 +1,4 @@
+import '../guides.css';
 import { pageMetadata } from '@/lib/seo';
 import LocalClusterGuide,{type LocalClusterGuideData} from '@/components/LocalClusterGuide';
 const path='/house-construction-virugambakkam-vadapalani-saligramam';

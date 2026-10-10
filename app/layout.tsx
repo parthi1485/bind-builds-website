@@ -1,9 +1,9 @@
 import './globals.css';
 import './premium.css';
-import './guides.css';
 import './ui-fixes.css';
 import type { Metadata, Viewport } from 'next';
 import Motion from '@/components/Motion';
+import PerformanceVitals from '@/components/PerformanceVitals';
 import PageScroll from '@/components/PageScroll';
 import Analytics from '@/components/Analytics';
 import { site } from '@/lib/site';
@@ -18,5 +18,5 @@ export const metadata: Metadata = {
   verification: googleSiteVerification ? { google: googleSiteVerification } : undefined,
 };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="en"><body><PageScroll /><Motion /><Analytics />{children}</body></html>;
+  return <html lang="en"><body><PageScroll /><Motion /><PerformanceVitals /><Analytics />{children}</body></html>;
 }

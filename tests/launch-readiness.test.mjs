@@ -257,6 +257,24 @@ test('performance improvements preserve analytics and calculator report paths', 
   assert.doesNotMatch(layout,/import '\.\/assurance\.css'/);
 });
 
+test('guide CSS is scoped and actual Core Web Vitals reach the analytics queue', () => {
+  const layout=read('app/layout.tsx');
+  const home=read('app/page.tsx');
+  const guide=read('app/building-plan-approval-chennai/page.tsx');
+  const locality=read('app/house-construction-ramapuram-chennai/page.tsx');
+  const packages=read('app/packages/page.tsx');
+  const vitals=read('components/PerformanceVitals.tsx');
+  assert.doesNotMatch(layout,/import '\.\/guides\.css'/);
+  assert.match(layout,/PerformanceVitals/);
+  assert.match(home,/import '\.\/guides\.css'/);
+  assert.match(guide,/import '\.\.\/guides\.css'/);
+  assert.match(locality,/import '\.\.\/guides\.css'/);
+  assert.doesNotMatch(packages,/import '\.\.\/guides\.css'/);
+  assert.match(read('app/ui-fixes.css'),/\.relatedGuides/);
+  for(const metric of ['LCP','INP','CLS','FCP','TTFB']) assert.ok(vitals.includes("'"+metric+"'"));
+  assert.match(vitals,/trackEvent\('web_vital'/);
+});
+
 test('desktop and mobile navigation keep Projects directly below Approvals', () => {
   const site=read('components/Site.tsx');
   const navigationLine=site.split('\n').find(line=>line.startsWith('const navigation = ')) || '';

@@ -323,3 +323,13 @@
 /* Lightweight, accessible skeleton while the on-demand estimate report loads. */
 .calcReportLoading{display:grid;place-items:center;min-height:240px;padding:38px 24px;border:1px solid #e1e7ee;border-radius:20px;background:linear-gradient(135deg,#f4f8ff,#fff);color:#395a7e;font-size:.93rem;text-align:center}
 @media(max-width:760px){.calcReportLoading{min-height:190px;border-radius:16px}}
+
+/* Shared footer and related-guide links remain visible on routes without guide CSS. */
+.footerLinks .footerGuideLink{color:#0071e3}
+.relatedGuides{display:flex;flex-wrap:wrap;gap:15px 28px;margin-top:28px;padding:18px 0;border-block:1px solid #ececf0}
+.relatedGuides a{display:inline-flex;align-items:center;min-height:38px;color:#0071e3;font-size:.875rem;line-height:1.7}
+@media(max-width:760px){
+ .relatedGuides{flex-wrap:nowrap;overflow-x:auto;gap:8px;margin:24px -18px 0;padding:14px 18px;scrollbar-width:none;scroll-snap-type:x proximity}
+ .relatedGuides::-webkit-scrollbar{display:none}
+ .relatedGuides a{flex:0 0 auto;max-width:260px;min-height:42px;padding:9px 13px;border:1px solid #e1e7ee;border-radius:100px;background:#fff;scroll-snap-align:start;font-size:.75rem}
+}

@@ -1,3 +1,4 @@
+import '../guides.css';
 import './approval-tools.css';
 import KnowYourSite from '@/components/KnowYourSite';
 import Link from 'next/link';

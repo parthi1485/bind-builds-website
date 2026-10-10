@@ -1,3 +1,4 @@
+import '../guides.css';
 import { pageMetadata } from '@/lib/seo';
 import LocalAreaGuide, { type LocalAreaGuideData } from '@/components/LocalAreaGuide';
 
