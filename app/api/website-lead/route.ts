@@ -32,6 +32,18 @@ export async function POST(request: Request) {
     const digits = payload.phone.replace(/\D/g, '');
     if (digits.length < 10 || digits.length > 15) return NextResponse.json({ ok: false, error: 'Valid phone number is required' }, { status: 400 });
 
+    // Enquiry form qualification is meaningful only when these answers were chosen
+    // by the visitor; the PDF lead flow intentionally has different fields.
+    if (payload.source !== 'Website – Estimate PDF') {
+      if (!payload.location) return NextResponse.json({ ok: false, error: 'Site location is required' }, { status: 400 });
+      const stages = ['Land purchased','Looking for a plot','Design in progress','Approved drawings ready','Existing building to renovate / rebuild'];
+      if (!stages.includes(payload.stage)) return NextResponse.json({ ok: false, error: 'Select your project stage' }, { status: 400 });
+      if (!['Ready to discuss scope and next steps','Comparing construction proposals','Planning for later','Just researching'].some(intent => payload.requirements.includes('Lead intent: ' + intent))) return NextResponse.json({ ok: false, error: 'Project intent is required' }, { status: 400 });
+    }
+    if (payload.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+      return NextResponse.json({ ok: false, error: 'Valid email is required' }, { status: 400 });
+    }
+
     if (payload.source === 'Website – Estimate PDF' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
       return NextResponse.json({ ok: false, error: 'Valid email is required' }, { status: 400 });
     }

@@ -352,3 +352,25 @@
  .calcActions{background:#fff;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;isolation:isolate}
  .calcActionsLive>output{position:relative}
 }
+
+/* Conversion: keep honeypot invisible and out of the keyboard path. */
+.leadHoneypot{position:absolute!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%)!important}
+.projectForm .formSubmitStatus:focus{outline:2px solid #bd5543;outline-offset:3px}
+.projectForm .formRecoveryActions{margin-block:12px 18px}
+@media(max-width:760px){
+ .projectForm .formRecoveryActions .cta{min-height:48px}
+ .projectForm .formSubmitStatus{scroll-margin-top:calc(90px + env(safe-area-inset-top))}
+}
+
+/* Qualified messaging route retains the supplied site, stage and budget context. */
+.qualifiedWhatsapp{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin:20px 0 6px;padding:18px;border:1px solid #d7e5f4;background:#f7fbff;border-radius:15px}
+.qualifiedWhatsapp>span{font-size:.77rem;color:#50647c}
+.qualifiedWhatsapp>a{font-size:.88rem;font-weight:650;line-height:1.4;color:#006bb8;text-underline-offset:3px}
+.qualifiedWhatsapp>a:focus-visible{outline:2px solid #0071e3;outline-offset:4px}
+.qualifiedWhatsapp>small{font-size:.69rem;color:#687889;line-height:1.5}
+@media(max-width:760px){.qualifiedWhatsapp{padding:16px 15px}.qualifiedWhatsapp>a{font-size:.83rem}}
+
+/* Post-submission nurture: offer planning content before an unnecessary sales call. */
+.nurtureNextLinks{display:flex;flex-wrap:wrap;gap:12px 22px;margin:13px 0 22px}
+.nurtureNextLinks>a{color:#1764a6;font-size:.8rem;text-decoration:underline;text-underline-offset:4px}
+.nurtureNextLinks>a:focus-visible{outline:2px solid #0071e3;outline-offset:3px}
