@@ -264,8 +264,12 @@ test('real-user Core Web Vitals are emitted through the existing analytics pipel
   const vitals=read('components/PerformanceVitals.tsx');
   assert.match(layout,/PerformanceVitals/);
   assert.match(layout,/import '\.\/guides\.css'/);
-  for (const metric of ['LCP','INP','CLS','FCP','TTFB']) assert.ok(vitals.includes("'"+metric+"'"));
-  assert.match(vitals,/trackEvent\('web_vital'/);
+  for (const metric of ['LCP','INP','CLS','FCP','TTFB']) assert.ok(read('lib/web-vitals-reporting.ts').includes("'"+metric+"'"));
+  assert.match(vitals,/prepareWebVitalEvent/);
+  assert.match(vitals,/trackEvent\(report.name, report.params\)/);
+  const reporter=read('lib/web-vitals-reporting.ts');
+  assert.match(reporter,/web_vital_\$\{metric.name.toLowerCase\(\)\}/);
+  assert.match(reporter,/metric\.rating\.replace/);
 });
 
 test('visible navigation defers heavy route downloads until visitor intent', () => {
