@@ -21,7 +21,7 @@ test('project form requires an explicit stage and offers contextual WhatsApp wit
   const form=source('components/ProjectForm.tsx');
   const styles=source('app/ui-fixes.css');
   assert.match(form,/stage:'',intent:''/);
-  assert.match(form,/<select required value=\{form.stage\}/);
+  assert.match(form,/<select data-funnel-field="site_stage" required value=\{form.stage\}/);
   assert.match(form,/Select your current stage/);
   assert.match(form,/project_brief_whatsapp_click/);
   assert.match(form,/whatsappUrl\(brief\)/);

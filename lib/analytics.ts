@@ -39,8 +39,10 @@ export function captureAttribution(): Attribution | null {
     const ownHost = window.location.hostname.replace(/^www\./, '');
     const externalReferrer = referrer && referrer !== ownHost ? referrer : '';
 
-    const source = (params.get('utm_source') || (gclid ? 'google' : fbclid ? 'meta' : externalReferrer || 'direct')).slice(0, 100);
-    const medium = (params.get('utm_medium') || ((gclid || fbclid) ? 'paid' : externalReferrer ? 'referral' : 'direct')).slice(0, 100);
+    const utmSource = params.get('utm_source') || '';
+    const source = (utmSource || (gclid ? 'google' : fbclid ? 'meta' : externalReferrer || 'direct')).slice(0, 100);
+    // An explicit UTM source with no medium is not a direct visit; do not guess paid vs organic.
+    const medium = (params.get('utm_medium') || ((gclid || fbclid) ? 'paid' : utmSource ? 'unspecified' : externalReferrer ? 'referral' : 'direct')).slice(0, 100);
     const attribution: Attribution = {
       source,
       medium,
@@ -48,7 +50,9 @@ export function captureAttribution(): Attribution | null {
       content: (params.get('utm_content') || '').slice(0, 120) || undefined,
       term: (params.get('utm_term') || '').slice(0, 120) || undefined,
       clickId: (gclid || fbclid).slice(0, 180) || undefined,
-      landingPath: (window.location.pathname + window.location.search).slice(0, 500),
+      // Never persist prefilled project notes or location query parameters in analytics.
+      // UTM attribution is retained in the dedicated campaign fields above.
+      landingPath: window.location.pathname.slice(0, 500),
       referrer: externalReferrer ? document.referrer.slice(0, 500) : undefined,
     };
     window.sessionStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(attribution));
@@ -67,7 +71,7 @@ export function analyticsContext(): AnalyticsParams {
     first_campaign: attribution.campaign,
     first_content: attribution.content,
     first_term: attribution.term,
-    first_landing_path: attribution.landingPath,
+    first_landing_path: attribution.landingPath.split('?')[0],
   };
 }
 
@@ -79,7 +83,7 @@ export function leadAttributionFields() {
     firstCampaign: attribution?.campaign || '',
     firstContent: attribution?.content || '',
     firstTerm: attribution?.term || '',
-    firstLandingPath: attribution?.landingPath || '',
+    firstLandingPath: attribution?.landingPath.split('?')[0] || '',
     referrer: attribution?.referrer || '',
   };
 }

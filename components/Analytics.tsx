@@ -21,8 +21,8 @@ export default function Analytics() {
     if (!GA_ID) return;
     captureAttribution();
     trackEvent('page_view', {
-      page_path: pathname + window.location.search,
-      page_location: window.location.href,
+      page_path: pathname,
+      page_location: window.location.origin + pathname,
       page_title: document.title,
     });
   }, [pathname]);
@@ -83,7 +83,7 @@ export default function Analytics() {
   return <>
     <Script src={'https://www.googletagmanager.com/gtag/js?id=' + GA_ID} strategy="lazyOnload" />
     <Script id="bind-builds-ga4" strategy="lazyOnload" onReady={flushPendingEvents}>{
-      "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','" + GA_ID + "',{send_page_view:false});window.dispatchEvent(new Event('bindbuilds:analytics-ready'));"
+      "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','" + GA_ID + "',{send_page_view:false,page_location:window.location.origin+window.location.pathname});window.dispatchEvent(new Event('bindbuilds:analytics-ready'));"
     }</Script>
   </>;
 }
