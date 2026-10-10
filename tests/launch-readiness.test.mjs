@@ -394,6 +394,8 @@ test('premium styles exclude retired quality-control and proposal selectors', ()
 
 test('route navigation preserves Back/Forward reading position while starting new pages at top', () => {
   const scrolling=read('components/PageScroll.tsx');
+  assert.doesNotMatch(scrolling,/addEventListener\('scroll',/);
+  assert.match(scrolling,/addEventListener\('pagehide', save\)/);
   assert.match(scrolling,/sessionStorage\.setItem/);
   assert.match(scrolling,/sessionStorage\.getItem/);
   assert.match(scrolling,/addEventListener\('popstate', onPopState\)/);

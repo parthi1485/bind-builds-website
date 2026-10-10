@@ -29,12 +29,9 @@ export default function PageScroll() {
     const previous = window.history.scrollRestoration;
     window.history.scrollRestoration = 'manual';
     activeRoute.current = route();
-    let frame = 0;
+    // Only persist at navigation and page exit: sessionStorage writes are synchronous.
     const save = () => {
       if (!navigating.current && activeRoute.current) saveScroll(activeRoute.current, window.scrollY);
-    };
-    const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(() => { frame = 0; save(); });
     };
     const onPopState = () => {
       saveScroll(activeRoute.current, window.scrollY);
@@ -56,13 +53,10 @@ export default function PageScroll() {
       save();
       navigating.current = true;
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('popstate', onPopState);
     window.addEventListener('pagehide', save);
     document.addEventListener('click', onClick);
     return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', onScroll);
       window.removeEventListener('popstate', onPopState);
       window.removeEventListener('pagehide', save);
       document.removeEventListener('click', onClick);
