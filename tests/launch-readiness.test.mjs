@@ -378,3 +378,12 @@ test('legacy CSS removal does not reintroduce obsolete home and calculator layou
   assert.match(css, /\.calcProgress/);
   assert.match(read('app/premium.css'), /\.productHero/);
 });
+
+test('premium styles exclude retired quality-control and proposal selectors', () => {
+  const css = read('app/premium.css');
+  for (const obsolete of ['.qualityStageTitle', '.qualityCheckList', '.qualityRelease', '.stageDiagramList', '.stageLegend', '.proposalTeaserFooter', '.enquiryFit']) {
+    assert.ok(!css.includes(obsolete), `Retired style ${obsolete} came back`);
+  }
+  assert.match(css, /\.qualityStageTab/);
+  assert.match(css, /\.enquiryConfidence/);
+});
