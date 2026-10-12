@@ -19,6 +19,7 @@ export default function sitemap():MetadataRoute.Sitemap{
   ['/individual-house-construction-chennai',.93],
   ['/turnkey-house-construction-chennai',.9],
   ['/building-plan-approval-chennai',.9],
+  ['/pre-construction-planning-report',.86],
   ['/service-areas-chennai',.92],
   ['/house-construction-west-chennai',.9],
   ['/house-construction-ramapuram-chennai',.94],

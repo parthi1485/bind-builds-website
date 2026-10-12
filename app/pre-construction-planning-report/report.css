@@ -1,0 +1,102 @@
+/* Pre-construction planning report: a calm, document-like app inside the Bind Builds system. */
+.preconBreadcrumb{max-width:1240px;margin:22px auto 0;padding:0 28px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;color:#788392;font-size:12px}
+.preconBreadcrumb a{color:#526477;text-underline-offset:3px}
+.preconPage{max-width:1240px;margin:0 auto;padding:45px 28px 96px;color:#203044}
+.preconIntro{max-width:940px;margin-bottom:34px}
+.preconIntro h2{font-size:clamp(34px,5vw,64px);line-height:1.08;letter-spacing:-.055em;font-weight:530;margin:15px 0 20px}
+.preconIntro h2 span{color:#87909b}
+.preconIntro>p{color:#596879;font-size:clamp(15px,1.7vw,18px);line-height:1.8;max-width:740px}
+.preconIntroBottom{display:flex;justify-content:space-between;gap:16px;margin-top:24px;padding-top:17px;border-top:1px solid #e5eaf0;color:#71808c;font-size:12px;line-height:1.6}
+.preconIntroBottom strong{color:#2e4763}
+.preconSteps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:#dfe6ed;border:1px solid #dfe6ed;border-radius:12px;overflow:hidden;margin:0 0 36px}
+.preconSteps a{display:flex;align-items:center;gap:10px;padding:16px 17px;min-height:52px;background:#f8fafc;color:#415269;font-size:12px;font-weight:550;text-decoration:none}
+.preconSteps a:hover{background:#ecf4fc;color:#0e62a6}
+.preconSteps span{font-size:11px;font-variant-numeric:tabular-nums;color:#1f7cbb}
+.preconGrid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);align-items:start;gap:24px}
+.preconEditor{display:flex;flex-direction:column;gap:22px;min-width:0}
+.preconPanel{min-width:0;border:1px solid #e0e7ee;background:#fff;border-radius:17px;padding:clamp(20px,2.5vw,32px);scroll-margin-top:calc(90px + env(safe-area-inset-top))}
+.preconPanelTitle{display:flex;gap:16px;align-items:start;margin-bottom:24px}
+.preconNumber{color:#1e76b9;font-size:13px;padding-top:5px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.preconPanelTitle h3{font-weight:570;font-size:clamp(23px,2.7vw,32px);letter-spacing:-.04em;line-height:1.16;margin:0 0 9px}
+.preconPanelTitle p{color:#6a7683;font-size:13px;line-height:1.7;margin:0}
+.preconFields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 14px}
+.preconFields>label{min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:8px;color:#354658;font-size:13px;font-weight:560}
+.preconFields label small{font-weight:440;color:#7a8590;font-size:11px}
+.preconWide{grid-column:1/-1}
+.preconFields input,.preconFields select,.preconFields textarea,.preconDocRow select{width:100%;min-width:0;box-sizing:border-box;border:1px solid #d5dfe9;border-radius:10px;padding:11px 12px;background:#fbfcfe;color:#27374a;font-size:14px;line-height:1.45;font:inherit;font-weight:440;min-height:48px}
+.preconFields textarea{min-height:84px;resize:vertical;line-height:1.55}
+.preconFields input:focus-visible,.preconFields select:focus-visible,.preconFields textarea:focus-visible,.preconDocRow select:focus-visible,.preconActions a:focus-visible,.preconActions button:focus-visible,.preconDocNext button:focus-visible{outline:2px solid #0071e3;outline-offset:3px}
+.preconLevels{padding:0;margin:0;border:0;min-width:0}
+.preconLevels legend{padding:0;margin:0 0 12px;color:#364759;font-weight:560;font-size:13px}
+.preconLevels>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.preconLevels label{position:relative;min-width:0;cursor:pointer}
+.preconLevels input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.preconLevels label span{display:grid;place-items:center;text-align:center;font-size:12px;border:1px solid #d5dfe9;border-radius:10px;min-height:48px;padding:7px 4px;line-height:1.3}
+.preconLevels input:checked+span{background:#edf6ff;border-color:#3a8bcc;color:#135c92;font-weight:640}
+.preconLevels input:focus-visible+span{outline:2px solid #0071e3;outline-offset:3px}
+.preconRatio{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:24px 0 0}
+.preconRatio>div{border:1px solid #e3eaf1;background:#f8fafc;padding:16px;border-radius:11px;min-width:0}
+.preconRatio>div span{display:block;font-size:11px;color:#667684;line-height:1.6}
+.preconRatio>div strong{display:block;font-size:clamp(19px,2.4vw,29px);letter-spacing:-.045em;color:#254764;line-height:1.3;margin-top:5px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.preconRatio strong small{font-size:12px;letter-spacing:0;font-weight:450;color:#6d7d8b}
+.preconRatio .preconRatioValue{grid-column:1/-1;background:#eaf4ff;border-color:#bed6ef}
+.preconRatio .preconRatioValue strong{font-size:clamp(32px,4.3vw,47px);color:#0e5b9d}
+.preconRatio>p{grid-column:1/-1;background:#f5f8fc;border:1px solid #e1e9f2;border-radius:10px;padding:16px;font-size:13px;color:#637181;line-height:1.7;margin:0}
+.preconCaution{border:1px solid #decba7;border-radius:10px;background:#fff8e9;padding:12px 14px;color:#78591e;font-size:12px;line-height:1.7}
+.preconFootnote{color:#6b7884;font-size:12px;line-height:1.7;margin:17px 0 0}
+.preconDocProgress{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:0 0 14px;font-size:12px;color:#486984}
+.preconDocProgress progress{max-width:170px;width:100%;height:7px;accent-color:#2376c2}
+.preconDocList{border-top:1px solid #e3e9ef}
+.preconDocRow{display:grid;grid-template-columns:minmax(0,1fr) minmax(127px,.55fr);gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid #e3e9ef}
+.preconDocRow>div{min-width:0}
+.preconIndex{display:inline-block;font-size:10px;color:#2d7db4;margin-right:8px}
+.preconDocRow strong{font-size:12px;color:#273c53}
+.preconDocRow p{font-size:11px;color:#70808e;line-height:1.6;margin:6px 0 0}
+.preconDocRow label{display:flex;flex-direction:column;gap:7px;color:#617181;font-size:11px}
+.preconDocRow select{min-height:44px;font-size:12px;padding:9px}
+.preconDocNext{background:#f3f7fb;border-radius:12px;padding:18px 18px 12px;margin-top:22px}
+.preconDocNext>strong{font-size:13px;color:#295272}
+.preconDocNext ol{list-style:none;padding:0;margin:11px 0 0}
+.preconDocNext li{padding:11px 0;border-top:1px solid #dce6f0}
+.preconDocNext li span{font-size:10px;color:#266d9d;margin-right:9px}
+.preconDocNext li b{font-size:12px;font-weight:630}
+.preconDocNext li p{font-size:11px;color:#687b8a;line-height:1.65;margin:6px 0 0}
+.preconDocNext button{border:0;color:#1169a8;background:transparent;font:inherit;font-size:12px;min-height:44px;cursor:pointer;padding:7px 0;text-align:left}
+.preconPreview{position:sticky;top:22px;min-width:0;scroll-margin-top:calc(80px + env(safe-area-inset-top))}
+.preconPreviewInner{border:1px solid #d5e1ed;border-radius:18px;background:linear-gradient(155deg,#f5f9fd 0%,#ffffff 48%);padding:clamp(24px,3.2vw,38px);box-shadow:0 18px 55px rgba(27,63,91,.045)}
+.preconPreview h3{font-size:clamp(26px,3vw,36px);letter-spacing:-.05em;line-height:1.12;font-weight:560;margin:14px 0 12px}
+.preconPreviewInner>p{font-size:12px;line-height:1.7;color:#657483}
+.preconPreviewSection{border-top:1px solid #dfe8f0;margin-top:23px;padding-top:19px}
+.preconPreviewSection>span{display:block;font-size:10px;letter-spacing:.025em;text-transform:uppercase;color:#64829b;margin-bottom:10px}
+.preconPreviewSection strong{font-size:17px;font-weight:610;letter-spacing:-.02em;color:#214c71}
+.preconPreviewSection>p{font-size:12px;color:#606f7e;line-height:1.7;margin:7px 0 0;overflow-wrap:anywhere}
+.preconQuestions ol{margin:0;padding-left:20px;color:#38546a}
+.preconQuestions li{font-size:12px;line-height:1.7;padding-left:3px;margin-bottom:10px}
+.preconPreviewDisclaimer{padding:12px 14px;border:1px solid #d8e4f1;background:#f5f9fd;border-radius:9px;color:#667688}
+.preconActions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:24px}
+.preconActions button,.preconActions a{min-height:48px;display:grid;place-items:center;border:1px solid #cbd9e7;background:#fff;border-radius:10px;box-sizing:border-box;font:inherit;color:#155b91;font-size:12px;font-weight:610;padding:10px 9px;line-height:1.4;text-align:center;text-decoration:none;cursor:pointer}
+.preconActions button:hover,.preconActions a:hover{background:#e9f4fe}
+.preconActions .preconActionPrimary{background:#143f64;color:#fff;border-color:#143f64}
+.preconActions .preconActionPrimary:hover{background:#205b88;color:#fff}
+.preconCopyStatus{min-height:16px;color:#2b7251!important;margin:12px 0 0!important}
+.preconPreview .preconShareNote{font-size:11px;line-height:1.65;color:#71808d;margin:16px 0 0}
+.preconAfter{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:28px 0 0;margin-top:40px;border-top:1px solid #e0e7ee}
+.preconAfter strong{font-size:19px;letter-spacing:-.025em;flex:0 0 auto}
+.preconAfter p{max-width:640px;font-size:13px;line-height:1.75;color:#687684;margin:0}
+.preconAfter a{color:#116cb5;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:1060px){.preconGrid{grid-template-columns:1fr}.preconPreview{position:static}.preconPreviewInner{max-width:none}.preconEditor{gap:18px}.preconAfter{display:block}.preconAfter p{margin-top:8px}}
+@media(max-width:760px){.preconBreadcrumb{padding:0 18px}.preconPage{padding:30px 18px 72px}.preconIntro h2{font-size:clamp(33px,8.2vw,48px)}.preconIntroBottom{display:block}.preconIntroBottom span{display:block;margin-top:5px}.preconSteps{grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:22px}.preconSteps a{min-height:46px;padding:12px;font-size:11px}.preconPanel{padding:21px 18px;border-radius:14px}.preconPanelTitle{gap:11px;margin-bottom:20px}.preconPanelTitle h3{font-size:25px}.preconPreviewInner{padding:24px 19px}.preconDocRow{grid-template-columns:1fr}.preconDocRow label{max-width:100%}.preconRatio>div{padding:13px}.preconActions button,.preconActions a{font-size:11px}}
+@media(max-width:375px){.preconFields{grid-template-columns:1fr}.preconLevels>div{grid-template-columns:repeat(2,minmax(0,1fr))}.preconRatio{grid-template-columns:1fr}.preconRatio .preconRatioValue{grid-column:auto}.preconActions{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.preconPage *{scroll-behavior:auto!important}}
+@media print{
+ @page{size:A4;margin:14mm}
+ body{background:#fff!important;color:#132236!important;font-family:Arial,sans-serif!important}
+ .nav,.mobileProjectBar,footer,.pageHero,.preconBreadcrumb,.preconIntro,.preconSteps,.preconEditor,.preconAfter,.preconActions,.preconCopyStatus,.preconShareNote,.motionToggle{display:none!important}
+ .preconPage{max-width:none;margin:0;padding:0}.preconGrid{display:block}.preconPreview{position:static}.preconPreviewInner{box-shadow:none!important;border:0!important;border-radius:0!important;background:#fff!important;padding:0!important}
+ .preconPreview h3{font-size:24pt}.preconPreviewSection{break-inside:avoid;margin-top:14px;padding-top:11px}.preconQuestions li{break-inside:avoid}.preconPreviewDisclaimer{break-inside:avoid}
+ .preconPreviewInner::before{content:'BIND BUILDS  /  PRE-CONSTRUCTION PREPARATION';display:block;font-size:10pt;letter-spacing:.07em;font-weight:700;margin-bottom:16pt;border-bottom:1px solid #c6d2dc;padding-bottom:8pt}
+}
+
+.preconPreviewDocList p{font-size:11px;color:#627386;line-height:1.6;margin:8px 0 0;overflow-wrap:anywhere}
+.preconPreviewDocList b{font-weight:600;color:#344f69}
+.preconPreviewAlert{color:#8a5d20!important;font-weight:650}

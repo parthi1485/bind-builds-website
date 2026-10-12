@@ -49,6 +49,7 @@ const pages=[
   ['/individual-house-construction-chennai',/individual house construction/i],
   ['/turnkey-house-construction-chennai',/turnkey house construction/i],
   ['/building-plan-approval-chennai',/building.*approval|approval.*Chennai/i],
+  ['/pre-construction-planning-report',/Pre-Construction Planning Report|pre-construction|preparation report|planning report/i],
   ['/service-areas-chennai',/service areas|construction across Chennai/i],
   ['/house-construction-west-chennai',/West Chennai|house construction/i],
   ['/house-construction-ramapuram-chennai',/Ramapuram|house construction/i],

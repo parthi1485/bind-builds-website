@@ -24,6 +24,7 @@ test('launch-critical routes are represented in the sitemap', () => {
     "'/individual-house-construction-chennai'",
     "'/turnkey-house-construction-chennai'",
     "'/building-plan-approval-chennai'",
+    "'/pre-construction-planning-report'",
     "'/service-areas-chennai'",
     "'/house-construction-west-chennai'",
     "'/house-construction-ramapuram-chennai'",
