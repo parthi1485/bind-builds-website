@@ -1,0 +1,103 @@
+/* Bind Builds — intent-based lead popup */
+.leadPopupBackdrop{
+ position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:24px;
+ background:#10151dcc;backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
+ animation:leadBackdropIn .22s ease-out;
+}
+.leadPopup{
+ width:min(940px,calc(100vw - 48px));max-height:min(720px,calc(100dvh - 48px));
+ display:grid;grid-template-columns:minmax(0,.92fr) minmax(360px,1.08fr);
+ overflow:auto;position:relative;border:1px solid #ffffff21;border-radius:28px;
+ background:#fff;box-shadow:0 35px 100px #0006;
+ animation:leadPopupIn .34s cubic-bezier(.2,.75,.2,1);
+}
+.leadPopupClose{
+ position:absolute;z-index:4;top:16px;right:16px;width:40px;height:40px;border:1px solid #dfe3e8;border-radius:50%;
+ background:#ffffffd9;backdrop-filter:blur(10px);color:#47505a;font-size:1.4rem;line-height:1;cursor:pointer;
+ transition:transform .18s,background .18s,color .18s;
+}
+.leadPopupClose:hover{background:#fff;color:#111820;transform:rotate(4deg)}
+.leadPopupStory{
+ position:relative;overflow:hidden;padding:54px 46px 44px;color:#fff;
+ background:
+  radial-gradient(circle at 80% 15%,#177fe43d 0,transparent 34%),
+  linear-gradient(145deg,#0d1b2b 0%,#102b46 58%,#0a2037 100%);
+}
+.leadPopupStory:after{
+ content:'';position:absolute;width:360px;height:360px;border:1px solid #ffffff14;border-radius:50%;
+ right:-150px;bottom:-150px;box-shadow:0 0 0 45px #ffffff05,0 0 0 90px #ffffff03;
+}
+.leadPopupEyebrow{display:block;font-size:.67rem;line-height:1.5;letter-spacing:.055em;color:#6d7885}
+.leadPopupStory .leadPopupEyebrow{color:#8ec6fb}
+.leadPopupStory h2{
+ position:relative;z-index:1;margin:24px 0 22px;font-size:clamp(2.6rem,4.5vw,4.5rem);line-height:.98;letter-spacing:-.06em;font-weight:570;
+}
+.leadPopupStory h2 span{color:#95a7ba}
+.leadPopupStory>p{position:relative;z-index:1;max-width:400px;margin:0;color:#c2cfdb;font-size:.91rem;line-height:1.75}
+.leadPopupSignals{position:relative;z-index:1;display:grid;gap:0;margin-top:38px;border-top:1px solid #ffffff1f}
+.leadPopupSignals>div{display:grid;grid-template-columns:28px 1fr;gap:0 12px;padding:16px 0;border-bottom:1px solid #ffffff1f}
+.leadPopupSignals span{grid-row:1/3;color:#6daae2;font-size:.58rem;padding-top:3px}
+.leadPopupSignals strong{font-size:.78rem;font-weight:570;color:#fff}
+.leadPopupSignals small{margin-top:3px;color:#8498aa;font-size:.63rem;line-height:1.5}
+
+.leadPopupFormPanel{padding:50px 48px 40px;display:flex;align-items:center;background:#fff}
+.leadPopupFormPanel>form,.leadPopupSuccess{width:100%}
+.leadPopupFormPanel h3,.leadPopupSuccess h3{margin:12px 0 24px;font-size:1.8rem;line-height:1.1;letter-spacing:-.04em;font-weight:570;color:#171a1e}
+.leadPopupFields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.leadPopupFields label{display:grid;gap:7px;color:#40464f;font-size:.68rem;font-weight:550}
+.leadPopupFields input,.leadPopupFields select{
+ width:100%;min-height:50px;border:1px solid #d6dbe2;border-radius:12px;background:#fbfcfd;color:#14181d;
+ padding:0 13px;font:inherit;font-size:16px;outline:none;transition:border-color .18s,box-shadow .18s,background .18s;
+}
+.leadPopupFields input:focus,.leadPopupFields select:focus{border-color:#78ade8;background:#fff;box-shadow:0 0 0 4px #0071e311}
+.leadPopupFields input::placeholder{color:#9da4ad}
+.leadPopupHoneypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+.leadPopupSubmit{width:100%;min-height:52px;margin-top:17px;justify-content:center;border-radius:13px}
+.leadPopupSubmit:disabled{opacity:.65;cursor:wait}
+.leadPopupPrivacy{margin:11px 0 0;color:#8a919a;font-size:.59rem;line-height:1.55;text-align:center}
+.leadPopupPrivacy a{text-decoration:underline;text-underline-offset:2px}
+.leadPopupResearch{display:flex;justify-content:space-between;gap:16px;margin-top:22px;padding-top:16px;border-top:1px solid #eaedf0;font-size:.68rem}
+.leadPopupResearch span{color:#89909a}
+.leadPopupResearch a{color:#006bd6;font-weight:550}
+.leadPopupError{margin:11px 0 0;color:#a83232;font-size:.67rem;line-height:1.55}
+.leadPopupSuccess{padding:10px 0}
+.leadPopupSuccessMark{width:54px;height:54px;display:grid;place-items:center;margin-bottom:24px;border-radius:50%;background:#e9f5ff;color:#0071e3;font-size:1.25rem}
+.leadPopupSuccess p{color:#6f7781;font-size:.82rem;line-height:1.7;margin:0 0 25px}
+.leadPopupSuccess .cta{justify-content:center}
+
+@keyframes leadBackdropIn{from{opacity:0}to{opacity:1}}
+@keyframes leadPopupIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+
+@media(max-width:760px){
+ .leadPopupBackdrop{place-items:end center;padding:0;background:#10151da8}
+ .leadPopup{
+  width:100%;max-height:min(88dvh,760px);grid-template-columns:1fr;border-radius:24px 24px 0 0;border-bottom:0;
+  animation:leadSheetIn .32s cubic-bezier(.2,.75,.2,1);
+ }
+ .leadPopupClose{top:12px;right:12px;width:38px;height:38px}
+ .leadPopupStory{padding:30px 22px 24px}
+ .leadPopupStory h2{font-size:clamp(2.25rem,10vw,3.25rem);margin:18px 0 14px;max-width:350px}
+ .leadPopupStory>p{font-size:.78rem;line-height:1.65;padding-right:22px}
+ .leadPopupSignals{grid-template-columns:repeat(3,1fr);gap:0;margin-top:23px}
+ .leadPopupSignals>div{display:block;padding:13px 10px 0 0;border-bottom:0;border-top:1px solid #ffffff20}
+ .leadPopupSignals span{display:block;padding:0 0 7px}
+ .leadPopupSignals strong{display:block;font-size:.68rem}
+ .leadPopupSignals small{display:none}
+ .leadPopupFormPanel{padding:25px 20px calc(24px + env(safe-area-inset-bottom))}
+ .leadPopupFormPanel h3,.leadPopupSuccess h3{font-size:1.45rem;margin-bottom:18px}
+ .leadPopupFields{grid-template-columns:1fr;gap:11px}
+ .leadPopupFields label{gap:5px}
+ .leadPopupFields input,.leadPopupFields select{min-height:48px;border-radius:11px}
+ .leadPopupSubmit{min-height:50px;margin-top:14px}
+ .leadPopupResearch{margin-top:17px;padding-top:14px;flex-direction:column;gap:7px}
+}
+@media(max-width:390px){
+ .leadPopupStory{padding-inline:18px}
+ .leadPopupFormPanel{padding-inline:17px}
+ .leadPopupStory h2{font-size:2.2rem}
+}
+@media(prefers-reduced-motion:reduce){
+ .leadPopupBackdrop,.leadPopup{animation:none!important}
+ .leadPopupClose,.leadPopupFields input,.leadPopupFields select{transition:none!important}
+}
+@keyframes leadSheetIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
