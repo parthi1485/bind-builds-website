@@ -2,11 +2,13 @@ import './globals.css';
 import './premium.css';
 import './guides.css';
 import './ui-fixes.css';
+import './lead-popup.css';
 import type { Metadata, Viewport } from 'next';
 import Motion from '@/components/Motion';
 import PerformanceVitals from '@/components/PerformanceVitals';
 import PageScroll from '@/components/PageScroll';
 import Analytics from '@/components/Analytics';
+import LeadIntentPopup from '@/components/LeadIntentPopup';
 import { site } from '@/lib/site';
 const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#ffffff', colorScheme: 'light' };
@@ -19,5 +21,5 @@ export const metadata: Metadata = {
   verification: googleSiteVerification ? { google: googleSiteVerification } : undefined,
 };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="en"><body><PageScroll /><Motion /><PerformanceVitals /><Analytics />{children}</body></html>;
+  return <html lang="en"><body><PageScroll /><Motion /><PerformanceVitals /><Analytics /><LeadIntentPopup />{children}</body></html>;
 }
