@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxsCulnUR0HQUOU50iMy__7SDVgSY4rl5h9GfGTHB6e9hs1YqF1ZkvcRGOFed_LTR1m/exec';
-const allowedSources = new Set(['Website – Estimate PDF', 'Website – Project Enquiry', 'Website – Contact Form']);
+const allowedSources = new Set(['Website – Estimate PDF', 'Website – Project Enquiry', 'Website – Contact Form', 'Website – Lead Popup']);
 
 const fields = [
   'source','name','phone','email','projectType','location','stage','builtUpArea','budget','timeline','requirements',
@@ -34,7 +34,9 @@ export async function POST(request: Request) {
 
     // Enquiry form qualification is meaningful only when these answers were chosen
     // by the visitor; the PDF lead flow intentionally has different fields.
-    if (payload.source !== 'Website – Estimate PDF') {
+    if (payload.source === 'Website – Lead Popup') {
+      if (!payload.location) return NextResponse.json({ ok: false, error: 'Site location is required' }, { status: 400 });
+    } else if (payload.source !== 'Website – Estimate PDF') {
       if (!payload.location) return NextResponse.json({ ok: false, error: 'Site location is required' }, { status: 400 });
       const stages = ['Land purchased','Looking for a plot','Design in progress','Approved drawings ready','Existing building to renovate / rebuild'];
       if (!stages.includes(payload.stage)) return NextResponse.json({ ok: false, error: 'Select your project stage' }, { status: 400 });
