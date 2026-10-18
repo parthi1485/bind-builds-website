@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { site, whatsappUrl } from '@/lib/site';
 
-const navigation = [['Packages', '/packages'], ['Calculator', '/cost-calculator'], ['Process', '/process'], ['Why Bind', '/why-bind-builds'], ['Approvals', '/building-plan-approval-chennai'], ['Projects', '/project-evidence'], ['About', '/about'], ['FAQs', '/faq'], ['Contact', '/contact']];
+const navigation = [['Packages', '/packages'], ['Calculator', '/cost-calculator'], ['Process', '/process'], ['Why Bind', '/why-bind-builds'], ['Approvals', '/building-plan-approval-chennai'], ['Projects', site.portfolio], ['About', '/about'], ['FAQs', '/faq'], ['Contact', '/contact']];
 export function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -44,13 +44,13 @@ export function Nav() {
     <a className="skipLink" href="#main-content">Skip to content</a>
     <header className={`nav ${scrolled || pathname !== '/' || open ? 'navScrolled' : ''}`}>
       <Link href="/" className="brandImage" aria-label="Bind Builds home"><Image src="/bind-builds-logo.svg" alt="Bind Builds" width={190} height={66} priority /></Link>
-      <nav className="links" aria-label="Main navigation">{navigation.map(([name, href]) => href.startsWith('http') ? <a key={href} href={href} target="_blank" rel="noopener noreferrer">{name}</a> : <IntentLink key={href} href={href} aria-current={pathname === href ? 'page' : undefined}>{name}</IntentLink>)}</nav>
+      <nav className="links" aria-label="Main navigation">{navigation.map(([name, href]) => href.startsWith('http') ? <a key={href} href={href} rel="noopener noreferrer">{name}</a> : <IntentLink key={href} href={href} aria-current={pathname === href ? 'page' : undefined}>{name}</IntentLink>)}</nav>
       <IntentLink className="cta navCta" href="/start-a-project" aria-current={pathname === '/start-a-project' ? 'page' : undefined}>Plan my home <span aria-hidden="true">↗</span></IntentLink>
       <button ref={toggle} type="button" className="menuButton" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>{open ? 'Close' : 'Menu'}<span aria-hidden="true">{open ? '−' : '+'}</span></button>
     </header>
     <div ref={menu} id="mobile-menu" className="mobileMenu" hidden={!open} role="dialog" aria-modal={open ? true : undefined} aria-labelledby="mobile-menu-title">
       <p className="eyebrow" id="mobile-menu-title">Architecture. Engineering. Construction.</p>
-      <nav aria-label="Mobile navigation">{navigation.map(([name, href], i) => href.startsWith('http') ? <a href={href} key={href} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}><small>0{i + 1}</small><span>{name}</span><span aria-hidden="true">↗</span></a> : <IntentLink href={href} key={href} onClick={() => setOpen(false)} aria-current={pathname === href ? 'page' : undefined}><small>0{i + 1}</small><span>{name}</span><span aria-hidden="true">↗</span></IntentLink>)}</nav>
+      <nav aria-label="Mobile navigation">{navigation.map(([name, href], i) => href.startsWith('http') ? <a href={href} key={href} rel="noopener noreferrer" onClick={() => setOpen(false)}><small>0{i + 1}</small><span>{name}</span><span aria-hidden="true">↗</span></a> : <IntentLink href={href} key={href} onClick={() => setOpen(false)} aria-current={pathname === href ? 'page' : undefined}><small>0{i + 1}</small><span>{name}</span><span aria-hidden="true">↗</span></IntentLink>)}</nav>
       <IntentLink className="cta primary" href="/start-a-project" onClick={() => setOpen(false)}>Plan my home ↗</IntentLink>
       <a className="menuPhone" href={`tel:${site.telephone}`}>{site.phone}</a>
     </div>
@@ -59,7 +59,7 @@ export function Nav() {
 }
 export function Footer() {
   const guideLinks = [
-    ['Projects', '/project-evidence'],
+    ['Projects', site.portfolio],
     ['Construction company', '/construction-company-chennai'],
     ['House construction', '/house-construction-chennai'],
     ['Individual house construction', '/individual-house-construction-chennai'],
@@ -82,7 +82,7 @@ export function Footer() {
     <div className="footerIdentity"><Link href="/" className="brandImage" aria-label="Bind Builds home"><Image src="/bind-builds-logo.svg" alt="Bind Builds" width={190} height={66} /></Link><p>Architect-led construction.<br />Chennai · Selected Coimbatore projects.</p><Link className="footerPrimaryLink" href="/start-a-project">Plan my home ↗</Link></div>
     <div className="footerSitemap">
       <div><span className="footerLabel">Explore</span><nav className="footerLinks" aria-label="Footer navigation">{navigation.map(([name, href]) => href.startsWith('http') ? <a href={href} key={href} target="_blank" rel="noopener noreferrer">{name}</a> : <Link href={href} key={href}>{name}</Link>)}</nav></div>
-      <div><span className="footerLabel">Areas + guides</span><nav className="footerLinks footerGuideLinks" aria-label="Construction service areas and guides">{guideLinks.map(([name,href])=><Link className="footerGuideLink" href={href} key={href}>{name}</Link>)}</nav></div>
+      <div><span className="footerLabel">Areas + guides</span><nav className="footerLinks footerGuideLinks" aria-label="Construction service areas and guides">{guideLinks.map(([name,href])=>href.startsWith('http')?<a className="footerGuideLink" href={href} key={href}>{name}</a>:<Link className="footerGuideLink" href={href} key={href}>{name}</Link>)}</nav></div>
     </div>
     <div className="footerContact"><span className="footerLabel">Contact</span><address style={{fontStyle:'normal',lineHeight:1.7}}>{site.address.streetAddress}<br/>{site.address.addressLocality} {site.address.postalCode}</address><a href={`tel:${site.telephone}`}>{site.phone}</a><a href={`mailto:${site.email}`}>{site.email}</a><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">Chat on WhatsApp ↗</a><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a><Link href="/review">Google review ↗</Link></div>
     <div className="footerBottom"><span>© {new Date().getFullYear()} Bind Builds</span><span>Plan • Build • Deliver</span><Link href="/privacy">Privacy</Link></div>

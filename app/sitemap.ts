@@ -3,7 +3,6 @@ import { site } from '@/lib/site';
 
 // Include lastmod only where the page has a documented significant content update.
 const verifiedUpdates:Record<string,string>={
- '/project-evidence':'2026-09-25',
  '/construction-cost-coimbatore':'2026-09-24',
 };
 export default function sitemap():MetadataRoute.Sitemap{
@@ -11,7 +10,6 @@ export default function sitemap():MetadataRoute.Sitemap{
   ['',1],
   ['/about',.7],
   ['/why-bind-builds',.94],
-  ['/project-evidence',.88],
   ['/projects/sunguvarchathiram-multigenerational-home',.86],
   ['/projects/pallikaranai-family-home',.86],
   ['/projects/ccbm-commercial-complex',.84],

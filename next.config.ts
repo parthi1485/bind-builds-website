@@ -14,8 +14,8 @@ const legacyRedirects=[
  {source:'/about',destination:'https://www.bindbuilds.com/about'},
  {source:'/packages',destination:'https://www.bindbuilds.com/packages'},
  {source:'/contact',destination:'https://www.bindbuilds.com/contact'},
- {source:'/portfolio',destination:'https://www.bindbuilds.com/project-evidence'},
- {source:'/projects',destination:'https://www.bindbuilds.com/project-evidence'},
+ {source:'/portfolio',destination:'https://www.bindarchitects.com/'},
+ {source:'/projects',destination:'https://www.bindarchitects.com/'},
  {source:'/design-packages',destination:'https://www.bindarchitects.com/'},
 ];
 
@@ -25,11 +25,17 @@ const nextConfig:NextConfig={
   return [{source:'/:path*',headers:securityHeaders}];
  },
  async redirects(){
-  return legacyHosts.flatMap(host=>legacyRedirects.map(rule=>({
-   ...rule,
-   permanent:true,
-   has:[{type:'host' as const,value:host}],
-  })));
+  return [
+   ...legacyHosts.flatMap(host=>legacyRedirects.map(rule=>({
+    ...rule,
+    permanent:true,
+    has:[{type:'host' as const,value:host}],
+   }))),
+   // Keep previous Bind Builds project URLs working while the portfolio lives on Studio Bind.
+   {source:'/project-evidence',destination:'https://www.bindarchitects.com/',permanent:true},
+   {source:'/projects',destination:'https://www.bindarchitects.com/',permanent:true},
+   {source:'/portfolio',destination:'https://www.bindarchitects.com/',permanent:true},
+  ];
  },
 };
 
