@@ -1,0 +1,31 @@
+'use client';
+import { useState } from 'react';
+import Link from 'next/link';
+import { packages } from '@/lib/site';
+import type { PackageCategory } from '@/components/PackageComparison';
+
+type PackageKey = 'essential' | 'elevate' | 'signature';
+const personas: Record<PackageKey,{title:string;who:string}> = {
+ essential:{title:'Thoughtful essentials',who:'For a practical family home with clearly specified standard finishes.'},
+ elevate:{title:'Balanced materials and support',who:'For homeowners wanting greater material allowances and more architect/project-manager involvement.'},
+ signature:{title:'More room for personalisation',who:'For more extensive detailing and premium finish allowances.'}
+};
+export default function PackageQuickGuide({categories}:{categories:PackageCategory[]}){
+ const [area,setArea]=useState('1600');
+ const [selected,setSelected]=useState<PackageKey>('elevate');
+ const a=Number(area), valid=Number.isFinite(a)&&Number.isInteger(a)&&a>=100&&a<=100000;
+ const spec=(n:string,t:PackageKey,index=0)=>categories.find(c=>c.no===n)?.[t][index]||'Refer to the complete specification below';
+ return <section className="packageDecisionSection" aria-labelledby="package-decision-title">
+  <div className="packageDecisionHeader"><span className="eyebrow">Choose with confidence / 01—03</span><h2 id="package-decision-title">Three clear starting points.<br/><span>One considered approach.</span></h2><p>Start with how you want your home to perform, then compare real material allowances and supervision differences. The detailed package specification follows below.</p></div>
+  <div className="packageDecisionGrid">{packages.map(p=><button type="button" className={'packageDecisionCard'+(selected===p.key?' isSelected':'')} key={p.key} aria-pressed={selected===p.key} onClick={()=>setSelected(p.key)}>
+   <span className="packageDecisionCardTop"><span>{p.name}</span><span aria-hidden="true">{selected===p.key?'✓':'↗'}</span></span>
+   <strong className="packageDecisionRate">₹{p.rate.toLocaleString('en-IN')} <small>/ sq.ft*</small></strong>
+   <span className="packageDecisionPersona">{personas[p.key].title}</span>
+   <span className="packageDecisionWho">{personas[p.key].who}</span>
+   <span className="packageDecisionSpec">Flooring: {spec('05',p.key)}</span>
+   <span className="packageDecisionSpec">Site support: {spec('02',p.key,1)}</span>
+  </button>)}</div>
+  <div className="packageDecisionResult"><div><label htmlFor="package-decision-area">Total built-up area (all floors) · sq.ft</label><input id="package-decision-area" type="number" min="100" max="100000" step="1" inputMode="numeric" value={area} onChange={e=>setArea(e.target.value)} aria-invalid={!valid}/>{!valid&&<small role="alert">Enter a whole number from 100 to 100,000 sq.ft.</small>}</div><div className="packageDecisionEstimate"><span>Indicative {packages.find(p=>p.key===selected)?.name} base construction</span><output aria-live="polite">{valid?'₹'+(a*packages.find(p=>p.key===selected)!.rate/100000).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2})+' lakh':'Enter your area'}</output><p>Same area, different specifications. Taxes, approvals, separately priced works and site conditions are extra as applicable.</p></div>{valid&&<Link className="cta primary" href={`/cost-calculator?package=${packages.find(p=>p.key===selected)!.name}&area=${a}`}>Build my detailed estimate ↗</Link>}</div>
+  <p className="packageDecisionFootnote">*Published base starting rates. Package inclusions, material brands, quantities, taxes and exclusions are confirmed in a project-specific proposal. All structural design must follow applicable professional and engineering requirements.</p>
+ </section>;
+}

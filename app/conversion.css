@@ -1,0 +1,53 @@
+
+/* Conversion release 01: calm editorial hierarchy, no dark-pattern urgency */
+.productHeroCopy>.homeTamilLine{font-size:clamp(.88rem,1.12vw,1.05rem);font-weight:550;line-height:1.7;color:#345d80;max-width:720px;margin:-13px auto 25px;letter-spacing:0}
+.homeEvidenceFeature{background:#fff;padding-top:clamp(55px,7vw,105px);padding-bottom:clamp(65px,8vw,110px)}
+.homeEvidenceGrid{max-width:1180px;margin:auto;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,90px);align-items:center}
+.homeEvidenceVisual{position:relative;background:#e9edf1;border-radius:22px;overflow:hidden;min-width:0;min-height:360px;display:flex;align-items:stretch}
+.homeEvidenceVisual img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover}
+.homeEvidenceVisual>span{position:relative;align-self:end;margin:16px;background:#ffffffed;backdrop-filter:blur(10px);padding:10px 14px;border-radius:12px;color:#393f48;font-size:.75rem;line-height:1.4;font-weight:550}
+.homeEvidenceCopy h2,.homeScopeHeading h2{font-size:clamp(2.4rem,4vw,4.75rem);letter-spacing:-.06em;line-height:1.06;margin:18px 0 25px}
+.homeEvidenceCopy h2 span,.homeScopeHeading h2 span{color:#85858d}
+.homeEvidenceCopy>p,.homeScopeHeading>p{max-width:680px;color:#5c6068;font-size:clamp(1rem,1.28vw,1.125rem);line-height:1.7}
+.homeEvidenceItems{border-top:1px solid #e2e4e7;margin:25px 0 28px}
+.homeEvidenceItems>a{display:grid;grid-template-columns:1fr auto;gap:2px 12px;border-bottom:1px solid #e2e4e7;padding:16px 2px;align-items:center}
+.homeEvidenceItems strong{font-size:.98rem;letter-spacing:-.02em;font-weight:600}
+.homeEvidenceItems small{grid-column:1;color:#69727d;font-size:.78rem;line-height:1.5}
+.homeEvidenceItems a>span{grid-column:2;grid-row:1 / span 2;color:#0064c8;font-size:1.2rem}
+.homeEvidenceItems a:hover strong{text-decoration:underline;text-underline-offset:3px}
+.homeScopeContrast{background:#f7f9fc}
+.homeScopeHeading{max-width:1160px;margin:0 auto 42px}
+.homeScopePanels{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1160px;margin:auto}
+.homeScopePanels article{border:1px solid #e3e7ed;background:#fff;padding:clamp(25px,3.5vw,47px);border-radius:22px;min-width:0}
+.homeScopePanels article:nth-child(2){background:#ebf3fd;border-color:#d1e0f3}
+.homeScopePanels h3{font-size:clamp(1.45rem,2.3vw,2.1rem);letter-spacing:-.045em;margin:16px 0 22px}
+.homeScopePanels ul{padding-left:1.2rem;margin:0 0 24px;display:grid;gap:15px;color:#4c5662;line-height:1.6}
+.homeScopeNote{max-width:1160px;margin:22px auto 0;color:#66727d;font-size:.82rem;line-height:1.65}
+.packageDecisionSection{padding:clamp(45px,6vw,88px) var(--gutter) clamp(48px,6vw,90px);background:#f6f8fb}
+.packageDecisionHeader,.packageDecisionGrid,.packageDecisionResult,.packageDecisionFootnote{max-width:1170px;margin-left:auto;margin-right:auto}
+.packageDecisionHeader h2{font-size:clamp(2.1rem,4.1vw,4.7rem);letter-spacing:-.06em;line-height:1.07;margin:17px 0 18px}
+.packageDecisionHeader h2 span{color:#858a93}
+.packageDecisionHeader p{max-width:760px;font-size:clamp(1rem,1.5vw,1.2rem);color:#5c6671;line-height:1.7}
+.packageDecisionGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:35px}
+.packageDecisionCard{appearance:none;text-align:left;display:flex;flex-direction:column;align-items:stretch;gap:12px;padding:clamp(19px,2.25vw,28px);border:1.5px solid #dce3eb;background:#fff;border-radius:20px;min-width:0;min-height:350px;transition:background .2s,border-color .2s,box-shadow .2s,transform .2s}
+.packageDecisionCard:hover{border-color:#9abbdc;transform:translateY(-2px)}
+.packageDecisionCard.isSelected{border-color:#0071e3;box-shadow:0 9px 30px #0064c80f}
+.packageDecisionCardTop{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:650;font-size:1.1rem}
+.packageDecisionCardTop span:last-child{color:#0071e3}
+.packageDecisionRate{font-size:clamp(1.6rem,2.6vw,2.75rem);font-weight:650;letter-spacing:-.055em;line-height:1.15}
+.packageDecisionRate small{font-size:.85rem;letter-spacing:0;color:#6e7480;font-weight:500}
+.packageDecisionPersona{font-weight:650;color:#1e2c3d}
+.packageDecisionWho{font-size:.87rem;line-height:1.6;color:#626c76;min-height:74px}
+.packageDecisionSpec{padding-top:11px;border-top:1px solid #ecedf0;font-size:.78rem;line-height:1.55;color:#4e5763}
+.packageDecisionResult{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) auto;align-items:end;gap:21px;padding:26px;margin-top:18px;background:#fff;border:1px solid #e2e7ef;border-radius:20px}
+.packageDecisionResult label{display:block;font-size:.85rem;color:#495461;margin-bottom:9px}
+.packageDecisionResult input{font-size:1rem;width:100%;max-width:270px;min-height:48px;background:#f9fafc;border:1px solid #b9c4d0;border-radius:10px;padding:8px 13px}
+.packageDecisionResult [role="alert"]{display:block;color:#ae3535;font-size:.8rem;margin-top:6px}
+.packageDecisionEstimate{display:flex;flex-direction:column;gap:5px}
+.packageDecisionEstimate>span{font-size:.75rem;color:#6a7480}
+.packageDecisionEstimate output{font-size:clamp(1.7rem,2.5vw,2.5rem);letter-spacing:-.05em;font-weight:650;line-height:1.2}
+.packageDecisionEstimate p{font-size:.74rem;color:#6e7782;margin:0;line-height:1.55}
+.packageDecisionFootnote{margin-top:15px;font-size:.76rem;color:#65717e;line-height:1.7}
+@media(max-width:900px){.homeEvidenceGrid{grid-template-columns:1fr}.homeEvidenceVisual{min-height:350px}.packageDecisionGrid{grid-template-columns:1fr}.packageDecisionCard{min-height:0}.packageDecisionWho{min-height:0}.packageDecisionResult{grid-template-columns:1fr 1fr}.packageDecisionResult>.cta{grid-column:1 / -1}.homeScopePanels{grid-template-columns:1fr}}
+@media(max-width:550px){.homeEvidenceVisual{min-height:260px}.homeEvidenceCopy h2,.homeScopeHeading h2{font-size:clamp(2.1rem,9vw,3rem)}.homeScopePanels article{padding:24px}.packageDecisionResult{grid-template-columns:1fr;padding:18px}.packageDecisionResult>.cta{grid-column:1}.packageDecisionHeader h2{font-size:clamp(2.15rem,9vw,3.35rem)}.packageDecisionSection{padding-left:20px;padding-right:20px}.productHeroCopy>.homeTamilLine{margin-top:-11px}}
+@media(prefers-reduced-motion:reduce){.packageDecisionCard{transition:none}.packageDecisionCard:hover{transform:none}}

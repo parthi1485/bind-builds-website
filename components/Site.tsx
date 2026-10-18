@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { site, whatsappUrl } from '@/lib/site';
 
-const navigation = [['Packages', '/packages'], ['Calculator', '/cost-calculator'], ['Process', '/process'], ['Why Bind', '/why-bind-builds'], ['Approvals', '/building-plan-approval-chennai'], ['Projects', site.portfolio], ['About', '/about'], ['FAQs', '/faq'], ['Contact', '/contact']];
+const navigation = [['Packages', '/packages'], ['Calculator', '/cost-calculator'], ['Process', '/process'], ['Site Work', '/project-evidence'], ['Planning', '/pre-construction-planning-report'], ['Studio Portfolio', site.portfolio], ['About', '/about'], ['FAQs', '/faq'], ['Contact', '/contact']];
 export function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -75,7 +75,7 @@ export function Nav() {
 }
 export function Footer() {
   const guideLinks = [
-    ['Projects', site.portfolio],
+    ['Project evidence', '/project-evidence'],
     ['Construction company', '/construction-company-chennai'],
     ['House construction', '/house-construction-chennai'],
     ['Individual house construction', '/individual-house-construction-chennai'],
