@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import LocalAreaSelector from '@/components/LocalAreaSelector';
 import StructuredData from '@/components/StructuredData';
 import { Page } from '@/components/Site';
 import { breadcrumbSchema } from '@/lib/seo';
 import { money } from '@/lib/calculator';
-import { packages, site, whatsappUrl } from '@/lib/site';
+import { packages, site } from '@/lib/site';
 
 export type LocalClusterGuideData={
  path:string;
@@ -19,6 +20,7 @@ export type LocalClusterGuideData={
  scenarios:Array<[string,string]>;
  faqs:Array<[string,string]>;
  nearby:Array<[string,string]>;
+ projectEvidence?:{title:string;description:string;href:string;role:string};
 };
 
 export default function LocalClusterGuide({data}:{data:LocalClusterGuideData}){
@@ -41,7 +43,7 @@ export default function LocalClusterGuide({data}:{data:LocalClusterGuideData}){
     <span className="productEyebrow">{data.introEyebrow}</span>
     <h2>{data.introLead}<br/><span>{data.introAccent}</span></h2>
     <p>{data.intro}</p>
-    <div className="guideActions"><Link className="cta primary" href="/start-a-project">Discuss my site ↗</Link><Link className="productTextLink" href="/cost-calculator">Calculate my construction budget →</Link></div>
+    <div className="guideActions"><a className="cta primary" href="#choose-project-locality">Choose my site locality ↓</a><Link className="productTextLink" href="/cost-calculator">Calculate my construction budget →</Link></div>
    </header>
 
    <section className="guideSection">
@@ -70,6 +72,13 @@ export default function LocalClusterGuide({data}:{data:LocalClusterGuideData}){
     <div className="guideCards three">{data.scenarios.map(([h,p])=><article key={h}><h3>{h}</h3><p>{p}</p></article>)}</div>
    </section>
 
+   {data.projectEvidence&&<section className="guideSection">
+    <span className="productEyebrow">Relevant project evidence · role stated</span>
+    <h2>Experience near this corridor.<br/><span>See what the project actually demonstrates.</span></h2>
+    <div className="guideCards">
+     <article><span className="productEyebrow">{data.projectEvidence.role}</span><h3>{data.projectEvidence.title}</h3><p>{data.projectEvidence.description}</p><Link href={data.projectEvidence.href}>Explore the project and its documented role →</Link></article>
+    </div>
+   </section>}
    <section className="guideSection">
     <span className="productEyebrow">Authority before appointment</span>
     <h2>Verify the business.<br/><span>Then assess the proposal.</span></h2>
@@ -88,7 +97,7 @@ export default function LocalClusterGuide({data}:{data:LocalClusterGuideData}){
 
    <section className="guideSection guideFaq"><span className="productEyebrow">Construction FAQs</span><h2>Before the first site meeting.</h2>{data.faqs.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</section>
 
-   <section className="guideClosing"><h2>Have a site in this corridor?</h2><p>Share the exact locality, plot dimensions, road width, proposed floors, approximate built-up area, family requirements, budget direction and target start date.</p><div className="guideActions"><Link className="cta primary" href="/start-a-project">Check my project fit ↗</Link><a className="productTextLink" href={whatsappUrl(`Hello Bind Builds, I have a site in ${data.areas[0]} / nearby Chennai and would like to discuss house construction.`)} target="_blank" rel="noopener noreferrer">WhatsApp my site details ↗</a></div></section>
+   <section className="guideClosing"><h2>Have a site in this corridor?</h2><p>Share the exact locality, plot dimensions, road width, proposed floors, approximate built-up area, family requirements, budget direction and target start date.</p><LocalAreaSelector areas={data.areas}/></section>
   </article>
   <StructuredData data={[breadcrumbSchema('House construction in '+data.areas.join(', '),data.path),serviceSchema,faqSchema]}/>
  </Page>;

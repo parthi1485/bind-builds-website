@@ -429,3 +429,23 @@
  }
  .caseProjectVisual{border-radius:16px}
 }
+
+
+/* Local service area enquiry — preserve chosen neighbourhood in the project brief */
+.localAreaSelector{margin-top:27px;padding:22px;border:1px solid #e0e5ec;border-radius:18px;background:#f8fafc}
+.localAreaSelector fieldset{margin:0;padding:0;border:0;min-width:0}
+.localAreaSelector legend{font-size:.78rem;font-weight:600;color:#303843;padding:0 0 12px}
+.localAreaSelectorChoices{display:flex;flex-wrap:wrap;gap:8px}
+.localAreaSelectorChoices button{min-height:44px;padding:10px 16px;border-radius:999px;border:1px solid #d2d9e3;background:white;color:#344052;font:inherit;font-size:.77rem;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.localAreaSelectorChoices button[aria-pressed=true]{background:#0071e3;border-color:#0071e3;color:white}
+.localAreaSelectorChoices button:focus-visible{outline:3px solid #83beff;outline-offset:2px}
+.localAreaSelector .guideActions{margin-top:21px}
+.localAreaSelector .guideSmall{margin:16px 0 0;max-width:680px}
+@media(max-width:650px){
+ .localAreaSelector{padding:18px 16px;border-radius:16px}
+ .localAreaSelectorChoices{gap:8px}
+ .localAreaSelectorChoices button{font-size:.77rem}
+ .localAreaSelector .guideActions{align-items:stretch}
+ .localAreaSelector .guideActions .cta{width:100%;justify-content:center;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){.localAreaSelectorChoices button{transition:none}}

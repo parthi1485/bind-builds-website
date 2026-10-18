@@ -1,7 +1,11 @@
 import type { MetadataRoute } from 'next';
 import { site } from '@/lib/site';
 
-const updated='2026-10-09';
+// Include lastmod only where the page has a documented significant content update.
+const verifiedUpdates:Record<string,string>={
+ '/project-evidence':'2026-09-25',
+ '/construction-cost-coimbatore':'2026-09-24',
+};
 export default function sitemap():MetadataRoute.Sitemap{
  const pages=[
   ['',1],
@@ -41,5 +45,5 @@ export default function sitemap():MetadataRoute.Sitemap{
   ['/start-a-project',.8],
   ['/privacy',.3],
  ] as const;
- return pages.map(([path,priority])=>({url:site.url+path,lastModified:updated,changeFrequency:'monthly',priority}));
+ return pages.map(([path])=>({url:site.url+path,...(verifiedUpdates[path]?{lastModified:verifiedUpdates[path]}:{})}));
 }

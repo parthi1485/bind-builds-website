@@ -30,6 +30,7 @@ const data:LocalClusterGuideData={
   ['Can you plan a rental or multi-family building?','Yes, subject to project fit. Parking, privacy, stairs, service meters, shafts and structural intent should be coordinated before the building is priced and executed.'],
   ['Do you arrange a site visit immediately?','We first review the project information. When the site and scope appear to fit, we arrange the appropriate site or office meeting.']
  ],
+ projectEvidence:{title:'CCBM Commercial Complex — Maduravoyal',role:'Studio Bind Architects · Architectural design',description:'A completed architectural-design project in Maduravoyal. This is evidence of Studio Bind design experience in the locality, not a claim that Bind Builds constructed or handed over a residential building there.',href:'/projects/ccbm-commercial-complex'},
  nearby:[['Porur','/house-construction-porur-chennai'],['Poonamallee','/house-construction-poonamallee-chennai'],['Mangadu + Kundrathur','/house-construction-mangadu-kundrathur-chennai'],['West Chennai hub','/house-construction-west-chennai']]
 };
 export default function Page(){return <LocalClusterGuide data={data}/>;}
