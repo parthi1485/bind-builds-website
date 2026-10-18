@@ -116,3 +116,15 @@
  body:has(.premiumHome) .mobileProjectBar{display:none!important}
 }
 @media(prefers-reduced-motion:reduce){.premiumHome .homeEvidenceVisual{transition:none}}
+
+/* The CCBM media currently fails on mobile Safari. Use a truthful dossier graphic
+   until verified photographic media is available, including on linked case pages. */
+.projectSheetPlaceholder{width:100%;display:flex;flex-direction:column;justify-content:space-between;min-height:270px;gap:25px;position:relative;overflow:hidden;padding:clamp(24px,4vw,48px);background:linear-gradient(135deg,#e3e9ec,#f5f6f7);color:#1b2f3d;border:1px solid #d9e1e6}
+.projectSheetPlaceholder:after{content:'';position:absolute;right:-10%;top:8%;width:60%;aspect-ratio:1;border:1px solid #92a7b888;box-shadow:inset 25px 25px 0 #fff2,0 0 0 35px #c8d6df39;transform:rotate(-17deg);pointer-events:none}
+.projectSheetPlaceholder>span,.projectSheetPlaceholder>strong,.projectSheetPlaceholder>small{position:relative;z-index:1}
+.projectSheetPlaceholder>span{font-size:.67rem;letter-spacing:.14em;font-weight:600;color:#617788}
+.projectSheetPlaceholder>strong{font-size:clamp(2rem,5vw,4.5rem);letter-spacing:-.06em;line-height:1.04;font-weight:550}
+.projectSheetPlaceholder>small{font-size:.78rem;color:#5a7180}
+.evidenceProjectSheet{min-height:260px}
+.caseProjectSheet{min-height:400px}
+@media(max-width:760px){.caseProjectSheet{min-height:280px}.evidenceProjectSheet{min-height:220px}.projectSheetPlaceholder>strong{font-size:clamp(2rem,9vw,3.3rem)}}

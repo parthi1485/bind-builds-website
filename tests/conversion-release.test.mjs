@@ -145,3 +145,15 @@ test('homepage sections have intentional color contrast and a working project-in
  assert.match(css,/body:has\(\.premiumHome\) \.mobileProjectBar\{display:none!important\}/);
  assert.match(motion,/\['\/', '\/start-a-project'/);
 });
+
+test('CCBM project evidence pages do not expose a failing media file as project photography',()=>{
+ const evidence=read('app/project-evidence/page.tsx');
+ const caseStudy=read('app/projects/ccbm-commercial-complex/page.tsx');
+ const css=read('app/homepage-rhythm.css');
+ assert.doesNotMatch(evidence,/img className="evidenceCardVisual"/);
+ assert.doesNotMatch(caseStudy,/<img src="\/projects\/ccbm-commercial-complex\.webp"/);
+ assert.doesNotMatch(caseStudy,/image:site\.url\+'\/projects\/ccbm-commercial-complex\.webp'/);
+ assert.match(evidence,/not a project photograph/);
+ assert.match(caseStudy,/Project information graphic, not site photography/);
+ assert.match(css,/\.projectSheetPlaceholder/);
+});

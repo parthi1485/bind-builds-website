@@ -17,7 +17,6 @@ const caseSchema={
  headline:title,
  description,
  url:site.url+path,
- image:site.url+'/projects/ccbm-commercial-complex.webp',
  dateModified:'2026-09-25',
  author:{'@id':site.url+'/#founder'},
  publisher:{'@id':site.url+'/#organization'},
@@ -48,8 +47,8 @@ export default function CcbmCommercialComplex(){
    </header>
 
    <figure className="caseProjectVisual">
-    <img src="/projects/ccbm-commercial-complex.webp" alt="CCBM Commercial Complex project sheet showing architectural renderings, completed building photograph and site aerials in Maduravoyal" width="900" height="518"/>
-    <figcaption>CCBM Commercial Complex · Maduravoyal · project sheet supplied from the Studio Bind Architects portfolio.</figcaption>
+    <div className="projectSheetPlaceholder caseProjectSheet" role="img" aria-label="CCBM Commercial Complex completed architectural design project information graphic, not a photograph"><span>STUDIO BIND ARCHITECTS / PROJECT FILE</span><strong>CCBM<br/>Commercial Complex.</strong><small>12,494 sq.ft built-up · Maduravoyal, Chennai</small></div>
+    <figcaption>Project information graphic, not site photography. Original design portfolio material can be reviewed with Studio Bind Architects.</figcaption>
    </figure>
 
    <section className="guideSection">

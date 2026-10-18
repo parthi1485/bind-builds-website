@@ -31,7 +31,7 @@ export default function ProjectEvidence(){
     <h2>From design intent<br/><span>to built reality.</span></h2>
     <div className="evidenceGrid">
       <article className="evidenceCard evidenceCardFeatured">
-        <img className="evidenceCardVisual" src="/projects/ccbm-commercial-complex.webp" alt="CCBM Commercial Complex in Maduravoyal — completed Studio Bind architectural design project sheet" loading="lazy"/>
+        <div className="projectSheetPlaceholder evidenceProjectSheet" role="img" aria-label="CCBM Commercial Complex project information graphic, not a project photograph"><span>STUDIO BIND / COMPLETED DESIGN</span><strong>CCBM<br/>Commercial Complex.</strong><small>Maduravoyal · Chennai</small></div>
         <div className="evidenceCardTop"><span className="evidenceStatus evidenceStatusCompleted">Completed · Architecture</span><span className="evidenceMeta">Maduravoyal<br/>Chennai</span></div>
         <h3>CCBM Commercial Complex</h3>
         <p>A commercial complex designed by Studio Bind Architects around flexible, floor-wise planning for independent business occupancy. A completed project that reflects the architectural thinking behind the Bind practice.</p>
