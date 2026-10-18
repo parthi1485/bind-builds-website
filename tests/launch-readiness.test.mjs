@@ -285,7 +285,7 @@ test('visible navigation defers heavy route downloads until visitor intent', () 
   assert.match(link,/onTouchStart=/);
   assert.match(link,/router\.prefetch\(href\)/);
   assert.match(nav,/className="links"[\s\S]*IntentLink/);
-  assert.match(hero,/Calculate construction cost[\s\S]*<\/IntentLink>/);
+  assert.match(hero,/Calculate my construction cost[\s\S]*<\/IntentLink>/);
 });
 
 test('navigation separates construction-stage evidence from Studio Bind portfolio', () => {

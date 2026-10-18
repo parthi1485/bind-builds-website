@@ -1,6 +1,5 @@
 
 /* Conversion release 01: calm editorial hierarchy, no dark-pattern urgency */
-.productHeroCopy>.homeTamilLine{font-size:clamp(.88rem,1.12vw,1.05rem);font-weight:550;line-height:1.7;color:#345d80;max-width:720px;margin:-13px auto 25px;letter-spacing:0}
 .homeEvidenceFeature{background:#fff;padding-top:clamp(55px,7vw,105px);padding-bottom:clamp(65px,8vw,110px)}
 .homeEvidenceGrid{max-width:1180px;margin:auto;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,90px);align-items:center}
 .homeEvidenceVisual{position:relative;background:#e9edf1;border-radius:22px;overflow:hidden;min-width:0;min-height:360px;display:flex;align-items:stretch}
@@ -49,7 +48,7 @@
 .packageDecisionEstimate p{font-size:.74rem;color:#6e7782;margin:0;line-height:1.55}
 .packageDecisionFootnote{margin-top:15px;font-size:.76rem;color:#65717e;line-height:1.7}
 @media(max-width:900px){.homeEvidenceGrid{grid-template-columns:1fr}.homeEvidenceVisual{min-height:350px}.packageDecisionGrid{grid-template-columns:1fr}.packageDecisionCard{min-height:0}.packageDecisionWho{min-height:0}.packageDecisionResult{grid-template-columns:1fr 1fr}.packageDecisionResult>.cta{grid-column:1 / -1}.homeScopePanels{grid-template-columns:1fr}}
-@media(max-width:550px){.homeEvidenceVisual{min-height:260px}.homeEvidenceCopy h2,.homeScopeHeading h2{font-size:clamp(2.1rem,9vw,3rem)}.homeScopePanels article{padding:24px}.packageDecisionResult{grid-template-columns:1fr;padding:18px}.packageDecisionResult>.cta{grid-column:1}.packageDecisionHeader h2{font-size:clamp(2.15rem,9vw,3.35rem)}.packageDecisionSection{padding-left:20px;padding-right:20px}.productHeroCopy>.homeTamilLine{margin-top:-11px}}
+@media(max-width:550px){.homeEvidenceVisual{min-height:260px}.homeEvidenceCopy h2,.homeScopeHeading h2{font-size:clamp(2.1rem,9vw,3rem)}.homeScopePanels article{padding:24px}.packageDecisionResult{grid-template-columns:1fr;padding:18px}.packageDecisionResult>.cta{grid-column:1}.packageDecisionHeader h2{font-size:clamp(2.15rem,9vw,3.35rem)}.packageDecisionSection{padding-left:20px;padding-right:20px}}
 @media(prefers-reduced-motion:reduce){.packageDecisionCard{transition:none}.packageDecisionCard:hover{transform:none}}
 
 /* Cost comprehension and contact-free homeowner sharing */
@@ -118,3 +117,14 @@
 .homePlanningFootnote{max-width:1180px;margin:20px auto 0;font-size:.8rem;color:#687583;line-height:1.6}
 @media(max-width:900px){.homePlanningGrid{grid-template-columns:1fr}.homePlanningGrid>a{min-height:0}.homePlanningGrid p{margin:0 0 8px}}
 @media(prefers-reduced-motion:reduce){.homePlanningGrid>a{transition:none}.homePlanningGrid>a:hover{transform:none}}
+
+/* Restore original quiet hero. Mobile-only rhythm keeps the architecture visible. */
+@media(max-width:760px){
+ .premiumHome .productHero h1{margin:20px auto 18px}
+ .premiumHome .productHeroCopy>p{max-width:340px;font-size:.9rem;line-height:1.55;margin:0 auto 18px}
+ .premiumHome .productHeroActions{gap:4px}
+ .premiumHome .productHeroActions .cta{width:auto;max-width:100%;min-width:170px;min-height:46px;padding:12px 26px}
+ .premiumHome .productHeroActions .productTextLink{padding:7px 12px}
+ .premiumHome .productHeroTrust{font-size:.7rem;line-height:1.4;gap:7px 8px;margin-top:11px}
+ .premiumHome .architectureScene{margin-top:10px}
+}

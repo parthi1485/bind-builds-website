@@ -8,8 +8,9 @@ test('homepage positions architect-led decisions with honest project evidence',(
  const home=read('app/page.tsx');
  const hero=read('components/HomeExperience.tsx');
  assert.match(hero,/Architect-led construction/);
- assert.match(hero,/lang="ta"/);
- assert.match(hero,/Calculate construction cost/);
+ assert.match(hero,/One team\. From the first sketch to the final key\./);
+ assert.doesNotMatch(hero,/homeTamilLine|lang="ta"|An architect-led team coordinating the decisions/);
+ assert.match(hero,/Calculate my construction cost/);
  assert.match(hero,/Plan my home/);
  assert.match(home,/homeEvidenceFeature/);
  assert.match(home,/Studio Bind Architects · Completed architecture project/);
@@ -95,4 +96,15 @@ test('new package and planning interactions have privacy-conscious funnel events
  assert.match(analytics,/planning_resource_click/);
  assert.match(analytics,/homeEvidenceFeature/);
  assert.doesNotMatch(guide,/trackEvent\([^\n]*location:/);
+});
+
+test('original minimal homepage hero keeps restrained mobile CTA and spacing',()=>{
+ const hero=read('components/HomeExperience.tsx');
+ const css=read('app/conversion.css');
+ const copy=hero.slice(hero.indexOf('productHeroCopy'),hero.indexOf('architectureScene'));
+ assert.match(copy,/One team\. From the first sketch to the final key\./);
+ assert.match(copy,/href="\/start-a-project" className="cta primary"/);
+ assert.match(copy,/href="\/cost-calculator"/);
+ assert.doesNotMatch(copy,/homeTamilLine/);
+ assert.match(css,/premiumHome \.productHeroActions \.cta\{width:auto/);
 });
