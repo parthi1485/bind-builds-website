@@ -14,6 +14,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
   const [status, setStatus] = useState('');
   const [downloading, setDownloading] = useState(false);
   const downloadGate = useRef<HTMLDialogElement>(null);
+  const downloadInFlight = useRef(false);
   const [downloadLead, setDownloadLead] = useState({ name: '', phone: '', email: '' });
   const [downloadLeadStatus, setDownloadLeadStatus] = useState('');
   const [months, setMonths] = useState(String(constructionMonths(input.floors.length)));
@@ -81,6 +82,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
   };
   const unlockDownload = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (downloadInFlight.current) return;
     const digits = downloadLead.phone.replace(/\D/g, '').length;
     if (digits < 10 || digits > 15) { trackEvent('pdf_gate_validation_error',{field:'phone'}); setDownloadLeadStatus('Please enter a valid phone number with 10–15 digits.'); return; }
 
@@ -98,11 +100,13 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
 
     const attribution = leadAttributionFields();
     const attributionSummary = leadAttributionSummary();
+    downloadInFlight.current = true;
     setDownloading(true);
     setDownloadLeadStatus('Saving your details…');
     try {
       const response = await fetch('/api/website-lead', {
         method: 'POST',
+        signal: AbortSignal.timeout(20000),
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           source: 'Website – Estimate PDF',
@@ -137,8 +141,8 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     } catch {
       trackEvent('pdf_download_lead_error',{package_name:selected.name,calculated_area:estimate.area});
       setDownloading(false);
-      setDownloadLeadStatus('We could not save your details. Please try again before downloading.');
-    }
+      setDownloadLeadStatus('We could not confirm your details were saved. Your entries are still here. Retry, or close this window to copy your estimate.');
+    } finally { downloadInFlight.current = false; }
   };
 
   return <div className="calcReport">
@@ -153,7 +157,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
       <form onSubmit={unlockDownload} aria-busy={downloading}>
         <div className="estimateDownloadGateHead"><span className="eyebrow">PDF DOWNLOAD</span><button type="button" aria-label="Close" onClick={()=>downloadGate.current?.close()}>×</button></div>
         <h3 id="estimate-download-title">Download your<br/>estimate PDF.</h3>
-        <p>Enter your contact details to continue.</p>
+        <p>Your name, phone and email are sent to Bind Builds with this estimate for follow-up before the PDF is prepared.</p>
         <div className="estimateDownloadFields">
           <label>Your name <span>required</span><input autoFocus required minLength={2} maxLength={80} autoComplete="name" value={downloadLead.name} onChange={e=>setDownloadLead(v=>({...v,name:e.target.value}))}/></label>
           <label>Phone number <span>required</span><input required type="tel" inputMode="tel" autoComplete="tel" maxLength={22} pattern="[+0-9() -]{10,22}" value={downloadLead.phone} onChange={e=>setDownloadLead(v=>({...v,phone:e.target.value}))}/></label>

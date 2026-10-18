@@ -48,7 +48,7 @@
 .plotWorksheetFieldGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .plotWorksheetInputs label{display:flex;flex-direction:column;align-items:stretch;gap:8px;font-size:13px;font-weight:600;color:#2f3947;min-width:0}
 .plotWorksheetInputs label>small{display:inline;font-weight:400;color:#6c7582}
-.plotWorksheetInputs input[type="number"],.plotWorksheetInputs input[type="text"]{font:inherit;font-weight:500;min-width:0;width:100%;min-height:48px;border:1px solid #d3dae4;border-radius:10px;padding:10px 12px;background:#fff;color:#1e2936;box-sizing:border-box;font-variant-numeric:tabular-nums}
+.plotWorksheetInputs input[type="number"],.plotWorksheetInputs input[type="text"]{font:inherit;font-size:16px;font-weight:500;min-width:0;width:100%;min-height:48px;border:1px solid #d3dae4;border-radius:10px;padding:10px 12px;background:#fff;color:#1e2936;box-sizing:border-box;font-variant-numeric:tabular-nums}
 .plotWorksheetInputs input:focus-visible,.plotWorksheetFloors input:focus-visible+span,.plotWorksheetActions a:focus-visible,.plotWorksheetCopy:focus-visible{outline:2px solid #0071e3;outline-offset:3px}
 .plotWorksheetFloors{padding:0;margin:0;border:0;min-width:0}
 .plotWorksheetFloors legend{font-weight:600;color:#2f3947;font-size:13px;padding:0 0 11px}
@@ -102,7 +102,7 @@
 .documentAssistantRow strong{font-size:13px;font-weight:600;color:#27384a}
 .documentAssistantRow p{font-size:11px;line-height:1.65;color:#66717e;margin:6px 0 0}
 .documentAssistantRow label{font-size:11px;display:flex;flex-direction:column;gap:7px;color:#60707e;font-weight:500}
-.documentAssistantRow select{min-width:0;max-width:100%;background:#f8fafc;border:1px solid #d9e3ed;border-radius:9px;padding:9px 10px;min-height:44px;font:inherit;font-size:12px;color:#223449;cursor:pointer}
+.documentAssistantRow select{min-width:0;max-width:100%;background:#f8fafc;border:1px solid #d9e3ed;border-radius:9px;padding:9px 10px;min-height:44px;font:inherit;font-size:16px;color:#223449;cursor:pointer}
 .documentAssistantRow select:focus-visible,.documentAssistant button:focus-visible{outline:2px solid #0071e3;outline-offset:3px}
 .documentAssistantNext{margin-top:23px;padding:18px 19px;border-radius:13px;background:#f3f7fb}
 .documentAssistantNext>h4{font-size:16px;letter-spacing:-.015em;font-weight:600;color:#253c50;margin:9px 0 14px}
@@ -117,7 +117,7 @@
 .documentAssistantCopy p{font-size:11px;color:#2b6950;margin:0}
 .documentAssistant>.guideSmall{margin-top:9px}
 @media(max-width:900px){.documentAssistant{padding:21px}.documentAssistantRow{grid-template-columns:minmax(0,1fr)}.documentAssistantRow label{max-width:100%}}
-@media(max-width:760px){.documentAssistant{padding:18px 16px;margin:22px 0;border-radius:13px}.documentAssistantHeader>h3{font-size:27px}.documentAssistantNext{padding:16px 14px}.documentAssistantRow select{font-size:14px}}
+@media(max-width:760px){.documentAssistant{padding:18px 16px;margin:22px 0;border-radius:13px}.documentAssistantHeader>h3{font-size:27px}.documentAssistantNext{padding:16px 14px}.documentAssistantRow select{font-size:16px}}
 .documentAssistantProjectNote{border-left:2px solid #b2cce7;padding-left:13px;color:#566c80;line-height:1.65;font-size:12px;margin:17px 0 8px}
 .documentAssistant progress::-webkit-progress-bar{background:#e1e8f2;border-radius:10px}
 .documentAssistant progress::-webkit-progress-value{background:#2378ca;border-radius:10px}

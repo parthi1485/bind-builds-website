@@ -18,6 +18,7 @@ export default function ProjectForm({source='Website – Project Enquiry'}:Props
  const [submitStatus,setSubmitStatus]=useState('');
  const [copyStatus,setCopyStatus]=useState('');
  const heading=useRef<HTMLHeadingElement>(null);
+ const firstStepRender=useRef(true);
  const errorRef=useRef<HTMLParagraphElement>(null);
  const submissionInFlight=useRef(false);
  const startedRef=useRef(false);
@@ -25,7 +26,11 @@ export default function ProjectForm({source='Website – Project Enquiry'}:Props
  const invalidFieldsRef=useRef(new Set<string>());
 
  useEffect(()=>{const params=new URLSearchParams(window.location.search);const requestedType=params.get('type');const type=['New home','Demolition & rebuild','Rental / multi-family building','Commercial','Healthcare','Retail / hospitality','Interiors','Other'].includes(requestedType||'')?requestedType!:'New home';const tier=params.get('package');const area=params.get('area');const location=(params.get('location')||'').slice(0,120).replace(/[\u0000-\u001f]/g,'');const notes=(params.get('notes')||'').slice(0,2000).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,'');setForm(value=>({...value,type,location,package:['Essential','Elevate','Signature'].includes(tier||'')?tier!:'',area:area&&/^\d{1,6}$/.test(area)?area:'',notes}));},[]);
- useEffect(()=>{if(step>0||prepared)heading.current?.focus();},[step,prepared]);
+ useEffect(()=>{
+  if(firstStepRender.current){firstStepRender.current=false;return;}
+  heading.current?.scrollIntoView({block:'start',behavior:'instant'});
+  heading.current?.focus({preventScroll:true});
+ },[step,prepared]);
  useEffect(()=>{if(!prepared)trackEvent('project_form_step_view',{form_source:source,step_number:step+1,step_name:['project','priorities','contact'][step]});},[step,prepared,source]);
  useEffect(()=>{
   if(step===2&&!prepared&&!contactReachedRef.current){
