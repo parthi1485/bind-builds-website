@@ -128,3 +128,70 @@
  .premiumHome .productHeroTrust{font-size:.7rem;line-height:1.4;gap:7px 8px;margin-top:11px}
  .premiumHome .architectureScene{margin-top:10px}
 }
+
+/* Editorial calm release: architecture first, one visual rhythm. */
+.premiumHome .homeEvidenceFeature{padding-block:clamp(70px,9vw,135px);background:#fff}
+.premiumHome .homeEvidenceGrid{max-width:1260px;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(34px,7vw,110px)}
+.premiumHome .homeEvidenceVisual{min-height:clamp(380px,42vw,610px);border-radius:4px;background:#f0f1f3}
+.premiumHome .homeEvidenceVisual>span{border-radius:3px;font-size:.7rem;letter-spacing:.01em}
+.premiumHome .homeEvidenceCopy h2{font-size:clamp(3rem,5.4vw,6rem);line-height:1.03;margin:20px 0 22px}
+.premiumHome .homeEvidenceCopy>p{max-width:410px;font-size:clamp(.96rem,1.25vw,1.1rem);line-height:1.75;margin-bottom:20px}
+.premiumHome .homeEvidenceCopy>.homeEvidenceStages{font-size:.74rem;line-height:1.8;color:#78808a;margin-bottom:25px}
+.premiumHome .designStatement{padding-block:clamp(85px,9vw,140px);background:#f9fafb}
+.premiumHome .homeScopeContrast{background:#fff}
+.premiumHome .homeScopeHeading{max-width:1100px;margin-bottom:35px}
+.premiumHome .homeScopeHeading h2{font-size:clamp(2.9rem,5vw,5.3rem)}
+.premiumHome .homeScopeHeading>p{max-width:540px;font-size:1rem;line-height:1.8}
+.premiumHome .homeScopePanels{max-width:1100px;gap:0;border-block:1px solid #e3e7eb}
+.premiumHome .homeScopePanels article,.premiumHome .homeScopePanels article:nth-child(2){border:0;border-radius:0;box-shadow:none;background:transparent;padding:clamp(24px,3.5vw,45px)}
+.premiumHome .homeScopePanels article:first-child{border-right:1px solid #e3e7eb}
+.premiumHome .homeScopePanels h3{font-size:clamp(1.65rem,2.7vw,2.5rem);margin:15px 0 24px}
+.premiumHome .homeScopePanels ul{gap:13px;color:#626a73;font-size:.9rem}
+.premiumHome .homeScopeNote{max-width:1100px}
+.premiumHome .homePlanningTools{background:#f8f9fb}
+.premiumHome .homePlanningHeader{margin-bottom:30px}
+.premiumHome .homePlanningGrid{gap:0;border-block:1px solid #e2e7ed}
+.premiumHome .homePlanningGrid>a{min-height:230px;border:0;border-radius:0;background:transparent;box-shadow:none;padding:clamp(24px,3vw,42px);gap:15px}
+.premiumHome .homePlanningGrid>a:not(:last-child){border-right:1px solid #e2e7ed}
+.premiumHome .homePlanningGrid>a:hover{transform:none;box-shadow:none;background:#f0f4f8}
+.premiumHome .homePlanningGrid p{font-size:.87rem;color:#737b86}
+.premiumHome .confidenceGrid{gap:0;border-block:1px solid #e5e9ee}
+.premiumHome .confidenceCard{background:transparent;box-shadow:none;border:0;border-radius:0;padding:clamp(24px,3vw,38px)}
+.premiumHome .confidenceCard:nth-child(odd){border-right:1px solid #e5e9ee}
+.premiumHome .confidenceCard:nth-child(-n+2){border-bottom:1px solid #e5e9ee}
+.premiumHome .confidenceCard p{line-height:1.75}
+.packageDecisionSection{background:#fafbfc;padding-block:clamp(60px,7vw,100px)}
+.packageDecisionGrid{gap:0;border-block:1px solid #e2e6ec}
+.packageDecisionCard{border:0;border-radius:0;min-height:255px;padding:clamp(22px,3vw,38px);box-shadow:none;background:transparent;gap:12px}
+.packageDecisionCard:not(:last-child){border-right:1px solid #e2e6ec}
+.packageDecisionCard:hover{transform:none;background:#f1f5fa;border-color:transparent}
+.packageDecisionCard.isSelected{border:0;box-shadow:inset 0 -3px #0064c8;background:#f0f6ff}
+.packageDecisionWho{min-height:0}
+.packageDecisionSpec{margin-top:auto}
+@media(max-width:900px){
+ .premiumHome .homeEvidenceGrid{grid-template-columns:1fr;gap:30px}
+ .premiumHome .homeEvidenceVisual{min-height:0;aspect-ratio:5/4}
+ .premiumHome .homeEvidenceCopy h2{font-size:clamp(2.8rem,9vw,4.5rem)}
+ .premiumHome .homeScopePanels{grid-template-columns:1fr}
+ .premiumHome .homeScopePanels article,.premiumHome .homeScopePanels article:nth-child(2){padding:28px 0}
+ .premiumHome .homeScopePanels article:first-child{border-right:0;border-bottom:1px solid #e3e7eb}
+ .premiumHome .homePlanningGrid{grid-template-columns:1fr}
+ .premiumHome .homePlanningGrid>a{min-height:0;padding:27px 0}
+ .premiumHome .homePlanningGrid>a:not(:last-child){border-right:0;border-bottom:1px solid #e2e7ed}
+ .premiumHome .confidenceGrid{grid-template-columns:1fr}
+ .premiumHome .confidenceCard:nth-child(odd){border-right:0}
+ .premiumHome .confidenceCard:not(:last-child){border-bottom:1px solid #e5e9ee}
+ .premiumHome .confidenceCard{padding:25px 0}
+ .packageDecisionGrid{border-bottom:0}
+ .packageDecisionCard{min-height:0;padding:25px 5px}
+ .packageDecisionCard:not(:last-child){border-right:0;border-bottom:1px solid #e2e6ec}
+ .packageDecisionCard.isSelected{box-shadow:inset 3px 0 #0064c8;padding-left:18px}
+}
+@media(max-width:480px){
+ .premiumHome .homeEvidenceFeature{padding-top:58px}
+ .premiumHome .homeEvidenceVisual{aspect-ratio:4/3}
+ .premiumHome .homeEvidenceVisual>span{font-size:.67rem;margin:10px}
+ .premiumHome .homeEvidenceCopy>.homeEvidenceStages{font-size:.69rem}
+ .premiumHome .designStatement{padding-block:78px}
+}
+@media(prefers-reduced-motion:reduce){.premiumHome .homePlanningGrid>a{transition:none}}

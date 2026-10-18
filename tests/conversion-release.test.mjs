@@ -108,3 +108,23 @@ test('original minimal homepage hero keeps restrained mobile CTA and spacing',()
  assert.doesNotMatch(copy,/homeTamilLine/);
  assert.match(css,/premiumHome \.productHeroActions \.cta\{width:auto/);
 });
+
+test('editorial homepage prioritises architecture and removes duplicate highlight cards',()=>{
+ const home=read('app/page.tsx');
+ const css=read('app/conversion.css');
+ assert.doesNotMatch(home,/className="proofRail"|className="highlightGrid"/);
+ assert.match(home,/homeEvidenceVisual/);
+ assert.match(home,/Studio Bind Architects · Completed architecture project/);
+ assert.match(home,/Ongoing construction · Pre-construction/);
+ assert.ok(home.indexOf('homeEvidenceFeature')<home.indexOf('designStatement'));
+ assert.ok(home.indexOf('designStatement')<home.indexOf('homeScopeContrast'));
+ assert.ok(home.indexOf('specificationSection')<home.indexOf('homePlanningTools'));
+ assert.match(css,/homeEvidenceGrid\{max-width:1260px/);
+});
+test('simplified package choices preserve the full specification comparison',()=>{
+ const quick=read('components/PackageQuickGuide.tsx');
+ const full=read('app/packages/page.tsx');
+ assert.match(quick,/Flooring: /);
+ assert.doesNotMatch(quick,/Site support: /);
+ assert.match(full,/PackageComparison categories=\{categories\}/);
+});
