@@ -291,7 +291,8 @@ test('visible navigation defers heavy route downloads until visitor intent', () 
 test('navigation separates construction-stage evidence from Studio Bind portfolio', () => {
   const site=read('components/Site.tsx');
   const navigationLine=site.split('\n').find(line=>line.startsWith('const navigation = ')) || '';
-  assert.match(navigationLine,/\['Site Work', '\/project-evidence'\], \['Planning', '\/pre-construction-planning-report'\], \['Studio Portfolio', site\.portfolio\]/);
+  assert.match(navigationLine,/\['Approvals', '\/building-plan-approval-chennai'\], \['Planning', '\/pre-construction-planning-report'\], \['Projects', site\.portfolio\]/);
+  assert.doesNotMatch(navigationLine,/Site Work|Studio Portfolio/);
   assert.match(site,/className="links".*navigation\.map/s);
   assert.match(site,/aria-label="Mobile navigation".*navigation\.map/s);
 });
