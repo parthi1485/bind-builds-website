@@ -31,8 +31,7 @@ const nextConfig:NextConfig={
     permanent:true,
     has:[{type:'host' as const,value:host}],
    }))),
-   // Keep previous Bind Builds project URLs working while the portfolio lives on Studio Bind.
-   {source:'/project-evidence',destination:'https://www.bindarchitects.com/',permanent:true},
+   // /projects remains Studio Bind's external portfolio; /project-evidence is a separate internal construction-stage resource.
    {source:'/projects',destination:'https://www.bindarchitects.com/',permanent:true},
    {source:'/portfolio',destination:'https://www.bindarchitects.com/',permanent:true},
   ];

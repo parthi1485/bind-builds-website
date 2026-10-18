@@ -10,6 +10,7 @@ export default function sitemap():MetadataRoute.Sitemap{
   ['',1],
   ['/about',.7],
   ['/why-bind-builds',.94],
+  ['/project-evidence',.85],
   ['/projects/sunguvarchathiram-multigenerational-home',.86],
   ['/projects/pallikaranai-family-home',.86],
   ['/projects/ccbm-commercial-complex',.84],

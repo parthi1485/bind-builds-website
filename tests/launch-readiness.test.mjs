@@ -12,6 +12,7 @@ test('launch-critical routes are represented in the sitemap', () => {
     "''",
     "'/about'",
     "'/why-bind-builds'",
+    "'/project-evidence'",
     "'/projects/sunguvarchathiram-multigenerational-home'",
     "'/projects/pallikaranai-family-home'",
     "'/projects/ccbm-commercial-complex'",
@@ -148,7 +149,8 @@ test('canonical and legacy-domain migration signals remain configured', () => {
   assert.match(config,/type:'host'/);
   assert.match(config,/https:\/\/www\.bindbuilds\.com\/packages/);
   assert.match(config,/https:\/\/www\.bindarchitects\.com\//);
-  assert.match(config,/source:'\/project-evidence',destination:'https:\/\/www\.bindarchitects\.com\/',permanent:true/);
+  assert.doesNotMatch(config,/source:'\/project-evidence',destination:/);
+  assert.match(config,/source:'\/projects',destination:'https:\/\/www\.bindarchitects\.com\/',permanent:true/);
 });
 
 
@@ -283,13 +285,13 @@ test('visible navigation defers heavy route downloads until visitor intent', () 
   assert.match(link,/onTouchStart=/);
   assert.match(link,/router\.prefetch\(href\)/);
   assert.match(nav,/className="links"[\s\S]*IntentLink/);
-  assert.match(hero,/Calculate my construction cost[\s\S]*<\/IntentLink>/);
+  assert.match(hero,/Calculate construction cost[\s\S]*<\/IntentLink>/);
 });
 
-test('desktop and mobile navigation keep Projects directly below Approvals', () => {
+test('navigation separates construction-stage evidence from Studio Bind portfolio', () => {
   const site=read('components/Site.tsx');
   const navigationLine=site.split('\n').find(line=>line.startsWith('const navigation = ')) || '';
-  assert.match(navigationLine,/\['Approvals', '\/building-plan-approval-chennai'\], \['Projects', site\.portfolio\]/);
+  assert.match(navigationLine,/\['Site Work', '\/project-evidence'\], \['Planning', '\/pre-construction-planning-report'\], \['Studio Portfolio', site\.portfolio\]/);
   assert.match(site,/className="links".*navigation\.map/s);
   assert.match(site,/aria-label="Mobile navigation".*navigation\.map/s);
 });
