@@ -128,3 +128,20 @@ test('simplified package choices preserve the full specification comparison',()=
  assert.doesNotMatch(quick,/Site support: /);
  assert.match(full,/PackageComparison categories=\{categories\}/);
 });
+
+test('homepage sections have intentional color contrast and a working project-information panel',()=>{
+ const home=read('app/page.tsx');
+ const css=read('app/homepage-rhythm.css');
+ const layout=read('app/layout.tsx');
+ const motion=read('components/Motion.tsx');
+ assert.doesNotMatch(home,/<img src="\/projects\/ccbm-commercial-complex\.webp"/);
+ assert.match(home,/homeProjectSheet/);
+ assert.match(home,/CCBM/);
+ assert.match(home,/Studio Bind Architects · Completed architecture project/);
+ assert.match(home,/Beyond<br\/><span>the rate\./);
+ assert.match(layout,/import '\.\/homepage-rhythm\.css'/);
+ assert.match(css,/\.premiumHome \.designStatement\{[\s\S]*?background:#161a20;[\s\S]*?color:#f6f7f8/);
+ assert.match(css,/\.premiumHome \.designStatement>h2\{color:#f6f7f8/);
+ assert.match(css,/body:has\(\.premiumHome\) \.mobileProjectBar\{display:none!important\}/);
+ assert.match(motion,/\['\/', '\/start-a-project'/);
+});

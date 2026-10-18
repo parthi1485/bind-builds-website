@@ -1,0 +1,118 @@
+
+/* Bind Builds — deliberate chapter transitions, mobile typography and accessible controls.
+   Scoped to homepage to avoid changing calculator, packages or enquiry layouts. */
+.premiumHome{background:#fff;color:#16191e}
+.premiumHome .homeEvidenceFeature{
+ background:#f6f7f8;
+ border-top:1px solid #edf0f2;
+ padding-block:clamp(64px,8vw,116px);
+}
+.premiumHome .homeEvidenceGrid{max-width:1160px;gap:clamp(35px,6vw,80px);grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}
+.premiumHome .homeEvidenceVisual{
+ background:#e8ecef;
+ color:#1e2c39;
+ min-height:0;
+ aspect-ratio:1.18;
+ border:1px solid #dfe5e9;
+ overflow:hidden;
+ border-radius:3px;
+ display:block;
+ text-decoration:none;
+ position:relative;
+}
+.premiumHome .homeEvidenceVisual:hover{border-color:#8cabc5}
+.premiumHome .homeProjectSheet{
+ position:relative;
+ display:flex;
+ flex-direction:column;
+ justify-content:space-between;
+ min-height:100%;
+ aspect-ratio:1.18;
+ padding:clamp(22px,3vw,35px);
+ overflow:hidden;
+ background:linear-gradient(135deg,#e6ebee,#f4f5f5 65%,#e9edef);
+}
+.premiumHome .homeProjectTopline{display:flex;justify-content:space-between;gap:12px;letter-spacing:.14em;font-size:.64rem;font-weight:550;color:#687989;position:relative;z-index:2}
+.premiumHome .homeProjectDrawing{position:absolute;width:95%;height:78%;top:13%;left:2.5%;color:#8da4b4;opacity:.65}
+.premiumHome .homeProjectDetails{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.premiumHome .homeProjectDetails>span:first-child{font-size:.66rem;letter-spacing:.16em;font-weight:600;color:#576d7c}
+.premiumHome .homeProjectDetails>strong{font-size:clamp(2.1rem,4.2vw,4.8rem);font-weight:550;letter-spacing:-.065em;line-height:.98;color:#152838}
+.premiumHome .homeProjectDetails>span:last-child{font-size:.75rem;color:#52697b;margin-top:8px}
+.premiumHome .homeEvidenceVisual>.homeProjectCredit{
+ position:absolute;bottom:14px;right:14px;left:auto;
+ max-width:70%;padding:8px 11px;border-radius:3px;background:#fffefa;
+ color:#4b5763;line-height:1.45;font-size:.68rem;
+}
+.premiumHome .homeEvidenceCopy h2{font-size:clamp(2.8rem,4.6vw,4.6rem);letter-spacing:-.058em;line-height:1.04;margin:20px 0 20px}
+.premiumHome .homeEvidenceCopy>p{line-height:1.7;font-size:clamp(.95rem,1.2vw,1.04rem);max-width:390px}
+.premiumHome .homeEvidenceCopy>.homeEvidenceStages{font-size:.72rem;color:#586571;line-height:1.65}
+.premiumHome .designStatement{
+ background:#161a20;
+ color:#f6f7f8;
+ padding-block:clamp(75px,9vw,128px);
+ border:0;
+}
+.premiumHome .designStatement>.productEyebrow{color:#c3cbd4;letter-spacing:.04em}
+.premiumHome .designStatement>h2{color:#f6f7f8;font-size:clamp(3rem,6.5vw,6.2rem);line-height:1.04;margin:22px auto 25px;max-width:1080px}
+.premiumHome .designStatement>h2>span{color:#b5c0cb}
+.premiumHome .designStatement>p{color:#c2cbd5;font-size:clamp(.95rem,1.35vw,1.08rem);line-height:1.75;max-width:610px;margin-inline:auto}
+.premiumHome .designStatement .connectedProcess{max-width:850px;margin:55px auto 34px}
+.premiumHome .designStatement .connectedProcess strong{color:#f8fafc}
+.premiumHome .designStatement .connectedProcess small{color:#bac6d1}
+.premiumHome .designStatement .connectedProcess>div>span{color:#bdd8f9;border-color:#657380;background:#293441}
+.premiumHome .designStatement .productTextLink{color:#9fceff}
+.premiumHome .homeScopeContrast{
+ background:#fff;border-bottom:1px solid #e7eaee;
+ padding-block:clamp(70px,8vw,116px);
+}
+.premiumHome .homeScopeHeading{margin-bottom:35px}
+.premiumHome .homeScopeHeading h2{font-size:clamp(2.8rem,5.2vw,5.3rem);letter-spacing:-.058em;line-height:1.04;margin:17px 0 18px}
+.premiumHome .homeScopeHeading>p{font-size:clamp(.97rem,1.3vw,1.08rem);line-height:1.7;max-width:590px}
+.premiumHome .homeScopePanels{border-color:#e5e9ee}
+.premiumHome .homeScopePanels h3{margin:10px 0 17px}
+.premiumHome .homeScopePanels ul{line-height:1.65;margin-bottom:12px}
+.premiumHome .homeScopeNote{color:#687581;font-size:.78rem;line-height:1.7;margin-top:18px}
+.premiumHome .specificationSection{background:#f5f7f9;padding-top:clamp(70px,8vw,112px);padding-bottom:clamp(70px,8vw,115px)}
+.premiumHome .specificationSection .productSectionHeader{margin-bottom:clamp(30px,4vw,55px)}
+.premiumHome .specificationSection .productSectionHeader h2{line-height:1.06}
+@media(max-width:900px){
+ .premiumHome .homeEvidenceGrid{grid-template-columns:minmax(0,1fr)}
+ .premiumHome .homeEvidenceVisual{aspect-ratio:1.15}
+}
+@media(max-width:760px){
+ .premiumHome .homeEvidenceFeature{padding:44px 21px 64px}
+ .premiumHome .homeEvidenceGrid{gap:30px}
+ .premiumHome .homeEvidenceVisual{aspect-ratio:1.16;min-height:0}
+ .premiumHome .homeProjectSheet{aspect-ratio:1.16;padding:21px}
+ .premiumHome .homeProjectDetails>strong{font-size:clamp(2.35rem,9.3vw,3.7rem)}
+ .premiumHome .homeEvidenceVisual>.homeProjectCredit{max-width:74%;font-size:.61rem;right:10px;bottom:10px;padding:6px 8px}
+ .premiumHome .homeEvidenceCopy h2{font-size:clamp(2.2rem,8.6vw,3.05rem);line-height:1.07;margin:16px 0}
+ .premiumHome .homeEvidenceCopy>p{font-size:.94rem;line-height:1.7;margin-bottom:12px}
+ .premiumHome .homeEvidenceCopy>.homeEvidenceStages{font-size:.69rem;line-height:1.65;margin-bottom:17px}
+ .premiumHome .designStatement{padding:76px 22px 72px}
+ .premiumHome .designStatement>h2{font-size:clamp(2.5rem,10vw,3.5rem);line-height:1.09;margin:22px auto}
+ .premiumHome .designStatement>p{font-size:.9rem;line-height:1.7;max-width:350px;color:#c5d0dc}
+ .premiumHome .designStatement .connectedProcess{
+  margin:37px auto 30px;max-width:380px;
+  grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;
+  border-top:1px solid #475360;border-bottom:1px solid #475360;padding:22px 0;
+ }
+ .premiumHome .designStatement .connectedProcess>i{display:none}
+ .premiumHome .designStatement .connectedProcess>div>span{border:0;width:auto;height:auto;background:transparent;color:#aec4db;font-size:.68rem}
+ .premiumHome .designStatement .connectedProcess strong{font-size:.87rem;margin:10px 0 5px;letter-spacing:-.02em}
+ .premiumHome .designStatement .connectedProcess small{font-size:.66rem;max-width:110px;line-height:1.5;color:#b8c6d4}
+ .premiumHome .designStatement .productTextLink{font-size:.88rem;min-height:44px}
+ .premiumHome .homeScopeContrast{padding:66px 22px 75px}
+ .premiumHome .homeScopeHeading h2{font-size:clamp(2.45rem,10vw,3.2rem);margin:16px 0 20px;line-height:1.08}
+ .premiumHome .homeScopeHeading>p{font-size:.96rem;line-height:1.7}
+ .premiumHome .homeScopePanels article,.premiumHome .homeScopePanels article:nth-child(2){padding:26px 0}
+ .premiumHome .homeScopePanels h3{font-size:1.55rem;margin:10px 0 16px}
+ .premiumHome .homeScopePanels ul{padding-left:1.2rem;font-size:.87rem;gap:9px}
+ .premiumHome .homeScopeNote{font-size:.74rem}
+ .premiumHome .specificationSection{padding:66px 22px 77px}
+ .premiumHome .specificationSection .productSectionHeader h2{font-size:clamp(2.5rem,10vw,3.3rem)}
+ /* The homepage already has a primary hero CTA and contextual links.
+    Do not block content or the Safari bottom toolbar with a second floating CTA. */
+ body:has(.premiumHome) .mobileProjectBar{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){.premiumHome .homeEvidenceVisual{transition:none}}

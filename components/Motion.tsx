@@ -8,7 +8,7 @@ export default function Motion() {
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
   const [controlHost, setControlHost] = useState<HTMLElement | null>(null);
-  const inlineControl = ['/start-a-project', '/cost-calculator', '/contact', '/pre-construction-planning-report', '/building-plan-approval-chennai'].includes(pathname);
+  const inlineControl = ['/', '/start-a-project', '/cost-calculator', '/contact', '/pre-construction-planning-report', '/building-plan-approval-chennai'].includes(pathname);
 
   useEffect(() => {
     setControlHost(inlineControl ? document.querySelector<HTMLElement>('.footerBottom') : null);

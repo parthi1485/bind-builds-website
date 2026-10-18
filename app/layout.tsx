@@ -4,6 +4,7 @@ import './guides.css';
 import './ui-fixes.css';
 import './lead-popup.css';
 import './conversion.css';
+import './homepage-rhythm.css';
 import type { Metadata, Viewport } from 'next';
 import Motion from '@/components/Motion';
 import PerformanceVitals from '@/components/PerformanceVitals';
