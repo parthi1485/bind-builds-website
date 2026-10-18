@@ -385,3 +385,14 @@
 .nurtureNextLinks{display:flex;flex-wrap:wrap;gap:12px 22px;margin:13px 0 22px}
 .nurtureNextLinks>a{color:#1764a6;font-size:.8rem;text-decoration:underline;text-underline-offset:4px}
 .nurtureNextLinks>a:focus-visible{outline:2px solid #0071e3;outline-offset:3px}
+
+/* Keep the motion control available without covering fields or sticky form actions. */
+.motionToggle.motionToggleInline{
+  display:inline-flex!important;position:static!important;
+  width:auto;height:auto;min-height:44px;flex-shrink:0;
+  padding:10px 14px;margin:0;box-shadow:none;backdrop-filter:none;font-size:var(--type-caption);
+}
+.motionToggleInline span{
+  display:inline;position:static;width:auto;height:auto;padding:0;margin:0;
+  overflow:visible;clip:auto;clip-path:none;white-space:normal;
+}

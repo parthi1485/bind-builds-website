@@ -1,11 +1,18 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { createPortal } from 'react-dom';
 
 export default function Motion() {
   const pathname = usePathname();
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
+  const [controlHost, setControlHost] = useState<HTMLElement | null>(null);
+  const inlineControl = ['/start-a-project', '/cost-calculator', '/contact'].includes(pathname);
+
+  useEffect(() => {
+    setControlHost(inlineControl ? document.querySelector<HTMLElement>('.footerBottom') : null);
+  }, [pathname, inlineControl]);
 
   useEffect(() => {
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -74,9 +81,7 @@ export default function Motion() {
     };
   }, [pathname, paused, reduced]);
 
-  return <>
-    <div className="readingProgress" aria-hidden="true" />
-    <button className="motionToggle" type="button" onClick={() => setPaused(value => !value)}
+  const control = <button className={`motionToggle${inlineControl ? ' motionToggleInline' : ''}`} type="button" onClick={() => setPaused(value => !value)}
       disabled={reduced} aria-pressed={paused || reduced}
       aria-label={reduced ? 'Motion reduced by your device setting' : paused ? 'Enable decorative motion' : 'Pause decorative motion'}
       title={reduced ? 'Respects your reduced-motion setting' : paused ? 'Enable motion' : 'Pause motion'}>
@@ -87,6 +92,10 @@ export default function Motion() {
         </>}
       </svg>
       <span>{reduced ? 'Reduced motion' : paused ? 'Motion off' : 'Motion on'}</span>
-    </button>
+    </button>;
+
+  return <>
+    <div className="readingProgress" aria-hidden="true" />
+    {inlineControl ? controlHost && createPortal(control, controlHost) : control}
   </>;
 }
