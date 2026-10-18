@@ -165,6 +165,19 @@ export default function Process(){
       <p className="processNote">The sequence is coordinated for your site. Feasibility and approval requirements are reviewed early; work starts only after applicable approvals and the drawings needed for that stage are in place. Existing-building demolition, if needed, is separately scoped and scheduled.</p>
     </section>
 
+    <section className="section avoidableMistakes" id="avoidable-construction-mistakes" aria-labelledby="mistakes-heading">
+      <div className="mistakesHeading"><span className="eyebrow">Before it's too late to correct</span><h2 className="lead" id="mistakes-heading">Four avoidable mistakes.<br/><span className="muted">Four better decisions.</span></h2><p>These are common coordination risks, not claims that every contractor makes them. The practical protection is a clear brief, approved drawings, stage records and written decisions.</p></div>
+      <div className="mistakesGrid">
+       {[
+        ['01','Comparing only the square-foot rate','Different allowances or excluded works can make two quotations incomparable.','Compare the same area basis, specifications, taxes and exclusions.'],
+        ['02','Starting site work before drawing coordination','Late structural or service changes can cause disruption and avoidable rework.','Confirm the appropriate architectural, structural and MEP drawings before each execution stage.'],
+        ['03','Concealing wet-area work without checks','Waterproofing and plumbing problems are harder to investigate after finishes are installed.','Record specified pressure, waterproofing and ponding tests before covering the work.'],
+        ['04','Approving extra work verbally','An undefined change can create disagreements over money, scope and time.','Record the variation, cost and time impact before written approval and execution.']
+       ].map(([no,title,risk,prevention])=><article key={no}><span>{no}</span><h3>{title}</h3><p>{risk}</p><div><strong>Better decision</strong><p>{prevention}</p></div></article>)}
+      </div>
+      <div className="mistakesNext"><Link href="/pre-construction-planning-report" className="cta primary">Prepare my home-building checklist ↗</Link><Link className="textLink" href="/packages">Compare scope and exclusions →</Link></div>
+    </section>
+
     <section className="section dark">
       <div className="grid"><span className="eyebrow">During construction</span><div>
         <h2 className="lead">One coordinated team.<br/><span className="muted">Stage by stage.</span></h2>

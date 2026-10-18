@@ -5,6 +5,7 @@ import { packages, site, whatsappUrl } from '@/lib/site';
 import { calculateEmi, compactMoney, configuration, createVisualData, floorName, money, splitStages, validNumber, type Estimate, type EstimateInput } from '@/lib/calculator';
 import ProposalVisuals, { EstimatePresentation, ComparisonDiagram } from './ProposalVisuals';
 import StageCostRoadmap from './StageCostRoadmap';
+import MyHomePlan from './MyHomePlan';
 import { constructionMonths } from '@/lib/calculator-options';
 import type { PdfReportData } from '@/lib/estimate-pdf';
 import { attributedPageUrl, leadAttributionFields, leadAttributionSummary, trackEvent } from '@/lib/analytics';
@@ -197,6 +198,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     <p role="status" className="calcStatus">{status}</p>
     <section className="calcReportCard calcDuration"><span className="eyebrow">Construction planning scenario</span><strong>~{constructionMonths(input.floors.length)}<small> months</small></strong><div className="durationTrack"><span style={{width:`${constructionMonths(input.floors.length)/18*100}%`}}/></div><p>6 months for ground only + 4 months per additional floor. Design and approval time is separate. Actual duration depends on area, site conditions, scope and the agreed programme.</p></section><ProposalVisuals data={visuals}/>
     <StageCostRoadmap allocation={allocation} base={estimate.base} extras={estimate.allowanceTotal}/>
+    <MyHomePlan input={input} estimate={estimate} packageName={selected.name} onEdit={onEdit}/>
     <div className="calcReportColumns">
       <section className="calcReportCard"><span className="eyebrow">01 / Where the number comes from</span><h3>Your cost breakdown.</h3><p className="calcHint">{estimate.area.toLocaleString('en-IN')} sq.ft calculated floor/headroom area. Selected car parking is included in base construction; other selected extras remain additional.</p><dl className="calcCostRows">{rows.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}<div className="calcCostTotal"><dt>Planning subtotal</dt><dd>{money(estimate.total)}</dd></div></dl></section>
       <section className="calcReportCard calcNextStep"><span className="eyebrow">What happens after the estimate?</span><h3>Three useful checks.<br />Before a proposal.</h3><ol className="calcNextChecklist"><li><span>01</span><p><strong>Site + access</strong>Review location, road access and existing conditions.</p></li><li><span>02</span><p><strong>Design + area</strong>Confirm the spaces, floor areas and planning direction.</p></li><li><span>03</span><p><strong>Scope + specification</strong>Turn the planning estimate into a project-specific proposal.</p></li></ol><p className="calcHint">No details are needed to view or present your estimate. Contact details are requested only before downloading the PDF.</p></section>
