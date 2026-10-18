@@ -13,6 +13,10 @@ export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const menu = useRef<HTMLDivElement>(null);
   const toggle = useRef<HTMLButtonElement>(null);
+  const closeMenu = () => {
+    setOpen(false);
+    requestAnimationFrame(() => toggle.current?.focus());
+  };
   useEffect(() => { setOpen(false); }, [pathname]);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -24,9 +28,16 @@ export function Nav() {
     if (!open) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    menu.current?.querySelector<HTMLAnchorElement>('a')?.focus();
+    const background = [...document.querySelectorAll<HTMLElement>('#main-content, .footer, .motionToggle')];
+    const previousInert = background.map(element => element.inert);
+    background.forEach(element => { element.inert = true; });
+    menu.current?.querySelector<HTMLButtonElement>('button')?.focus();
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') { setOpen(false); toggle.current?.focus(); }
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setOpen(false);
+        requestAnimationFrame(() => toggle.current?.focus());
+      }
       if (event.key !== 'Tab') return;
       const links = menu.current?.querySelectorAll<HTMLElement>('a,button');
       if (!links?.length) return;
@@ -38,18 +49,23 @@ export function Nav() {
     const onResize = () => { if (window.innerWidth >= 1100) setOpen(false); };
     document.addEventListener('keydown', onKey);
     window.addEventListener('resize', onResize);
-    return () => { document.body.style.overflow = previous; document.removeEventListener('keydown', onKey); window.removeEventListener('resize', onResize); };
+    return () => {
+      document.body.style.overflow = previous;
+      background.forEach((element, index) => { element.inert = previousInert[index]; });
+      document.removeEventListener('keydown', onKey);
+      window.removeEventListener('resize', onResize);
+    };
   }, [open]);
   return <>
     <a className="skipLink" href="#main-content">Skip to content</a>
-    <header className={`nav ${scrolled || pathname !== '/' || open ? 'navScrolled' : ''}`}>
+    <header className={`nav ${scrolled || pathname !== '/' || open ? 'navScrolled' : ''}`} inert={open} aria-hidden={open ? true : undefined}>
       <Link href="/" className="brandImage" aria-label="Bind Builds home"><Image src="/bind-builds-logo.svg" alt="Bind Builds" width={190} height={66} priority /></Link>
       <nav className="links" aria-label="Main navigation">{navigation.map(([name, href]) => href.startsWith('http') ? <a key={href} href={href} rel="noopener noreferrer">{name}</a> : <IntentLink key={href} href={href} aria-current={pathname === href ? 'page' : undefined}>{name}</IntentLink>)}</nav>
       <IntentLink className="cta navCta" href="/start-a-project" aria-current={pathname === '/start-a-project' ? 'page' : undefined}>Plan my home <span aria-hidden="true">↗</span></IntentLink>
       <button ref={toggle} type="button" className="menuButton" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>{open ? 'Close' : 'Menu'}<span aria-hidden="true">{open ? '−' : '+'}</span></button>
     </header>
     <div ref={menu} id="mobile-menu" className="mobileMenu" hidden={!open} role="dialog" aria-modal={open ? true : undefined} aria-labelledby="mobile-menu-title">
-      <p className="eyebrow" id="mobile-menu-title">Architecture. Engineering. Construction.</p>
+      <div className="mobileMenuHeading"><Link href="/" className="brandImage" aria-label="Bind Builds home" onClick={() => setOpen(false)}><Image src="/bind-builds-logo.svg" alt="Bind Builds" width={190} height={66} /></Link><p className="srOnly" id="mobile-menu-title">Explore Bind Builds</p><button type="button" className="mobileMenuClose" onClick={closeMenu}>Close <span aria-hidden="true">×</span></button></div>
       <nav aria-label="Mobile navigation">{navigation.map(([name, href], i) => href.startsWith('http') ? <a href={href} key={href} rel="noopener noreferrer" onClick={() => setOpen(false)}><small>0{i + 1}</small><span>{name}</span><span aria-hidden="true">↗</span></a> : <IntentLink href={href} key={href} onClick={() => setOpen(false)} aria-current={pathname === href ? 'page' : undefined}><small>0{i + 1}</small><span>{name}</span><span aria-hidden="true">↗</span></IntentLink>)}</nav>
       <IntentLink className="cta primary" href="/start-a-project" onClick={() => setOpen(false)}>Plan my home ↗</IntentLink>
       <a className="menuPhone" href={`tel:${site.telephone}`}>{site.phone}</a>

@@ -66,6 +66,8 @@ export default function LeadIntentPopup() {
 
     const show = (trigger: 'engaged' | 'time' | 'exit') => {
       if (opened) return;
+      // Keep the visitor's current task in control of attention and keyboard focus.
+      if (document.querySelector('[aria-modal="true"]') || document.activeElement?.closest('input, select, textarea, [contenteditable="true"]')) return;
       opened = true;
       try { window.sessionStorage.setItem(SHOWN_KEY, '1'); } catch {}
       previousFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
