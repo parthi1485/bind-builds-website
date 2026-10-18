@@ -77,3 +77,22 @@ test('process page adds specific construction risk education without scare prici
  assert.match(process,/pre-construction-planning-report/);
  assert.doesNotMatch(process,/save ₹2 lakh|lose ₹2 lakh/i);
 });
+
+test('homepage makes existing free preparation tools discoverable',()=>{
+ const home=read('app/page.tsx');
+ assert.match(home,/homePlanningTools/);
+ assert.match(home,/Home-building readiness report/);
+ assert.match(home,/href="\/pre-construction-planning-report"/);
+ assert.match(home,/href="\/building-plan-approval-chennai"/);
+ assert.match(home,/href="\/cost-calculator"/);
+ assert.match(home,/Detailed design, statutory verification and professional site assessments require an agreed engagement/);
+});
+
+test('new package and planning interactions have privacy-conscious funnel events',()=>{
+ const guide=read('components/PackageQuickGuide.tsx');
+ const analytics=read('components/Analytics.tsx');
+ assert.match(guide,/package_preference_preview/);
+ assert.match(analytics,/planning_resource_click/);
+ assert.match(analytics,/homeEvidenceFeature/);
+ assert.doesNotMatch(guide,/trackEvent\([^\n]*location:/);
+});

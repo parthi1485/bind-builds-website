@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { packages } from '@/lib/site';
+import { trackEvent } from '@/lib/analytics';
 import type { PackageCategory } from '@/components/PackageComparison';
 
 type PackageKey = 'essential' | 'elevate' | 'signature';
@@ -17,7 +18,7 @@ export default function PackageQuickGuide({categories}:{categories:PackageCatego
  const spec=(n:string,t:PackageKey,index=0)=>categories.find(c=>c.no===n)?.[t][index]||'Refer to the complete specification below';
  return <section className="packageDecisionSection" aria-labelledby="package-decision-title">
   <div className="packageDecisionHeader"><span className="eyebrow">Choose with confidence / 01—03</span><h2 id="package-decision-title">Three clear starting points.<br/><span>One considered approach.</span></h2><p>Start with how you want your home to perform, then compare real material allowances and supervision differences. The detailed package specification follows below.</p></div>
-  <div className="packageDecisionGrid">{packages.map(p=><button type="button" className={'packageDecisionCard'+(selected===p.key?' isSelected':'')} key={p.key} aria-pressed={selected===p.key} onClick={()=>setSelected(p.key)}>
+  <div className="packageDecisionGrid">{packages.map(p=><button type="button" className={'packageDecisionCard'+(selected===p.key?' isSelected':'')} key={p.key} aria-pressed={selected===p.key} onClick={()=>{setSelected(p.key);trackEvent('package_preference_preview',{package_name:p.name});}}>
    <span className="packageDecisionCardTop"><span>{p.name}</span><span aria-hidden="true">{selected===p.key?'✓':'↗'}</span></span>
    <strong className="packageDecisionRate">₹{p.rate.toLocaleString('en-IN')} <small>/ sq.ft*</small></strong>
    <span className="packageDecisionPersona">{personas[p.key].title}</span>

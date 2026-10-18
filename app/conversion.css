@@ -102,3 +102,19 @@
 .mistakesNext{max-width:1080px;margin:26px auto 0;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
 @media(max-width:900px){.myHomePlanGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.myHomePlanSnapshot{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:630px){.myHomePlanGrid,.myHomePlanSnapshot,.mistakesGrid{grid-template-columns:1fr}.myHomePlanActions .cta.primary{margin-left:0;width:100%}.myHomePlanActions .textButton{min-height:44px}.myHomePlanSnapshot{gap:7px}.myHomePlanSnapshot>div{gap:4px}}
+
+/* Prominent, low-pressure planning resources */
+.homePlanningTools{background:#f6f8fb}
+.homePlanningHeader{max-width:1180px;margin:0 auto 38px}
+.homePlanningHeader h2{font-size:clamp(2.3rem,4.6vw,4.8rem);line-height:1.06;letter-spacing:-.06em;margin:18px 0 18px}
+.homePlanningHeader h2 span{color:#828b96}
+.homePlanningHeader p{max-width:780px;font-size:clamp(.96rem,1.4vw,1.14rem);line-height:1.7;color:#617080}
+.homePlanningGrid{max-width:1180px;margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.homePlanningGrid>a{display:flex;flex-direction:column;min-width:0;min-height:300px;gap:14px;background:#fff;border:1px solid #e1e8f0;border-radius:20px;padding:clamp(21px,2.8vw,34px);transition:border-color .2s,transform .2s,box-shadow .2s}
+.homePlanningGrid>a:hover{border-color:#b7d0ed;transform:translateY(-3px);box-shadow:0 8px 24px #245a9b0a}
+.homePlanningGrid h3{font-size:clamp(1.25rem,2vw,1.75rem);letter-spacing:-.04em;line-height:1.15;margin:0}
+.homePlanningGrid p{font-size:.9rem;line-height:1.65;color:#657180;flex:1;margin:0}
+.homePlanningGrid>a strong{font-weight:600;font-size:.85rem;color:#0064c8}
+.homePlanningFootnote{max-width:1180px;margin:20px auto 0;font-size:.8rem;color:#687583;line-height:1.6}
+@media(max-width:900px){.homePlanningGrid{grid-template-columns:1fr}.homePlanningGrid>a{min-height:0}.homePlanningGrid p{margin:0 0 8px}}
+@media(prefers-reduced-motion:reduce){.homePlanningGrid>a{transition:none}.homePlanningGrid>a:hover{transform:none}}
