@@ -37,7 +37,6 @@ const pages=[
   ['/',/Your home\.|Bind Builds/i],
   ['/about',/Designed with purpose|Bind Builds/i],
   ['/why-bind-builds',/One home\. Many specialists\. One point of contact\.|START WITH THE ARCHITECT|Why Bind Builds/i],
-  ['/project-evidence',/Designed with intent\. Built with discipline\.|Selected projects|Projects/i],
   ['/projects/sunguvarchathiram-multigenerational-home',/multi-generational home|6,519 sq\.ft/i],
   ['/projects/pallikaranai-family-home',/17-foot plot|Pallikaranai/i],
   ['/projects/ccbm-commercial-complex',/CCBM Commercial Complex|Maduravoyal|12,494 sq\.ft/i],
@@ -79,6 +78,14 @@ for(const [path,marker] of pages){
   assert.match(html,marker,`${path} is missing expected page content`);
   assert.doesNotMatch(html,/noindex/i,`${path} unexpectedly contains noindex`);
   console.log('✓',path);
+}
+
+// The Projects index intentionally lives on the Studio Bind Architects website.
+for(const path of ['/project-evidence','/projects','/portfolio']){
+  const response=await request(path,{redirect:'manual'});
+  assert.equal(response.status,308,`${path} should permanently redirect (received ${response.status})`);
+  assert.equal(response.headers.get('location'),'https://www.bindarchitects.com/',`${path} redirect target`);
+  console.log('✓ Project portfolio redirect',path);
 }
 
 const robots=await request('/robots.txt');

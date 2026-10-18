@@ -12,7 +12,6 @@ test('launch-critical routes are represented in the sitemap', () => {
     "''",
     "'/about'",
     "'/why-bind-builds'",
-    "'/project-evidence'",
     "'/projects/sunguvarchathiram-multigenerational-home'",
     "'/projects/pallikaranai-family-home'",
     "'/projects/ccbm-commercial-complex'",
@@ -148,7 +147,8 @@ test('canonical and legacy-domain migration signals remain configured', () => {
   for(const host of ['bindconstructions.com','www.bindconstructions.com']) assert.ok(config.includes(host));
   assert.match(config,/type:'host'/);
   assert.match(config,/https:\/\/www\.bindbuilds\.com\/packages/);
-  assert.match(config,/https:\/\/www\.bindbuilds\.com\/project-evidence/);
+  assert.match(config,/https:\/\/www\.bindarchitects\.com\//);
+  assert.match(config,/source:'\/project-evidence',destination:'https:\/\/www\.bindarchitects\.com\/',permanent:true/);
 });
 
 
@@ -289,7 +289,7 @@ test('visible navigation defers heavy route downloads until visitor intent', () 
 test('desktop and mobile navigation keep Projects directly below Approvals', () => {
   const site=read('components/Site.tsx');
   const navigationLine=site.split('\n').find(line=>line.startsWith('const navigation = ')) || '';
-  assert.match(navigationLine,/\['Approvals', '\/building-plan-approval-chennai'\], \['Projects', '\/project-evidence'\]/);
+  assert.match(navigationLine,/\['Approvals', '\/building-plan-approval-chennai'\], \['Projects', site\.portfolio\]/);
   assert.match(site,/className="links".*navigation\.map/s);
   assert.match(site,/aria-label="Mobile navigation".*navigation\.map/s);
 });
