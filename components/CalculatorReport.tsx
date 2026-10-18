@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { packages, site, whatsappUrl } from '@/lib/site';
 import { calculateEmi, compactMoney, configuration, createVisualData, floorName, money, splitStages, validNumber, type Estimate, type EstimateInput } from '@/lib/calculator';
 import ProposalVisuals, { EstimatePresentation, ComparisonDiagram } from './ProposalVisuals';
+import StageCostRoadmap from './StageCostRoadmap';
 import { constructionMonths } from '@/lib/calculator-options';
 import type { PdfReportData } from '@/lib/estimate-pdf';
 import { attributedPageUrl, leadAttributionFields, leadAttributionSummary, trackEvent } from '@/lib/analytics';
@@ -55,6 +56,31 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     `Construction duration is a planning scenario: ${constructionMonths(input.floors.length)} months for ${configuration(input.floors.length)}, using 6 months plus 4 per additional floor. It excludes design and approvals. Site, area, weather and scope affect the actual programme.`,
     'Floor choices and plot conversions do not assess legal buildability, setbacks or permitted FSI. Your architect must confirm the applicable approval route for the site.',
   ];
+  const saveSummary = () => {
+    const blob = new Blob([notes], { type: 'text/plain;charset=utf-8' });
+    const href = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = href;
+    anchor.download = 'bind-builds-home-budget-summary.txt';
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    window.setTimeout(() => URL.revokeObjectURL(href), 1000);
+    trackEvent('estimate_summary_saved', { package_name: selected.name, calculated_area: estimate.area });
+    setStatus('Planning summary saved. It is not a construction quotation.');
+  };
+  const shareSummary = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'My Bind Builds home estimate', text: notes });
+        trackEvent('estimate_summary_shared', { package_name: selected.name });
+        return;
+      } catch (error) {
+        if ((error as Error)?.name === 'AbortError') return;
+      }
+    }
+    await copy();
+  };
   const copy = async () => { try { await navigator.clipboard.writeText(notes); setStatus('Estimate copied. You can paste it into a message.'); } catch { setStatus('Copy is unavailable in this browser. Use the WhatsApp draft or download the PDF.'); } };
   const download = async () => {
     setDownloading(true); setStatus('Preparing your PDF…');
@@ -152,7 +178,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     </div>
     {estimate.unpriced.length > 0 && <div className="calcQuoteNotice"><strong>{estimate.unpriced.length} selected {estimate.unpriced.length === 1 ? 'extra still needs' : 'extras still need'} a quote</strong><p>{estimate.unpriced.map(item => item.label).join(' · ')}</p><span>These items are excluded from the subtotal above.</span></div>}
     <section className="estimateConversionBar" id="estimate-next-step" aria-labelledby="estimate-next-title"><div><span className="eyebrow">Make this estimate specific to your site</span><h3 id="estimate-next-title">You have the number.<br/>Now connect it to the plan.</h3><p>Carry your package, area and estimate into a short project brief. We’ll review the site, requirements and the scope behind the number.</p><div className="estimateConversionProof"><span>Estimate carried forward</span><span>~2 minute brief</span><span>No commitment to proceed</span></div></div><div className="estimateConversionActions"><Link href={enquiryUrl} className="cta primary">Discuss this estimate ↗</Link><a href={whatsappUrl('Hello Bind Builds, I would like to discuss this estimate.\n\n' + notes)} className="textLink" target="_blank" rel="noopener noreferrer">Continue on WhatsApp ↗</a></div></section>
-    <div className="calcReportToolbar"><EstimatePresentation data={visuals} breakdown={{rows,total:money(estimate.total)}}/><button className="cta" type="button" onClick={requestDownload} disabled={downloading}>{downloading ? 'Preparing PDF…' : 'Download estimate PDF'} <span aria-hidden="true">↓</span></button><button className="textButton" type="button" onClick={copy}>Copy estimate</button><button className="textButton" type="button" onClick={onEdit}>Edit my inputs</button></div>
+    <div className="calcReportToolbar"><EstimatePresentation data={visuals} breakdown={{rows,total:money(estimate.total)}}/><button className="cta" type="button" onClick={requestDownload} disabled={downloading}>{downloading ? 'Preparing PDF…' : 'Download estimate PDF'} <span aria-hidden="true">↓</span></button><button className="textButton" type="button" onClick={copy}>Copy estimate</button><button className="textButton" type="button" onClick={shareSummary}>Share with family</button><button className="textButton" type="button" onClick={saveSummary}>Save summary (TXT)</button><button className="textButton" type="button" onClick={onEdit}>Edit my inputs</button></div>
     <dialog className="estimateDownloadGate" ref={downloadGate} aria-labelledby="estimate-download-title" onClick={event=>{if(event.target===event.currentTarget)downloadGate.current?.close();}}>
       <form onSubmit={unlockDownload} aria-busy={downloading}>
         <div className="estimateDownloadGateHead"><span className="eyebrow">PDF DOWNLOAD</span><button type="button" aria-label="Close" onClick={()=>downloadGate.current?.close()}>×</button></div>
@@ -170,6 +196,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     </dialog>
     <p role="status" className="calcStatus">{status}</p>
     <section className="calcReportCard calcDuration"><span className="eyebrow">Construction planning scenario</span><strong>~{constructionMonths(input.floors.length)}<small> months</small></strong><div className="durationTrack"><span style={{width:`${constructionMonths(input.floors.length)/18*100}%`}}/></div><p>6 months for ground only + 4 months per additional floor. Design and approval time is separate. Actual duration depends on area, site conditions, scope and the agreed programme.</p></section><ProposalVisuals data={visuals}/>
+    <StageCostRoadmap allocation={allocation} base={estimate.base} extras={estimate.allowanceTotal}/>
     <div className="calcReportColumns">
       <section className="calcReportCard"><span className="eyebrow">01 / Where the number comes from</span><h3>Your cost breakdown.</h3><p className="calcHint">{estimate.area.toLocaleString('en-IN')} sq.ft calculated floor/headroom area. Selected car parking is included in base construction; other selected extras remain additional.</p><dl className="calcCostRows">{rows.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}<div className="calcCostTotal"><dt>Planning subtotal</dt><dd>{money(estimate.total)}</dd></div></dl></section>
       <section className="calcReportCard calcNextStep"><span className="eyebrow">What happens after the estimate?</span><h3>Three useful checks.<br />Before a proposal.</h3><ol className="calcNextChecklist"><li><span>01</span><p><strong>Site + access</strong>Review location, road access and existing conditions.</p></li><li><span>02</span><p><strong>Design + area</strong>Confirm the spaces, floor areas and planning direction.</p></li><li><span>03</span><p><strong>Scope + specification</strong>Turn the planning estimate into a project-specific proposal.</p></li></ol><p className="calcHint">No details are needed to view or present your estimate. Contact details are requested only before downloading the PDF.</p></section>

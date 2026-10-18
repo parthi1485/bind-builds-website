@@ -41,3 +41,16 @@ test('construction evidence is internal but the project index remains a Studio B
  assert.match(sitemap,/\['\/project-evidence',/);
  assert.match(smoke,/\['\/project-evidence',/);
 });
+
+test('calculator explains illustrative allocation and supports contact-free sharing',()=>{
+ const report=read('components/CalculatorReport.tsx');
+ const roadmap=read('components/StageCostRoadmap.tsx');
+ assert.match(report,/StageCostRoadmap allocation=\{allocation\}/);
+ assert.match(report,/estimate_summary_saved/);
+ assert.match(report,/estimate_summary_shared/);
+ assert.match(report,/Save summary \(TXT\)/);
+ assert.match(report,/Share with family/);
+ assert.match(roadmap,/not payment demands or agreed milestones/);
+ assert.match(roadmap,/signed project agreement/);
+ assert.match(roadmap,/allocation\.slice\(8,10\)/);
+});

@@ -51,3 +51,23 @@
 @media(max-width:900px){.homeEvidenceGrid{grid-template-columns:1fr}.homeEvidenceVisual{min-height:350px}.packageDecisionGrid{grid-template-columns:1fr}.packageDecisionCard{min-height:0}.packageDecisionWho{min-height:0}.packageDecisionResult{grid-template-columns:1fr 1fr}.packageDecisionResult>.cta{grid-column:1 / -1}.homeScopePanels{grid-template-columns:1fr}}
 @media(max-width:550px){.homeEvidenceVisual{min-height:260px}.homeEvidenceCopy h2,.homeScopeHeading h2{font-size:clamp(2.1rem,9vw,3rem)}.homeScopePanels article{padding:24px}.packageDecisionResult{grid-template-columns:1fr;padding:18px}.packageDecisionResult>.cta{grid-column:1}.packageDecisionHeader h2{font-size:clamp(2.15rem,9vw,3.35rem)}.packageDecisionSection{padding-left:20px;padding-right:20px}.productHeroCopy>.homeTamilLine{margin-top:-11px}}
 @media(prefers-reduced-motion:reduce){.packageDecisionCard{transition:none}.packageDecisionCard:hover{transform:none}}
+
+/* Cost comprehension and contact-free homeowner sharing */
+.stageCostRoadmap{margin-top:25px!important}
+.stageCostRoadmap h3{font-size:clamp(1.8rem,3.4vw,3.2rem);letter-spacing:-.055em;line-height:1.08;margin:15px 0 13px}
+.stageCostRoadmap>p{color:#596573;font-size:.94rem;line-height:1.7;max-width:800px}
+.stageCostBars{display:flex;width:100%;height:12px;gap:3px;border-radius:8px;overflow:hidden;background:#d9dee7;margin:26px 0}
+.stageCostBars span:nth-child(1){background:#1e6ebc}.stageCostBars span:nth-child(2){background:#5b8abc}.stageCostBars span:nth-child(3){background:#80accb}.stageCostBars span:nth-child(4){background:#b8ccd9}
+.stageCostCards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.stageCostCards article{padding:20px 18px;border:1px solid #e1e7ee;border-radius:13px;background:#fff;min-width:0;display:flex;flex-direction:column}
+.stageCostNumber{font-size:.7rem;letter-spacing:.12em;color:#4675a5;font-weight:650}
+.stageCostCards h4{font-size:1rem;margin:12px 0 8px;letter-spacing:-.02em}
+.stageCostCards p{font-size:.78rem;line-height:1.5;color:#68717d;flex:1;margin:0 0 25px}
+.stageCostCards article>div{display:flex;flex-direction:column;gap:3px}
+.stageCostCards strong{font-size:1.07rem;letter-spacing:-.035em}
+.stageCostCards article>div span{font-size:.73rem;color:#647080}
+.stageCostTotals{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;border-top:1px solid #e1e7ee;margin-top:20px;padding-top:18px;font-size:.88rem}
+.stageCostTotals strong{text-align:right}
+.stageCostRoadmap>.stageCostDisclaimer{margin:17px 0 0;font-size:.8rem;max-width:950px}
+@media(max-width:840px){.stageCostCards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.stageCostCards{grid-template-columns:1fr}.stageCostCards article{min-height:0}.stageCostCards p{margin-bottom:12px}}
