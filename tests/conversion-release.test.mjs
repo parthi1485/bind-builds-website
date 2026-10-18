@@ -28,7 +28,7 @@ test('three package decisions use published rates and route to calculator',()=>{
  assert.match(guide,/packages\.map\(p=>/);
  assert.match(guide,/aria-pressed=\{selected===p\.key\}/);
  assert.match(guide,/\/cost-calculator\?package=/);
- assert.match(guide,/selected package/);
+ assert.match(guide,/selected===p.key/);
  assert.match(guide,/Taxes, approvals, separately priced works/);
 });
 
