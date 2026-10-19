@@ -51,57 +51,6 @@
 @media(max-width:550px){.homeEvidenceVisual{min-height:260px}.homeEvidenceCopy h2,.homeScopeHeading h2{font-size:clamp(2.1rem,9vw,3rem)}.homeScopePanels article{padding:24px}.packageDecisionResult{grid-template-columns:1fr;padding:18px}.packageDecisionResult>.cta{grid-column:1}.packageDecisionHeader h2{font-size:clamp(2.15rem,9vw,3.35rem)}.packageDecisionSection{padding-left:20px;padding-right:20px}}
 @media(prefers-reduced-motion:reduce){.packageDecisionCard{transition:none}.packageDecisionCard:hover{transform:none}}
 
-/* Cost comprehension and contact-free homeowner sharing */
-.stageCostRoadmap{margin-top:25px!important}
-.stageCostRoadmap h3{font-size:clamp(1.8rem,3.4vw,3.2rem);letter-spacing:-.055em;line-height:1.08;margin:15px 0 13px}
-.stageCostRoadmap>p{color:#596573;font-size:.94rem;line-height:1.7;max-width:800px}
-.stageCostBars{display:flex;width:100%;height:12px;gap:3px;border-radius:8px;overflow:hidden;background:#d9dee7;margin:26px 0}
-.stageCostBars span:nth-child(1){background:#1e6ebc}.stageCostBars span:nth-child(2){background:#5b8abc}.stageCostBars span:nth-child(3){background:#80accb}.stageCostBars span:nth-child(4){background:#b8ccd9}
-.stageCostCards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
-.stageCostCards article{padding:20px 18px;border:1px solid #e1e7ee;border-radius:13px;background:#fff;min-width:0;display:flex;flex-direction:column}
-.stageCostNumber{font-size:.7rem;letter-spacing:.12em;color:#4675a5;font-weight:650}
-.stageCostCards h4{font-size:1rem;margin:12px 0 8px;letter-spacing:-.02em}
-.stageCostCards p{font-size:.78rem;line-height:1.5;color:#68717d;flex:1;margin:0 0 25px}
-.stageCostCards article>div{display:flex;flex-direction:column;gap:3px}
-.stageCostCards strong{font-size:1.07rem;letter-spacing:-.035em}
-.stageCostCards article>div span{font-size:.73rem;color:#647080}
-.stageCostTotals{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;border-top:1px solid #e1e7ee;margin-top:20px;padding-top:18px;font-size:.88rem}
-.stageCostTotals strong{text-align:right}
-.stageCostRoadmap>.stageCostDisclaimer{margin:17px 0 0;font-size:.8rem;max-width:950px}
-@media(max-width:840px){.stageCostCards{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:520px){.stageCostCards{grid-template-columns:1fr}.stageCostCards article{min-height:0}.stageCostCards p{margin-bottom:12px}}
-
-/* Local, optional My Home Plan — visible consent only on deliberate enquiry */
-.myHomePlan{margin-top:25px!important;background:#f8fafc!important;border:1px solid #e2eaf4}
-.myHomePlanIntro h3{font-size:clamp(2rem,3.6vw,3.4rem);letter-spacing:-.055em;line-height:1.08;margin:15px 0 12px}
-.myHomePlanIntro p{max-width:760px;line-height:1.65;color:#657180;font-size:.95rem;margin:0 0 28px}
-.myHomePlanGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.myHomePlanGrid label{font-size:.78rem;font-weight:550;color:#566271;display:flex;flex-direction:column;gap:8px}
-.myHomePlanGrid small{font-weight:400;color:#7c8590}
-.myHomePlanGrid input,.myHomePlanGrid select{height:52px;width:100%;border:1px solid #b4c0cd;background:#fff;border-radius:12px;padding:10px 13px;font-size:1rem;color:#1b2633;min-width:0}
-.myHomePlanSnapshot{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:24px 0}
-.myHomePlanSnapshot>div{background:#fff;border:1px solid #e2e7ef;padding:17px;border-radius:12px;min-width:0;display:flex;flex-direction:column;gap:8px}
-.myHomePlanSnapshot span{font-size:.72rem;color:#6c7887}
-.myHomePlanSnapshot strong{font-size:1.06rem;letter-spacing:-.025em;overflow-wrap:anywhere}
-.myHomePlanActions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
-.myHomePlanActions .cta{min-height:48px;font-size:.84rem;padding:12px 18px}
-.myHomePlanActions .cta.primary{margin-left:auto}
-.myHomePlanPrivacy{font-size:.77rem;color:#657281;line-height:1.55;margin:16px 0 0}
-.avoidableMistakes{background:#fff}
-.mistakesHeading{max-width:1080px;margin:0 auto 30px}
-.mistakesHeading>p{color:#576370;max-width:800px;font-size:1rem;line-height:1.7}
-.mistakesGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;max-width:1080px;margin:auto}
-.mistakesGrid article{background:#f5f8fc;border:1px solid #e3eaf2;padding:clamp(20px,3vw,36px);border-radius:18px;min-width:0}
-.mistakesGrid article>span{font-size:.72rem;letter-spacing:.1em;color:#286cb2}
-.mistakesGrid h3{font-size:clamp(1.25rem,2vw,1.7rem);letter-spacing:-.035em;margin:16px 0}
-.mistakesGrid article>p{color:#576471;line-height:1.65;font-size:.91rem}
-.mistakesGrid article>div{margin-top:22px;border-top:1px solid #dce5ef;padding-top:15px}
-.mistakesGrid article>div strong{color:#225f9d;font-size:.8rem}
-.mistakesGrid article>div p{margin:8px 0 0;font-size:.87rem;color:#334457;line-height:1.6}
-.mistakesNext{max-width:1080px;margin:26px auto 0;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
-@media(max-width:900px){.myHomePlanGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.myHomePlanSnapshot{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:630px){.myHomePlanGrid,.myHomePlanSnapshot,.mistakesGrid{grid-template-columns:1fr}.myHomePlanActions .cta.primary{margin-left:0;width:100%}.myHomePlanActions .textButton{min-height:44px}.myHomePlanSnapshot{gap:7px}.myHomePlanSnapshot>div{gap:4px}}
-
 /* Prominent, low-pressure planning resources */
 .homePlanningTools{background:#f6f8fb}
 .homePlanningHeader{max-width:1180px;margin:0 auto 38px}

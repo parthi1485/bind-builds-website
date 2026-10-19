@@ -43,31 +43,21 @@ test('construction evidence is internal but the project index remains a Studio B
  assert.match(smoke,/\['\/project-evidence',/);
 });
 
-test('calculator explains illustrative allocation and supports contact-free sharing',()=>{
+test('calculator results return to compact original estimate without stage roadmap or Home Plan form',()=>{
  const report=read('components/CalculatorReport.tsx');
- const roadmap=read('components/StageCostRoadmap.tsx');
- assert.match(report,/StageCostRoadmap allocation=\{allocation\}/);
- assert.match(report,/estimate_summary_saved/);
- assert.match(report,/estimate_summary_shared/);
- assert.match(report,/Save summary \(TXT\)/);
- assert.match(report,/Share with family/);
- assert.match(roadmap,/not payment demands or agreed milestones/);
- assert.match(roadmap,/signed project agreement/);
- assert.match(roadmap,/allocation\.slice\(8,10\)/);
-});
-
-test('personalised home brief remains optional and prefills project enquiry',()=>{
- const plan=read('components/MyHomePlan.tsx');
- const report=read('components/CalculatorReport.tsx');
- const enquiry=read('components/ProjectForm.tsx');
- assert.match(report,/MyHomePlan input=\{input\}/);
- assert.match(plan,/Share with family/);
- assert.match(plan,/Nothing is sent to Bind Builds until you choose to enquire/);
- assert.match(plan,/URLSearchParams/);
- assert.match(plan,/Edit floors, package or extras/);
- assert.match(plan,/home_plan_saved/);
- assert.match(enquiry,/stageParam=params\.get\('stage'\)/);
- assert.match(enquiry,/timelineParam=params\.get\('timeline'\)/);
+ assert.doesNotMatch(report,/StageCostRoadmap|MyHomePlan|stageCostRoadmap|myHomePlan/);
+ assert.doesNotMatch(report,/Share with family|Save summary \\(TXT\\)/);
+ assert.match(report,/Your home\./);
+ assert.match(report,/Your cost breakdown\./);
+ assert.match(report,/Download estimate PDF/);
+ assert.match(report,/Copy estimate/);
+ assert.match(report,/Edit my inputs/);
+ assert.match(report,/EstimatePresentation data=\\{visuals\\}/);
+ assert.match(report,/ProposalVisuals data=\\{visuals\\}/);
+ assert.match(report,/estimateConversionBar/);
+ assert.match(report,/calculateEmi/);
+ const css=read('app/conversion.css');
+ assert.doesNotMatch(css,/\\.stageCostRoadmap|\\.myHomePlanGrid|\\.stageCostCards/);
 });
 
 test('process page adds specific construction risk education without scare pricing',()=>{
