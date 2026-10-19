@@ -45,19 +45,15 @@ test('construction evidence is internal but the project index remains a Studio B
 
 test('calculator results return to compact original estimate without stage roadmap or Home Plan form',()=>{
  const report=read('components/CalculatorReport.tsx');
- assert.doesNotMatch(report,/StageCostRoadmap|MyHomePlan|stageCostRoadmap|myHomePlan/);
- assert.doesNotMatch(report,/Share with family|Save summary \\(TXT\\)/);
- assert.match(report,/Your home\./);
- assert.match(report,/Your cost breakdown\./);
- assert.match(report,/Download estimate PDF/);
- assert.match(report,/Copy estimate/);
- assert.match(report,/Edit my inputs/);
- assert.match(report,/EstimatePresentation data=\\{visuals\\}/);
- assert.match(report,/ProposalVisuals data=\\{visuals\\}/);
- assert.match(report,/estimateConversionBar/);
- assert.match(report,/calculateEmi/);
+ assert.ok(!report.includes('StageCostRoadmap') && !report.includes('MyHomePlan'));
+ assert.ok(!report.includes('Share with family') && !report.includes('Save summary (TXT)'));
+ for(const required of ['Your home.', 'Your cost breakdown.', 'Download estimate PDF', 'Copy estimate', 'Edit my inputs', '<EstimatePresentation data={visuals}', '<ProposalVisuals data={visuals}/>', 'estimateConversionBar', 'calculateEmi']){
+  assert.ok(report.includes(required), 'Missing original result component: '+required);
+ }
  const css=read('app/conversion.css');
- assert.doesNotMatch(css,/\\.stageCostRoadmap|\\.myHomePlanGrid|\\.stageCostCards/);
+ for(const removed of ['.stageCostRoadmap','.myHomePlanGrid','.stageCostCards']){
+  assert.ok(!css.includes(removed), 'Orphaned result UI styles: '+removed);
+ }
 });
 
 test('process page adds specific construction risk education without scare pricing',()=>{
