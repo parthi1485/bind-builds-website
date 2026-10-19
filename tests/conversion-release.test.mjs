@@ -4,22 +4,15 @@ import { readFileSync } from 'node:fs';
 
 const read = path => readFileSync(new URL('../'+path,import.meta.url),'utf8');
 
-test('homepage positions architect-led decisions with honest project evidence',()=>{
- const home=read('app/page.tsx');
- const hero=read('components/HomeExperience.tsx');
+test('homepage retains the original hero while removing the project feature',()=>{
+ const home=read('app/page.tsx'), hero=read('components/HomeExperience.tsx');
  assert.match(hero,/Architect-led construction/);
- assert.match(hero,/One team\. From the first sketch to the final key\./);
- assert.doesNotMatch(hero,/homeTamilLine|lang="ta"|An architect-led team coordinating the decisions/);
- assert.match(hero,/Calculate my construction cost/);
- assert.match(hero,/Plan my home/);
- assert.match(home,/homeEvidenceFeature/);
- assert.match(home,/Studio Bind Architects · Completed architecture project/);
- assert.match(home,/Ongoing construction/);
- assert.match(home,/Pre-construction/);
- assert.match(home,/homeScopeContrast/);
- assert.match(home,/same area, specification and exclusions/);
+ assert.ok(hero.includes('One team. From the first sketch to the final key.'));
+ assert.ok(hero.includes('Calculate my construction cost')&&hero.includes('Plan my home'));
+ assert.ok(!home.includes('homeEvidenceFeature')&&!home.includes('homeProjectSheet'));
+ assert.ok(home.includes('confidenceSection')&&home.includes('Review project evidence'));
+ assert.ok(home.includes('homeScopeContrast'));
 });
-
 test('three package decisions use published rates and route to calculator',()=>{
  const guide=read('components/PackageQuickGuide.tsx');
  const page=read('app/packages/page.tsx');
@@ -80,7 +73,7 @@ test('new package and planning interactions have privacy-conscious funnel events
  const analytics=read('components/Analytics.tsx');
  assert.match(guide,/package_preference_preview/);
  assert.match(analytics,/planning_resource_click/);
- assert.match(analytics,/homeEvidenceFeature/);
+ assert.match(analytics,/confidence-before-commit/);
  assert.doesNotMatch(guide,/trackEvent\([^\n]*location:/);
 });
 
@@ -95,17 +88,14 @@ test('original minimal homepage hero keeps restrained mobile CTA and spacing',()
  assert.match(css,/premiumHome \.productHeroActions \.cta\{width:auto/);
 });
 
-test('editorial homepage prioritises architecture and removes duplicate highlight cards',()=>{
+test('editorial homepage starts with the hero and maintains the original sections',()=>{
  const home=read('app/page.tsx');
- const css=read('app/conversion.css');
- assert.doesNotMatch(home,/className="proofRail"|className="highlightGrid"/);
- assert.match(home,/homeEvidenceVisual/);
- assert.match(home,/Studio Bind Architects · Completed architecture project/);
- assert.match(home,/Ongoing construction · Pre-construction/);
- assert.ok(home.indexOf('homeEvidenceFeature')<home.indexOf('designStatement'));
+ for(const deleted of ['className="proofRail"','className="highlightGrid"','homeEvidenceVisual','homeProjectSheet'])
+  assert.ok(!home.includes(deleted));
+ assert.ok(home.indexOf('<HomeHero/>')<home.indexOf('designStatement'));
  assert.ok(home.indexOf('designStatement')<home.indexOf('homeScopeContrast'));
- assert.ok(home.indexOf('specificationSection')<home.indexOf('homePlanningTools'));
- assert.match(css,/homeEvidenceGrid\{max-width:1260px/);
+ assert.ok(home.indexOf('specificationSection')<home.indexOf('<BuildAssurance/>'));
+ assert.ok(home.indexOf('<BuildAssurance/>')<home.indexOf('homePlanningTools'));
 });
 test('simplified package choices preserve the full specification comparison',()=>{
  const quick=read('components/PackageQuickGuide.tsx');
@@ -115,23 +105,19 @@ test('simplified package choices preserve the full specification comparison',()=
  assert.match(full,/PackageComparison categories=\{categories\}/);
 });
 
-test('homepage sections have intentional color contrast and a working project-information panel',()=>{
- const home=read('app/page.tsx');
- const css=read('app/homepage-rhythm.css');
- const layout=read('app/layout.tsx');
- const motion=read('components/Motion.tsx');
- assert.doesNotMatch(home,/<img src="\/projects\/ccbm-commercial-complex\.webp"/);
- assert.match(home,/homeProjectSheet/);
- assert.match(home,/CCBM/);
- assert.match(home,/Studio Bind Architects · Completed architecture project/);
- assert.match(home,/Beyond<br\/><span>the rate\./);
- assert.match(layout,/import '\.\/homepage-rhythm\.css'/);
- assert.match(css,/\.premiumHome \.designStatement\{[\s\S]*?background:#161a20;[\s\S]*?color:#f6f7f8/);
- assert.match(css,/\.premiumHome \.designStatement>h2\{color:#f6f7f8/);
- assert.match(css,/body:has\(\.premiumHome\) \.mobileProjectBar\{display:none!important\}/);
- assert.match(motion,/\['\/', '\/start-a-project'/);
+test('homepage clearly separates the price comparison and construction assurance',()=>{
+ const home=read('app/page.tsx'), css=read('app/homepage-rhythm.css');
+ const layout=read('app/layout.tsx'), motion=read('components/Motion.tsx');
+ assert.ok(!home.includes('homeEvidenceFeature')&&!home.includes('homeProjectSheet'));
+ assert.ok(home.includes('specificationSection')&&home.includes('<BuildAssurance/>'));
+ assert.ok(home.includes('Beyond<br/><span>the rate.</span>'));
+ assert.ok(layout.includes('homepage-rhythm.css'));
+ assert.ok(css.includes('background:#fff;')&&css.includes('background:#e7edf4;'));
+ assert.ok(css.includes('.premiumHome .assuranceSection::before'));
+ assert.ok(css.includes('.premiumHome .designStatement>h2'));
+ assert.ok(css.includes('body:has(.premiumHome) .mobileProjectBar'));
+ assert.ok(motion.includes('inlineControl'));
 });
-
 test('CCBM project evidence pages do not expose a failing media file as project photography',()=>{
  const evidence=read('app/project-evidence/page.tsx');
  const caseStudy=read('app/projects/ccbm-commercial-complex/page.tsx');

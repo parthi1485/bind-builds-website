@@ -8,23 +8,7 @@ import { HomeHero, HomeBudget } from '@/components/HomeExperience';
 import { BuildAssurance, BrandEcosystem } from '@/components/BuildAssurance';
 import { site, whatsappUrl } from '@/lib/site';
 export default function Home(){return <><Nav/><main id="main-content" className="premiumHome"><HomeHero/><StructuredData data={[organizationSchema,localBusinessSchema,founderPersonSchema,{'@context':'https://schema.org','@type':'WebSite',name:'Bind Builds',alternateName:'Bind Builds Chennai',url:site.url,'@id':site.url+'/#website',publisher:{'@id':site.url+'/#organization'},inLanguage:'en-IN'}]}/>
- <section className="homeEvidenceFeature productSection" aria-labelledby="home-evidence-title"><div className="homeEvidenceGrid">
- <Link className="homeEvidenceVisual" href="/projects/ccbm-commercial-complex" aria-label="Explore CCBM Commercial Complex — completed Studio Bind architectural design">
- <div className="homeProjectSheet">
-  <div className="homeProjectTopline"><span>STUDIO BIND / PROJECT FILE</span><span>01—03</span></div>
-  <svg className="homeProjectDrawing" viewBox="0 0 640 390" fill="none" aria-hidden="true" focusable="false">
-   <g stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round">
-    <path d="M108 324V130L322 50L522 117V324" /><path d="M108 130L322 198L522 117M322 198V366M108 324L322 366L522 324"/>
-    <path d="M132 146V313L307 348V211ZM341 210V347L499 312V148Z"/>
-    <path d="M132 186L307 247M132 230L307 284M132 272L307 320M341 246L499 203M341 286L499 247M341 326L499 291"/>
-    <path d="M178 158V321M223 174V330M268 190V339M379 188V339M423 174V329M466 161V320"/>
-    <path d="M84 341L321 388L551 340M73 118L322 24L552 107"/>
-   </g>
-  </svg>
-  <div className="homeProjectDetails"><span>CCBM</span><strong>Commercial<br/>Complex.</strong><span>Maduravoyal · Chennai</span></div>
- </div><span className="homeProjectCredit">Studio Bind Architects · Completed architecture project</span></Link>
- <div className="homeEvidenceCopy"><span className="productEyebrow">Selected work / With context</span><h2 id="home-evidence-title">Made to mean<br/><span>something.</span></h2><p>Architecture, site work and planning — shown with the actual role and stage.</p><p className="homeEvidenceStages">Ongoing construction · Pre-construction · Completed architecture</p><Link href="/project-evidence" className="productTextLink">Explore project evidence →</Link></div>
- </div></section>
+
 <section className="productSection designStatement"><span className="productEyebrow reveal">A simple idea. A better starting point.</span><h2 className="reveal">The plan is<br/><span>part of the build.</span></h2><p className="reveal">So we connect the architect, the engineer and the site.<br className="desktopBreak"/> Your home benefits from the whole picture.</p><div className="connectedProcess reveal" aria-label="Design, coordinate, build"><div><span>01</span><strong>Design.</strong><small>Your life, in a plan.</small></div><i aria-hidden="true"/><div><span>02</span><strong>Coordinate.</strong><small>Every detail aligned.</small></div><i aria-hidden="true"/><div><span>03</span><strong>Build.</strong><small>One agreed direction.</small></div></div><Link href="/process" className="productTextLink">See how it comes together <span aria-hidden="true">→</span></Link></section>
 <section className="productSection homeScopeContrast" aria-labelledby="scope-contrast-title"><div className="homeScopeHeading"><span className="productEyebrow">Compare beyond the rate</span><h2 id="scope-contrast-title">Beyond<br/><span>the rate.</span></h2><p>Compare the same area, specification and exclusions. Then look at the decisions behind the build.</p></div><div className="homeScopePanels">
  <article><span className="productEyebrow">A quotation tells you</span><h3>The price.</h3><ul><li>Area and package rate</li><li>Material allowances</li><li>Inclusions and exclusions</li></ul></article>
