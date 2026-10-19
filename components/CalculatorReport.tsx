@@ -1,4 +1,6 @@
 'use client';
+
+// Keep the results focused on the original estimate, quotation details and download/edit actions.
 import { useRef, useState, type FormEvent, type RefObject } from 'react';
 import Link from 'next/link';
 import { packages, site, whatsappUrl } from '@/lib/site';
