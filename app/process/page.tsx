@@ -175,7 +175,7 @@ export default function Process(){
         ['04','Approving extra work verbally','An undefined change can create disagreements over money, scope and time.','Record the variation, cost and time impact before written approval and execution.']
        ].map(([no,title,risk,prevention])=><article key={no}><span>{no}</span><h3>{title}</h3><p>{risk}</p><div><strong>Better decision</strong><p>{prevention}</p></div></article>)}
       </div>
-      <div className="mistakesNext"><Link href="/pre-construction-planning-report" className="cta primary">Prepare my home-building checklist ↗</Link><Link className="textLink" href="/packages">Compare scope and exclusions →</Link></div>
+      <div className="mistakesNext"><Link href="/building-plan-approval-chennai" className="cta primary">Review approval readiness ↗</Link><Link className="textLink" href="/packages">Compare scope and exclusions →</Link></div>
     </section>
 
     <section className="section dark">

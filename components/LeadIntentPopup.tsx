@@ -26,7 +26,7 @@ const initialForm: PopupForm = {
   website: '',
 };
 
-const blockedPaths = ['/start-a-project', '/contact', '/cost-calculator', '/privacy', '/pre-construction-planning-report', '/building-plan-approval-chennai'];
+const blockedPaths = ['/start-a-project', '/contact', '/cost-calculator', '/privacy', '/building-plan-approval-chennai'];
 
 function recent(storageKey: string, maxAge: number) {
   try {

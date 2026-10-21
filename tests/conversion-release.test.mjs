@@ -54,29 +54,24 @@ test('process page adds specific construction risk education without scare prici
  assert.match(process,/avoidable-construction-mistakes/);
  assert.match(process,/Concealing wet-area work without checks/);
  assert.match(process,/Approving extra work verbally/);
- assert.match(process,/pre-construction-planning-report/);
+ assert.match(process,/building-plan-approval-chennai/);
  assert.doesNotMatch(process,/save ₹2 lakh|lose ₹2 lakh/i);
 });
 
-test('homepage makes existing free preparation tools discoverable',()=>{
- const home=read('app/page.tsx');
- assert.match(home,/homePlanningTools/);
- assert.match(home,/Home-building readiness report/);
- assert.match(home,/href="\/pre-construction-planning-report"/);
- assert.match(home,/href="\/building-plan-approval-chennai"/);
- assert.match(home,/href="\/cost-calculator"/);
- assert.match(home,/Detailed design, statutory verification and professional site assessments require an agreed engagement/);
+test('homepage has no retired Planning promotion and retains calculator and approvals navigation',()=>{
+ const home=read('app/page.tsx'),site=read('components/Site.tsx');
+ assert.doesNotMatch(home,/homePlanningTools|pre-construction-planning-report/);
+ assert.match(home,/HomeBudget/);
+ assert.match(site,/Approvals/);
+ assert.match(site,/Calculator/);
 });
-
-test('new package and planning interactions have privacy-conscious funnel events',()=>{
- const guide=read('components/PackageQuickGuide.tsx');
- const analytics=read('components/Analytics.tsx');
+test('package and project trust interactions retain their analytics',()=>{
+ const guide=read('components/PackageQuickGuide.tsx'),analytics=read('components/Analytics.tsx');
  assert.match(guide,/package_preference_preview/);
- assert.match(analytics,/planning_resource_click/);
- assert.match(analytics,/confidence-before-commit/);
+ assert.match(analytics,/trust_evidence_click/);
+ assert.doesNotMatch(analytics,/planning_resource_click/);
  assert.doesNotMatch(guide,/trackEvent\([^\n]*location:/);
 });
-
 test('original minimal homepage hero keeps restrained mobile CTA and spacing',()=>{
  const hero=read('components/HomeExperience.tsx');
  const css=read('app/conversion.css');
@@ -95,7 +90,7 @@ test('editorial homepage starts with the hero and maintains the original section
  assert.ok(home.indexOf('<HomeHero/>')<home.indexOf('designStatement'));
  assert.ok(home.indexOf('designStatement')<home.indexOf('homeScopeContrast'));
  assert.ok(home.indexOf('specificationSection')<home.indexOf('<BuildAssurance/>'));
- assert.ok(home.indexOf('<BuildAssurance/>')<home.indexOf('homePlanningTools'));
+ assert.ok(home.indexOf('<BuildAssurance/>')<home.indexOf('studioStatement'));
 });
 test('simplified package choices preserve the full specification comparison',()=>{
  const quick=read('components/PackageQuickGuide.tsx');

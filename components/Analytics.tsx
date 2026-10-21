@@ -73,9 +73,6 @@ export default function Analytics() {
       if (anchor.closest('#confidence-before-commit') || anchor.closest('.aboutTransparency') || anchor.closest('.enquiryConfidence')) {
         trackEvent('trust_evidence_click', { ...base, destination: href.slice(0, 180) });
       }
-      if (anchor.closest('.homePlanningTools')) {
-        trackEvent('planning_resource_click', { ...base, destination: href.slice(0, 150) });
-      }
     };
     document.addEventListener('click', onClick);
     return () => document.removeEventListener('click', onClick);

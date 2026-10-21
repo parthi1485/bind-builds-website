@@ -34,6 +34,8 @@ const nextConfig:NextConfig={
    // /projects remains Studio Bind's external portfolio; /project-evidence is a separate internal construction-stage resource.
    {source:'/projects',destination:'https://www.bindarchitects.com/',permanent:true},
    {source:'/portfolio',destination:'https://www.bindarchitects.com/',permanent:true},
+   // The separate Planning report is retired; direct existing links to the approval guide.
+   {source:'/pre-construction-planning-report',destination:'/building-plan-approval-chennai',permanent:true},
   ];
  },
 };

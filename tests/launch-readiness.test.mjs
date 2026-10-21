@@ -24,7 +24,6 @@ test('launch-critical routes are represented in the sitemap', () => {
     "'/individual-house-construction-chennai'",
     "'/turnkey-house-construction-chennai'",
     "'/building-plan-approval-chennai'",
-    "'/pre-construction-planning-report'",
     "'/service-areas-chennai'",
     "'/house-construction-west-chennai'",
     "'/house-construction-ramapuram-chennai'",
@@ -291,7 +290,8 @@ test('visible navigation defers heavy route downloads until visitor intent', () 
 test('navigation separates construction-stage evidence from Studio Bind portfolio', () => {
   const site=read('components/Site.tsx');
   const navigationLine=site.split('\n').find(line=>line.startsWith('const navigation = ')) || '';
-  assert.match(navigationLine,/\['Approvals', '\/building-plan-approval-chennai'\], \['Planning', '\/pre-construction-planning-report'\], \['Projects', site\.portfolio\]/);
+  assert.match(navigationLine,/\['Approvals', '\/building-plan-approval-chennai'\], \['Projects', site\.portfolio\]/);
+  assert.doesNotMatch(navigationLine,/pre-construction-planning-report|\['Planning'/);
   assert.doesNotMatch(navigationLine,/Site Work|Studio Portfolio/);
   assert.match(site,/className="links".*navigation\.map/s);
   assert.match(site,/aria-label="Mobile navigation".*navigation\.map/s);
@@ -407,4 +407,14 @@ test('route navigation preserves Back/Forward reading position while starting ne
   assert.match(scrolling,/if \(destination\.hash\) return/);
   assert.match(scrolling,/const target = backTarget\.current \?\? 0/);
   assert.match(scrolling,/behavior: 'instant'/);
+});
+
+test('retired Planning page is absent from navigation and sitemap and redirects to Approvals',()=>{
+ const site=read('components/Site.tsx');
+ const sitemap=read('app/sitemap.ts');
+ const config=read('next.config.ts');
+ assert.doesNotMatch(site,/pre-construction-planning-report|\['Planning'/);
+ assert.doesNotMatch(sitemap,/pre-construction-planning-report/);
+ assert.match(config,/source:'\/pre-construction-planning-report',destination:'\/building-plan-approval-chennai',permanent:true/);
+ assert.equal(existsSync(new URL('../app/pre-construction-planning-report/page.tsx',import.meta.url)),false);
 });

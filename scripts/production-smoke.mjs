@@ -49,7 +49,6 @@ const pages=[
   ['/individual-house-construction-chennai',/individual house construction/i],
   ['/turnkey-house-construction-chennai',/turnkey house construction/i],
   ['/building-plan-approval-chennai',/building.*approval|approval.*Chennai/i],
-  ['/pre-construction-planning-report',/Pre-Construction Planning Report|pre-construction|preparation report|planning report/i],
   ['/service-areas-chennai',/service areas|construction across Chennai/i],
   ['/house-construction-west-chennai',/West Chennai|house construction/i],
   ['/house-construction-ramapuram-chennai',/Ramapuram|house construction/i],
@@ -79,6 +78,14 @@ for(const [path,marker] of pages){
   assert.match(html,marker,`${path} is missing expected page content`);
   assert.doesNotMatch(html,/noindex/i,`${path} unexpectedly contains noindex`);
   console.log('✓',path);
+}
+
+// The removed Planning page redirects visitors to the existing approvals guide.
+{
+ const response=await request('/pre-construction-planning-report',{redirect:'manual'});
+ assert.equal(response.status,308,'Removed planning page should permanently redirect');
+ assert.equal(response.headers.get('location'),'/building-plan-approval-chennai','Removed planning page redirect destination');
+ console.log('✓ Removed planning page redirects to Approvals');
 }
 
 // The /projects index and /portfolio redirect to Studio Bind; /project-evidence remains internal.
