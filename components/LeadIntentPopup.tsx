@@ -129,7 +129,7 @@ export default function LeadIntentPopup() {
       }
       if (event.key !== 'Tab') return;
       const focusable = [...(dialog.current?.querySelectorAll<HTMLElement>('button,input,select,a[href]') || [])]
-        .filter(element => !element.hasAttribute('disabled') && (element.getClientRects().length > 0));
+        .filter(element => !element.hasAttribute('disabled') && element.tabIndex >= 0 && element.getClientRects().length > 0);
       if (!focusable.length) return;
       const firstEl = focusable[0];
       const lastEl = focusable[focusable.length - 1];
