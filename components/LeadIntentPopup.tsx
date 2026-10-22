@@ -129,7 +129,7 @@ export default function LeadIntentPopup() {
       }
       if (event.key !== 'Tab') return;
       const focusable = [...(dialog.current?.querySelectorAll<HTMLElement>('button,input,select,a[href]') || [])]
-        .filter(element => !element.hasAttribute('disabled'));
+        .filter(element => !element.hasAttribute('disabled') && (element.getClientRects().length > 0));
       if (!focusable.length) return;
       const firstEl = focusable[0];
       const lastEl = focusable[focusable.length - 1];
@@ -220,46 +220,36 @@ export default function LeadIntentPopup() {
   }}>
     <div ref={dialog} className="leadPopup" role="dialog" aria-modal="true" aria-labelledby="lead-popup-title" aria-describedby="lead-popup-copy">
       <button ref={closeButton} type="button" className="leadPopupClose" onClick={() => close('button')} aria-label="Close project enquiry">×</button>
-
-      <section className="leadPopupStory">
+      <div className="leadPopupHeader">
         <span className="leadPopupEyebrow">Bind Builds · Architect-led construction</span>
         <h2 id="lead-popup-title">Build with clarity.<br/><span>Before you commit.</span></h2>
-        <p id="lead-popup-copy">Tell us where you are building. We’ll help you understand the right next step for scope, cost and timeline.</p>
-        <div className="leadPopupSignals" aria-label="Why speak with Bind Builds">
-          <div><span>01</span><strong>Architect-led</strong><small>Design and execution considered together.</small></div>
-          <div><span>02</span><strong>Scope first</strong><small>Useful clarity before a project-specific proposal.</small></div>
-          <div><span>03</span><strong>Chennai + Coimbatore</strong><small>Project fit is reviewed before we promise a visit.</small></div>
+        <p id="lead-popup-copy">Tell us where you’re building. We’ll help with the next step.</p>
+        <div className="leadPopupSignals" aria-label="Our approach">
+          <span>Architect-led</span><span>Scope first</span><span>Chennai + Coimbatore</span>
         </div>
-      </section>
-
-      <section className="leadPopupFormPanel">
+      </div>
+      <div className="leadPopupFormPanel">
         {submitted ? <div className="leadPopupSuccess" aria-live="polite">
           <span className="leadPopupSuccessMark" aria-hidden="true">✓</span>
-          <span className="leadPopupEyebrow">Enquiry received</span>
           <h3>We have your details.</h3>
-          <p>Our team will first review your location and project type, then contact you with the most useful next step.</p>
+          <p>We’ll review the site and contact you with the next step.</p>
           <button type="button" className="cta primary" onClick={() => close('success')}>Continue exploring →</button>
         </div> : <form onSubmit={submit}>
-          <span className="leadPopupEyebrow">Start with four details</span>
-          <h3>Tell us what you’re planning.</h3>
           <div className="leadPopupFields">
             <label>Full name<input required autoComplete="name" maxLength={100} value={form.name} onChange={event => update('name', event.target.value)} placeholder="Your name" /></label>
-            <label>Mobile number<input required autoComplete="tel" inputMode="tel" maxLength={20} value={form.phone} onChange={event => update('phone', event.target.value)} placeholder="+91 98765 43210" /></label>
+            <label>Mobile number<input required type="tel" autoComplete="tel" inputMode="tel" maxLength={20} value={form.phone} onChange={event => update('phone', event.target.value)} placeholder="+91 98765 43210" /></label>
             <label>Site location<input required autoComplete="address-level2" maxLength={120} value={form.location} onChange={event => update('location', event.target.value)} placeholder="Porur, ECR, Coimbatore…" /></label>
-            <label>Project type<select value={form.projectType} onChange={event => update('projectType', event.target.value)}>
-              {['New home','Demolition & rebuild','Rental / multi-family building','Commercial / healthcare','Interiors / other'].map(value => <option key={value}>{value}</option>)}
-            </select></label>
+            <details className="leadPopupOptional"><summary>Project type: {form.projectType} <span>Change</span></summary>
+              <label>Project type<select value={form.projectType} onChange={event => update('projectType', event.target.value)}>{['New home','Demolition & rebuild','Rental / multi-family building','Commercial / healthcare','Interiors / other'].map(value => <option key={value}>{value}</option>)}</select></label>
+            </details>
             <label className="leadPopupHoneypot" aria-hidden="true">Website<input tabIndex={-1} autoComplete="off" value={form.website} onChange={event => update('website', event.target.value)} /></label>
           </div>
-          <button className="cta primary leadPopupSubmit" type="submit" disabled={submitting}>{submitting ? 'Sending…' : 'Discuss my project →'}</button>
-          <p className="leadPopupPrivacy">No commitment to proceed. Your details are used only for enquiry follow-up. <Link href="/privacy">Privacy details</Link>.</p>
+          <button className="cta primary leadPopupSubmit" type="submit" disabled={submitting}>{submitting ? 'Sending…' : 'Plan my project →'}</button>
+          <p className="leadPopupPrivacy">No obligation. Details used for enquiry follow-up. <Link href="/privacy">Privacy</Link>.</p>
           {status && <p className="leadPopupError" role="alert">{status}</p>}
-          <div className="leadPopupResearch">
-            <span>Still researching?</span>
-            <Link href="/cost-calculator" onClick={() => close('calculator')}>Calculate construction cost instead →</Link>
-          </div>
+          <Link className="leadPopupExplore" href="/cost-calculator" onClick={() => close('calculator')}>Just exploring? Calculate your cost →</Link>
         </form>}
-      </section>
+      </div>
     </div>
   </div>;
 }

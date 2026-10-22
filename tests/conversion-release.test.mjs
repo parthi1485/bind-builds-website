@@ -124,3 +124,32 @@ test('CCBM project evidence pages do not expose a failing media file as project 
  assert.match(caseStudy,/Project information graphic, not site photography/);
  assert.match(css,/\.projectSheetPlaceholder/);
 });
+
+test('architecture graphic, alternating section and comparison highlights stay minimal',()=>{
+ const home=read('app/page.tsx');
+ const css=read('app/homepage-rhythm.css');
+ assert.match(home,/className="processBlueprint"/);
+ assert.match(home,/scopePanelIcon/);
+ assert.match(home,/scopePrice/);
+ assert.match(home,/scopeProcess/);
+ assert.match(css,/premiumHome \.designStatement\{position:relative;isolation:isolate/);
+ assert.match(css,/homeScopeContrast\{isolation:isolate/);
+ assert.match(css,/homeScopePanels article/);
+ assert.match(css,/max-width:760px/);
+});
+
+test('popup remains a compact accessible single-column lead form',()=>{
+ const popup=read('components/LeadIntentPopup.tsx');
+ const css=read('app/lead-popup.css');
+ assert.match(popup,/leadPopupHeader/);
+ assert.match(popup,/Plan my project/);
+ assert.match(popup,/Project type: \{form\.projectType\}/);
+ assert.match(popup,/details className="leadPopupOptional"/);
+ assert.match(popup,/await fetch\('\/api\/website-lead'/);
+ assert.match(popup,/lead_popup_success/);
+ assert.match(popup,/getClientRects\(\)\.length > 0/);
+ assert.match(css,/width:min\(450px,100%\)/);
+ assert.match(css,/place-items:center/);
+ assert.doesNotMatch(css,/grid-template-columns:minmax\(0,\.92fr\)/);
+ assert.doesNotMatch(css,/place-items:end center/);
+});

@@ -105,3 +105,57 @@
  .premiumHome .assuranceSection::before{left:22px;width:54px}
  .premiumHome .assuranceSection>.productSectionHeader{padding-inline:22px;margin-bottom:34px}
 }
+
+
+/* 2026-10-22: architectural depth without turning sections into ads. */
+.premiumHome .designStatement{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 88% 30%,#213e56 0,#142738 30%,#131a23 66%,#101820 100%);padding-block:clamp(88px,9vw,136px)}
+.premiumHome .designStatement::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(114deg,transparent 40%,#77a6d50d 70%,transparent 95%),repeating-linear-gradient(90deg,transparent 0 88px,#9fc6ec0b 89px 90px);mask-image:linear-gradient(90deg,transparent 6%,#000 100%)}
+.premiumHome .processBlueprint{position:absolute;right:-9%;top:4%;width:min(60%,720px);height:90%;color:#789bb8;opacity:.19;z-index:-1;pointer-events:none}
+.premiumHome .designStatement>.productEyebrow,.premiumHome .designStatement>h2,.premiumHome .designStatement>p,.premiumHome .designStatement>.productTextLink{position:relative;z-index:1}
+.premiumHome .designStatement .connectedProcess{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;max-width:920px;text-align:left;border-block:1px solid #b4cee03a;margin:clamp(40px,5vw,58px) auto 38px;padding:28px 0}
+.premiumHome .designStatement .connectedProcess>div{display:grid;justify-items:start;align-content:start;grid-template-columns:40px minmax(0,1fr);gap:10px 9px;text-align:left;padding:13px clamp(12px,2.2vw,26px);border:0}
+.premiumHome .designStatement .connectedProcess>div:not(:last-child){border-right:1px solid #b4cee02b}
+.premiumHome .designStatement .connectedProcess>div>span{grid-column:1;width:38px;height:38px;border:1px solid #9bb9d466;border-radius:50%;background:#ffffff0a;color:#b3d4fa;display:grid;place-items:center;font-size:.74rem}
+.premiumHome .designStatement .connectedProcess svg{grid-column:2;width:38px;height:38px;color:#bed4ea;stroke:currentColor}
+.premiumHome .designStatement .connectedProcess strong{grid-column:1/-1;margin:8px 0 0;font-size:clamp(1rem,1.8vw,1.38rem);line-height:1.2;color:#f7fafd}
+.premiumHome .designStatement .connectedProcess small{grid-column:1/-1;margin:0;color:#b7c8d8;line-height:1.55;font-size:.77rem;max-width:175px}
+.premiumHome .designStatement .connectedProcess>i{display:none}
+.premiumHome .homeScopeContrast{isolation:isolate;position:relative;background:linear-gradient(135deg,#f0f5fa 0,#fcfdff 42%,#f7f9fc 100%);overflow:hidden;border-bottom:1px solid #e0e7ef}
+.premiumHome .homeScopeContrast::before{content:"";position:absolute;right:-7%;top:3%;width:min(62%,650px);height:58%;border:1px solid #8facc82a;transform:skewY(-24deg);pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 37px,#88b4de15 38px 39px),repeating-linear-gradient(90deg,transparent 0 37px,#88b4de15 38px 39px);mask-image:linear-gradient(90deg,transparent,#000)}
+.premiumHome .homeScopeHeading,.premiumHome .homeScopePanels,.premiumHome .homeScopeNote{position:relative;z-index:1}
+.premiumHome .homeScopeHeading .productEyebrow{color:#46769f}
+.premiumHome .homeScopePanels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;border:0}
+.premiumHome .homeScopePanels article,.premiumHome .homeScopePanels article:nth-child(2){position:relative;min-width:0;background:#ffffffd9;backdrop-filter:blur(8px);border:1px solid #dde7f2;border-radius:20px;padding:clamp(22px,3vw,38px);box-shadow:0 12px 36px #304e7310}
+.premiumHome .homeScopePanels article:nth-child(2){background:#f9f7f4dd;border-color:#e8e0da}
+.premiumHome .homeScopePanels article:first-child{border-right:1px solid #dde7f2}
+.premiumHome .scopePanelIntro{display:flex;align-items:center;gap:20px;margin-bottom:23px}
+.premiumHome .scopePanelIcon{display:grid;place-items:center;flex-shrink:0;width:55px;height:55px;border-radius:14px;background:#eaf3fb;color:#365e81}
+.premiumHome .scopeProcess .scopePanelIcon{background:#eeeae4;color:#635d57}
+.premiumHome .scopePanelIcon svg{width:26px;height:26px}
+.premiumHome .homeScopePanels h3{margin:5px 0 0;font-size:clamp(1.5rem,2.4vw,2.1rem)}
+.premiumHome .homeScopePanels ul{margin:0;padding-left:1.15rem;color:#5a6671;line-height:1.75;font-size:.9rem}
+.premiumHome .scopeProcess .productTextLink{display:inline-flex;margin-top:17px;font-size:.88rem}
+.premiumHome .homeScopeNote{margin-top:20px}
+@media(max-width:760px){
+ .premiumHome .designStatement{padding:82px 22px 79px;background:radial-gradient(ellipse at 110% 42%,#1d3e56 0,#121f2c 47%,#111820 100%)}
+ .premiumHome .processBlueprint{width:104%;right:-42%;top:18%;height:70%;opacity:.17}
+ .premiumHome .designStatement .connectedProcess{grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:40px auto 29px;padding:18px 0}
+ .premiumHome .designStatement .connectedProcess>div{grid-template-columns:1fr;gap:8px;padding:6px 10px;align-items:start;justify-items:start}
+ .premiumHome .designStatement .connectedProcess>div>span{grid-column:1;width:29px;height:29px;font-size:.68rem;border:0;background:transparent}
+ .premiumHome .designStatement .connectedProcess svg{grid-column:1;width:27px;height:27px}
+ .premiumHome .designStatement .connectedProcess strong{grid-column:1;font-size:clamp(.8rem,3.2vw,1rem);line-height:1.3;margin:4px 0 0}
+ .premiumHome .designStatement .connectedProcess small{grid-column:1;line-height:1.5;font-size:clamp(.63rem,2.6vw,.76rem);max-width:100%;overflow-wrap:break-word}
+ .premiumHome .homeScopeContrast{padding:68px 22px 76px}
+ .premiumHome .homeScopeContrast::before{width:90%;right:-30%;opacity:.45}
+ .premiumHome .homeScopePanels{grid-template-columns:1fr;gap:13px}
+ .premiumHome .homeScopePanels article,.premiumHome .homeScopePanels article:nth-child(2){padding:23px 20px;border-radius:17px}
+ .premiumHome .homeScopePanels article:first-child{border-right:1px solid #dde7f2;border-bottom:1px solid #dde7f2}
+ .premiumHome .scopePanelIntro{gap:14px;margin-bottom:15px}
+ .premiumHome .scopePanelIcon{width:46px;height:46px;border-radius:12px}
+ .premiumHome .scopePanelIcon svg{width:23px;height:23px}
+ .premiumHome .homeScopePanels h3{font-size:1.45rem}
+ .premiumHome .homeScopePanels ul{font-size:.83rem;gap:6px}
+ .premiumHome .homeScopeHeading h2{font-size:clamp(2.4rem,9.6vw,3.1rem)}
+}
+@media(max-width:355px){.premiumHome .designStatement .connectedProcess>div{padding-inline:6px}.premiumHome .designStatement .connectedProcess strong{font-size:.78rem}}
+@media(prefers-reduced-motion:reduce){.premiumHome .scopePanelIcon,.premiumHome .homeScopePanels article{transition:none}}
