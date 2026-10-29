@@ -15,6 +15,7 @@ export default function sitemap():MetadataRoute.Sitemap{
   ['/projects/pallikaranai-family-home',.86],
   ['/projects/ccbm-commercial-complex',.84],
   ['/packages',.9],
+  ['/design-packages',.84],
   ['/cost-calculator',.95],
   ['/construction-cost-chennai',.95],
   ['/construction-company-chennai',.97],

@@ -42,6 +42,7 @@ const pages=[
   ['/projects/pallikaranai-family-home',/17-foot plot|Pallikaranai/i],
   ['/projects/ccbm-commercial-complex',/CCBM Commercial Complex|Maduravoyal|12,494 sq\.ft/i],
   ['/packages',/Packages|Essential|Elevate/i],
+  ['/design-packages',/Design packages|START|REFINE/i],
   ['/cost-calculator',/construction cost|calculator|estimate/i],
   ['/construction-cost-chennai',/construction cost in Chennai/i],
   ['/construction-company-chennai',/construction company in Chennai/i],

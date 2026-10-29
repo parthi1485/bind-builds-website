@@ -17,6 +17,7 @@ test('launch-critical routes are represented in the sitemap', () => {
     "'/projects/pallikaranai-family-home'",
     "'/projects/ccbm-commercial-complex'",
     "'/packages'",
+    "'/design-packages'",
     "'/cost-calculator'",
     "'/construction-cost-chennai'",
     "'/construction-company-chennai'",
@@ -417,4 +418,27 @@ test('retired Planning page is absent from navigation and sitemap and redirects 
  assert.doesNotMatch(sitemap,/pre-construction-planning-report/);
  assert.match(config,/source:'\/pre-construction-planning-report',destination:'\/building-plan-approval-chennai',permanent:true/);
  assert.equal(existsSync(new URL('../app/pre-construction-planning-report/page.tsx',import.meta.url)),false);
+});
+
+test('design packages preserve four reference tiers, distinct construction service and lead handoff',()=>{
+ const page=read('app/design-packages/page.tsx');
+ const css=read('app/design-packages/design-packages.css');
+ const nav=read('components/Site.tsx');
+ const form=read('components/ProjectForm.tsx');
+ const sitemap=read('app/sitemap.ts');
+ const smoke=read('scripts/production-smoke.mjs');
+ for(const pattern of ["name:'START',rate:40","name:'BUILD',rate:90","name:'ELEVATE',rate:150","name:'REFINE',rate:250"]) assert.ok(page.includes(pattern), 'Missing tier '+pattern);
+ for(const label of ['Detailed construction drawings','Electrical layouts','Plumbing layouts','Interior 3D visuals','Landscape design concepts','Drawings for government approval']) assert.ok(page.includes(label),'Missing deliverable '+label);
+ assert.match(page,/1,500 sq.ft/);
+ assert.match(page,/Construction, site supervision and ongoing construction monitoring are not included/);
+ assert.match(page,/Applicable GST/);
+ assert.match(page,/Design consultancy/);
+ assert.match(page,/type:'Architectural design'/);
+ assert.match(form,/Design START/);
+ assert.match(form,/Architectural design/);
+ assert.match(nav,/\['Design Packages', '\/design-packages'\]/);
+ assert.match(sitemap,/\['\/design-packages',/);
+ assert.match(smoke,/\['\/design-packages',/);
+ assert.match(css,/@media\(max-width:760px\)/);
+ assert.match(page,/tabIndex=\{0\}/);
 });
