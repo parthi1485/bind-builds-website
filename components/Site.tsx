@@ -70,7 +70,6 @@ export function Nav() {
       <IntentLink className="cta primary" href="/start-a-project" onClick={() => setOpen(false)}>Plan my home ↗</IntentLink>
       <a className="menuPhone" href={`tel:${site.telephone}`}>{site.phone}</a>
     </div>
-    {pathname !== '/start-a-project' && pathname !== '/cost-calculator' && <div className={`mobileProjectBar ${pathname !== '/' || scrolled ? 'isVisible' : ''}`} aria-hidden={open} inert={open}><a href={`tel:${site.telephone}`}>Call the studio</a><IntentLink href="/start-a-project">Plan my home ↗</IntentLink></div>}
   </>;
 }
 export function Footer() {
