@@ -3,6 +3,8 @@ import { site } from '@/lib/site';
 
 // Include lastmod only where the page has a documented significant content update.
 const verifiedUpdates:Record<string,string>={
+ '/demolition-rebuild-house-chennai':'2026-11-27',
+ '/house-construction-anna-nagar-chennai':'2026-11-27',
  '/construction-cost-coimbatore':'2026-09-24',
  '/building-plan-approval-chennai':'2026-11-27',
  '/construction-cost-chennai':'2026-11-27',

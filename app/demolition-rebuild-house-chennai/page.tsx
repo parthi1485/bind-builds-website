@@ -2,15 +2,17 @@ import Link from 'next/link';
 import { Page } from '@/components/Site';
 import StructuredData from '@/components/StructuredData';
 import { pageMetadata, breadcrumbSchema } from '@/lib/seo';
-import { site, whatsappUrl } from '@/lib/site';
+import { money } from '@/lib/calculator';
+import { packages, site } from '@/lib/site';
 
 const path='/demolition-rebuild-house-chennai';
-const title='Old House Demolition & Rebuild in Chennai';
-const description='Planning to demolish and rebuild an old house in Chennai? Understand site review, demolition scope, approvals, neighbour safety, soil investigation, design and construction sequencing.';
+const title='Old House Demolition and Reconstruction in Chennai';
+const description='Compare demolition quotes and estimate the new home separately. See a Chennai rebuild budget example, what to check on site and how to prepare for a review.';
 export const metadata=pageMetadata(title,description,path);
 
 const faqs=[
  ['Is demolition included in the normal construction square-foot rate?','No. Existing-building demolition is treated as a separate project-specific scope because volume, access, disposal, salvage, utilities and neighbour conditions vary.'],
+ ['How do I compare two demolition quotes if one includes salvage?','Ask each contractor to list the gross price for the same dismantling and debris-clearance scope, the items they intend to retain and the salvage credit. Compare the net payable amounts only after checking whether transport, disposal and site protection are included in both.'],
  ['Should the new house be designed before demolition?','The new project should be developed far enough to confirm the intended layout, approximate built-up area and construction direction before the demolition sequence is finalised. The exact order depends on the site, approvals and investigations required.'],
  ['What happens to electricity, water and other existing services?','Existing connections and services need to be identified and safely isolated, protected, shifted or managed as applicable before demolition begins. The responsible parties should be clear in the demolition scope.'],
  ['Can materials from the old house be reused?','Potential salvage items can be identified before demolition, but reuse depends on condition, dimensions, safety, design compatibility and storage. Do not assume structural materials are reusable without professional assessment.'],
@@ -24,10 +26,9 @@ export default function DemolitionRebuildChennai(){
   <article className="guidePage">
    <nav className="guideBreadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><span>Demolition and rebuild in Chennai</span></nav>
    <header className="guideIntro">
-    <span className="productEyebrow">Existing house. New chapter.</span>
-    <h2>Rebuilding starts<br/><span>before demolition day.</span></h2>
-    <p>An old-house rebuild is not simply “demolish first, design later.” The existing structure, neighbours, utility connections, access, salvage, approval path, new floor area and structural strategy need to be understood as one coordinated project.</p>
-    <div className="guideActions"><Link className="cta primary" href="/start-a-project?type=Demolition%20%26%20rebuild">Discuss my rebuild ↗</Link><a className="productTextLink" href={whatsappUrl('Hello Bind Builds, I am planning to demolish and rebuild an existing house in Chennai.')} target="_blank" rel="noopener noreferrer">Talk about my existing house ↗</a></div>
+    <h2>What will it cost to replace your existing house?</h2>
+    <p>Start with two measurements. The floors being taken down determine the demolition scope. The built-up area you plan to construct determines the base price of the new house. Ask for both figures before you compare builders.</p>
+    <div className="guideActions"><Link className="cta primary" href="/start-a-project?type=Demolition%20%26%20rebuild">Discuss my rebuild ↗</Link><a className="productTextLink" href="#rebuild-budget">See a worked rebuild budget ↓</a></div>
    </header>
 
    <section className="guideSection">
@@ -56,9 +57,12 @@ export default function DemolitionRebuildChennai(){
     <div className="guideActions"><Link href="/process" className="productTextLink">See the Bind Builds pre-construction process →</Link><Link href="/building-plan-approval-chennai" className="productTextLink">Review the Chennai approval guide →</Link></div>
    </section>
 
-   <section className="guideSection">
+   <section className="guideSection" id="rebuild-budget">
     <span className="productEyebrow">Budgeting a rebuild</span>
     <h2>Separate the old-house cost<br/><span>from the new-house cost.</span></h2>
+    <p>Suppose you are replacing a 900 sq.ft single-storey house with two floors of 750 sq.ft each. Ask the demolition contractor to quote for the existing 900 sq.ft after inspecting the site. For the new 1,500 sq.ft house, the Bind Builds Essential starting rate of {money(packages[0].rate)}/sq.ft gives a base construction estimate of <strong>{money(1500 * packages[0].rate)}</strong>.</p>
+    <p>To build a project budget, add the written demolition quote, approval costs, applicable taxes and separately priced site works. If the contractor offers a credit for salvage, record who keeps each item and deduct the credit only once. The example assumes the full 1,500 sq.ft is agreed as billable area.</p>
+    <h3>What to ask each contractor to price</h3>
     <div className="guideCards three">
       <article><h3>Demolition</h3><p>Price dismantling, machinery, labour, debris removal, protection and salvage as its own scope.</p></article>
       <article><h3>New construction</h3><p>Use the confirmed new built-up area and selected package specification as the starting construction basis.</p><Link href="/construction-cost-chennai">See Chennai construction costs →</Link></article>
