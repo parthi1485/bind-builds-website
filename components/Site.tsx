@@ -74,9 +74,9 @@ export function Nav() {
 }
 export function Footer() {
   const guideLinks = [
+    ['House construction in Chennai', '/house-construction-chennai'],
     ['Project evidence', '/project-evidence'],
     ['Construction company', '/construction-company-chennai'],
-    ['House construction', '/house-construction-chennai'],
     ['Individual house construction', '/individual-house-construction-chennai'],
     ['Construction cost 2026', '/construction-cost-chennai'],
     ['Turnkey construction', '/turnkey-house-construction-chennai'],
