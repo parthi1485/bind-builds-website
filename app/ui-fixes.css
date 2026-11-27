@@ -234,7 +234,7 @@
 }
 .packageJumpItem span{font-size:.84rem;font-weight:600}
 .packageJumpItem strong{font-size:.86rem;font-variant-numeric:tabular-nums;white-space:nowrap}
-.packageJumpItem small{font-size:.63rem;font-weight:450;color:#747e8b}
+.packageJumpItem small{font-size:.63rem;font-weight:450;color:#586171}
 .packageJumpItem.isRecommended{background:#f4f8ff;border-color:#bdd8f6}
 .packageJumpItem:focus-visible{outline:2px solid #0071e3;outline-offset:2px}
 .simplePackageCard{scroll-margin-top:calc(100px + env(safe-area-inset-top))}
@@ -398,3 +398,5 @@
   display:inline;position:static;width:auto;height:auto;padding:0;margin:0;
   overflow:visible;clip:auto;clip-path:none;white-space:normal;
 }
+
+.packageFinalCta.blue { background-color: #005bb8; }

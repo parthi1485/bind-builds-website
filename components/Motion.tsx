@@ -83,7 +83,6 @@ export default function Motion() {
 
   const control = <button className={`motionToggle${inlineControl ? ' motionToggleInline' : ''}`} type="button" onClick={() => setPaused(value => !value)}
       disabled={reduced} aria-pressed={paused || reduced}
-      aria-label={reduced ? 'Motion reduced by your device setting' : paused ? 'Enable decorative motion' : 'Pause decorative motion'}
       title={reduced ? 'Respects your reduced-motion setting' : paused ? 'Enable motion' : 'Pause motion'}>
       <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
         {paused || reduced ? <path d="M6 3L16 10L6 17Z" fill="currentColor"/> : <>

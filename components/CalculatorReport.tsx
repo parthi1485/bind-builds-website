@@ -1,24 +1,21 @@
 'use client';
 
 // Keep the results focused on the original estimate, quotation details and download/edit actions.
-import { useRef, useState, type FormEvent, type RefObject } from 'react';
+import { useRef, useState, type RefObject } from 'react';
 import Link from 'next/link';
 import { packages, site, whatsappUrl } from '@/lib/site';
 import { calculateEmi, compactMoney, configuration, createVisualData, floorName, money, splitStages, validNumber, type Estimate, type EstimateInput } from '@/lib/calculator';
 import ProposalVisuals, { EstimatePresentation, ComparisonDiagram } from './ProposalVisuals';
 import { constructionMonths } from '@/lib/calculator-options';
 import type { PdfReportData } from '@/lib/estimate-pdf';
-import { attributedPageUrl, leadAttributionFields, leadAttributionSummary, trackEvent } from '@/lib/analytics';
+import { trackEvent } from '@/lib/analytics';
 
 type Props = { input: EstimateInput; estimate: Estimate; packageIndex: number; headingRef: RefObject<HTMLHeadingElement | null>; onEdit: () => void };
 export default function CalculatorReport({ input, estimate, packageIndex, headingRef, onEdit }: Props) {
   const selected = packages[packageIndex];
   const [status, setStatus] = useState('');
   const [downloading, setDownloading] = useState(false);
-  const downloadGate = useRef<HTMLDialogElement>(null);
   const downloadInFlight = useRef(false);
-  const [downloadLead, setDownloadLead] = useState({ name: '', phone: '', email: '' });
-  const [downloadLeadStatus, setDownloadLeadStatus] = useState('');
   const [months, setMonths] = useState(String(constructionMonths(input.floors.length)));
   const [loan, setLoan] = useState(String(Math.round(estimate.total * .8)));
   const [interest, setInterest] = useState('8.5');
@@ -59,6 +56,8 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
   ];
   const copy = async () => { try { await navigator.clipboard.writeText(notes); setStatus('Estimate copied. You can paste it into a message.'); } catch { setStatus('Copy is unavailable in this browser. Use the WhatsApp draft or download the PDF.'); } };
   const download = async () => {
+    if (downloadInFlight.current) return;
+    downloadInFlight.current = true;
     setDownloading(true); setStatus('Preparing your PDF…');
     try {
       const data: PdfReportData = { packageName: selected.name, total: money(estimate.total), date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }),
@@ -75,78 +74,8 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
       trackEvent('estimate_pdf_download',{package_name:selected.name,calculated_area:estimate.area,value:estimate.total,currency:'INR'});
       setStatus('PDF prepared. Check your browser downloads.');
     } catch { trackEvent('estimate_pdf_generation_error',{package_name:selected.name}); setStatus('The PDF could not be created. Please try again, or copy your estimate.'); }
-    finally { setDownloading(false); }
+    finally { downloadInFlight.current = false; setDownloading(false); }
   };
-  const requestDownload = () => {
-    setDownloadLeadStatus('');
-    trackEvent('pdf_gate_open',{package_name:selected.name,calculated_area:estimate.area,value:estimate.total,currency:'INR'});
-    downloadGate.current?.showModal();
-  };
-  const unlockDownload = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (downloadInFlight.current) return;
-    const digits = downloadLead.phone.replace(/\D/g, '').length;
-    if (digits < 10 || digits > 15) { trackEvent('pdf_gate_validation_error',{field:'phone'}); setDownloadLeadStatus('Please enter a valid phone number with 10–15 digits.'); return; }
-
-    const parking = input.allowances.find(item => item.key === 'parking' && item.selected);
-    const extras = estimate.selected
-      .filter(item => item.key !== 'parking')
-      .map(item => `${item.label}: ${item.amount === null ? 'To be quoted' : money(item.amount)}${item.detail ? ' · ' + item.detail : ''}`)
-      .join(' | ');
-
-    const headroomPricing = input.headroom
-      ? estimate.headroomUnpriced ? 'Request a quote'
-      : estimate.headroomMode === 'lump' ? `Custom allowance · ${money(estimate.headroomCost)}`
-      : `${input.headroom.toLocaleString('en-IN')} sq.ft × ${money(estimate.headroomRate)} / sq.ft = ${money(estimate.headroomCost)}`
-      : '';
-
-    const attribution = leadAttributionFields();
-    const attributionSummary = leadAttributionSummary();
-    downloadInFlight.current = true;
-    setDownloading(true);
-    setDownloadLeadStatus('Saving your details…');
-    try {
-      const response = await fetch('/api/website-lead', {
-        method: 'POST',
-        signal: AbortSignal.timeout(20000),
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          source: 'Website – Estimate PDF',
-          name: downloadLead.name,
-          phone: downloadLead.phone,
-          email: downloadLead.email,
-          package: selected.name,
-          configuration: configuration(input.floors.length),
-          plotArea: String(input.plot),
-          calculatedArea: String(estimate.area),
-          packageRate: money(input.rate) + ' / sq.ft',
-          estimateTotal: money(estimate.total),
-          headroomArea: input.headroom ? String(input.headroom) : '',
-          headroomPricing,
-          parkingArea: parking?.detail?.match(/^([\d.]+) sq\.ft/)?.[1] || '',
-          parkingPricing: parking ? (parking.detail || (parking.amount === null ? 'To be quoted' : money(parking.amount))) : '',
-          additionalItems: extras,
-          requirements: attributionSummary,
-          pdfDownloaded: 'Requested — not yet generated',
-          pageUrl: attributedPageUrl(),
-          ...attribution,
-          website: ''
-        }),
-      });
-      const result = await response.json().catch(() => ({ ok: false }));
-      if (!response.ok || !result.ok) throw new Error('Lead capture failed');
-
-      trackEvent('pdf_download_lead',{package_name:selected.name,calculated_area:estimate.area,value:estimate.total,currency:'INR'});
-      setDownloadLeadStatus('Details received. Preparing your PDF…');
-      downloadGate.current?.close();
-      await download();
-    } catch {
-      trackEvent('pdf_download_lead_error',{package_name:selected.name,calculated_area:estimate.area});
-      setDownloading(false);
-      setDownloadLeadStatus('We could not confirm your details were saved. Your entries are still here. Retry, or close this window to copy your estimate.');
-    } finally { downloadInFlight.current = false; }
-  };
-
   return <div className="calcReport">
     <div className="calcReportHero">
       <div><span className="eyebrow">Your first step towards a well-planned home</span><h2 ref={headingRef} tabIndex={-1}>Your home.<br />In numbers.</h2><p>{selected.name} · {configuration(input.floors.length)} · {estimate.area.toLocaleString('en-IN')} sq.ft calculated area</p></div>
@@ -154,27 +83,12 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     </div>
     {estimate.unpriced.length > 0 && <div className="calcQuoteNotice"><strong>{estimate.unpriced.length} selected {estimate.unpriced.length === 1 ? 'extra still needs' : 'extras still need'} a quote</strong><p>{estimate.unpriced.map(item => item.label).join(' · ')}</p><span>These items are excluded from the subtotal above.</span></div>}
     <section className="estimateConversionBar" id="estimate-next-step" aria-labelledby="estimate-next-title"><div><span className="eyebrow">Make this estimate specific to your site</span><h3 id="estimate-next-title">You have the number.<br/>Now connect it to the plan.</h3><p>Carry your package, area and estimate into a short project brief. We’ll review the site, requirements and the scope behind the number.</p><div className="estimateConversionProof"><span>Estimate carried forward</span><span>~2 minute brief</span><span>No commitment to proceed</span></div></div><div className="estimateConversionActions"><Link href={enquiryUrl} className="cta primary">Discuss this estimate ↗</Link><a href={whatsappUrl('Hello Bind Builds, I would like to discuss this estimate.\n\n' + notes)} className="textLink" target="_blank" rel="noopener noreferrer">Continue on WhatsApp ↗</a></div></section>
-    <div className="calcReportToolbar"><EstimatePresentation data={visuals} breakdown={{rows,total:money(estimate.total)}}/><button className="cta" type="button" onClick={requestDownload} disabled={downloading}>{downloading ? 'Preparing PDF…' : 'Download estimate PDF'} <span aria-hidden="true">↓</span></button><button className="textButton" type="button" onClick={copy}>Copy estimate</button><button className="textButton" type="button" onClick={onEdit}>Edit my inputs</button></div>
-    <dialog className="estimateDownloadGate" ref={downloadGate} aria-labelledby="estimate-download-title" onClick={event=>{if(event.target===event.currentTarget)downloadGate.current?.close();}}>
-      <form onSubmit={unlockDownload} aria-busy={downloading}>
-        <div className="estimateDownloadGateHead"><span className="eyebrow">PDF DOWNLOAD</span><button type="button" aria-label="Close" onClick={()=>downloadGate.current?.close()}>×</button></div>
-        <h3 id="estimate-download-title">Download your<br/>estimate PDF.</h3>
-        <p>Your name, phone and email are sent to Bind Builds with this estimate for follow-up before the PDF is prepared.</p>
-        <div className="estimateDownloadFields">
-          <label>Your name <span>required</span><input autoFocus required minLength={2} maxLength={80} autoComplete="name" value={downloadLead.name} onChange={e=>setDownloadLead(v=>({...v,name:e.target.value}))}/></label>
-          <label>Phone number <span>required</span><input required type="tel" inputMode="tel" autoComplete="tel" maxLength={22} pattern="[+0-9() -]{10,22}" value={downloadLead.phone} onChange={e=>setDownloadLead(v=>({...v,phone:e.target.value}))}/></label>
-          <label>Email <span>required</span><input required type="email" autoComplete="email" maxLength={150} value={downloadLead.email} onChange={e=>setDownloadLead(v=>({...v,email:e.target.value}))}/></label>
-        </div>
-        <button className="cta primary estimateDownloadSubmit" type="submit" disabled={downloading}>{downloading ? 'Preparing PDF…' : 'Download PDF ↓'}</button>
-        <p className="estimateDownloadGateStatus" role="status">{downloadLeadStatus}</p>
-        <p className="estimateDownloadPrivacy"><Link href="/privacy">Privacy details ↗</Link></p>
-      </form>
-    </dialog>
+    <div className="calcReportToolbar"><EstimatePresentation data={visuals} breakdown={{rows,total:money(estimate.total)}}/><button className="cta" type="button" onClick={download} disabled={downloading}>{downloading ? 'Preparing PDF…' : 'Download estimate PDF'} <span aria-hidden="true">↓</span></button><button className="textButton" type="button" onClick={copy}>Copy estimate</button><button className="textButton" type="button" onClick={onEdit}>Edit my inputs</button></div>
     <p role="status" className="calcStatus">{status}</p>
     <section className="calcReportCard calcDuration"><span className="eyebrow">Construction planning scenario</span><strong>~{constructionMonths(input.floors.length)}<small> months</small></strong><div className="durationTrack"><span style={{width:`${constructionMonths(input.floors.length)/18*100}%`}}/></div><p>6 months for ground only + 4 months per additional floor. Design and approval time is separate. Actual duration depends on area, site conditions, scope and the agreed programme.</p></section><ProposalVisuals data={visuals}/>
     <div className="calcReportColumns">
       <section className="calcReportCard"><span className="eyebrow">01 / Where the number comes from</span><h3>Your cost breakdown.</h3><p className="calcHint">{estimate.area.toLocaleString('en-IN')} sq.ft calculated floor/headroom area. Selected car parking is included in base construction; other selected extras remain additional.</p><dl className="calcCostRows">{rows.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}<div className="calcCostTotal"><dt>Planning subtotal</dt><dd>{money(estimate.total)}</dd></div></dl></section>
-      <section className="calcReportCard calcNextStep"><span className="eyebrow">What happens after the estimate?</span><h3>Three useful checks.<br />Before a proposal.</h3><ol className="calcNextChecklist"><li><span>01</span><p><strong>Site + access</strong>Review location, road access and existing conditions.</p></li><li><span>02</span><p><strong>Design + area</strong>Confirm the spaces, floor areas and planning direction.</p></li><li><span>03</span><p><strong>Scope + specification</strong>Turn the planning estimate into a project-specific proposal.</p></li></ol><p className="calcHint">No details are needed to view or present your estimate. Contact details are requested only before downloading the PDF.</p></section>
+      <section className="calcReportCard calcNextStep"><span className="eyebrow">What happens after the estimate?</span><h3>Three useful checks.<br />Before a proposal.</h3><ol className="calcNextChecklist"><li><span>01</span><p><strong>Site + access</strong>Review location, road access and existing conditions.</p></li><li><span>02</span><p><strong>Design + area</strong>Confirm the spaces, floor areas and planning direction.</p></li><li><span>03</span><p><strong>Scope + specification</strong>Turn the planning estimate into a project-specific proposal.</p></li></ol><p className="calcHint">Download your estimate directly. Share your details when you want to discuss your project.</p></section>
     </div>
     <section className="calcReportCard calcCompare"><ComparisonDiagram data={visuals}/><p className="calcHint">Additional items are excluded from this comparison.</p><div className="comparisonSpecLinks">{packages.map(item=><Link key={item.key} href={`/packages#${item.key}`} target="_blank" rel="noopener noreferrer">{item.name} specification ↗</Link>)}</div></section>
     <details className="calcPlanning"><summary>Explore a time and loan scenario <span aria-hidden="true">+</span></summary><div className="calcPlanningGrid"><section><h3>A simple spend scenario.</h3><label>Assumed construction duration <span>months</span><input type="number" inputMode="numeric" min="1" max="60" step="1" value={months} onChange={e => setMonths(e.target.value)} /></label><output>{validNumber(parse(months), 1, 60, true) ? money(estimate.base / Number(months)) + ' / month' : 'Enter 1–60 whole months'}</output><p>Base construction cost divided evenly by your chosen duration. Real spending varies by stage. This is not a delivery timeline or a payment commitment; design and approval time is separate.</p></section><section><h3>Explore a loan repayment.</h3><div className="calcLoanFields"><label>Loan amount <span>₹</span><input type="number" inputMode="numeric" min="1" max="1000000000" step="1" value={loan} onChange={e => setLoan(e.target.value)} /></label><label>Annual interest <span>%</span><input type="number" inputMode="decimal" min="0" max="30" step="0.05" value={interest} onChange={e => setInterest(e.target.value)} /></label><label>Loan tenure <span>years</span><input type="number" inputMode="numeric" min="1" max="40" step="1" value={tenure} onChange={e => setTenure(e.target.value)} /></label></div><output>{emi ? money(emi.monthly) + ' / month' : 'Check the loan amount, rate and tenure'}</output>{emi && <p>Total repayment: {money(emi.repayment)}<br />Interest over the term: {money(emi.interest)}</p>}<p>The initial 80% loan amount, 8.5% rate and 20-year term are editable examples, not lender offers. Assumes a fully disbursed loan and constant rate; excludes fees and pre-EMI. <a href="https://homeloans.hdfc.bank.in/home-loan-emi-calculator" target="_blank" rel="noopener noreferrer">EMI formula reference ↗</a></p></section></div><p className="calcPlanningFootnote">These exploratory time and loan scenarios are separate from the construction estimate and are not included in its PDF or enquiry brief.</p></details>

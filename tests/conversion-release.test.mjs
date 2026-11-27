@@ -19,10 +19,11 @@ test('three package decisions use published rates and route to calculator',()=>{
  const site=read('lib/site.ts');
  for(const rate of ['2399','2649','3199']) assert.match(site,new RegExp('rate: '+rate));
  assert.match(page,/PackageQuickGuide categories=\{categories\}/);
- assert.match(guide,/packages\.map\(p=>/);
- assert.match(guide,/aria-pressed=\{selected===p\.key\}/);
- assert.match(guide,/\/cost-calculator\?package=/);
- assert.match(guide,/selected===p.key/);
+ assert.match(guide,/packages\.map\(\(p,index\)=>/);
+ assert.match(guide,/aria-pressed=\{selected\.key===p\.key\}/);
+ assert.match(read('components/PackagePlannerState.tsx'),/\/cost-calculator\?package=/);
+ assert.match(read('components/BudgetPlanner.tsx'),/href=\{estimateUrl\}/);
+ assert.match(guide,/href=\{estimateUrl\}/);
  assert.match(guide,/Taxes, approvals, separately priced works/);
 });
 

@@ -20,7 +20,7 @@
 .packageProcessTrack>li:first-child .packageProcessNode>span{background:var(--blue);border-color:var(--blue);color:#fff}
 .packageProcessCopy{text-align:center;padding-top:22px}
 .packageProcessCopy strong{display:block;font-size:.875rem;line-height:1.35;font-weight:600;letter-spacing:-.015em;color:#2d2d31;min-height:38px}
-.packageProcessCopy p{font-size:.72rem;line-height:1.65;color:#77777f;margin:11px auto 0;max-width:165px}
+.packageProcessCopy p{font-size:.72rem;line-height:1.65;color:#586171;margin:11px auto 0;max-width:165px}
 .packageProcessLink{margin-top:38px;font-size:.8125rem}
 .packageProcessStepLink{display:inline-flex;align-items:center;justify-content:center;margin-top:14px;padding:8px 11px;border-radius:100px;background:#edf5ff;color:var(--blue);font-size:.65rem;font-weight:600;line-height:1.3;white-space:nowrap}
 .packageProcessStepLink:hover{background:#e2efff}

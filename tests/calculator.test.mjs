@@ -174,3 +174,11 @@ test('package comparison keeps selected parking inside base construction at a fi
  assert.equal(comparisons[1].base-comparisons[0].base,estimate.floorArea*(2649-2399));
  assert.equal(comparisons[2].base-comparisons[1].base,estimate.floorArea*(3199-2649));
 });
+
+test('sump unit-price estimates require at least 6000 litres while quote requests remain available', () => {
+ const sump = extraOptions.find(item => item.key === 'sump');
+ const value = initialExtra(sump);
+ assert.ok(Number.isNaN(extraAmount({...value,quantity:'5999'},sump.minimumQuantity)));
+ assert.equal(extraAmount(value,sump.minimumQuantity),180000);
+ assert.equal(extraAmount({...value,mode:'unpriced',quantity:'1000'},sump.minimumQuantity),null);
+});

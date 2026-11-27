@@ -42,7 +42,7 @@ export function captureAttribution(): Attribution | null {
     const utmSource = params.get('utm_source') || '';
     const source = (utmSource || (gclid ? 'google' : fbclid ? 'meta' : externalReferrer || 'direct')).slice(0, 100);
     // An explicit UTM source with no medium is not a direct visit; do not guess paid vs organic.
-    const medium = (params.get('utm_medium') || ((gclid || fbclid) ? 'paid' : utmSource ? 'unspecified' : externalReferrer ? 'referral' : 'direct')).slice(0, 100);
+    const medium = (params.get('utm_medium') || (gclid ? 'paid' : utmSource || fbclid ? 'unspecified' : externalReferrer ? 'referral' : 'direct')).slice(0, 100);
     const attribution: Attribution = {
       source,
       medium,

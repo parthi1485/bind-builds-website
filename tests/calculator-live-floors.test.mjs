@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { calculateEstimate, compactMoney } from '../lib/calculator.ts';
+import { calculateEstimate, compactMoney, splitFloorArea } from '../lib/calculator.ts';
 import { constructionMonths } from '../lib/calculator-options.ts';
 
 const source = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
@@ -20,7 +20,7 @@ test('floor changes recalculate the complete construction subtotal alongside tim
 
 test('floor selector, duration card and both subtotal readouts share the same estimate', () => {
   const component = source('components/ConstructionCalculator.tsx');
-  assert.match(component,/onChange=\{\(\) => setFloorCount\(count\)\}/);
+  assert.match(component,/onChange=\{\(\) => changeFloorCount\(count\)\}/);
   assert.match(component,/const duration=constructionMonths\(floorCount\)/);
   assert.match(component,/className="calcDurationBudget"/);
   assert.match(component,/className="calcActionsLive"/);
@@ -32,4 +32,16 @@ test('floor selector, duration card and both subtotal readouts share the same es
   assert.match(css,/\.calcDurationTop\{/);
   assert.match(css,/\.calcDurationBudget>output\{/);
   assert.match(css,/\.calcActions\{background:#fff;-webkit-backdrop-filter:none!important;backdrop-filter:none!important/);
+});
+
+test('a total built-up area is divided across floors without changing its budget', () => {
+  for (const total of [100, 999, 2000, 100000]) {
+    for (const count of [1, 2, 3, 4]) {
+      const floors = splitFloorArea(total, count).map(Number);
+      assert.equal(floors.length, count);
+      assert.equal(estimateForFloors(floors).floorArea, total);
+    }
+  }
+  assert.deepEqual(splitFloorArea(2001, 2), ['1001', '1000']);
+  assert.throws(() => splitFloorArea(1, 2), RangeError);
 });

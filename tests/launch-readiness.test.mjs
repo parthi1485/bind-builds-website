@@ -65,7 +65,7 @@ test('lead conversion events remain wired to the conversion paths', () => {
   assert.match(project,/trackEvent\('project_enquiry'/);
   assert.match(project,/formRecoveryActions/);
   assert.match(project,/project_enquiry_recovery_click/);
-  assert.match(report,/trackEvent\('pdf_download_lead'/);
+  assert.doesNotMatch(report,/fetch\('\/api\/website-lead'/);
   assert.match(report,/trackEvent\('estimate_pdf_download'/);
   assert.match(analytics,/call_click/);
   assert.match(analytics,/flushPendingEvents/);
@@ -78,7 +78,7 @@ test('lead conversion events remain wired to the conversion paths', () => {
   assert.match(analytics,/scroll_depth/);
   assert.match(project,/project_form_step_view/);
   assert.match(project,/project_form_step_complete/);
-  assert.match(report,/pdf_gate_open/);
+  assert.match(report,/onClick=\{download\}/);
   assert.match(report,/estimateConversionBar/);
   assert.match(project,/project_form_optional_skipped/);
   assert.match(project,/lead_intent_selected/);
@@ -291,7 +291,7 @@ test('visible navigation defers heavy route downloads until visitor intent', () 
 test('navigation separates construction-stage evidence from Studio Bind portfolio', () => {
   const site=read('components/Site.tsx');
   const navigationLine=site.split('\n').find(line=>line.startsWith('const navigation = ')) || '';
-  assert.match(navigationLine,/\['Approvals', '\/building-plan-approval-chennai'\], \['Projects', site\.portfolio\]/);
+  assert.match(navigationLine,/\['Approvals', '\/building-plan-approval-chennai'\], \['Projects', '\/project-evidence'\]/);
   assert.doesNotMatch(navigationLine,/pre-construction-planning-report|\['Planning'/);
   assert.doesNotMatch(navigationLine,/Site Work|Studio Portfolio/);
   assert.match(site,/className="links".*navigation\.map/s);
@@ -308,7 +308,7 @@ test('lead submissions preserve explicit first-touch attribution for CRM reporti
   assert.match(analytics,/firstSource/);
   assert.match(analytics,/firstLandingPath/);
   assert.match(project,/\.\.\.attribution/);
-  assert.match(calculator,/\.\.\.attribution/);
+  assert.doesNotMatch(calculator,/leadAttributionFields|\/api\/website-lead/);
   assert.match(route,/'firstSource'/);
   assert.match(route,/'firstMedium'/);
   assert.match(route,/'firstLandingPath'/);

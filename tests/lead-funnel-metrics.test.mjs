@@ -36,7 +36,7 @@ test('analytics events do not transmit free-text URL query parameters', () => {
  assert.match(analytics,/send_page_view:false,page_location:window\.location\.origin\+window\.location\.pathname/);
  assert.doesNotMatch(analytics,/page_location: window\.location\.href/);
  assert.match(lib,/landingPath: window\.location\.pathname\.slice/);
- assert.match(lib,/utmSource \? 'unspecified'/);
+ assert.match(lib,/utmSource \|\| fbclid \? 'unspecified'/);
  assert.match(lib,/first_landing_path: attribution\.landingPath\.split\('\?'\)\[0\]/);
  assert.match(lib,/firstLandingPath: attribution\?\.landingPath\.split\('\?'\)\[0\]/);
 });

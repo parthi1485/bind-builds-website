@@ -6,6 +6,7 @@ export type ExtraOption = {
  unit:string;
  quantity:string;
  rate:string;
+ minimumQuantity?:number;
  quantityPresets?:{label:string;quantity:number;note?:string}[];
 };
 export const extraOptions: ExtraOption[] = [
@@ -13,7 +14,7 @@ export const extraOptions: ExtraOption[] = [
  {key:'parking',label:'Separate car parking',detail:'Exclude this area from the floor areas to avoid counting it twice. Layout and access need review.',unit:'sq.ft',quantity:'200',rate:'2350'},
  {key:'compound',label:'Compound wall',detail:'Enter wall length and average height. Wall only; gate is a separate item. Foundations and finishes affect cost.',unit:'sq.ft',quantity:'600',rate:'450'},
  {key:'gate',label:'Main gate · MS / sliding',detail:'Size, finish and automation need confirmation.',unit:'item',quantity:'1',rate:'125000'},
- {key:'sump',label:'Underground sump',detail:'Standard minimum planning capacity starts at 6,000 litres. Choose a family-size preset or enter a higher capacity manually. Final sizing depends on occupancy, supply frequency, tanker dependence, overhead storage and site requirements.',unit:'litres',quantity:'6000',rate:'30',quantityPresets:[
+ {key:'sump',label:'Underground sump',detail:'Standard minimum planning capacity starts at 6,000 litres. Choose a family-size preset or enter a higher capacity manually. Final sizing depends on occupancy, supply frequency, tanker dependence, overhead storage and site requirements.',unit:'litres',minimumQuantity:6000,quantity:'6000',rate:'30',quantityPresets:[
   {label:'1–4 members',quantity:6000,note:'6,000 L'},
   {label:'5–8 members',quantity:9000,note:'9,000 L'},
   {label:'9–12 members',quantity:12000,note:'12,000 L'},
@@ -47,12 +48,12 @@ export const initialExtra = (item:ExtraOption):ExtraSelection => ({
  length:item.key==='compound'?'100':'',
  height:item.key==='compound'?'6':'',
 });
-export function extraAmount(value:ExtraSelection):number|null {
+export function extraAmount(value:ExtraSelection, minimumQuantity = 0.01):number|null {
  if(value.mode==='unpriced')return null;
  if(value.mode==='lump')return value.amount.trim()===''?null:Number(value.amount);
  if(!value.quantity.trim() || !value.rate.trim())return null;
  const quantity=Number(value.quantity),rate=Number(value.rate);
- if(!Number.isFinite(quantity)||!Number.isFinite(rate)||quantity<=0||quantity>100000||rate<=0||rate>10000000)return NaN;
+ if(!Number.isFinite(quantity)||!Number.isFinite(rate)||quantity<minimumQuantity||quantity>100000||rate<=0||rate>10000000)return NaN;
  return Math.round(quantity*rate);
 }
 export function compoundWallArea(length:string,height:string):string {

@@ -4,7 +4,7 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxsCulnUR0HQU
 const allowedSources = new Set(['Website – Estimate PDF', 'Website – Project Enquiry', 'Website – Contact Form', 'Website – Lead Popup']);
 
 const fields = [
-  'source','name','phone','email','projectType','location','stage','builtUpArea','budget','timeline','requirements',
+  'submissionId','source','name','phone','email','projectType','location','stage','builtUpArea','budget','timeline','requirements',
   'package','configuration','plotArea','calculatedArea','packageRate','estimateTotal','headroomArea','headroomPricing',
   'parkingArea','parkingPricing','additionalItems','pdfDownloaded','pageUrl',
   'firstSource','firstMedium','firstCampaign','firstContent','firstTerm','firstLandingPath','referrer'

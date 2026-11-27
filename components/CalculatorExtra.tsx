@@ -3,7 +3,7 @@ import { compoundWallArea, extraAmount, initialExtra, parkingArea, type ExtraOpt
 import { money } from '@/lib/calculator';
 type Props={item:ExtraOption;value?:ExtraSelection;onChange:(change:Partial<ExtraSelection>)=>void};
 export default function CalculatorExtra({item,value:stored,onChange}:Props){
- const value=stored??initialExtra(item), amount=extraAmount(value);
+ const value=stored??initialExtra(item), amount=extraAmount(value,item.minimumQuantity);
  const setCompoundDimension=(field:'length'|'height',next:string)=>{
   const length=field==='length'?next:(value.length??'');
   const height=field==='height'?next:(value.height??'');
@@ -21,7 +21,7 @@ export default function CalculatorExtra({item,value:stored,onChange}:Props){
       <label>Average height <span>ft</span><input type="number" inputMode="decimal" min="0.01" max="100" step="0.01" value={value.height??''} onChange={e=>setCompoundDimension('height',e.target.value)}/></label>
       <label>Calculated wall area <span>sq.ft</span><input type="number" readOnly tabIndex={-1} value={value.quantity}/></label>
       <label>Unit rate <span>₹ / sq.ft</span><input type="number" inputMode="decimal" min="0.01" max="10000000" step="0.01" value={value.rate} onChange={e=>onChange({rate:e.target.value})}/></label>
-     </div>:<div className="extraUnitFields"><label>{item.key==='parking'?'Parking area':'Quantity'} <span>{item.unit}</span><input type="number" inputMode="decimal" min="0.01" max="100000" step="0.01" placeholder="To be confirmed" value={value.quantity} onChange={e=>onChange({quantity:e.target.value,...(item.key==='parking'?{cars:0}:{})})}/></label><label>Unit rate <span>₹ / {item.unit}</span><input type="number" inputMode="decimal" min="0.01" max="10000000" step="0.01" placeholder="Enter rate" value={value.rate} onChange={e=>onChange({rate:e.target.value})}/></label></div>}
+     </div>:<div className="extraUnitFields"><label>{item.key==='parking'?'Parking area':'Quantity'} <span>{item.unit}</span><input type="number" inputMode="decimal" min={item.minimumQuantity ?? 0.01} max="100000" step="0.01" placeholder="To be confirmed" value={value.quantity} onChange={e=>onChange({quantity:e.target.value,...(item.key==='parking'?{cars:0}:{})})}/></label><label>Unit rate <span>₹ / {item.unit}</span><input type="number" inputMode="decimal" min="0.01" max="10000000" step="0.01" placeholder="Enter rate" value={value.rate} onChange={e=>onChange({rate:e.target.value})}/></label></div>}
     {item.rate&&<button className="textButton" type="button" onClick={()=>onChange({rate:item.rate})}>Use reference rate · {money(Number(item.rate))} / {item.unit}</button>}
    </>}
    {value.mode==='lump'&&<label>Total allowance <span>₹</span><input type="number" inputMode="numeric" min="1" max="100000000" step="1" placeholder="To be quoted" value={value.amount} onChange={e=>onChange({amount:e.target.value})}/></label>}

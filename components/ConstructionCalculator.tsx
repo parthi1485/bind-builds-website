@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import { packages } from '@/lib/site';
-import { calculateEstimate, compactMoney, configuration, floorName, HEADROOM_STANDARD_RATE, money, validNumber, type EstimateInput } from '@/lib/calculator';
+import { calculateEstimate, compactMoney, configuration, floorName, splitFloorArea, HEADROOM_STANDARD_RATE, money, validNumber, type EstimateInput } from '@/lib/calculator';
 import dynamic from 'next/dynamic';
 const CalculatorReport = dynamic(() => import('./CalculatorReport'), { loading: () => <div className="calcReportLoading" role="status">Preparing your estimate…</div> });
 import CalculatorExtra from './CalculatorExtra';
@@ -41,6 +41,7 @@ export default function ConstructionCalculator() {
   const [furthest, setFurthest] = useState(0);
   const [plot, setPlot] = useState('1200');
   const [areas, setAreas] = useState(['900', '900', '900', '900']);
+  const [importedArea, setImportedArea] = useState<number | null>(null);
   const [floorCount, setFloorCount] = useState(1);
   const [tier, setTier] = useState(1);
   const [hasHeadroom, setHasHeadroom] = useState(false);
@@ -61,7 +62,10 @@ export default function ConstructionCalculator() {
     if (requestedTier >= 0) setTier(requestedTier);
     const area = params.get('area');
     if (area && /^\d{1,6}$/.test(area) && validNumber(Number(area), 1, 100000, true)) {
-      setAreas([area, area, area, area]); setFloorCount(1); setPlot(String(Math.max(1200, Number(area))));
+      setImportedArea(Number(area));
+      setAreas([area]);
+      setFloorCount(1);
+      setPlot('');
     }
   }, []);
   useEffect(() => {
@@ -74,9 +78,17 @@ export default function ConstructionCalculator() {
   const input: EstimateInput = { plot: number(plot), floors: areas.slice(0, floorCount).map(number), rate: selected.rate,
     headroom: hasHeadroom ? number(headroom) : 0, headroomRate: hasHeadroom ? number(headroomRate) : HEADROOM_STANDARD_RATE,
     headroomMode: hasHeadroom ? headroomMode : 'unit', headroomAmount: hasHeadroom && headroomMode === 'lump' ? (headroomAmount.trim()==='' ? null : number(headroomAmount)) : null, reservePercent: 0,
-    allowances: [...extraOptions.map(item => { const value=allowances[item.key]??initialExtra(item); return {key:item.key,label:item.label,selected:value.selected,amount:extraAmount(value),detail:extraDescription(item,value)}; }), approvalAllowance(approval, builtArea)] };
+    allowances: [...extraOptions.map(item => { const value=allowances[item.key]??initialExtra(item); return {key:item.key,label:item.label,selected:value.selected,amount:extraAmount(value,item.minimumQuantity),detail:extraDescription(item,value)}; }), approvalAllowance(approval, builtArea)] };
   let estimate = null;
   try { estimate = calculateEstimate(input); } catch { /* Invalid input is explained by the native form constraints. */ }
+  const floorTotal = areas.slice(0, floorCount).reduce((sum, value) => sum + number(value), 0);
+  const changeFloorCount = (count: number) => {
+    if (importedArea !== null) {
+      const total = Number.isSafeInteger(floorTotal) && floorTotal >= count ? floorTotal : importedArea;
+      setAreas(splitFloorArea(total, count));
+    }
+    setFloorCount(count);
+  };
   const setArea = (index: number, value: string) => setAreas(current => current.map((area, i) => i === index ? value : area));
   const setGround = (value: string) => setAreas(current => current.map((area, i) => i === 0 || area === current[0] ? value : area));
   const updateExtra = (key:string,change:Partial<ExtraSelection>) => setAllowances(current => {
@@ -90,7 +102,7 @@ export default function ConstructionCalculator() {
   const next = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); if (step === 3 && !estimate) return; if(step===0&&!analyticsStarted.current){analyticsStarted.current=true;trackEvent('calculator_started',{plot_area:Number(plot)||0});} trackEvent('calculator_step_complete',{step_number:step+1,step_name:stepNames[step],package_name:selected.name}); if(step===3&&estimate){trackEvent('estimate_generated',{package_name:selected.name,floors:floorCount,calculated_area:estimate.area,value:estimate.total,currency:'INR'});} setFurthest(Math.max(furthest, step + 1)); setStep(step + 1); };
 
   return <div className="calculator" id="calculator" ref={root}>
-    <ol className="calcProgress" aria-label="Estimate progress">{[...stepNames, 'Your estimate'].map((label, index) => <li key={label} aria-current={step === index ? 'step' : undefined} className={index < step ? 'complete' : ''}><button type="button" aria-label={`${label}, step ${index + 1} of 5${step === index ? ", current" : index < step ? ", completed" : ""}`} disabled={index > furthest || index === 4 && !estimate} onClick={() => setStep(index)}><span>{index < step ? '✓' : String(index + 1).padStart(2, '0')}</span><b><span className="progressLong">{label}</span><span className="progressShort">{progressShortNames[index]}</span></b></button></li>)}</ol>
+    <ol className="calcProgress" aria-label="Estimate progress">{[...stepNames, 'Your estimate'].map((label, index) => <li key={label} aria-current={step === index ? 'step' : undefined} className={index < step ? 'complete' : ''}><button type="button" aria-description={`step ${index + 1} of 5`} disabled={index > furthest || index === 4 && !estimate} onClick={() => setStep(index)}><span aria-hidden="true">{index < step ? '✓' : String(index + 1).padStart(2, '0')}</span><b><span className="progressLong">{label}</span><span className="progressShort">{progressShortNames[index]}</span></b></button></li>)}</ol>
     {step === 4 && estimate ? <CalculatorReport input={input} estimate={estimate} packageIndex={tier} headingRef={heading} onEdit={() => setStep(0)} /> : <div className="calcLayout">
       <form className="calcForm" onSubmit={next}>
         <div className="calcStepContent" key={step}>
@@ -101,13 +113,13 @@ export default function ConstructionCalculator() {
             <label htmlFor="calc-plot">Plot area <span>sq.ft</span></label><input id="calc-plot" required type="number" inputMode="decimal" min="1" max="100000" step="0.01" value={plot} onChange={e => setPlot(e.target.value)} aria-describedby="plot-help" />
             <div className="calcPresets" aria-label="Common plot sizes">{[600, 1200, 1800, 2400].map(value => <button key={value} type="button" aria-pressed={Number(plot) === value} onClick={() => setPlot(String(value))}>{value.toLocaleString('en-IN')} sq.ft</button>)}</div>
             <p id="plot-help" className="calcHint">{validNumber(number(plot), 1, 100000) ? `${(Number(plot) / 9).toLocaleString('en-IN', { maximumFractionDigits: 1 })} sq.yd · ${(Number(plot) / 435.6).toFixed(2)} cents · ${(Number(plot) / 2400).toFixed(2)} grounds` : 'Enter a plot area between 1 and 1,00,000 sq.ft.'}</p>
-            <label htmlFor="calc-ground">Ground-floor built-up area <span>sq.ft</span></label><input id="calc-ground" required type="number" inputMode="numeric" min="1" max="100000" step="1" value={areas[0]} onChange={e => setGround(e.target.value)} aria-describedby="ground-help" />
-            <p id="ground-help" className="calcHint">Enter the building area, not the full plot. Count staircases and covered circulation once. Exclude any parking or headroom you plan to add separately.</p>
-            {validNumber(number(plot), 1, 100000) && Number(areas[0]) > Number(plot) && <p className="calcNotice">Your ground-floor area exceeds the plot area. Please review these figures with your architect.</p>}
+            {importedArea !== null ? <p className="calcHint">Your starting estimate covers <strong>{importedArea.toLocaleString('en-IN')} sq.ft across all floors</strong>. Enter your plot area above, then choose how to divide the floor area.</p> : <><label htmlFor="calc-ground">Ground-floor built-up area <span>sq.ft</span></label><input id="calc-ground" required type="number" inputMode="numeric" min="1" max="100000" step="1" value={areas[0]} onChange={e => setGround(e.target.value)} aria-describedby="ground-help" />
+            <p id="ground-help" className="calcHint">Enter the building area, not the full plot. Count staircases and covered circulation once. Exclude any parking or headroom you plan to add separately.</p></>}
+            {validNumber(number(plot), 1, 100000) && importedArea === null && Number(areas[0]) > Number(plot) && <p className="calcNotice">Your ground-floor area exceeds the plot area. Please review these figures with your architect.</p>}
             <CalculatorExtra item={extraOptions.find(item=>item.key==='parking')!} value={allowances.parking} onChange={change=>updateExtra('parking',change)}/><p className="calcHint">Enter each floor separately in the next step so the area and construction-time scenario reflect your actual configuration.</p>
           </div>}
           {step === 1 && <div className="calcFields">
-            <fieldset className="calcChoices"><legend>Number of floors</legend><div className="floorChoices">{[1, 2, 3, 4].map(count => <label key={count}><input type="radio" name="floors" checked={floorCount === count} onChange={() => setFloorCount(count)} /><span><strong>{count === 1 ? 'Ground' : `G + ${count - 1}`}</strong><small>{count} {count === 1 ? 'floor' : 'floors'}</small></span></label>)}</div></fieldset>
+            <fieldset className="calcChoices"><legend>Number of floors</legend><div className="floorChoices">{[1, 2, 3, 4].map(count => <label key={count}><input type="radio" name="floors" checked={floorCount === count} disabled={importedArea !== null && count > Math.max(importedArea, floorTotal || 0)} onChange={() => changeFloorCount(count)} /><span><strong>{count === 1 ? 'Ground' : `G + ${count - 1}`}</strong><small>{count} {count === 1 ? 'floor' : 'floors'}</small></span></label>)}</div></fieldset>
             <div className="calcDuration">
               <div className="calcDurationTop" aria-live="polite" aria-atomic="true">
                 <div className="calcDurationSchedule"><span className="eyebrow">Construction planning scenario</span><strong>{duration}<small> months</small></strong></div>
@@ -116,6 +128,7 @@ export default function ConstructionCalculator() {
               <div className="durationTrack"><span style={{width:`${duration/18*100}%`}}/></div>
               <p>6 months for ground only + 4 months per additional floor. Indicative only; area, soil, design, access and weather can change the programme. Design and approvals are separate.</p>
             </div><div className="calcFloorFields">{areas.slice(0, floorCount).map((area, index) => <label key={index}>{floorName(index)} <span>sq.ft</span><input required type="number" inputMode="numeric" min="1" max="100000" step="1" value={area} onChange={e => setArea(index, e.target.value)} /></label>)}</div>
+            {importedArea !== null && Number.isFinite(floorTotal) && floorTotal !== importedArea && <p className="calcNotice" role="status">Your floor areas now total {floorTotal.toLocaleString('en-IN')} sq.ft. Your starting estimate used {importedArea.toLocaleString('en-IN')} sq.ft.</p>}
             {floorCount > 1 && <button className="textButton calcCopyArea" type="button" onClick={() => setAreas(areas.map(() => areas[0]))}>Use the ground-floor area for every floor</button>}
             <div className={`calcExtra ${hasHeadroom?'selected':''}`}>
               <label className="calcCheck"><input type="checkbox" checked={hasHeadroom} onChange={e => setHasHeadroom(e.target.checked)} /><span>Add staircase headroom separately<small>Only when it is not already counted in a floor area.</small></span></label>

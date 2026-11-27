@@ -85,3 +85,13 @@ export function createVisualData(input: EstimateInput, estimate: Estimate, packa
   };
 }
 export type VisualEstimate = ReturnType<typeof createVisualData>;
+
+
+export function splitFloorArea(total: number, count: number): string[] {
+  if (!Number.isSafeInteger(total) || !Number.isInteger(count) || count < 1 || count > 4 || total < count) {
+    throw new RangeError('Each floor needs at least one square foot.');
+  }
+  const perFloor = Math.floor(total / count);
+  const remaining = total % count;
+  return Array.from({ length: count }, (_, index) => String(perFloor + (index < remaining ? 1 : 0)));
+}

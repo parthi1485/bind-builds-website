@@ -9,7 +9,7 @@
 .assuranceTabs>button[aria-selected=true] .assuranceTabIcon{background:#fff}
 .assuranceTabIcon svg{width:22px;height:22px}
 .assuranceTabs>button>span:nth-child(2){font-size:.75rem;font-weight:550;line-height:1.25;color:#505058}
-.assuranceTabs>button[aria-selected=true]>span:nth-child(2){color:#0071e3}
+.assuranceTabs>button[aria-selected=true]>span:nth-child(2){color:#005bb8}
 .assuranceTabs>button>small{font-size:.5625rem;color:#aaaab2}
 .assuranceTabs>button[aria-selected=true]>small{color:#6aa9ea}
 .assurancePanel{min-height:510px;position:relative;overflow:hidden;border-radius:26px;background:linear-gradient(135deg,#0e1928,#193451 58%,#0b2138);color:#fff;display:grid;grid-template-columns:.8fr 1.2fr;align-items:stretch}
@@ -40,12 +40,12 @@
 .ecosystemIntro{max-width:1150px;margin:0 auto 60px;display:grid;grid-template-columns:1.3fr .7fr;gap:8vw;align-items:end}
 .ecosystemIntro h2{font-size:clamp(2.7rem,4.8vw,5rem);line-height:1.04;letter-spacing:-.057em;font-weight:600;margin:22px 0 0}
 .ecosystemIntro h2>span{color:#86868e}
-.ecosystemIntro>p{font-size:.9375rem;line-height:1.8;color:#777780;max-width:470px;margin:0 0 6px}
+.ecosystemIntro>p{font-size:.9375rem;line-height:1.8;color:#586171;max-width:470px;margin:0 0 6px}
 .ecosystemBlock{max-width:1150px;margin:0 auto;border-top:1px solid #e5e5ea;padding:27px 0 31px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:35px;align-items:center;overflow:hidden}
 .ecosystemLabel{display:grid;grid-template-columns:28px minmax(0,1fr);gap:13px;align-items:start}
-.ecosystemLabel>span{font-size:.625rem;color:#a0a0a8;padding-top:2px}
+.ecosystemLabel>span{font-size:.625rem;color:#586171;padding-top:2px}
 .ecosystemLabel strong{display:block;font-size:.875rem;font-weight:550;color:#313137}
-.ecosystemLabel small{display:block;font-size:.625rem;line-height:1.6;color:#898991;margin-top:7px}
+.ecosystemLabel small{display:block;font-size:.625rem;line-height:1.6;color:#586171;margin-top:7px}
 .brandMarquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
 .brandMarqueeTrack{width:max-content;display:flex;gap:12px;animation:brandFlow 34s linear infinite}
 .brandMarquee.reverse .brandMarqueeTrack{animation-direction:reverse;animation-duration:26s}
@@ -56,7 +56,7 @@
 .brandLogoFallback{display:none;max-width:138px;color:#252a31;font-size:.72rem;line-height:1.08;font-weight:650;letter-spacing:.025em;text-align:center}
 .brandWordmark.logoFailed .brandLogoImage{display:none}
 .brandWordmark.logoFailed .brandLogoFallback{display:block}
-.ecosystemDisclaimer{max-width:1150px;margin:0 auto;border-top:1px solid #eeeeF2;padding-top:20px;color:#8a8a93;font-size:.625rem;line-height:1.7}
+.ecosystemDisclaimer{max-width:1150px;margin:0 auto;border-top:1px solid #eeeeF2;padding-top:20px;color:#586171;font-size:.625rem;line-height:1.7}
 @keyframes assuranceDraw{from{stroke-dashoffset:520}to{stroke-dashoffset:0}}
 @keyframes assurancePulse{0%{opacity:.4;transform:scale(.95);transform-origin:center}100%{opacity:1;transform:scale(1)}}
 @keyframes brandFlow{to{transform:translateX(calc(-50% - 6px))}}
