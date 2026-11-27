@@ -23,5 +23,14 @@ export const metadata: Metadata = {
   verification: googleSiteVerification ? { google: googleSiteVerification } : undefined,
 };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="en"><body><PageScroll /><Motion /><PerformanceVitals /><Analytics /><LeadIntentPopup />{children}</body></html>;
+  return <html lang="en"><head><script dangerouslySetInnerHTML={{__html: `// Keep legacy enquiry links usable without exposing project notes to measurement.
+if (location.pathname === '/start-a-project' || location.pathname === '/contact') {
+  var url = new URL(location.href);
+  if (url.searchParams.has('notes') || url.searchParams.has('location')) {
+    window.bindEnquiryQuery = url.search;
+    url.searchParams.delete('notes');
+    url.searchParams.delete('location');
+    history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+  }
+}`}} /></head><body><PageScroll /><Motion /><PerformanceVitals /><Analytics /><LeadIntentPopup />{children}</body></html>;
 }

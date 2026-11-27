@@ -5,7 +5,7 @@ import { pageMetadata, breadcrumbSchema, founderPersonSchema } from '@/lib/seo';
 import { site } from '@/lib/site';
 
 const path='/project-evidence';
-const title='Projects | Bind Builds — Architect-Led Construction Chennai';
+const title='Chennai Projects and Case Studies';
 const description='Explore Bind Builds projects in Chennai: completed architecture, active residential construction and homes moving from planning to execution.';
 export const metadata=pageMetadata(title,description,path);
 

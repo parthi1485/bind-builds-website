@@ -204,6 +204,7 @@ export default function LeadIntentPopup() {
 
       try { window.localStorage.setItem(SUBMITTED_KEY, String(Date.now())); } catch {}
       setSubmitted(true);
+      trackEvent('project_enquiry', { form_source: 'Website – Lead Popup', project_type: form.projectType });
       trackEvent('lead_popup_success', { page_path: pathname, project_type: form.projectType });
     } catch {
       setStatus('We could not confirm your enquiry. Please retry, or use the full project brief.');

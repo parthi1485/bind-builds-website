@@ -254,7 +254,7 @@ test('performance improvements preserve analytics and calculator report paths', 
   const calculator=read('components/ConstructionCalculator.tsx');
   const home=read('app/page.tsx');
   const layout=read('app/layout.tsx');
-  assert.match(analytics,/strategy="lazyOnload"/);
+  assert.match(analytics,/strategy="afterInteractive"/);
   assert.match(analytics,/onReady=\{flushPendingEvents\}/);
   assert.match(calculator,/dynamic\(\(\) => import\('\.\/CalculatorReport'\)/);
   assert.match(calculator,/calcReportLoading/);

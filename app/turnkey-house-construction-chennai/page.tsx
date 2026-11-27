@@ -88,6 +88,7 @@ export default function TurnkeyHouseConstruction(){
    <section className="guideSection guideFaq"><span className="productEyebrow">Turnkey construction FAQs</span><h2>Before you choose the model.</h2>{faqs.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</section>
 
    <section className="guideClosing"><h2>Bring the plot. Bring the questions.</h2><p>We’ll start with your location, family requirements, approximate area and budget.</p><div className="guideActions"><Link className="cta primary" href="/start-a-project">Prepare my project brief ↗</Link><a className="productTextLink" href={whatsappUrl('Hello Bind Builds, I would like to discuss turnkey house construction in Chennai.')} target="_blank" rel="noopener noreferrer">Talk on WhatsApp ↗</a></div></section>
+  <section className="guideSection"><h2>Review the design before pricing the build</h2><p>For a narrow residential plot, the <Link href="/projects/pallikaranai-family-home">Pallikaranai family home brief</Link> shows how three households share the site. For a commercial brief, the <Link href="/projects/ccbm-commercial-complex">CCBM design in Maduravoyal</Link> shows how Studio Bind Architects planned for independent tenants on different floors.</p></section>
   </article>
   <StructuredData data={[breadcrumbSchema('Turnkey house construction in Chennai',path),serviceSchema,faqSchema]}/>
  </Page>;

@@ -4,6 +4,11 @@ import { site } from '@/lib/site';
 // Include lastmod only where the page has a documented significant content update.
 const verifiedUpdates:Record<string,string>={
  '/construction-cost-coimbatore':'2026-09-24',
+ '/building-plan-approval-chennai':'2026-11-27',
+ '/construction-cost-chennai':'2026-11-27',
+ '/projects/pallikaranai-family-home':'2026-11-27',
+ '/projects/ccbm-commercial-complex':'2026-11-27',
+ '/turnkey-house-construction-chennai':'2026-11-27',
 };
 export default function sitemap():MetadataRoute.Sitemap{
  const pages=[

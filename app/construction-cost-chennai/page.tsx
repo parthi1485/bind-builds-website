@@ -9,7 +9,7 @@ import PriorityAreaLinks from '@/components/PriorityAreaLinks';
 const path='/construction-cost-chennai';
 const title='House Construction Cost in Chennai 2026 | Per Sq Ft Rates';
 const description='See 2026 house construction cost per sq.ft in Chennai with Bind Builds. Compare ₹2,399, ₹2,649 and ₹3,199/sq.ft packages, sample budgets, exclusions and cost drivers.';
-const updated='2026-09-24';
+const updated='2026-11-27';
 const sizes=[1000,1500,2000,2500];
 
 export const metadata=pageMetadata(title,description,path);
@@ -24,12 +24,12 @@ const faqs=[
 
 export default function ConstructionCostChennai(){
  const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:faqs.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))};
- const articleSchema={'@context':'https://schema.org','@type':'Article',headline:title,description,dateModified:updated,datePublished:updated,mainEntityOfPage:site.url+path,author:{'@type':'Organization','@id':site.url+'/#organization',name:site.name},publisher:{'@type':'Organization','@id':site.url+'/#organization',name:site.name}};
+ const articleSchema={'@context':'https://schema.org','@type':'Article',headline:title,description,dateModified:updated,datePublished:'2026-09-24',mainEntityOfPage:site.url+path,author:{'@type':'Organization','@id':site.url+'/#organization',name:site.name},publisher:{'@type':'Organization','@id':site.url+'/#organization',name:site.name}};
  return <Page kicker="CHENNAI / CONSTRUCTION COST GUIDE" title="House construction cost in Chennai.">
   <article className="guidePage">
    <nav className="guideBreadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><span>Construction cost in Chennai</span></nav>
    <header className="guideIntro">
-    <span className="productEyebrow">Updated 24 September 2026</span>
+    <span className="productEyebrow">Updated 27 November 2026</span>
     <h2>Start with the rate.<br/><span>Then look behind it.</span></h2>
     <p>A useful house construction cost per sq.ft in Chennai starts with the built-up area and a written specification. Bind Builds publishes three starting package rates, then separates site-specific work, approvals and additional items so the planning number stays understandable.</p>
     <div className="guideActions"><Link className="cta primary" href="/cost-calculator">Calculate my construction cost ↗</Link><Link className="productTextLink" href="/packages">Compare package specifications →</Link></div>
@@ -48,7 +48,7 @@ export default function ConstructionCostChennai(){
     <h2>What does the area<br/><span>mean in rupees?</span></h2>
     <p>The table below multiplies the same built-up area by each published package rate. It is a base-cost comparison before additional items.</p>
     <div className="guideTableWrap"><table className="guideCostTable"><thead><tr><th>Built-up area</th>{packages.map(item=><th key={item.key}>{item.name}<small>{money(item.rate)} / sq.ft</small></th>)}</tr></thead><tbody>{sizes.map(size=><tr key={size}><th>{size.toLocaleString('en-IN')} sq.ft</th>{packages.map(item=><td key={item.key}>{money(size*item.rate)}</td>)}</tr>)}</tbody></table></div>
-    <div className="guideNote"><strong>Formula</strong><p>Base construction estimate = confirmed built-up construction area × selected package rate. Add separately measured parking or headroom to the base construction where applicable, then add approval allowances and other selected extras.</p></div>
+    <div className="guideNote"><strong>Worked example for a two-floor Chennai home</strong><p>Assume 750 sq.ft on each floor, with parking already included in the measured area. At the Essential rate of {money(packages[0].rate)}/sq.ft, the base is 1,500 × {money(packages[0].rate)} = {money(1500 * packages[0].rate)}. Count the parking area once.</p><p>If the site also needs a 6,000-litre sump, an illustrative allowance of ₹30/litre adds ₹1,80,000. That brings this example to {money(1500 * packages[0].rate + 180000)} before approvals, taxes and any other project-specific items. Adjust the quantities and rate in the calculator for your site.</p></div>
     <Link href="/cost-calculator" className="productTextLink">Use your actual floor areas in the calculator →</Link>
    </section>
 

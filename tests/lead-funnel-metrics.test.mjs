@@ -31,9 +31,10 @@ test('validation and submit events never contain name, phone, email, notes or lo
 test('analytics events do not transmit free-text URL query parameters', () => {
  const analytics=read('components/Analytics.tsx');
  const lib=read('lib/analytics.ts');
- assert.match(analytics,/page_path: pathname,/);
- assert.match(analytics,/page_location: window\.location\.origin \+ pathname,/);
- assert.match(analytics,/send_page_view:false,page_location:window\.location\.origin\+window\.location\.pathname/);
+ assert.equal((analytics.match(/'page_view'/g) || []).length,1);
+ assert.match(analytics,/send_page_view:false/);
+ assert.match(analytics,/new URL\(location.origin\+location.pathname\)/);
+ assert.doesNotMatch(analytics,/trackEvent\('page_view'/);
  assert.doesNotMatch(analytics,/page_location: window\.location\.href/);
  assert.match(lib,/landingPath: window\.location\.pathname\.slice/);
  assert.match(lib,/utmSource \|\| fbclid \? 'unspecified'/);

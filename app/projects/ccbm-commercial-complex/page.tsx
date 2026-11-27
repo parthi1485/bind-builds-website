@@ -17,7 +17,7 @@ const caseSchema={
  headline:title,
  description,
  url:site.url+path,
- dateModified:'2026-09-25',
+ dateModified:'2026-11-27',
  author:{'@id':site.url+'/#founder'},
  publisher:{'@id':site.url+'/#organization'},
  about:[
@@ -35,7 +35,7 @@ const priorities=[
 ];
 
 export default function CcbmCommercialComplex(){
- return <Page kicker="PROJECT EVIDENCE / COMPLETED DESIGN PROJECT" title="A commercial building planned to lease floor by floor.">
+ return <Page kicker="PROJECT EVIDENCE / COMPLETED DESIGN PROJECT" title="CCBM Commercial Complex in Maduravoyal">
   <article className="guidePage projectCaseStudy">
    <nav className="guideBreadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/project-evidence">Project evidence</Link><span>/</span><span>CCBM Commercial Complex</span></nav>
 
@@ -64,7 +64,7 @@ export default function CcbmCommercialComplex(){
    <section className="guideSection">
     <span className="productEyebrow">Design intent</span>
     <h2>One building.<br/><span>Multiple leasing possibilities.</span></h2>
-    <p>The project was designed as a high rental-yield commercial building with flexible floor-wise planning, allowing independent leasing for multiple businesses.</p>
+    <p>The owner’s brief called for independent tenants on different floors. On a 4,000 sq.ft site, the design distributes 12,494 sq.ft of built-up space vertically. A prospective owner reviewing a similar scheme can trace the approach from the street to each tenancy and identify which circulation and service spaces must be shared across floors.</p>
     <div className="caseDecisionGrid">{priorities.map(([no,h,p])=><article key={no}><span>{no}</span><h3>{h}</h3><p>{p}</p></article>)}</div>
    </section>
 

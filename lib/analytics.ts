@@ -42,7 +42,7 @@ export function captureAttribution(): Attribution | null {
     const utmSource = params.get('utm_source') || '';
     const source = (utmSource || (gclid ? 'google' : fbclid ? 'meta' : externalReferrer || 'direct')).slice(0, 100);
     // An explicit UTM source with no medium is not a direct visit; do not guess paid vs organic.
-    const medium = (params.get('utm_medium') || (gclid ? 'paid' : utmSource || fbclid ? 'unspecified' : externalReferrer ? 'referral' : 'direct')).slice(0, 100);
+    const medium = (params.get('utm_medium') || (gclid ? 'paid' : utmSource || fbclid ? 'unspecified' : externalReferrer ? (/^(?:(?:www|in)\.)?(?:google\.(?:com|co\.in)|(?:[a-z]+\.)?search\.yahoo\.com|bing\.com|duckduckgo\.com)$/.test(externalReferrer) ? 'organic' : 'referral') : 'direct')).slice(0, 100);
     const attribution: Attribution = {
       source,
       medium,
@@ -53,7 +53,7 @@ export function captureAttribution(): Attribution | null {
       // Never persist prefilled project notes or location query parameters in analytics.
       // UTM attribution is retained in the dedicated campaign fields above.
       landingPath: window.location.pathname.slice(0, 500),
-      referrer: externalReferrer ? document.referrer.slice(0, 500) : undefined,
+      referrer: externalReferrer ? new URL(document.referrer).origin : undefined,
     };
     window.sessionStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(attribution));
     return attribution;
@@ -101,7 +101,7 @@ export function leadAttributionSummary() {
 
 export function attributedPageUrl() {
   if (typeof window === 'undefined') return '';
-  const url = new URL(window.location.href);
+  const url = new URL(window.location.pathname, window.location.origin);
   const attribution = captureAttribution();
   if (!attribution) return url.toString();
   url.searchParams.set('bb_first_source', attribution.source);

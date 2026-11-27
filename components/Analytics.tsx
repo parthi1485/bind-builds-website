@@ -18,14 +18,8 @@ export default function Analytics() {
   }, []);
 
   useEffect(() => {
-    if (!GA_ID) return;
     captureAttribution();
-    trackEvent('page_view', {
-      page_path: pathname,
-      page_location: window.location.origin + pathname,
-      page_title: document.title,
-    });
-  }, [pathname]);
+  }, []);
 
   useEffect(() => {
     if (!GA_ID) return;
@@ -71,7 +65,7 @@ export default function Analytics() {
         } catch {}
       }
       if (anchor.closest('#confidence-before-commit') || anchor.closest('.aboutTransparency') || anchor.closest('.enquiryConfidence')) {
-        trackEvent('trust_evidence_click', { ...base, destination: href.slice(0, 180) });
+        trackEvent('trust_evidence_click', { ...base, destination: anchor.pathname.split('?')[0] });
       }
     };
     document.addEventListener('click', onClick);
@@ -81,9 +75,21 @@ export default function Analytics() {
   if (!GA_ID) return null;
 
   return <>
-    <Script src={'https://www.googletagmanager.com/gtag/js?id=' + GA_ID} strategy="lazyOnload" />
-    <Script id="bind-builds-ga4" strategy="lazyOnload" onReady={flushPendingEvents}>{
-      "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','" + GA_ID + "',{send_page_view:false,page_location:window.location.origin+window.location.pathname});window.dispatchEvent(new Event('bindbuilds:analytics-ready'));"
+    <Script src={'https://www.googletagmanager.com/gtag/js?id=' + GA_ID} strategy="afterInteractive" />
+    <Script id="bind-builds-ga4" strategy="afterInteractive" onReady={flushPendingEvents}>{
+      `window.dataLayer=window.dataLayer||[];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag=gtag;
+      gtag('js',new Date());
+      gtag('config',${JSON.stringify(GA_ID)},{send_page_view:false});
+      var landing=new URL(location.origin+location.pathname);
+      var incoming=new URLSearchParams(location.search);
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid'].forEach(function(key){
+        if(incoming.has(key)) landing.searchParams.set(key,incoming.get(key));
+      });
+      gtag('event','page_view',{page_location:landing.href,page_title:document.title});
+      window.dispatchEvent(new Event('bindbuilds:analytics-ready'));`
+
     }</Script>
   </>;
 }

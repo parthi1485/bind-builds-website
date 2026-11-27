@@ -4,10 +4,9 @@ Stage 8 starts with measurement before design changes or SEO expansion.
 
 ## Primary business conversions
 
-1. `project_enquiry` — completed project/contact enquiry.
-2. `pdf_download_lead` — contact captured before estimate PDF download.
+The main form, contact form and popup emit `project_enquiry` after the server confirms receipt. Segment enquiries by `form_source`. Popup success also emits the diagnostic event `lead_popup_success`. Keep only `project_enquiry` as the website enquiry key event. Historical `pdf_download_lead` records predate the direct PDF download flow.
 
-Keep these as the primary GA4 key events.
+The site sends one initial page view. The GA4 web stream’s enhanced history measurement supplies subsequent navigation views. Keep history measurement enabled.
 
 ## Funnel events
 
@@ -45,10 +44,8 @@ Useful dimensions:
 - `package_selected`
 - `estimate_generated`
 - `estimate_presented`
-- `pdf_gate_open`
-- `pdf_download_lead`
 - `estimate_pdf_download`
-- `pdf_download_lead_error`
+- `estimate_pdf_generation_error`
 
 Useful dimensions:
 - `step_number`
@@ -88,7 +85,7 @@ Weekly:
 - project CTA → form start
 - form step 1 → step 2 → step 3 → enquiry
 - calculator start → generated estimate
-- estimate → PDF gate → PDF lead
+- estimate → PDF download (engagement)
 - WhatsApp/call clicks by landing page
 
 Monthly:

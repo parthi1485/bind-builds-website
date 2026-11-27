@@ -15,7 +15,7 @@ const caseSchema={
  headline:title,
  description,
  url:site.url+path,
- dateModified:'2026-09-24',
+ dateModified:'2026-11-27',
  author:{'@id':site.url+'/#founder'},
  publisher:{'@id':site.url+'/#organization'},
  about:[
@@ -41,7 +41,7 @@ const decisions=[
 ];
 
 export default function PallikaranaiCaseStudy(){
- return <Page kicker="PROJECT EVIDENCE / PRE-CONSTRUCTION" title="A 17-foot plot. Three generations. One building.">
+ return <Page kicker="PROJECT EVIDENCE / PRE-CONSTRUCTION" title="Pallikaranai family home on a 17 × 44 ft plot">
   <article className="guidePage projectCaseStudy">
    <nav className="guideBreadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/project-evidence">Project evidence</Link><span>/</span><span>Pallikaranai</span></nav>
 
@@ -90,8 +90,8 @@ export default function PallikaranaiCaseStudy(){
    <section className="guideSection">
     <span className="productEyebrow">What this page proves</span>
     <div className="caseBoundary">
-     <h3>Pre-construction evidence is evidence of thinking—not completed workmanship.</h3>
-     <p>This project demonstrates how Bind Builds structures a residential brief and coordinates decisions before execution. It should not be read as evidence of a finished building until the project actually reaches construction and handover.</p>
+     <h3>What the family can check on the floor plan</h3>
+     <p>Trace the route from the car park to the upper-floor stair. Can each household reach its front door while the parents retain privacy on the ground floor? Then compare kitchen and bathroom positions across floors to see where service shafts need space. These are questions for the schematic review on this 17-foot frontage.</p>
     </div>
    </section>
 

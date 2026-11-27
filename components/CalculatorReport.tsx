@@ -1,4 +1,5 @@
 'use client';
+import { DraftAction, EnquiryAction } from './BriefActions';
 
 // Keep the results focused on the original estimate, quotation details and download/edit actions.
 import { useRef, useState, type RefObject } from 'react';
@@ -41,7 +42,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
     'Only priced additional items are included. Taxes, unpriced approval charges, site-specific work and other exclusions are additional.',
     'Please review the scope and prepare a project-specific proposal.',
   ].filter(Boolean).join('\n');
-  const enquiryUrl = '/start-a-project?' + new URLSearchParams({ package: selected.name, area: String(estimate.area), notes }).toString();
+  const enquiryUrl = new URLSearchParams({ package: selected.name, area: String(estimate.area), notes });
   const comparisons = packages.map(item => ({ name: item.name, rate: item.rate, base: estimate.floorArea * item.rate + estimate.headroomCost + estimate.parkingCost }));
   const visuals = createVisualData(input, estimate, selected.name, comparisons);
   const assumptions = [
@@ -82,7 +83,7 @@ export default function CalculatorReport({ input, estimate, packageIndex, headin
       <div className="calcReportTotal"><span>Planning subtotal</span><strong>{compactMoney(estimate.total)}</strong><span>{money(estimate.total)}</span><p>Only priced additional items are included. Taxes, unpriced approval charges and other exclusions are additional. Subject to a project-specific proposal.</p></div>
     </div>
     {estimate.unpriced.length > 0 && <div className="calcQuoteNotice"><strong>{estimate.unpriced.length} selected {estimate.unpriced.length === 1 ? 'extra still needs' : 'extras still need'} a quote</strong><p>{estimate.unpriced.map(item => item.label).join(' · ')}</p><span>These items are excluded from the subtotal above.</span></div>}
-    <section className="estimateConversionBar" id="estimate-next-step" aria-labelledby="estimate-next-title"><div><span className="eyebrow">Make this estimate specific to your site</span><h3 id="estimate-next-title">You have the number.<br/>Now connect it to the plan.</h3><p>Carry your package, area and estimate into a short project brief. We’ll review the site, requirements and the scope behind the number.</p><div className="estimateConversionProof"><span>Estimate carried forward</span><span>~2 minute brief</span><span>No commitment to proceed</span></div></div><div className="estimateConversionActions"><Link href={enquiryUrl} className="cta primary">Discuss this estimate ↗</Link><a href={whatsappUrl('Hello Bind Builds, I would like to discuss this estimate.\n\n' + notes)} className="textLink" target="_blank" rel="noopener noreferrer">Continue on WhatsApp ↗</a></div></section>
+    <section className="estimateConversionBar" id="estimate-next-step" aria-labelledby="estimate-next-title"><div><span className="eyebrow">Make this estimate specific to your site</span><h3 id="estimate-next-title">You have the number.<br/>Now connect it to the plan.</h3><p>Carry your package, area and estimate into a short project brief. We’ll review the site, requirements and the scope behind the number.</p><div className="estimateConversionProof"><span>Estimate carried forward</span><span>~2 minute brief</span><span>No commitment to proceed</span></div></div><div className="estimateConversionActions"><EnquiryAction query={enquiryUrl} className="cta primary">Discuss this estimate ↗</EnquiryAction><DraftAction url={whatsappUrl('Hello Bind Builds, I would like to discuss this estimate.\n\n' + notes)} className="textLink">Continue on WhatsApp ↗</DraftAction></div></section>
     <div className="calcReportToolbar"><EstimatePresentation data={visuals} breakdown={{rows,total:money(estimate.total)}}/><button className="cta" type="button" onClick={download} disabled={downloading}>{downloading ? 'Preparing PDF…' : 'Download estimate PDF'} <span aria-hidden="true">↓</span></button><button className="textButton" type="button" onClick={copy}>Copy estimate</button><button className="textButton" type="button" onClick={onEdit}>Edit my inputs</button></div>
     <p role="status" className="calcStatus">{status}</p>
     <section className="calcReportCard calcDuration"><span className="eyebrow">Construction planning scenario</span><strong>~{constructionMonths(input.floors.length)}<small> months</small></strong><div className="durationTrack"><span style={{width:`${constructionMonths(input.floors.length)/18*100}%`}}/></div><p>6 months for ground only + 4 months per additional floor. Design and approval time is separate. Actual duration depends on area, site conditions, scope and the agreed programme.</p></section><ProposalVisuals data={visuals}/>

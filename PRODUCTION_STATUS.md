@@ -38,8 +38,8 @@
 
 Automated monitoring intentionally does **not** create fake sales leads. Periodically verify:
 - one real project enquiry reaches the Google Sheet/email workflow;
-- one estimate PDF lead reaches the Google Sheet/email workflow;
-- `project_enquiry` and `pdf_download_lead` continue appearing in GA4;
+- one estimate PDF downloads directly from the calculator;
+- `project_enquiry` and `estimate_pdf_download` continue appearing in GA4;
 - Search Console indexing/coverage remains healthy.
 
 ## Change discipline

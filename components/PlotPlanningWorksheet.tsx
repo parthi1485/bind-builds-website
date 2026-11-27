@@ -1,7 +1,7 @@
 'use client';
+import { DraftAction, EnquiryAction } from './BriefActions';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { calculatePlotPlanning, plotPlanningBrief } from '@/lib/plot-planning';
 import { approvalSources } from '@/lib/approval-guide';
 import { whatsappUrl } from '@/lib/site';
@@ -20,7 +20,7 @@ export default function PlotPlanningWorksheet() {
   // Reject empty fields before converting: Number('') would incorrectly become zero.
   const result = frontage.trim() && depth.trim() && levelArea.trim() ? calculatePlotPlanning(values) : null;
   const brief = result ? plotPlanningBrief(values, result, locality) : '';
-  const enquiry = result ? '/start-a-project?' + new URLSearchParams({ location: locality.trim().slice(0, 120), type: 'New home', notes: brief }) : '/start-a-project';
+  const enquiry = new URLSearchParams({ location: locality.trim().slice(0, 120), type: 'New home', notes: brief });
   const log = (action: string) => trackEvent('plot_planning_action', { action, levels, has_locality: Boolean(locality.trim()) });
   const copy = async () => {
     if (!brief) return;
@@ -64,7 +64,7 @@ export default function PlotPlanningWorksheet() {
         <div className="plotWorksheetNext"><strong>What must still be verified?</strong><p>Survey boundaries · local body and planning authority · land use · road access · legally counted areas and exemptions · setbacks · height · permission route.</p><a href={approvalSources.portal} target="_blank" rel="noopener noreferrer">Check the official planning portal ↗</a></div>
       </div>
     </div>
-    <div className="plotWorksheetActions"><div><strong>Take your scenario into a useful conversation.</strong><p>We’ll help identify what needs to be checked before design or construction. Professional services require an agreed scope and fee.</p></div><div className="plotWorksheetButtons">{result?<Link className="cta primary" href={enquiry} onClick={()=>log('enquiry')}>Discuss my site ↗</Link>:<button className="cta primary" type="button" disabled>Discuss my site ↗</button>}{result?<a className="cta" href={whatsappUrl('Hello Bind Builds, I would like to discuss this illustrative planning scenario.\n\n'+brief)} target="_blank" rel="noopener noreferrer" onClick={()=>log('whatsapp_draft')}>WhatsApp scenario ↗</a>:<button className="cta" type="button" disabled>WhatsApp scenario ↗</button>}<button type="button" className="plotWorksheetCopy" disabled={!result} onClick={copy}>Copy summary <span aria-hidden="true">↗</span></button></div></div>
+    <div className="plotWorksheetActions"><div><strong>Take your scenario into a useful conversation.</strong><p>We’ll help identify what needs to be checked before design or construction. Professional services require an agreed scope and fee.</p></div><div className="plotWorksheetButtons">{result?<EnquiryAction className="cta primary" query={enquiry} onClick={()=>log('enquiry')}>Discuss my site ↗</EnquiryAction>:<button className="cta primary" type="button" disabled>Discuss my site ↗</button>}{result?<DraftAction className="cta" url={whatsappUrl('Hello Bind Builds, I would like to discuss this illustrative planning scenario.\n\n'+brief)} onClick={()=>log('whatsapp_draft')}>WhatsApp scenario ↗</DraftAction>:<button className="cta" type="button" disabled>WhatsApp scenario ↗</button>}<button type="button" className="plotWorksheetCopy" disabled={!result} onClick={copy}>Copy summary <span aria-hidden="true">↗</span></button></div></div>
     <p className="plotWorksheetCopyStatus" role="status" aria-live="polite">{copyStatus}</p>
     <p className="guideSmall">Figures are generated locally on this page. Only if you choose WhatsApp, copy or enquiry are your inputs used in that next step. Do not enter survey numbers, property deeds, passwords or personal ID documents here.</p>
   </section>;
