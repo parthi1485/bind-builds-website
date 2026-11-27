@@ -9,10 +9,52 @@ import { BuildAssurance, BrandEcosystem } from '@/components/BuildAssurance';
 import { site, whatsappUrl } from '@/lib/site';
 export default function Home(){return <><Nav/><main id="main-content" className="premiumHome"><HomeHero/><StructuredData data={[organizationSchema,localBusinessSchema,founderPersonSchema,{'@context':'https://schema.org','@type':'WebSite',name:'Bind Builds',alternateName:'Bind Builds Chennai',url:site.url,'@id':site.url+'/#website',publisher:{'@id':site.url+'/#organization'},inLanguage:'en-IN'}]}/>
 
-<section className="productSection designStatement"><span className="productEyebrow reveal">A simple idea. A better starting point.</span><h2 className="reveal">The plan is<br/><span>part of the build.</span></h2><p className="reveal">So we connect the architect, the engineer and the site.<br className="desktopBreak"/> Your home benefits from the whole picture.</p><svg className="processBlueprint" aria-hidden="true" focusable="false" viewBox="0 0 560 500" fill="none"><g stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"><path d="M85 400V165L282 78L472 161V400L282 476Z"/><path d="M85 165L282 247L472 161M282 247V476"/><path d="M119 198V385L252 435V262ZM312 262V434L437 386V199Z"/><path d="M119 247L252 297M119 291L252 343M119 340L252 386M312 307L437 258M312 354L437 304M312 399L437 352"/><path d="M156 211V400M199 229V418M347 248V419M397 220V402M70 153L282 59L491 146M64 419L282 497L493 420"/></g><g stroke="currentColor" strokeWidth=".65" opacity=".6"><path d="M23 450H545M23 190H545M282 18V497"/><circle cx="282" cy="247" r="202"/></g></svg><div className="connectedProcess reveal" aria-label="Design, coordinate, build"><div><span>01</span><svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" fill="none"><path d="M7 7h14v18H7zM11 11h15v17H11zM14 16h9M14 20h7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg><strong>Design.</strong><small>Your life, in a plan.</small></div><div><span>02</span><svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" fill="none"><path d="M16 4l11 6v12l-11 6-11-6V10l11-6zM5 10l11 6 11-6M16 16v12" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/></svg><strong>Coordinate.</strong><small>Every detail aligned.</small></div><div><span>03</span><svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" fill="none"><path d="M4 15L16 5l12 10M8 12v16h16V12M13 28v-9h6v9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg><strong>Build.</strong><small>One agreed direction.</small></div></div><Link href="/house-construction-chennai" className="productTextLink">Explore house construction in Chennai <span aria-hidden="true">→</span></Link></section>
-<section className="productSection homeScopeContrast" aria-labelledby="scope-contrast-title"><div className="homeScopeHeading"><span className="productEyebrow">Compare beyond the rate</span><h2 id="scope-contrast-title">Beyond<br/><span>the rate.</span></h2><p>Compare the same area, specification and exclusions. Then look at the decisions behind the build.</p></div><div className="homeScopePanels">
- <article className="scopePrice"><div className="scopePanelIntro"><span className="scopePanelIcon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none"><path d="M7 3h11l4 4v18H7zM18 3v5h4M11 13h8M11 17h8M11 21h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg></span><div><span className="productEyebrow">A quotation tells you</span><h3>The price.</h3></div></div><ul><li>Area and package rate</li><li>Material allowances</li><li>Inclusions and exclusions</li></ul></article>
- <article className="scopeProcess"><div className="scopePanelIntro"><span className="scopePanelIcon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none"><path d="M14 3v4M14 21v4M3 14h4M21 14h4M6 6l3 3M19 19l3 3M22 6l-3 3M9 19l-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><circle cx="14" cy="14" r="7" stroke="currentColor" strokeWidth="1.5"/><circle cx="14" cy="14" r="2.5" stroke="currentColor" strokeWidth="1.5"/></svg></span><div><span className="productEyebrow">A coordinated build also needs</span><h3>The process.</h3></div></div><ul><li>Design and engineering coordination</li><li>Stage checks and documentation</li><li>Written changes and handover scope</li></ul><Link href="/process" className="productTextLink">Explore our process →</Link></article></div><p className="homeScopeNote">Actual deliverables depend on the package and signed agreement.</p></section>
+<section className="productSection designStatement" id="our-studio" aria-labelledby="studio-position-title">
+  <div className="studioPositionLayout">
+    <div className="studioPositionCopy">
+      <h2 id="studio-position-title">Architecture <span>for everyone.</span></h2>
+      <p>Our architects plan for the way you live, from morning light at the breakfast table to a downstairs bedroom for your parents. Whichever package you choose, our site team builds from those drawings.</p>
+      <Link href="/house-construction-chennai" className="positionLink">House construction in Chennai</Link>
+    </div>
+    <svg className="processBlueprint" aria-hidden="true" focusable="false" viewBox="0 0 560 500" fill="none">
+      <g stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round">
+        <path d="M85 400V165L282 78L472 161V400L282 476Z" fill="currentColor" fillOpacity=".05"/>
+        <path d="M85 165L282 247L472 161M282 247V476"/>
+        <path d="M119 198V385L252 435V262ZM312 262V434L437 386V199Z"/>
+        <path d="M119 247L252 297M119 291L252 343M119 340L252 386M312 307L437 258M312 354L437 304M312 399L437 352"/>
+        <path d="M156 211V400M199 229V418M347 248V419M397 220V402M70 153L282 59L491 146M64 419L282 497L493 420"/>
+      </g>
+      <g stroke="currentColor" strokeWidth=".75" opacity=".36">
+        <path d="M23 450H545M23 190H545M282 18V497"/>
+        <circle cx="282" cy="247" r="202"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section className="productSection homeScopeContrast" id="pricing" aria-labelledby="scope-contrast-title">
+  <div className="scopePricingLayout">
+    <div className="scopePricingIntro">
+      <h2 id="scope-contrast-title">No hidden costs.</h2>
+      <p>“Included” means the cost is already in your package price. Your written proposal sets out material allowances, taxes and exclusions before you sign.</p>
+      <Link href="/packages" className="positionLink">Compare package inclusions</Link>
+    </div>
+    <dl className="scopeLedger">
+      <div>
+        <dt>Included in every package</dt>
+        <dd>Floor plans, electrical and plumbing layouts, and construction drawings.</dd>
+      </div>
+      <div>
+        <dt>Priced separately</dt>
+        <dd>Building approval fees, compound walls and underground sumps.</dd>
+      </div>
+      <div>
+        <dt>If you change the scope</dt>
+        <dd>You see the cost and the impact on your schedule in writing. We start the extra work after you approve it. <Link href="/process#change-order">How changes are approved</Link></dd>
+      </div>
+    </dl>
+  </div>
+</section>
  <section className="productSection specificationSection" id="specifications"><div className="productSectionHeader reveal"><span className="productEyebrow">Your specification. Your budget.</span><h2>Make room for<br/><span>the right numbers.</span></h2><p>Move the area. Compare the packages.<br/>See what a different specification means for your budget.</p></div><HomeBudget/></section>
  <BuildAssurance/>
  <section className="productSection studioStatement"><div className="studioYears reveal"><span>2019</span><i aria-hidden="true"/><span>2026</span><p>Studio Bind Architects → Bind Builds</p></div><div className="reveal"><span className="productEyebrow">The practice behind the build</span><h2>Architectural thinking.<br/><span>From day one.</span></h2><p>Led by Ar. Parthiban Moorthy, Bind Builds brings the design and site experience of Studio Bind Architects into a coordinated construction service.</p><div className="studioLinks"><Link className="productTextLink" href="/about">Meet the practice →</Link><a className="productTextLink" href={site.studio} target="_blank" rel="noopener noreferrer">Explore the design studio ↗</a></div></div></section>

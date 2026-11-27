@@ -6,7 +6,7 @@ const read = path => readFileSync(new URL('../'+path,import.meta.url),'utf8');
 
 test('homepage retains the original hero while removing the project feature',()=>{
  const home=read('app/page.tsx'), hero=read('components/HomeExperience.tsx');
- assert.match(hero,/Architect-led construction/);
+ assert.match(hero,/Architect-led construction studio · Chennai/);
  assert.ok(hero.includes('One team. From the first sketch to the final key.'));
  assert.ok(hero.includes('Calculate my construction cost')&&hero.includes('Plan my home'));
  assert.ok(!home.includes('homeEvidenceFeature')&&!home.includes('homeProjectSheet'));
@@ -106,11 +106,11 @@ test('homepage clearly separates the price comparison and construction assurance
  const layout=read('app/layout.tsx'), motion=read('components/Motion.tsx');
  assert.ok(!home.includes('homeEvidenceFeature')&&!home.includes('homeProjectSheet'));
  assert.ok(home.includes('specificationSection')&&home.includes('<BuildAssurance/>'));
- assert.ok(home.includes('Beyond<br/><span>the rate.</span>'));
+ assert.match(home,/<h2 id="scope-contrast-title">No hidden costs\.<\/h2>/);
  assert.ok(layout.includes('homepage-rhythm.css'));
  assert.ok(css.includes('background:#fff;')&&css.includes('background:#e7edf4;'));
  assert.ok(css.includes('.premiumHome .assuranceSection::before'));
- assert.ok(css.includes('.premiumHome .designStatement>h2'));
+ assert.match(home,/aria-labelledby="studio-position-title"/);
  assert.ok(css.includes('body:has(.premiumHome) .mobileProjectBar'));
  assert.ok(motion.includes('inlineControl'));
 });
@@ -126,17 +126,19 @@ test('CCBM project evidence pages do not expose a failing media file as project 
  assert.match(css,/\.projectSheetPlaceholder/);
 });
 
-test('architecture graphic, alternating section and comparison highlights stay minimal',()=>{
+test('homepage explains accessible architecture, package inclusions and approval of changes',()=>{
  const home=read('app/page.tsx');
- const css=read('app/homepage-rhythm.css');
- assert.match(home,/className="processBlueprint"/);
- assert.match(home,/scopePanelIcon/);
- assert.match(home,/scopePrice/);
- assert.match(home,/scopeProcess/);
- assert.match(css,/premiumHome \.designStatement\{position:relative;isolation:isolate/);
- assert.match(css,/homeScopeContrast\{isolation:isolate/);
- assert.match(css,/homeScopePanels article/);
- assert.match(css,/max-width:760px/);
+ const studio=home.slice(home.indexOf('id="our-studio"'),home.indexOf('id="pricing"'));
+ const pricing=home.slice(home.indexOf('id="pricing"'),home.indexOf('specificationSection'));
+ assert.match(studio,/Architecture <span>for everyone\.<\/span>/);
+ assert.match(studio,/className="processBlueprint" aria-hidden="true" focusable="false"/);
+ assert.match(studio,/href="\/house-construction-chennai"/);
+ for(const label of ['Included in every package','Priced separately','If you change the scope']){
+  assert.ok(pricing.includes('<dt>'+label+'</dt>'));
+ }
+ assert.match(pricing,/href="\/packages"/);
+ assert.match(pricing,/href="\/process#change-order"/);
+ assert.match(read('app/process/page.tsx'),/id="change-order"/);
 });
 
 test('popup remains a compact accessible single-column lead form',()=>{
