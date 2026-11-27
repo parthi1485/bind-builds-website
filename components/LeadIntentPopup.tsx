@@ -44,6 +44,8 @@ export default function LeadIntentPopup() {
   const [status, setStatus] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const submissionId = useRef('');
+  const submissionInFlight = useRef(false);
   const dialog = useRef<HTMLDivElement>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
   const previousFocus = useRef<HTMLElement | null>(null);
@@ -149,7 +151,10 @@ export default function LeadIntentPopup() {
     };
   }, [open]);
 
-  const update = (key: keyof PopupForm, value: string) => setForm(current => ({ ...current, [key]: value }));
+  const update = (key: keyof PopupForm, value: string) => {
+    submissionId.current = '';
+    setForm(current => ({ ...current, [key]: value }));
+  };
 
   const close = (reason: 'button' | 'escape' | 'backdrop' | 'calculator' | 'success') => {
     if (!submitted && reason !== 'success') {
@@ -162,12 +167,14 @@ export default function LeadIntentPopup() {
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (submitting) return;
+    if (submitting || submissionInFlight.current) return;
+    submissionInFlight.current = true;
     setStatus('');
     setSubmitting(true);
     trackEvent('lead_popup_submit_attempt', { page_path: pathname, project_type: form.projectType });
 
     try {
+      submissionId.current ||= crypto.randomUUID();
       const attribution = leadAttributionFields();
       const requirements = [
         'Quick website lead popup',
@@ -179,6 +186,7 @@ export default function LeadIntentPopup() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          submissionId: submissionId.current,
           source: 'Website – Lead Popup',
           name: form.name,
           phone: form.phone,
@@ -210,6 +218,7 @@ export default function LeadIntentPopup() {
       setStatus('We could not confirm your enquiry. Please retry, or use the full project brief.');
       trackEvent('lead_popup_error', { page_path: pathname });
     } finally {
+      submissionInFlight.current = false;
       setSubmitting(false);
     }
   };
