@@ -5,6 +5,7 @@ import { pageMetadata, breadcrumbSchema, founderPersonSchema, organizationSchema
 import { site } from '@/lib/site';
 
 const path='/projects/pallikaranai-family-home';
+const worksheetPath='/project-briefs/pallikaranai-design-review.pdf';
 const title='Narrow Plot Family Home in Pallikaranai — Pre-Construction Case Study';
 const description='A Bind Builds pre-construction case study for a 17 × 44 ft east-facing Pallikaranai plot planned for parents and two sons, showing how user needs, parking, privacy and Vastu are resolved before construction begins.';
 export const metadata=pageMetadata(title,description,path);
@@ -15,7 +16,8 @@ const caseSchema={
  headline:title,
  description,
  url:site.url+path,
- dateModified:'2026-11-27',
+ dateModified:'2026-11-28',
+ hasPart:{'@type':'DigitalDocument',name:'Pallikaranai family home design review worksheet',url:site.url+worksheetPath,encodingFormat:'application/pdf',inLanguage:'en-IN'},
  author:{'@id':site.url+'/#founder'},
  publisher:{'@id':site.url+'/#organization'},
  about:[
@@ -55,6 +57,9 @@ export default function PallikaranaiCaseStudy(){
    <section className="guideSection">
     <span className="productEyebrow">Project brief</span>
     <div className="caseBriefTable">{brief.map(([label,value,note])=><div key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}</div>
+    <div className="guideActions">
+     <a className="productTextLink" href={worksheetPath} download>Download the design review worksheet (1-page PDF) ↓</a>
+    </div>
    </section>
 
    <section className="guideSection">
@@ -87,11 +92,21 @@ export default function PallikaranaiCaseStudy(){
     </ol>
    </section>
 
-   <section className="guideSection">
-    <span className="productEyebrow">What this page proves</span>
-    <div className="caseBoundary">
-     <h3>What the family can check on the floor plan</h3>
-     <p>Trace the route from the car park to the upper-floor stair. Can each household reach its front door while the parents retain privacy on the ground floor? Then compare kitchen and bathroom positions across floors to see where service shafts need space. These are questions for the schematic review on this 17-foot frontage.</p>
+   <section className="guideSection" id="plan-review">
+    <h2>What to check at the first plan review.</h2>
+    <div className="guideCards three">
+     <article>
+      <h3>Trace the route to each front door.</h3>
+      <p>Start at the gate and follow a visitor to either upstairs home. Circle any point where they would pass through the parents’ living space.</p>
+     </article>
+     <article>
+      <h3>Leave the car in the drawing.</h3>
+      <p>Mark the parked car with its doors open. Can someone carrying groceries still reach the ground-floor entrance or the stairs?</p>
+     </article>
+     <article>
+      <h3>Look at the floors together.</h3>
+      <p>Mark where each main room could get daylight. Compare the kitchens and bathrooms across floors to see where their service shafts could line up.</p>
+     </article>
     </div>
    </section>
 
