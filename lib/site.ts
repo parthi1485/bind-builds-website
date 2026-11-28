@@ -13,6 +13,7 @@ export const site = {
     addressCountry: 'IN',
   },
   maps: 'https://www.google.com/maps/search/?api=1&query=No.%20B%2F28%2C%202nd%20Cross%20Street%2C%20Kurinji%20Nagar%2C%20Ramapuram%2C%20Chennai%20600089',
+  googleBusinessProfile: 'https://www.google.com/maps/search/?api=1&query=Bind+Builds%2C+Ramapuram%2C+Chennai&query_place_id=ChIJMynUBqaRF0QRLB-PBJ8JySE',
   googleReview: 'https://g.page/r/CSwfjwSfCckhEBI/review',
   instagram: 'https://www.instagram.com/bindbuilds/',
   portfolio: 'https://www.bindarchitects.com/',
