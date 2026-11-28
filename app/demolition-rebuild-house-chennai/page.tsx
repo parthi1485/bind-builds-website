@@ -65,7 +65,7 @@ export default function DemolitionRebuildChennai(){
     <h3>What to ask each contractor to price</h3>
     <div className="guideCards three">
       <article><h3>Demolition</h3><p>Price dismantling, machinery, labour, debris removal, protection and salvage as its own scope.</p></article>
-      <article><h3>New construction</h3><p>Use the confirmed new built-up area and selected package specification as the starting construction basis.</p><Link href="/construction-cost-chennai">See Chennai construction costs →</Link></article>
+      <article><h3>New construction</h3><p>Compare specifications for <Link href="/house-construction-chennai#construction-packages">house construction in Chennai</Link> using the same agreed floor area for each quote.</p><Link href="/construction-cost-chennai">See Chennai construction costs →</Link></article>
       <article><h3>Project-specific extras</h3><p>Approvals, unusual foundations, external works, utility changes and other additions should remain visible.</p><Link href="/cost-calculator">Build a planning estimate →</Link></article>
     </div>
    </section>

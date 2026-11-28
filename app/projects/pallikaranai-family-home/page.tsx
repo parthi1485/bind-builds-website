@@ -95,7 +95,7 @@ export default function PallikaranaiCaseStudy(){
     </div>
    </section>
 
-   <section className="guideClosing"><h2>Have a difficult plot?</h2><p>Bring the plot dimensions, family requirements and what matters most. The first job is to make the plan work before the construction scope is fixed.</p><div className="guideActions"><Link className="cta primary" href="/start-a-project">Discuss my plot ↗</Link><Link className="productTextLink" href="/cost-calculator">Estimate the construction budget →</Link></div></section>
+   <section className="guideClosing"><h2>Have a difficult plot?</h2><p>Bring the plot dimensions, family requirements and what matters most. See how we plan and price independent homes in our <Link className="productTextLink" href="/house-construction-chennai">guide to house construction in Chennai</Link>.</p><div className="guideActions"><Link className="cta primary" href="/start-a-project">Discuss my plot ↗</Link><Link className="productTextLink" href="/cost-calculator">Estimate the construction budget →</Link></div></section>
   </article>
   <StructuredData data={[breadcrumbSchema('Pallikaranai family home',path),caseSchema,organizationSchema,founderPersonSchema]}/>
  </Page>;
